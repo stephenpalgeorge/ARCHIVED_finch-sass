@@ -1,9 +1,9 @@
-$set-sizes: () !default;
+$root-sizes: () !default;
 
 @use './config' with (
-  $set-sizes: $set-sizes,
+  $set-sizes: $root-sizes,
 );
 
 @use './typography' with (
-  $sizes: config.$sizes,
+  $set-sizes: config.$sizes,
 );

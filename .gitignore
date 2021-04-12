@@ -1,5 +1,7 @@
-demo
-demo/*
+demo-css
+demo-css/*
+demo-sass
+demo-sass/*
 
 dist
 dist/*

@@ -1,7 +1,9 @@
 @use 'sass:map';
 @use '../config';
 
-$sizes: config.$sizes !default;
+$default-sizes: config.$sizes;
+$set-sizes: () !default;
+$sizes: map.merge($default-sizes, $set-sizes);
 
 $finch-font-sizes: (
   'small-print': map.get($sizes, '300'),

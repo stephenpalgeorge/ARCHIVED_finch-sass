@@ -4,7 +4,9 @@
   "description": "A Sass framework for writing scalable css",
   "main": "src/index.scss",
   "scripts": {
-    "build": "rm -rf dist && npx sass --no-source-map src:dist"
+    "build": "rm -rf dist && npx sass --no-source-map src:dist",
+    "demo:css": "rm -rf demo-css/styles && npx sass --no-source-map src:demo-css/styles && serve -p 6060 demo-css",
+    "demo:sass": "rm -rf demo-sass/styles && npx sass --no-source-map demo-sass/scss:demo-sass/styles && serve -p 7070 demo-sass"
   },
   "repository": {
     "type": "git",
@@ -21,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/stephenpalgeorge/finch-css/issues"
   },
-  "homepage": "https://github.com/stephenpalgeorge/finch-css#readme"
+  "homepage": "https://github.com/stephenpalgeorge/finch-css#readme",
+  "devDependencies": {
+    "serve": "^11.3.2"
+  }
 }
