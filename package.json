@@ -2,7 +2,7 @@
   "name": "finch-css",
   "version": "0.0.0",
   "description": "A Sass framework for writing scalable css",
-  "main": "index.scss",
+  "main": "src/index.scss",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
