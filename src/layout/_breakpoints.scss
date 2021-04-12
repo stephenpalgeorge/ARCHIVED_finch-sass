@@ -1,0 +1,47 @@
+@use 'sass:map';
+@use '../_functions' as func;
+
+$breakpoint-x-small: 0 !default;
+$breakpoint-small: 576px !default;
+$breakpoint-medium: 768px !default;
+$breakpoint-large: 992px !default;
+$breakpoint-x-large: 1200px !default;
+
+$finch-breakpoints: (
+  'xs': $breakpoint-x-small,
+  'sm': $breakpoint-small,
+  'md': $breakpoint-medium,
+  'lg': $breakpoint-large,
+  'xl': $breakpoint-x-large,
+);
+
+$set-breakpoints: () !default;
+$breakpoints: map.merge($finch-breakpoints, $set-breakpoints);
+
+@mixin break($breakpoint, $dir: up) {
+  $width: map.get($breakpoints, $breakpoint);
+  @if $dir == up {
+    @media screen and (min-width: $width) {
+      @content;
+    }
+  }
+
+  @else if $dir == down {
+    @media screen and (max-width: $width - 1) {
+      @content;
+    }
+  }
+
+  @else {
+    @error "Unknown direction #{$dir}.";
+  }
+}
+
+@mixin break-only($breakpoint) {
+  $width: map.get($breakpoints, $breakpoint);
+  $next-breakpoint: func.map-get-next($breakpoints, $breakpoint);
+
+  @media screen and (min-width: $width) and (max-width: $next-breakpoint - 1) {
+    @content;
+  }
+}

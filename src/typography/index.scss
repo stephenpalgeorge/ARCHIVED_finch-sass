@@ -1,21 +1,20 @@
 @use 'sass:map';
 @use '../config';
+@use '../layout';
 
-$default-sizes: config.$sizes;
-$set-sizes: () !default;
-$sizes: map.merge($default-sizes, $set-sizes);
+$font-sizes: () !default;
+@use './sizes' as * with ($size-scale: config.$size-scale, $set-font-sizes: $font-sizes);
 
-$finch-font-sizes: (
-  'small-print': map.get($sizes, '300'),
-  'base': map.get($sizes, '400'),
-  'lead': map.get($sizes, '600'),
-) !default;
+$font-responsive: (
+  'font-size': false,
+);
+  
+$set-responsive: () !default;
+$responsive: map.merge($font-responsive, $set-responsive);
+@use '../_mixins' as m with ($responsive-map: $responsive);
 
-$set-font-sizes: () !default;
-$font-sizes: map.merge($finch-font-sizes, $set-font-sizes);
-
-@each $key, $value in $font-sizes {
-  .font-size--#{$key} {
-    font-size: $value;
+@each $key, $value in layout.$breakpoints {
+  @include layout.break($key) {
+    @include m.gen-responsive($key, 'font-size', 'font-size', $sizes);
   }
 }

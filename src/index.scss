@@ -1,9 +1,12 @@
 $root-sizes: () !default;
+$set-font-sizes: () !default;
+$set-font-responsive: () !default;
 
 @use './config' with (
-  $set-sizes: $root-sizes,
+  $set-size-scale: $root-sizes,
 );
 
 @use './typography' with (
-  $set-sizes: config.$sizes,
+  $font-sizes: $set-font-sizes,
+  $set-responsive: $set-font-responsive,
 );

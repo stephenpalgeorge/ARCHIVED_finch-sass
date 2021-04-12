@@ -1,12 +1,13 @@
 @use 'sass:map';
 
-$size-base: 1rem !default;
 
 /// SIZES
 /// ----------
 /// @author stephen pal-george
 ///
-$finch-sizes: (
+$size-base: 1rem !default;
+
+$finch-size-scale: (
   '100': $size-base * .4,
   '200': $size-base * .6,
   '300': $size-base * .8,
@@ -19,5 +20,5 @@ $finch-sizes: (
   '1000': $size-base * 4,
 );
 
-$set-sizes: () !default;
-$sizes: map.merge($finch-sizes, $set-sizes);
+$set-size-scale: () !default;
+$size-scale: map.merge($finch-size-scale, $set-size-scale);

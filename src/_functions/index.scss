@@ -1,0 +1,29 @@
+/// @author stephen pal-george
+/// @param {Map} $map
+/// @param {String} $target the initial key of the map, whose neighbour you want to find.
+@function map-get-next($map, $target) {
+  // initialise a counter:
+  $i: 1;
+  // initialise key index. Since $i starts at 1 and only ever increments, there is no danger
+  // of $i === $key-i + 1 ever matching until $key-i is explicitly set within the @each loop.
+  $key-i: -1;
+  // iterate on the map:
+  @each $key, $value in $map {
+    // we set $key-i to be the index of the target item in the map:
+    @if $key == $target {
+      $key-i: $i;
+    }
+    // if the current loop is on the index *after* the $target, then this is the key we want,
+    // so we return the current value:
+    @if $i == $key-i + 1 {
+      @return $value;
+    }
+
+    // if the index is the length of the map, then there is no `next` key and we show an error:
+    @if $i == length($map) {
+      @error "No breakpoint beyond #{$target}, there's probably a more suitable mixin you could be using.";
+    }
+    // increment $i for the next loop.
+    $i: $i + 1;
+  }
+}
