@@ -4,7 +4,7 @@
   "description": "A Sass framework for writing scalable css",
   "main": "src/index.scss",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rm -rf dist && npx sass --no-source-map src:dist"
   },
   "repository": {
     "type": "git",

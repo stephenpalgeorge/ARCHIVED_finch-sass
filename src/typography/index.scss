@@ -1,0 +1,19 @@
+@use 'sass:map';
+@use '../config';
+
+$sizes: config.$sizes !default;
+
+$finch-font-sizes: (
+  'small-print': map.get($sizes, '300'),
+  'base': map.get($sizes, '400'),
+  'lead': map.get($sizes, '600'),
+) !default;
+
+$set-font-sizes: () !default;
+$font-sizes: map.merge($finch-font-sizes, $set-font-sizes);
+
+@each $key, $value in $font-sizes {
+  .font-size--#{$key} {
+    font-size: $value;
+  }
+}
