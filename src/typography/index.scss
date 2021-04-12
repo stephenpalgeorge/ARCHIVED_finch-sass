@@ -4,9 +4,12 @@
 
 $font-sizes: () !default;
 @use './sizes' as * with ($size-scale: config.$size-scale, $set-font-sizes: $font-sizes);
+$font-weights: () !default;
+@use './weights' as * with ($set-font-weights: $font-weights);
 
 $font-responsive: (
   'font-size': false,
+  'font-weight': false,
 );
   
 $set-responsive: () !default;

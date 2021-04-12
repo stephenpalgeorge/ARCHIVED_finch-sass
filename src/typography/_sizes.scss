@@ -12,7 +12,7 @@ $set-font-sizes: () !default;
 $sizes: map.merge($finch-font-sizes, $set-font-sizes);
 
 @each $key, $value in $sizes {
-  .font-size--#{$key} {
+  .size--#{$key} {
     font-size: $value;
   }
 }

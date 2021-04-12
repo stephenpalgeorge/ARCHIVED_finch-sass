@@ -1,0 +1,24 @@
+@use 'sass:map';
+
+$weight-base: 400 !default;
+$weight-thin: $weight-base * .5; // default 200
+$weight-light: $weight-base * .75; // default 300
+$weight-bold: $weight-base * 1.75; // default 700
+$weight-black: $weight-base * 2.25; // default 900
+
+$finch-font-weights: (
+  'thin': $weight-thin,
+  'light': $weight-light,
+  'base': $weight-base,
+  'bold': $weight-bold,
+  'black': $weight-black,
+);
+
+$set-font-weights: () !default;
+$weights: map.merge($finch-font-weights, $set-font-weights);
+
+@each $key, $value in $weights {
+  .weight--#{$key} {
+    font-weight: $value;
+  }
+}
