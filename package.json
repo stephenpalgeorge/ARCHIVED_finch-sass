@@ -1,0 +1,25 @@
+{
+  "name": "finch-css",
+  "version": "0.0.0",
+  "description": "A Sass framework for writing scalable css",
+  "main": "index.scss",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephenpalgeorge/finch-css.git"
+  },
+  "keywords": [
+    "sass",
+    "css",
+    "framework",
+    "style"
+  ],
+  "author": "stephen pal-george",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stephenpalgeorge/finch-css/issues"
+  },
+  "homepage": "https://github.com/stephenpalgeorge/finch-css#readme"
+}
