@@ -1,12 +1,19 @@
 @use 'sass:map';
 
 $responsive-map: () !default;
+$utilities-map: () !default;
 
 @mixin gen-responsive($breakpoint, $prop, $propLabel, $propMap) {
   @if map.get($responsive-map, $prop) {
     @each $key, $value in $propMap {
-      .#{$breakpoint}\:#{$propLabel}--#{$key} {
+      %#{$breakpoint}\:#{$propLabel}--#{$key} {
         #{$prop}: $value;
+      }
+
+      @if map.get($utilities-map, $prop) {
+        .#{$breakpoint}\:#{$propLabel}--#{$key} {
+          #{$prop}: $value;
+        }
       }
     }
   }

@@ -3,6 +3,7 @@ $set-breakpoints: () !default;
 $set-font-sizes: () !default;
 $set-font-weights: () !default;
 $set-font-responsive: () !default;
+$set-font-utilities: () !default;
 
 @use './config' with (
   $set-size-scale: $root-sizes,
@@ -16,4 +17,5 @@ $set-font-responsive: () !default;
   $font-sizes: $set-font-sizes,
   $font-weights: $set-font-weights,
   $set-responsive: $set-font-responsive,
+  $set-utilities: $set-font-utilities,
 );

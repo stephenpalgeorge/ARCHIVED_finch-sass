@@ -2,22 +2,60 @@
 @use '../config';
 @use '../layout';
 
-$font-sizes: () !default;
-@use './sizes' as * with ($size-scale: config.$size-scale, $set-font-sizes: $font-sizes);
-$font-weights: () !default;
-@use './weights' as * with ($set-font-weights: $font-weights);
-
+/// @author stephen pal-george
+/// This map controls whether the styles are generated specifically for each breakpoint.
+/// If true, then placeholders and classes such as `(\.|%)sm\:size--lead` will be created.
 $font-responsive: (
   'font-size': false,
   'font-weight': false,
 );
-  
+/// provide custom 'responsive' settings for this module.
+/// @example @use '<path-to-finch>/typography' with ($set-responsive: ('font-size': true));
 $set-responsive: () !default;
 $responsive: map.merge($font-responsive, $set-responsive);
-@use '../_mixins' as m with ($responsive-map: $responsive);
 
+/// @author stephen pal-george
+/// This map controls whether or not utility classes are generated. By default,
+/// Finch will create everything within it's module's partials as placeholders (%),
+/// rather than classes (.). Switching any of these values to `true` will create the
+/// classes as well.
+$font-utilities: (
+  'font-size': false,
+  'font-weight': false,
+);
+/// provide custom 'utilities' settings for this module.
+/// @example @use '<path-to-finch>/typography' with ($set-utilities: ('font-weight': true));
+$set-utilities: () !default;
+$utilities: map.merge($font-utilities, $set-utilities);
+  
+@use '../_mixins' as m with ($responsive-map: $responsive, $utilities-map: $utilities);
+
+/// provide custom font-sizes for the module, these are consumed by the _sizes partial.
+/// @example @use '<path-to-finch>/typography' with ($font-sizes: ('headline': 5rem));
+$font-sizes: () !default;
+@use './sizes' as * with (
+  $size-scale: config.$size-scale,
+  $set-font-sizes: $font-sizes,
+  $gen-utils: map.get($utilities, 'font-size'),
+);
+
+/// provide custom font-weights for the module, these are consumed by the _weights partial.
+/// @example @use '<path-to-finch>/typography' with ($font-weights: ('heavy': 800));
+$font-weights: () !default;
+@use './weights' as * with (
+  $set-font-weights: $font-weights,
+  $gen-utils: map.get($utilities, 'font-weight')
+);
+
+// create responsize class names:
+// the following code generates classes such as `sm:size--lead`, or `xl:weight--heavy`.
 @each $key, $value in layout.$breakpoints {
   @include layout.break($key) {
-    @include m.gen-responsive($key, 'font-size', 'font-size', $sizes);
+    @include m.gen-responsive($key, 'font-size', 'size', $sizes);
+    @include m.gen-responsive($key, 'font-weight', 'weight', $weights);
   }
+}
+
+.text-main {
+  @extend %weight--black;
 }
