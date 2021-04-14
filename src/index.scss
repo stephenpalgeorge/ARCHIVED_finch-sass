@@ -2,6 +2,7 @@ $root-sizes: () !default;
 $set-breakpoints: () !default;
 $set-font-sizes: () !default;
 $set-font-weights: () !default;
+$set-line-heights: () !default;
 $set-font-responsive: () !default;
 $set-font-utilities: () !default;
 
@@ -16,6 +17,7 @@ $set-font-utilities: () !default;
 @use './typography' with (
   $font-sizes: $set-font-sizes,
   $font-weights: $set-font-weights,
+  $line-heights: $set-line-heights,
   $set-responsive: $set-font-responsive,
   $set-utilities: $set-font-utilities,
 );

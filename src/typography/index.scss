@@ -2,6 +2,10 @@
 @use '../config';
 @use '../layout';
 
+/// ----------
+/// MODULE SETUP
+/// ----------
+
 /// @author stephen pal-george
 /// This map controls whether the styles are generated specifically for each breakpoint.
 /// If true, then placeholders and classes such as `(\.|%)sm\:size--lead` will be created.
@@ -22,6 +26,7 @@ $responsive: map.merge($font-responsive, $set-responsive);
 $font-utilities: (
   'font-size': false,
   'font-weight': false,
+  'line-height': false,
 );
 /// provide custom 'utilities' settings for this module.
 /// @example @use '<path-to-finch>/typography' with ($set-utilities: ('font-weight': true));
@@ -30,6 +35,8 @@ $utilities: map.merge($font-utilities, $set-utilities);
   
 @use '../_mixins' as m with ($responsive-map: $responsive, $utilities-map: $utilities);
 
+/// FONT-SIZE
+/// ----------
 /// provide custom font-sizes for the module, these are consumed by the _sizes partial.
 /// @example @use '<path-to-finch>/typography' with ($font-sizes: ('headline': 5rem));
 $font-sizes: () !default;
@@ -39,12 +46,24 @@ $font-sizes: () !default;
   $gen-utils: map.get($utilities, 'font-size'),
 );
 
+/// FONT-WEIGHT
+/// ----------
 /// provide custom font-weights for the module, these are consumed by the _weights partial.
 /// @example @use '<path-to-finch>/typography' with ($font-weights: ('heavy': 800));
 $font-weights: () !default;
 @use './weights' as * with (
   $set-font-weights: $font-weights,
-  $gen-utils: map.get($utilities, 'font-weight')
+  $gen-utils: map.get($utilities, 'font-weight'),
+);
+
+/// LINE-HEIGHT
+/// ----------
+/// provide custom line-heights for the module, these are consumed by the _line-heights partial.
+/// @example @use '<path-to-finch>/typography' with ($line-heights: ('x-tall': 2));
+$line-heights: () !default;
+@use './line-heights' as * with (
+  $set-line-heights: $line-heights,
+  $gen-utils: map.get($utilities, 'line-height'),
 );
 
 // create responsize class names:
@@ -53,9 +72,12 @@ $font-weights: () !default;
   @include layout.break($key) {
     @include m.gen-responsive($key, 'font-size', 'size', $sizes);
     @include m.gen-responsive($key, 'font-weight', 'weight', $weights);
+    @include m.gen-responsive($key, 'line-height', 'line-height', $heights);
   }
 }
 
 .text-main {
   @extend %weight--black;
+  @extend %line-height--base;
+  @extend %size--lead;
 }

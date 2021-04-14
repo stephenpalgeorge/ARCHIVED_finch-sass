@@ -1,0 +1,28 @@
+@use 'sass:map';
+
+$gen-utils: false !default;
+
+$line-height-tight: 1;
+$line-height-base: 1.4;
+$line-height-tall: 1.7;
+
+$finch-line-heights: (
+  'tight': $line-height-tight,
+  'base': $line-height-base,
+  'tall': $line-height-tall,
+);
+
+$set-line-heights: () !default;
+$heights: map.merge($finch-line-heights, $set-line-heights);
+
+@each $key, $value in $heights {
+  %line-height--#{$key} {
+    line-height: $value;
+  }
+
+  @if $gen-utils {
+    .line-height--#{$key} {
+      @extend %line-height--#{$key};
+    }
+  }
+}
