@@ -110,12 +110,6 @@ $word-spacings: () !default;
   line-height: line-height($line-height);
   letter-spacing: letter-spacing($letter-spacing);
   word-spacing: word-spacing($word-spacing);
-<<<<<<< HEAD
-}
-
-.text-main {
-  @include text-style($size: small, $letter-spacing: tight, $word-spacing: wide);
-=======
   // set some recommended values that aren't browser defaults
   // in some cases, these won't be rendered as they are not well supported,
   // and the end-user can always override them in their stylesheets anyway...
@@ -125,6 +119,5 @@ $word-spacings: () !default;
 }
 
 .text-main {
-  @include text-style($size: inherit, $weight: bolder, $letter-spacing: tight, $word-spacing: wide);
->>>>>>> 44e43a30ae7db2d2dc9f0ce6edd3a2698baf2873
+  @include text-style($size: small, $letter-spacing: tight, $word-spacing: wide);
 }
