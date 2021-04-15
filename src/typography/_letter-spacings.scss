@@ -1,10 +1,11 @@
 @use 'sass:map';
+@use '../config';
 
 $letter-spacing-utils: false !default;
 
-$letter-spacing-tight: -1px;
-$letter-spacing-base: 0;
-$letter-spacing-wide: .125rem;
+$letter-spacing-tight: map.get(config.$atomic-scale, 300);
+$letter-spacing-base: map.get(config.$atomic-scale, 400);
+$letter-spacing-wide: map.get(config.$atomic-scale, 600);
 
 $finch-letter-spacings: (
   tight: $letter-spacing-tight,

@@ -46,7 +46,6 @@ $utilities: map.merge($font-utilities, $set-utilities);
 /// @example @use '<path-to-finch>/typography' with ($font-sizes: (headline: 5rem));
 $font-sizes: () !default;
 @use 'font-sizes' as * with (
-  $size-scale: config.$size-scale,
   $set-font-sizes: $font-sizes,
   $size-utils: map.get($utilities, font-size),
 );

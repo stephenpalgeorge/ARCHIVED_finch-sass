@@ -1,5 +1,9 @@
+/// Config map over-rides:
 $root-sizes: () !default;
+$atomic-sizes: () !default;
+/// Layout map over-rides:
 $set-breakpoints: () !default;
+/// Typography map over-rides:
 $set-font-sizes: () !default;
 $set-font-weights: () !default;
 $set-letter-spacings: () !default;
@@ -9,6 +13,7 @@ $set-font-responsive: () !default;
 $set-font-utilities: () !default;
 
 @use './config' with (
+  $set-atomic-scale: $atomic-sizes,
   $set-size-scale: $root-sizes,
 );
 
