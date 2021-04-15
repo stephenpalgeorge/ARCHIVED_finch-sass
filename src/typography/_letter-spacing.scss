@@ -1,6 +1,6 @@
 @use 'sass:map';
 
-$gen-utils: false !default;
+$letter-spacing-utils: false !default;
 
 $letter-spacing-tight: -0.125rem;
 $letter-spacing-base: 0;
@@ -25,7 +25,7 @@ $spacings: map.merge($finch-letter-spacings, $set-letter-spacings);
   @return null;
 }
 
-@if $gen-utils {
+@if $letter-spacing-utils {
   @each $key, $value in $spacings {
     .letter-spacing--#{$key} {
       letter-spacing: $value;

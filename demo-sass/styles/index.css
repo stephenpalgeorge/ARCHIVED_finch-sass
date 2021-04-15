@@ -6,7 +6,7 @@
   font-size: 1rem;
 }
 
-.text-main, .size--lead {
+.size--lead {
   font-size: 1.4rem;
 }
 
@@ -30,12 +30,20 @@
   font-weight: 700;
 }
 
-.text-main, .weight--black {
+.weight--heavy {
   font-weight: 900;
 }
 
-.text-main {
-  line-height: 1.4;
+.letter-spacing--tight {
+  letter-spacing: -0.125rem;
+}
+
+.letter-spacing--base {
+  letter-spacing: 0;
+}
+
+.letter-spacing--wide {
+  letter-spacing: 0.125rem;
 }
 
 @media screen and (min-width: 4px) {
@@ -54,6 +62,18 @@
   .xs\:size--display {
     font-size: 6rem;
   }
+
+  .xs\:letter-spacing--tight {
+    letter-spacing: -0.125rem;
+  }
+
+  .xs\:letter-spacing--base {
+    letter-spacing: 0;
+  }
+
+  .xs\:letter-spacing--wide {
+    letter-spacing: 0.125rem;
+  }
 }
 @media screen and (min-width: 576px) {
   .sm\:size--small-print {
@@ -70,6 +90,18 @@
 
   .sm\:size--display {
     font-size: 6rem;
+  }
+
+  .sm\:letter-spacing--tight {
+    letter-spacing: -0.125rem;
+  }
+
+  .sm\:letter-spacing--base {
+    letter-spacing: 0;
+  }
+
+  .sm\:letter-spacing--wide {
+    letter-spacing: 0.125rem;
   }
 }
 @media screen and (min-width: 768px) {
@@ -88,6 +120,18 @@
   .md\:size--display {
     font-size: 6rem;
   }
+
+  .md\:letter-spacing--tight {
+    letter-spacing: -0.125rem;
+  }
+
+  .md\:letter-spacing--base {
+    letter-spacing: 0;
+  }
+
+  .md\:letter-spacing--wide {
+    letter-spacing: 0.125rem;
+  }
 }
 @media screen and (min-width: 992px) {
   .lg\:size--small-print {
@@ -104,6 +148,18 @@
 
   .lg\:size--display {
     font-size: 6rem;
+  }
+
+  .lg\:letter-spacing--tight {
+    letter-spacing: -0.125rem;
+  }
+
+  .lg\:letter-spacing--base {
+    letter-spacing: 0;
+  }
+
+  .lg\:letter-spacing--wide {
+    letter-spacing: 0.125rem;
   }
 }
 @media screen and (min-width: 1200px) {
@@ -122,4 +178,22 @@
   .xl\:size--display {
     font-size: 6rem;
   }
+
+  .xl\:letter-spacing--tight {
+    letter-spacing: -0.125rem;
+  }
+
+  .xl\:letter-spacing--base {
+    letter-spacing: 0;
+  }
+
+  .xl\:letter-spacing--wide {
+    letter-spacing: 0.125rem;
+  }
+}
+.text-test {
+  font-weight: 900;
+  font-size: 1.4rem;
+  line-height: 1.4;
+  letter-spacing: 0;
 }

@@ -23,3 +23,7 @@ $set-font-utilities: () !default;
   $set-responsive: $set-font-responsive,
   $set-utilities: $set-font-utilities,
 );
+
+@forward './typography' as type-*;
+@forward './typography/sizes' as type-*;
+@forward './typography/weights' as type-*;

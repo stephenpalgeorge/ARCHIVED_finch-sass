@@ -1,6 +1,6 @@
 @use 'sass:map';
 
-$gen-utils: false !default;
+$size-utils: false !default;
 $size-scale: () !default;
 
 $finch-font-sizes: (
@@ -22,7 +22,7 @@ $sizes: map.merge($finch-font-sizes, $set-font-sizes);
   @return null;
 }
 
-@if $gen-utils {
+@if $size-utils {
   @each $key, $value in $sizes {
     .size--#{$key} {
       font-size: $value;

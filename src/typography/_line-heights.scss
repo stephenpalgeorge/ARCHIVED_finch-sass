@@ -1,6 +1,6 @@
 @use 'sass:map';
 
-$gen-utils: false !default;
+$line-height-utils: false !default;
 
 $line-height-tight: 1;
 $line-height-base: 1.4;
@@ -25,7 +25,7 @@ $heights: map.merge($finch-line-heights, $set-line-heights);
   @return null;
 }
 
-@if $gen-utils {
+@if $line-height-utils {
   @each $key, $value in $heights {
     .line-height--#{$key} {
       line-height: $value;

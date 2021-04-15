@@ -1,6 +1,6 @@
 @use 'sass:map';
 
-$gen-utils: false !default;
+$weight-utils: false !default;
 
 $weight-base: 400 !default;
 $weight-x-light: $weight-base * .5; // default 200
@@ -29,7 +29,7 @@ $weights: map.merge($finch-font-weights, $set-font-weights);
   @return null;
 }
 
-@if $gen-utils {
+@if $weight-utils {
   @each $key, $value in $weights {
     .weight--#{$key} {
       font-weight: $value;

@@ -1,4 +1,4 @@
-@use '../../src' with (
+@use '../../src' as finch with (
   $set-breakpoints: (
     'xs': 4px,
   ),
@@ -14,7 +14,7 @@
   ),
 );
 
-// @use '../../src/typography' with (
+// @use '../../src/typography' as type with (
 //   $set-responsive: (
 //     'font-size': true,
 //     'font-weight': true,
@@ -23,3 +23,7 @@
 //     'font-weight': true,
 //   ),
 // );
+
+.text-test {
+  @include finch.type-text-style($weight: heavy, $size: lead);
+}
