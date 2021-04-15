@@ -1,0 +1,34 @@
+@use 'sass:map';
+
+$word-spacing-utils: false !default;
+
+$word-spacing-tight: -1px;
+$word-spacing-base: 0;
+$word-spacing-wide: .25rem;
+
+$finch-word-spacings: (
+  'tight': $word-spacing-tight,
+  'base': $word-spacing-base,
+  'wide': $word-spacing-wide,
+);
+
+$set-word-spacings: () !default;
+$w-spacings: map.merge($finch-word-spacings, $set-word-spacings);
+
+@function word-spacing($key) {
+  $value: map.get($w-spacings, $key);
+  @if $value {
+    @return $value;
+  }
+
+  @warn 'No word-spacing found for "#{$key}"';
+  @return null;
+}
+
+@if $word-spacing-utils {
+  @each $key, $value in $w-spacings {
+    .word-spacing--#{$key} {
+      word-spacing: $value;
+    }
+  }
+}

@@ -1,4 +1,4 @@
-.size--small-print {
+.size--small {
   font-size: 0.8rem;
 }
 
@@ -30,20 +30,8 @@
   font-weight: 900;
 }
 
-.letter-spacing--tight {
-  letter-spacing: -0.125rem;
-}
-
-.letter-spacing--base {
-  letter-spacing: 0;
-}
-
-.letter-spacing--wide {
-  letter-spacing: 0.125rem;
-}
-
 @media screen and (min-width: 0) {
-  .xs\:size--small-print {
+  .xs\:size--small {
     font-size: 0.8rem;
   }
 
@@ -74,21 +62,9 @@
   .xs\:weight--heavy {
     font-weight: 900;
   }
-
-  .xs\:letter-spacing--tight {
-    letter-spacing: -0.125rem;
-  }
-
-  .xs\:letter-spacing--base {
-    letter-spacing: 0;
-  }
-
-  .xs\:letter-spacing--wide {
-    letter-spacing: 0.125rem;
-  }
 }
 @media screen and (min-width: 576px) {
-  .sm\:size--small-print {
+  .sm\:size--small {
     font-size: 0.8rem;
   }
 
@@ -119,21 +95,9 @@
   .sm\:weight--heavy {
     font-weight: 900;
   }
-
-  .sm\:letter-spacing--tight {
-    letter-spacing: -0.125rem;
-  }
-
-  .sm\:letter-spacing--base {
-    letter-spacing: 0;
-  }
-
-  .sm\:letter-spacing--wide {
-    letter-spacing: 0.125rem;
-  }
 }
 @media screen and (min-width: 768px) {
-  .md\:size--small-print {
+  .md\:size--small {
     font-size: 0.8rem;
   }
 
@@ -164,21 +128,9 @@
   .md\:weight--heavy {
     font-weight: 900;
   }
-
-  .md\:letter-spacing--tight {
-    letter-spacing: -0.125rem;
-  }
-
-  .md\:letter-spacing--base {
-    letter-spacing: 0;
-  }
-
-  .md\:letter-spacing--wide {
-    letter-spacing: 0.125rem;
-  }
 }
 @media screen and (min-width: 992px) {
-  .lg\:size--small-print {
+  .lg\:size--small {
     font-size: 0.8rem;
   }
 
@@ -209,21 +161,9 @@
   .lg\:weight--heavy {
     font-weight: 900;
   }
-
-  .lg\:letter-spacing--tight {
-    letter-spacing: -0.125rem;
-  }
-
-  .lg\:letter-spacing--base {
-    letter-spacing: 0;
-  }
-
-  .lg\:letter-spacing--wide {
-    letter-spacing: 0.125rem;
-  }
 }
 @media screen and (min-width: 1200px) {
-  .xl\:size--small-print {
+  .xl\:size--small {
     font-size: 0.8rem;
   }
 
@@ -254,24 +194,13 @@
   .xl\:weight--heavy {
     font-weight: 900;
   }
-
-  .xl\:letter-spacing--tight {
-    letter-spacing: -0.125rem;
-  }
-
-  .xl\:letter-spacing--base {
-    letter-spacing: 0;
-  }
-
-  .xl\:letter-spacing--wide {
-    letter-spacing: 0.125rem;
-  }
 }
 .text-main {
   font-weight: 400;
   font-size: 0.8rem;
   line-height: 1.4;
-  letter-spacing: -0.125rem;
+  letter-spacing: -1px;
+  word-spacing: 0.125rem;
 }
 
 .text-test {
@@ -279,4 +208,5 @@
   font-size: 1.4rem;
   line-height: 1.4;
   letter-spacing: 0;
+  word-spacing: 0;
 }
