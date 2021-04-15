@@ -1,4 +1,6 @@
 dist
 dist/*
 
+demo-*/styles
+
 node_modules
