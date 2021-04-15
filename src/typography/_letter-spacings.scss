@@ -1,5 +1,4 @@
 @use 'sass:map';
-@use 'sass:list';
 @use '../config';
 
 $letter-spacing-utils: false !default;
@@ -18,12 +17,6 @@ $set-letter-spacings: () !default;
 $l-spacings: map.merge($finch-letter-spacings, $set-letter-spacings);
 
 @function letter-spacing($key) {
-  // return the given value immediately if it is a reserved key word for this property:
-  $spec-values: (normal);
-  @if list.index(config.$global-values, $key) or list.index($spec-values, $key) {
-    @return $key;
-  }
-
   $value: map.get($l-spacings, $key);
   @if $value {
     @return $value;
