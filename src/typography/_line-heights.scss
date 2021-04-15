@@ -7,22 +7,28 @@ $line-height-base: 1.4;
 $line-height-tall: 1.7;
 
 $finch-line-heights: (
-  'tight': $line-height-tight,
-  'base': $line-height-base,
-  'tall': $line-height-tall,
+  tight: $line-height-tight,
+  base: $line-height-base,
+  tall: $line-height-tall,
 );
 
 $set-line-heights: () !default;
 $heights: map.merge($finch-line-heights, $set-line-heights);
 
-@each $key, $value in $heights {
-  %line-height--#{$key} {
-    line-height: $value;
+@function line-height($key) {
+  $value: map.get($heights, $key);
+  @if $value {
+    @return $value;
   }
 
-  @if $gen-utils {
+  @warn 'no line-height found for #{$key}';
+  @return null;
+}
+
+@if $gen-utils {
+  @each $key, $value in $heights {
     .line-height--#{$key} {
-      @extend %line-height--#{$key};
+      line-height: $value;
     }
   }
 }

@@ -1,0 +1,34 @@
+@use 'sass:map';
+
+$gen-utils: false !default;
+
+$letter-spacing-tight: -0.125rem;
+$letter-spacing-base: 0;
+$letter-spacing-wide: .125rem;
+
+$finch-letter-spacings: (
+  tight: $letter-spacing-tight,
+  base: $letter-spacing-base,
+  wide: $letter-spacing-wide,
+);
+
+$set-letter-spacings: () !default;
+$spacings: map.merge($finch-letter-spacings, $set-letter-spacings);
+
+@function letter-spacing($key) {
+  $value: map.get($spacings, $key);
+  @if $value {
+    @return $value;
+  }
+
+  @warn 'No spacing found for #{$key}';
+  @return null;
+}
+
+@if $gen-utils {
+  @each $key, $value in $spacings {
+    .letter-spacing--#{$key} {
+      letter-spacing: $value;
+    }
+  }
+}

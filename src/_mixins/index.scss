@@ -4,16 +4,10 @@ $responsive-map: () !default;
 $utilities-map: () !default;
 
 @mixin gen-responsive($breakpoint, $prop, $propLabel, $propMap) {
-  @if map.get($responsive-map, $prop) {
+  @if map.get($responsive-map, $prop) and map.get($utilities-map, $prop) {
     @each $key, $value in $propMap {
-      %#{$breakpoint}\:#{$propLabel}--#{$key} {
+      .#{$breakpoint}\:#{$propLabel}--#{$key} {
         #{$prop}: $value;
-      }
-
-      @if map.get($utilities-map, $prop) {
-        .#{$breakpoint}\:#{$propLabel}--#{$key} {
-          #{$prop}: $value;
-        }
       }
     }
   }

@@ -10,11 +10,13 @@
 /// This map controls whether the styles are generated specifically for each breakpoint.
 /// If true, then placeholders and classes such as `(\.|%)sm\:size--lead` will be created.
 $font-responsive: (
-  'font-size': false,
-  'font-weight': false,
+  font-size: false,
+  font-weight: false,
+  line-height: false,
+  letter-spacing: true,
 );
 /// provide custom 'responsive' settings for this module.
-/// @example @use '<path-to-finch>/typography' with ($set-responsive: ('font-size': true));
+/// @example @use '<path-to-finch>/typography' with ($set-responsive: (font-size: true));
 $set-responsive: () !default;
 $responsive: map.merge($font-responsive, $set-responsive);
 
@@ -24,12 +26,13 @@ $responsive: map.merge($font-responsive, $set-responsive);
 /// rather than classes (.). Switching any of these values to `true` will create the
 /// classes as well.
 $font-utilities: (
-  'font-size': false,
-  'font-weight': false,
-  'line-height': false,
+  font-size: false,
+  font-weight: false,
+  line-height: false,
+  letter-spacing: true,
 );
 /// provide custom 'utilities' settings for this module.
-/// @example @use '<path-to-finch>/typography' with ($set-utilities: ('font-weight': true));
+/// @example @use '<path-to-finch>/typography' with ($set-utilities: (font-weight: true));
 $set-utilities: () !default;
 $utilities: map.merge($font-utilities, $set-utilities);
   
@@ -38,46 +41,65 @@ $utilities: map.merge($font-utilities, $set-utilities);
 /// FONT-SIZE
 /// ----------
 /// provide custom font-sizes for the module, these are consumed by the _sizes partial.
-/// @example @use '<path-to-finch>/typography' with ($font-sizes: ('headline': 5rem));
+/// @example @use '<path-to-finch>/typography' with ($font-sizes: (headline: 5rem));
 $font-sizes: () !default;
 @use './sizes' as * with (
   $size-scale: config.$size-scale,
   $set-font-sizes: $font-sizes,
-  $gen-utils: map.get($utilities, 'font-size'),
+  $gen-utils: map.get($utilities, font-size),
 );
 
 /// FONT-WEIGHT
 /// ----------
 /// provide custom font-weights for the module, these are consumed by the _weights partial.
-/// @example @use '<path-to-finch>/typography' with ($font-weights: ('heavy': 800));
+/// @example @use '<path-to-finch>/typography' with ($font-weights: (heavy: 800));
 $font-weights: () !default;
 @use './weights' as * with (
   $set-font-weights: $font-weights,
-  $gen-utils: map.get($utilities, 'font-weight'),
+  $gen-utils: map.get($utilities, font-weight),
+);
+
+/// LETTER-SPACING
+/// ----------
+/// provide custom letter-spacings for the module, these are consumed by the _letter-spacings partial.
+/// @example @use '<path-to-finch>/typography' with ($letter-spacings: (x-wide: .25rem));
+$letter-spacings: () !default;
+@use './letter-spacing' as * with (
+  $set-letter-spacings: $letter-spacings,
+  $gen-utils: map.get($utilities, letter-spacing),
 );
 
 /// LINE-HEIGHT
 /// ----------
 /// provide custom line-heights for the module, these are consumed by the _line-heights partial.
-/// @example @use '<path-to-finch>/typography' with ($line-heights: ('x-tall': 2));
+/// @example @use '<path-to-finch>/typography' with ($line-heights: (x-tall: 2));
 $line-heights: () !default;
 @use './line-heights' as * with (
   $set-line-heights: $line-heights,
-  $gen-utils: map.get($utilities, 'line-height'),
+  $gen-utils: map.get($utilities, line-height),
 );
+
 
 // create responsize class names:
 // the following code generates classes such as `sm:size--lead`, or `xl:weight--heavy`.
+// the classes will only be generated if the corresponding property is set to 'true' in
+// the $font-responsive and $font-utilities maps.
 @each $key, $value in layout.$breakpoints {
   @include layout.break($key) {
     @include m.gen-responsive($key, 'font-size', 'size', $sizes);
     @include m.gen-responsive($key, 'font-weight', 'weight', $weights);
     @include m.gen-responsive($key, 'line-height', 'line-height', $heights);
+    @include m.gen-responsive($key, 'letter-spacing', 'letter-spacing', $spacings);
   }
 }
 
-.text-main {
-  @extend %weight--black;
-  @extend %line-height--base;
-  @extend %size--lead;
+@mixin text-style($weight: base, $size: base, $line-height: base, $letter-spacing: base) {
+  font-weight: weight($weight);
+  font-size: size($size);
+  line-height: line-height($line-height);
+  letter-spacing: letter-spacing($letter-spacing);
 }
+
+// .text-main {
+//   @include text-style($size: small-print, $letter-spacing: tight);
+// }

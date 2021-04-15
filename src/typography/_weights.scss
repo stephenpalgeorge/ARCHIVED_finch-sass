@@ -6,27 +6,33 @@ $weight-base: 400 !default;
 $weight-x-light: $weight-base * .5; // default 200
 $weight-light: $weight-base * .75; // default 300
 $weight-bold: $weight-base * 1.75; // default 700
-$weight-black: $weight-base * 2.25; // default 900
+$weight-heavy: $weight-base * 2.25; // default 900
 
 $finch-font-weights: (
-  'x-light': $weight-x-light,
-  'light': $weight-light,
-  'base': $weight-base,
-  'bold': $weight-bold,
-  'black': $weight-black,
+  x-light: $weight-x-light,
+  light: $weight-light,
+  base: $weight-base,
+  bold: $weight-bold,
+  heavy: $weight-heavy,
 );
 
 $set-font-weights: () !default;
 $weights: map.merge($finch-font-weights, $set-font-weights);
 
-@each $key, $value in $weights {
-  %weight--#{$key} {
-    font-weight: $value;
+@function weight($key) {
+  $value: map.get($weights, $key);
+  @if $value {
+    @return $value;
   }
 
-  @if $gen-utils {
+  @warn 'No weight found for #{$key}';
+  @return null;
+}
+
+@if $gen-utils {
+  @each $key, $value in $weights {
     .weight--#{$key} {
-      @extend %weight--#{$key};
+      font-weight: $value;
     }
   }
 }

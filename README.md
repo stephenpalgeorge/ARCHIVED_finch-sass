@@ -1,3 +1,3 @@
 # Finch CSS
 
-**Finch is a Sass framework for writing scalable CSS.**
+**_Finch_ is a Sass framework for writing scalable CSS.**
