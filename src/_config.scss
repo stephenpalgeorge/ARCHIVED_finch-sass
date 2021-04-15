@@ -38,3 +38,6 @@ $finch-atomic-scale: (
 
 $set-atomic-scale: () !default;
 $atomic-scale: map.merge($finch-atomic-scale, $set-size-scale);
+
+/// GLOBAL VALUES
+$global-values: (initial, inherit, unset);

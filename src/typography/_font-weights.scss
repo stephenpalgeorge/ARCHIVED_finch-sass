@@ -1,18 +1,20 @@
 @use 'sass:map';
+@use 'sass:list';
+@use '../config';
 
 $weight-utils: false !default;
 
 $weight-base: 400 !default;
 $weight-x-light: $weight-base * .5; // default 200
 $weight-light: $weight-base * .75; // default 300
-$weight-bold: $weight-base * 1.75; // default 700
+$weight-thick: $weight-base * 1.5; // default 600
 $weight-heavy: $weight-base * 2.25; // default 900
 
 $finch-font-weights: (
   x-light: $weight-x-light,
   light: $weight-light,
   base: $weight-base,
-  bold: $weight-bold,
+  thick: $weight-thick,
   heavy: $weight-heavy,
 );
 
@@ -20,6 +22,12 @@ $set-font-weights: () !default;
 $weights: map.merge($finch-font-weights, $set-font-weights);
 
 @function weight($key) {
+  // return the given value immediately if it is a reserved keyword for this property:
+  $spec-values: (normal, bold, lighter, bolder);
+  @if list.index(config.$global-values, $key) or list.index($spec-values, $key) {
+    @return $key;
+  }
+
   $value: map.get($weights, $key);
   @if $value {
     @return $value;
