@@ -121,3 +121,7 @@ $word-spacings: () !default;
 .text-main {
   @include text-style($size: inherit, $weight: bolder, $letter-spacing: tight, $word-spacing: wide);
 }
+
+.text-main {
+  @include text-style($size: small, $letter-spacing: tight, $word-spacing: wide);
+}

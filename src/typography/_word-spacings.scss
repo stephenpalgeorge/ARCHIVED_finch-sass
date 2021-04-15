@@ -1,8 +1,5 @@
 @use 'sass:map';
-<<<<<<< HEAD
 @use 'sass:list';
-=======
->>>>>>> ce43aa4d1a8f46c0fa2d5688fae000deafaa2072
 @use '../config';
 
 $word-spacing-utils: false !default;
@@ -21,15 +18,12 @@ $set-word-spacings: () !default;
 $w-spacings: map.merge($finch-word-spacings, $set-word-spacings);
 
 @function word-spacing($key) {
-<<<<<<< HEAD
   // return the given value immediately if it is a reserved keyword for this porperty:
   $spec-values: (normal);
   @if list.index(config.$global-values, $key) or list.index($spec-values, $key) {
     @return $key;
   }
 
-=======
->>>>>>> ce43aa4d1a8f46c0fa2d5688fae000deafaa2072
   $value: map.get($w-spacings, $key);
   @if $value {
     @return $value;
