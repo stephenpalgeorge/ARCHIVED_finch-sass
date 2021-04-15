@@ -101,5 +101,5 @@ $line-heights: () !default;
 }
 
 .text-main {
-  @include text-style($size: small-print, $letter-spacing: tight);
+  @include text-style($size: small, $letter-spacing: tight);
 }
