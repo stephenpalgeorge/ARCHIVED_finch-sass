@@ -1,10 +1,11 @@
 @use 'sass:map';
+@use '../config';
 
 $letter-spacing-utils: false !default;
 
-$letter-spacing-tight: -0.125rem;
-$letter-spacing-base: 0;
-$letter-spacing-wide: .125rem;
+$letter-spacing-tight: map.get(config.$atomic-scale, 300);
+$letter-spacing-base: map.get(config.$atomic-scale, 400);
+$letter-spacing-wide: map.get(config.$atomic-scale, 600);
 
 $finch-letter-spacings: (
   tight: $letter-spacing-tight,
@@ -13,20 +14,20 @@ $finch-letter-spacings: (
 );
 
 $set-letter-spacings: () !default;
-$spacings: map.merge($finch-letter-spacings, $set-letter-spacings);
+$l-spacings: map.merge($finch-letter-spacings, $set-letter-spacings);
 
 @function letter-spacing($key) {
-  $value: map.get($spacings, $key);
+  $value: map.get($l-spacings, $key);
   @if $value {
     @return $value;
   }
 
-  @warn 'No spacing found for #{$key}';
+  @warn 'No spacing found for "#{$key}"';
   @return null;
 }
 
 @if $letter-spacing-utils {
-  @each $key, $value in $spacings {
+  @each $key, $value in $l-spacings {
     .letter-spacing--#{$key} {
       letter-spacing: $value;
     }

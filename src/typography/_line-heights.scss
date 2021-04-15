@@ -21,7 +21,7 @@ $heights: map.merge($finch-line-heights, $set-line-heights);
     @return $value;
   }
 
-  @warn 'no line-height found for #{$key}';
+  @warn 'no line-height found for "#{$key}"';
   @return null;
 }
 

@@ -25,7 +25,7 @@ $weights: map.merge($finch-font-weights, $set-font-weights);
     @return $value;
   }
 
-  @warn 'No weight found for #{$key}';
+  @warn 'No weight found for "#{$key}"';
   @return null;
 }
 

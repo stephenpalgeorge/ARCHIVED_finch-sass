@@ -1,13 +1,19 @@
+/// Config map over-rides:
 $root-sizes: () !default;
+$atomic-sizes: () !default;
+/// Layout map over-rides:
 $set-breakpoints: () !default;
+/// Typography map over-rides:
 $set-font-sizes: () !default;
 $set-font-weights: () !default;
 $set-letter-spacings: () !default;
 $set-line-heights: () !default;
+$set-word-spacings: () !default;
 $set-font-responsive: () !default;
 $set-font-utilities: () !default;
 
 @use './config' with (
+  $set-atomic-scale: $atomic-sizes,
   $set-size-scale: $root-sizes,
 );
 
@@ -20,6 +26,7 @@ $set-font-utilities: () !default;
   $font-weights: $set-font-weights,
   $letter-spacings: $set-letter-spacings,
   $line-heights: $set-line-heights,
+  $word-spacings: $set-word-spacings,
   $set-responsive: $set-font-responsive,
   $set-utilities: $set-font-utilities,
 );
@@ -27,5 +34,8 @@ $set-font-utilities: () !default;
 // N.B. must make sure none of the partials share any variable names,
 // otherwise they will clash on load.
 @forward './typography' as type-*;
-@forward './typography/sizes' as type-*;
-@forward './typography/weights' as type-*;
+@forward './typography/font-sizes' as type-*;
+@forward './typography/font-weights' as type-*;
+@forward './typography/letter-spacings' as type-*;
+@forward './typography/line-heights' as type-*;
+@forward './typography/word-spacings' as type-*;

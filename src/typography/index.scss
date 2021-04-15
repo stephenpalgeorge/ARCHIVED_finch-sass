@@ -13,7 +13,8 @@ $font-responsive: (
   font-size: false,
   font-weight: false,
   line-height: false,
-  letter-spacing: true,
+  letter-spacing: false,
+  word-spacing: false,
 );
 /// provide custom 'responsive' settings for this module.
 /// @example @use '<path-to-finch>/typography' with ($set-responsive: (font-size: true));
@@ -29,7 +30,8 @@ $font-utilities: (
   font-size: false,
   font-weight: false,
   line-height: false,
-  letter-spacing: true,
+  letter-spacing: false,
+  word-spacing: false,
 );
 /// provide custom 'utilities' settings for this module.
 /// @example @use '<path-to-finch>/typography' with ($set-utilities: (font-weight: true));
@@ -43,8 +45,7 @@ $utilities: map.merge($font-utilities, $set-utilities);
 /// provide custom font-sizes for the module, these are consumed by the _sizes partial.
 /// @example @use '<path-to-finch>/typography' with ($font-sizes: (headline: 5rem));
 $font-sizes: () !default;
-@use 'sizes' as * with (
-  $size-scale: config.$size-scale,
+@use 'font-sizes' as * with (
   $set-font-sizes: $font-sizes,
   $size-utils: map.get($utilities, font-size),
 );
@@ -54,7 +55,7 @@ $font-sizes: () !default;
 /// provide custom font-weights for the module, these are consumed by the _weights partial.
 /// @example @use '<path-to-finch>/typography' with ($font-weights: (heavy: 800));
 $font-weights: () !default;
-@use 'weights' as * with (
+@use 'font-weights' as * with (
   $set-font-weights: $font-weights,
   $weight-utils: map.get($utilities, font-weight),
 );
@@ -64,7 +65,7 @@ $font-weights: () !default;
 /// provide custom letter-spacings for the module, these are consumed by the _letter-spacings partial.
 /// @example @use '<path-to-finch>/typography' with ($letter-spacings: (x-wide: .25rem));
 $letter-spacings: () !default;
-@use 'letter-spacing' as * with (
+@use 'letter-spacings' as * with (
   $set-letter-spacings: $letter-spacings,
   $letter-spacing-utils: map.get($utilities, letter-spacing),
 );
@@ -79,6 +80,15 @@ $line-heights: () !default;
   $line-height-utils: map.get($utilities, line-height),
 );
 
+/// WORD-SPACING
+/// ----------
+/// provide custom word-spacings for the module, these are consumed by the _word-spacings partial.
+/// @example @use '<path-to-finch>/typography' with ($word-spacings: (stretch: 1px));
+$word-spacings: () !default;
+@use 'word-spacings' as * with (
+  $set-word-spacings: $word-spacings,
+  $word-spacing-utils: map.get($utilities, word-spacing),
+);
 
 // create responsize class names:
 // the following code generates classes such as `sm:size--lead`, or `xl:weight--heavy`.
@@ -89,17 +99,19 @@ $line-heights: () !default;
     @include m.gen-responsive($key, 'font-size', 'size', $sizes);
     @include m.gen-responsive($key, 'font-weight', 'weight', $weights);
     @include m.gen-responsive($key, 'line-height', 'line-height', $heights);
-    @include m.gen-responsive($key, 'letter-spacing', 'letter-spacing', $spacings);
+    @include m.gen-responsive($key, 'letter-spacing', 'letter-spacing', $l-spacings);
+    @include m.gen-responsive($key, 'word-spacing', 'word-spacing', $w-spacings);
   }
 }
 
-@mixin text-style($weight: base, $size: base, $line-height: base, $letter-spacing: base) {
+@mixin text-style($weight: base, $size: base, $line-height: base, $letter-spacing: base, $word-spacing: base) {
   font-weight: weight($weight);
   font-size: size($size);
   line-height: line-height($line-height);
   letter-spacing: letter-spacing($letter-spacing);
+  word-spacing: word-spacing($word-spacing);
 }
 
 .text-main {
-  @include text-style($size: small, $letter-spacing: tight);
+  @include text-style($size: small, $letter-spacing: tight, $word-spacing: wide);
 }

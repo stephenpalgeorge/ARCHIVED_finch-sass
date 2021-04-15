@@ -1,12 +1,12 @@
 @use 'sass:map';
+@use '../config';
 
 $size-utils: false !default;
-$size-scale: () !default;
 
 $finch-font-sizes: (
-  small: map.get($size-scale, '300'),
-  base: map.get($size-scale, '400'),
-  lead: map.get($size-scale, '600'),
+  small: map.get(config.$size-scale, 300),
+  base: map.get(config.$size-scale, 400),
+  lead: map.get(config.$size-scale, 600),
 ) !default;
 
 $set-font-sizes: () !default;
@@ -18,7 +18,7 @@ $sizes: map.merge($finch-font-sizes, $set-font-sizes);
     @return $value;
   }
 
-  @warn 'no font-size found for #{$key}';
+  @warn 'no font-size found for "#{$key}"';
   @return null;
 }
 

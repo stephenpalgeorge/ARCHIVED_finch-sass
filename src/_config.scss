@@ -8,17 +8,33 @@
 $size-base: 1rem !default;
 
 $finch-size-scale: (
-  '100': $size-base * .4,
-  '200': $size-base * .6,
-  '300': $size-base * .8,
-  '400': $size-base,
-  '500': $size-base * 1.2,
-  '600': $size-base * 1.4,
-  '700': $size-base * 1.8,
-  '800': $size-base * 2,
-  '900': $size-base * 3,
-  '1000': $size-base * 4,
+  100: $size-base * .4,
+  200: $size-base * .6,
+  300: $size-base * .8,
+  400: $size-base,
+  500: $size-base * 1.2,
+  600: $size-base * 1.4,
+  700: $size-base * 1.8,
+  800: $size-base * 2,
+  900: $size-base * 3,
+  1000: $size-base * 4,
 );
 
 $set-size-scale: () !default;
 $size-scale: map.merge($finch-size-scale, $set-size-scale);
+
+$finch-atomic-scale: (
+  100: -.25rem,
+  200: -.125rem,
+  300: -1px,
+  400: 0,
+  500: 1px,
+  600: .125rem,
+  700: .25rem,
+  800: .4rem,
+  900: .5rem,
+  1000: 1rem,
+);
+
+$set-atomic-scale: () !default;
+$atomic-scale: map.merge($finch-atomic-scale, $set-size-scale);
