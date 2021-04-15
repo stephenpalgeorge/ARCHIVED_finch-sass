@@ -1,0 +1,25 @@
+@use '../../src' with (
+  $set-breakpoints: (
+    'xs': 4px,
+  ),
+  $set-font-sizes: (
+    'display': 6rem,
+  ),
+  $set-font-responsive: (
+    'font-size': true,
+  ),
+  $set-font-utilities: (
+    'font-size': true,
+    'font-weight': true,
+  ),
+);
+
+// @use '../../src/typography' with (
+//   $set-responsive: (
+//     'font-size': true,
+//     'font-weight': true,
+//   ),
+//   $set-utilities: (
+//     'font-weight': true,
+//   ),
+// );

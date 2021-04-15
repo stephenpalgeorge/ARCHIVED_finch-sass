@@ -1,0 +1,125 @@
+.size--small-print {
+  font-size: 0.8rem;
+}
+
+.size--base {
+  font-size: 1rem;
+}
+
+.text-main, .size--lead {
+  font-size: 1.4rem;
+}
+
+.size--display {
+  font-size: 6rem;
+}
+
+.weight--x-light {
+  font-weight: 200;
+}
+
+.weight--light {
+  font-weight: 300;
+}
+
+.weight--base {
+  font-weight: 400;
+}
+
+.weight--bold {
+  font-weight: 700;
+}
+
+.text-main, .weight--black {
+  font-weight: 900;
+}
+
+.text-main {
+  line-height: 1.4;
+}
+
+@media screen and (min-width: 4px) {
+  .xs\:size--small-print {
+    font-size: 0.8rem;
+  }
+
+  .xs\:size--base {
+    font-size: 1rem;
+  }
+
+  .xs\:size--lead {
+    font-size: 1.4rem;
+  }
+
+  .xs\:size--display {
+    font-size: 6rem;
+  }
+}
+@media screen and (min-width: 576px) {
+  .sm\:size--small-print {
+    font-size: 0.8rem;
+  }
+
+  .sm\:size--base {
+    font-size: 1rem;
+  }
+
+  .sm\:size--lead {
+    font-size: 1.4rem;
+  }
+
+  .sm\:size--display {
+    font-size: 6rem;
+  }
+}
+@media screen and (min-width: 768px) {
+  .md\:size--small-print {
+    font-size: 0.8rem;
+  }
+
+  .md\:size--base {
+    font-size: 1rem;
+  }
+
+  .md\:size--lead {
+    font-size: 1.4rem;
+  }
+
+  .md\:size--display {
+    font-size: 6rem;
+  }
+}
+@media screen and (min-width: 992px) {
+  .lg\:size--small-print {
+    font-size: 0.8rem;
+  }
+
+  .lg\:size--base {
+    font-size: 1rem;
+  }
+
+  .lg\:size--lead {
+    font-size: 1.4rem;
+  }
+
+  .lg\:size--display {
+    font-size: 6rem;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .xl\:size--small-print {
+    font-size: 0.8rem;
+  }
+
+  .xl\:size--base {
+    font-size: 1rem;
+  }
+
+  .xl\:size--lead {
+    font-size: 1.4rem;
+  }
+
+  .xl\:size--display {
+    font-size: 6rem;
+  }
+}
