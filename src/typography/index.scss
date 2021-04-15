@@ -100,6 +100,6 @@ $line-heights: () !default;
   letter-spacing: letter-spacing($letter-spacing);
 }
 
-// .text-main {
-//   @include text-style($size: small-print, $letter-spacing: tight);
-// }
+.text-main {
+  @include text-style($size: small-print, $letter-spacing: tight);
+}

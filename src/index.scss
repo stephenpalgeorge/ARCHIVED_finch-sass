@@ -24,6 +24,8 @@ $set-font-utilities: () !default;
   $set-utilities: $set-font-utilities,
 );
 
+// N.B. must make sure none of the partials share any variable names,
+// otherwise they will clash on load.
 @forward './typography' as type-*;
 @forward './typography/sizes' as type-*;
 @forward './typography/weights' as type-*;
