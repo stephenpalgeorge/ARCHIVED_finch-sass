@@ -1,0 +1,19 @@
+$text-align-utils: false !default;
+
+$alignments: (
+  start: start,
+  end: end,
+  left: left,
+  right: right,
+  center: center,
+  justify: justify,
+  match-parent: match-parent
+);
+
+@if text-align-utils {
+  @each $key, $value in $keywords {
+    .text-align--#{$key} {
+      text-align: $value;
+    }
+  }
+}

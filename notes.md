@@ -1,6 +1,7 @@
 - think about what to do with font-variant.
+- text-align needs to be included in typography partials.
 
-- font-kerning should be used in text-styles, might be ok to leave as the default actually.
+<!-- - font-kerning should be used in text-styles, might be ok to leave as the default actually. -->
 
 
 ## possible text style considerations:

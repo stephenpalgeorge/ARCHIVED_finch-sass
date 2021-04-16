@@ -15,6 +15,7 @@ $font-responsive: (
   font-weight: false,
   line-height: false,
   letter-spacing: false,
+  text-align: false,
   word-spacing: false,
 );
 /// provide custom 'responsive' settings for this module.
@@ -33,6 +34,7 @@ $font-utilities: (
   font-weight: false,
   line-height: false,
   letter-spacing: false,
+  text-align: false,
   word-spacing: false,
 );
 /// provide custom 'utilities' settings for this module.
@@ -93,6 +95,12 @@ $line-heights: () !default;
   $line-height-utils: map.get($utilities, line-height),
 );
 
+/// TEXT-ALIGN
+/// ----------
+@use 'text-align' as * with (
+  $text-align-utils: map.get($utilities, text-align),
+);
+
 /// WORD-SPACING
 /// ----------
 /// provide custom word-spacings for the module, these are consumed by the _word-spacings partial.
@@ -114,16 +122,26 @@ $word-spacings: () !default;
     @include m.gen-responsive($key, 'font-weight', 'weight', $weights);
     @include m.gen-responsive($key, 'line-height', 'line-height', $heights);
     @include m.gen-responsive($key, 'letter-spacing', 'letter-spacing', $l-spacings);
+    @include m.gen-responsive($key, 'text-align', 'text-align', $alignments);
     @include m.gen-responsive($key, 'word-spacing', 'word-spacing', $w-spacings);
   }
 }
 
-@mixin text-style($family: sans-serif, $weight: base, $size: base, $line-height: base, $letter-spacing: base, $word-spacing: base) {
+@mixin text-style(
+  $alignment: start,
+  $family: sans-serif,
+  $letter-spacing: base,
+  $line-height: base,
+  $size: base,
+  $weight: base,
+  $word-spacing: base
+) {
   font-family: font-family($family);
-  font-weight: weight($weight);
   font-size: size($size);
-  line-height: line-height($line-height);
+  font-weight: weight($weight);
   letter-spacing: letter-spacing($letter-spacing);
+  line-height: line-height($line-height);
+  text-align: $alignment;
   word-spacing: word-spacing($word-spacing);
   // set some recommended values that aren't browser defaults.
   // In some cases, these won't have any affect as they are not well supported,
