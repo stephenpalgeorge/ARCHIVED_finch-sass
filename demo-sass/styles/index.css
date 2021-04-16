@@ -1,4 +1,8 @@
-.size--small {
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,900&display=swap");
+.size--small-print {
   font-size: 0.8rem;
 }
 
@@ -8,10 +12,6 @@
 
 .size--lead {
   font-size: 1.4rem;
-}
-
-.size--display {
-  font-size: 6rem;
 }
 
 .weight--x-light {
@@ -26,16 +26,16 @@
   font-weight: 400;
 }
 
-.weight--bold {
-  font-weight: 700;
+.weight--thick {
+  font-weight: 600;
 }
 
 .weight--heavy {
   font-weight: 900;
 }
 
-@media screen and (min-width: 4px) {
-  .xs\:size--small {
+@media screen and (min-width: 0) {
+  .xs\:size--small-print {
     font-size: 0.8rem;
   }
 
@@ -47,12 +47,28 @@
     font-size: 1.4rem;
   }
 
-  .xs\:size--display {
-    font-size: 6rem;
+  .xs\:weight--x-light {
+    font-weight: 200;
+  }
+
+  .xs\:weight--light {
+    font-weight: 300;
+  }
+
+  .xs\:weight--base {
+    font-weight: 400;
+  }
+
+  .xs\:weight--thick {
+    font-weight: 600;
+  }
+
+  .xs\:weight--heavy {
+    font-weight: 900;
   }
 }
 @media screen and (min-width: 576px) {
-  .sm\:size--small {
+  .sm\:size--small-print {
     font-size: 0.8rem;
   }
 
@@ -64,12 +80,28 @@
     font-size: 1.4rem;
   }
 
-  .sm\:size--display {
-    font-size: 6rem;
+  .sm\:weight--x-light {
+    font-weight: 200;
+  }
+
+  .sm\:weight--light {
+    font-weight: 300;
+  }
+
+  .sm\:weight--base {
+    font-weight: 400;
+  }
+
+  .sm\:weight--thick {
+    font-weight: 600;
+  }
+
+  .sm\:weight--heavy {
+    font-weight: 900;
   }
 }
 @media screen and (min-width: 768px) {
-  .md\:size--small {
+  .md\:size--small-print {
     font-size: 0.8rem;
   }
 
@@ -81,12 +113,28 @@
     font-size: 1.4rem;
   }
 
-  .md\:size--display {
-    font-size: 6rem;
+  .md\:weight--x-light {
+    font-weight: 200;
+  }
+
+  .md\:weight--light {
+    font-weight: 300;
+  }
+
+  .md\:weight--base {
+    font-weight: 400;
+  }
+
+  .md\:weight--thick {
+    font-weight: 600;
+  }
+
+  .md\:weight--heavy {
+    font-weight: 900;
   }
 }
 @media screen and (min-width: 992px) {
-  .lg\:size--small {
+  .lg\:size--small-print {
     font-size: 0.8rem;
   }
 
@@ -98,12 +146,28 @@
     font-size: 1.4rem;
   }
 
-  .lg\:size--display {
-    font-size: 6rem;
+  .lg\:weight--x-light {
+    font-weight: 200;
+  }
+
+  .lg\:weight--light {
+    font-weight: 300;
+  }
+
+  .lg\:weight--base {
+    font-weight: 400;
+  }
+
+  .lg\:weight--thick {
+    font-weight: 600;
+  }
+
+  .lg\:weight--heavy {
+    font-weight: 900;
   }
 }
 @media screen and (min-width: 1200px) {
-  .xl\:size--small {
+  .xl\:size--small-print {
     font-size: 0.8rem;
   }
 
@@ -115,22 +179,46 @@
     font-size: 1.4rem;
   }
 
-  .xl\:size--display {
-    font-size: 6rem;
+  .xl\:weight--x-light {
+    font-weight: 200;
+  }
+
+  .xl\:weight--light {
+    font-weight: 300;
+  }
+
+  .xl\:weight--base {
+    font-weight: 400;
+  }
+
+  .xl\:weight--thick {
+    font-weight: 600;
+  }
+
+  .xl\:weight--heavy {
+    font-weight: 900;
   }
 }
 .text-main {
+  font-family: "Poppins", sans-serif;
   font-weight: 400;
-  font-size: 0.8rem;
-  line-height: 1.4;
+  font-size: small;
+  line-height: 1.5;
   letter-spacing: -1px;
   word-spacing: 0.25rem;
+  word-break: break-all;
+  hyphens: manual;
+  font-kerning: normal;
 }
 
 .text-test {
+  font-family: "Poppins", sans-serif;
   font-weight: 900;
   font-size: 1.4rem;
-  line-height: 1.4;
+  line-height: 1.5;
   letter-spacing: 0;
   word-spacing: 0;
+  word-break: break-all;
+  hyphens: manual;
+  font-kerning: normal;
 }

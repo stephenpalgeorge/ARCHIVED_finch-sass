@@ -5,11 +5,12 @@
 /// ----------
 /// MODULE SETUP
 /// ----------
-
+$use-web-safe: false !default;
 /// @author stephen pal-george
 /// This map controls whether the styles are generated specifically for each breakpoint.
 /// If true, then placeholders and classes such as `(\.|%)sm\:size--lead` will be created.
 $font-responsive: (
+  font-family: false,
   font-size: false,
   font-weight: false,
   line-height: false,
@@ -27,6 +28,7 @@ $responsive: map.merge($font-responsive, $set-responsive);
 /// rather than classes (.). Switching any of these values to `true` will create the
 /// classes as well.
 $font-utilities: (
+  font-family: false,
   font-size: false,
   font-weight: false,
   line-height: false,
@@ -40,9 +42,20 @@ $utilities: map.merge($font-utilities, $set-utilities);
   
 @use '../_mixins' as m with ($responsive-map: $responsive, $utilities-map: $utilities);
 
+/// FONT-FAMILIES
+/// ----------
+/// provide custom font-families for the module, these are consumed by the _font-families partial.
+/// @example @use '<path-to-finch>/typography' with ($font-families: (headings: <url-to-font>));
+$font-families: () !default;
+@use 'font-families' as * with (
+  $set-font-families: $font-families,
+  $font-family-utils: map.get($utilities, font-family),
+  $prefer-web-safe: $use-web-safe,
+);
+
 /// FONT-SIZE
 /// ----------
-/// provide custom font-sizes for the module, these are consumed by the _sizes partial.
+/// provide custom font-sizes for the module, these are consumed by the _font-sizes partial.
 /// @example @use '<path-to-finch>/typography' with ($font-sizes: (headline: 5rem));
 $font-sizes: () !default;
 @use 'font-sizes' as * with (
@@ -52,7 +65,7 @@ $font-sizes: () !default;
 
 /// FONT-WEIGHT
 /// ----------
-/// provide custom font-weights for the module, these are consumed by the _weights partial.
+/// provide custom font-weights for the module, these are consumed by the _font-weights partial.
 /// @example @use '<path-to-finch>/typography' with ($font-weights: (heavy: 800));
 $font-weights: () !default;
 @use 'font-weights' as * with (
@@ -96,6 +109,7 @@ $word-spacings: () !default;
 // the $font-responsive and $font-utilities maps.
 @each $key, $value in layout.$breakpoints {
   @include layout.break($key) {
+    @include m.gen-responsive($key, 'font-family', 'font', $families);
     @include m.gen-responsive($key, 'font-size', 'size', $sizes);
     @include m.gen-responsive($key, 'font-weight', 'weight', $weights);
     @include m.gen-responsive($key, 'line-height', 'line-height', $heights);
@@ -104,14 +118,15 @@ $word-spacings: () !default;
   }
 }
 
-@mixin text-style($weight: base, $size: base, $line-height: base, $letter-spacing: base, $word-spacing: base) {
+@mixin text-style($family: sans-serif, $weight: base, $size: base, $line-height: base, $letter-spacing: base, $word-spacing: base) {
+  font-family: font-family($family);
   font-weight: weight($weight);
   font-size: size($size);
   line-height: line-height($line-height);
   letter-spacing: letter-spacing($letter-spacing);
   word-spacing: word-spacing($word-spacing);
-  // set some recommended values that aren't browser defaults
-  // in some cases, these won't be rendered as they are not well supported,
+  // set some recommended values that aren't browser defaults.
+  // In some cases, these won't have any affect as they are not well supported,
   // and the end-user can always override them in their stylesheets anyway...
   word-break: break-all;
   hyphens: manual;

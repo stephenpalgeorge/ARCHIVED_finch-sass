@@ -1,30 +1,29 @@
-@use '../../src' as finch with (
-  $set-breakpoints: (
-    'xs': 4px,
-  ),
-  $set-font-sizes: (
-    'display': 6rem,
-  ),
-  $set-font-responsive: (
-    'font-size': true,
-  ),
-  $set-font-utilities: (
+// @use '../../src' as finch with (
+//   $set-font-sizes: (
+//     'display': 6rem,
+//   ),
+//   $set-font-responsive: (
+//     'font-size': true,
+//   ),
+//   $set-font-utilities: (
+//     'font-size': true,
+//     'font-weight': true,
+//   ),
+//   $set-use-web-safe: true,
+// );
+
+@use '../../src/typography' as type with (
+  $set-responsive: (
     'font-size': true,
     'font-weight': true,
   ),
+  $set-utilities: (
+    'font-weight': true,
+    'font-size': true,
+  ),
+  $use-web-safe: false,
 );
 
-// @use '../../src/typography' as type with (
-//   $set-responsive: (
-//     'font-size': true,
-//     'font-weight': true,
-//   ),
-//   $set-utilities: (
-//     'font-weight': true,
-//     'font-size': true,
-//   ),
-// );
-
 .text-test {
-  @include finch.type-text-style($weight: heavy, $size: lead);
+  @include type.text-style($weight: heavy, $size: lead);
 }

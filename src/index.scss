@@ -4,6 +4,7 @@ $atomic-sizes: () !default;
 /// Layout map over-rides:
 $set-breakpoints: () !default;
 /// Typography map over-rides:
+$set-font-families: () !default;
 $set-font-sizes: () !default;
 $set-font-weights: () !default;
 $set-letter-spacings: () !default;
@@ -11,6 +12,7 @@ $set-line-heights: () !default;
 $set-word-spacings: () !default;
 $set-font-responsive: () !default;
 $set-font-utilities: () !default;
+$set-use-web-safe: false !default;
 
 @use './config' with (
   $set-atomic-scale: $atomic-sizes,
@@ -22,6 +24,8 @@ $set-font-utilities: () !default;
 );
 
 @use './typography' with (
+  $use-web-safe: $set-use-web-safe,
+  $font-families: $set-font-families,
   $font-sizes: $set-font-sizes,
   $font-weights: $set-font-weights,
   $letter-spacings: $set-letter-spacings,
@@ -34,6 +38,7 @@ $set-font-utilities: () !default;
 // N.B. must make sure none of the partials share any variable names,
 // otherwise they will clash on load.
 @forward './typography' as type-*;
+@forward './typography/font-families' as type-*;
 @forward './typography/font-sizes' as type-*;
 @forward './typography/font-weights' as type-*;
 @forward './typography/letter-spacings' as type-*;

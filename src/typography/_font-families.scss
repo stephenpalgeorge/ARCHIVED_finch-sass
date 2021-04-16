@@ -1,0 +1,85 @@
+@use 'sass:map';
+@use 'sass:list';
+@use '../config';
+
+$font-family-utils: false !default;
+$prefer-web-safe: false !default;
+
+@if not $prefer-web-safe {
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,900&display=swap');
+}
+
+$font-family-serif: 'Playfair Display', serif;
+$font-family-sans-serif: 'Poppins', sans-serif;
+$font-family-cursive: 'Dancing Script', cursive;
+$font-family-monospace: 'Source Code Pro', monospace;
+
+// Web Safe Fonts:
+$font-family-arial: Arial, sans-serif;
+$font-family-verdana: Verdana, sans-serif;
+$font-family-helvetica: Helvetica, sans-serif;
+$font-family-tahoma: Tahoma, sans-serif;
+$font-family-trebuchet-ms: 'Trebuchet MS', sans-serif;
+$font-family-times-new-roman: 'Times New Roman', serif;
+$font-family-georgia: Georgia, serif;
+$font-family-garamond: Garamond, serif;
+$font-family-courier-new: 'Courier New', monospace;
+$font-family-brush-script-mt: 'Brush Script MT', cursive;
+
+// If the module is being used with the 'use-web-safe' flag set to true,
+// then override the font-family variables with some of the web-safe fonts
+// defined above.
+@if $prefer-web-safe {
+  $font-family-serif: $font-family-georgia;
+  $font-family-sans-serif: $font-family-verdana;
+  $font-family-cursive: $font-family-brush-script-mt;
+  $font-family-monospace: $font-family-courier-new;
+}
+
+$finch-font-families: (
+  serif: $font-family-serif,
+  sans-serif: $font-family-sans-serif,
+  cursive: $font-family-cursive,
+  monospace: $font-family-monospace,
+);
+$set-font-families: () !default;
+$families: map.merge($finch-font-families, $set-font-families);
+
+$web-safe: (
+  Arial: $font-family-arial,
+  Verdana: $font-family-verdana,
+  Helvetica: $font-family-helvetica,
+  Tahoma: $font-family-tahoma,
+  'Trebuchet MS': $font-family-trebuchet-ms,
+  'Times New Roman': $font-family-times-new-roman,
+  Georgia: $font-family-georgia,
+  Garamond: $font-family-garamond,
+  'Courier New': $font-family-courier-new,
+  'Brush Script MT': $font-family-brush-script-mt,
+);
+
+@function font-family($key) {
+  $generic-names: (fantasy, system-ui, ui-serif, ui-sans-serif, ui-monospace, ui-rounded, math, emoji, fangsong);
+  @if list.index(config.$global-values, $key) or list.index($web-safe, $key) or list.index($generic-names, $key) {
+    @return $key;
+  }
+
+  $value: map.get($families, $key);
+  @if $value {
+    @return $value;
+  }
+
+  @warn 'No font-family found for "#{$key}"';
+  @return null;
+}
+
+@if $font-family-utils {
+  @each $key, $value in $families {
+    .font--#{$key} {
+      font-family: $value;
+    }
+  }
+}
