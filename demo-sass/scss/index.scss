@@ -23,7 +23,3 @@
   ),
   $use-web-safe: false,
 );
-
-.text-test {
-  @include type.text-style($weight: heavy, $size: lead);
-}

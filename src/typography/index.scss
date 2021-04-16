@@ -128,11 +128,46 @@ $word-spacings: () !default;
   // set some recommended values that aren't browser defaults.
   // In some cases, these won't have any affect as they are not well supported,
   // and the end-user can always override them in their stylesheets anyway...
-  word-break: break-all;
-  hyphens: manual;
   font-kerning: normal;
 }
 
-.text-main {
-  @include text-style($size: small, $letter-spacing: tight, $word-spacing: wide);
+.text-body {
+  @include text-style($line-height: tall);
+  max-width: 60ch;
+}
+
+.text-lead {
+  @include text-style($size: lead, $weight: x-light);
+  // this next line is just here for demo purposes, this kind of thing should live in the layout module
+  max-width: 50ch;
+}
+
+.text-subheading {
+  @include text-style($family: serif, $size: sub-heading, $line-height: tight);
+}
+
+.text-heading {
+  @include text-style($family: serif, $size: heading, $line-height: tight, $weight: heavy);
+}
+
+// ALL OF THIS FOLLOWING CODE SHOULD ONE DAY LIVE IN AN 'Elements' MODULE, it's here for now
+// as a proof of concept/demo kind of thing.
+h1 {
+  @extend .text-heading;
+  // this next line is just here for demo purposes, this kind of thing should live in the layout module
+  max-width: 15ch;
+}
+
+h2, h3 {
+  @extend .text-subheading;
+  font-weight: weight(heavy);
+  // this next line is just here for demo purposes, this kind of thing should live in the layout module
+  max-width: 25ch;
+}
+h3 {
+  font-weight: weight(base);
+}
+
+p:not([class]) {
+  @extend .text-body;
 }

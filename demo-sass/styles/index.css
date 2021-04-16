@@ -11,7 +11,15 @@
 }
 
 .size--lead {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
+}
+
+.size--sub-heading {
+  font-size: 2rem;
+}
+
+.size--heading {
+  font-size: 3rem;
 }
 
 .weight--x-light {
@@ -44,7 +52,15 @@
   }
 
   .xs\:size--lead {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
+  }
+
+  .xs\:size--sub-heading {
+    font-size: 2rem;
+  }
+
+  .xs\:size--heading {
+    font-size: 3rem;
   }
 
   .xs\:weight--x-light {
@@ -77,7 +93,15 @@
   }
 
   .sm\:size--lead {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
+  }
+
+  .sm\:size--sub-heading {
+    font-size: 2rem;
+  }
+
+  .sm\:size--heading {
+    font-size: 3rem;
   }
 
   .sm\:weight--x-light {
@@ -110,7 +134,15 @@
   }
 
   .md\:size--lead {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
+  }
+
+  .md\:size--sub-heading {
+    font-size: 2rem;
+  }
+
+  .md\:size--heading {
+    font-size: 3rem;
   }
 
   .md\:weight--x-light {
@@ -143,7 +175,15 @@
   }
 
   .lg\:size--lead {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
+  }
+
+  .lg\:size--sub-heading {
+    font-size: 2rem;
+  }
+
+  .lg\:size--heading {
+    font-size: 3rem;
   }
 
   .lg\:weight--x-light {
@@ -176,7 +216,15 @@
   }
 
   .xl\:size--lead {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
+  }
+
+  .xl\:size--sub-heading {
+    font-size: 2rem;
+  }
+
+  .xl\:size--heading {
+    font-size: 3rem;
   }
 
   .xl\:weight--x-light {
@@ -199,26 +247,57 @@
     font-weight: 900;
   }
 }
-.text-main {
+.text-body, p:not([class]) {
   font-family: "Poppins", sans-serif;
   font-weight: 400;
-  font-size: small;
-  line-height: 1.5;
-  letter-spacing: -1px;
-  word-spacing: 0.25rem;
-  word-break: break-all;
-  hyphens: manual;
+  font-size: 1rem;
+  line-height: 1.75;
+  letter-spacing: 0;
+  word-spacing: 0;
   font-kerning: normal;
+  max-width: 60ch;
 }
 
-.text-test {
+.text-lead {
   font-family: "Poppins", sans-serif;
-  font-weight: 900;
-  font-size: 1.4rem;
+  font-weight: 200;
+  font-size: 1.2rem;
   line-height: 1.5;
   letter-spacing: 0;
   word-spacing: 0;
-  word-break: break-all;
-  hyphens: manual;
   font-kerning: normal;
+  max-width: 50ch;
+}
+
+.text-subheading, h2, h3 {
+  font-family: "Playfair Display", serif;
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 1.2;
+  letter-spacing: 0;
+  word-spacing: 0;
+  font-kerning: normal;
+}
+
+.text-heading, h1 {
+  font-family: "Playfair Display", serif;
+  font-weight: 900;
+  font-size: 3rem;
+  line-height: 1.2;
+  letter-spacing: 0;
+  word-spacing: 0;
+  font-kerning: normal;
+}
+
+h1 {
+  max-width: 15ch;
+}
+
+h2, h3 {
+  font-weight: 900;
+  max-width: 25ch;
+}
+
+h3 {
+  font-weight: 400;
 }

@@ -7,7 +7,9 @@ $size-utils: false !default;
 $finch-font-sizes: (
   small-print: map.get(config.$size-scale, 300),
   base: map.get(config.$size-scale, 400),
-  lead: map.get(config.$size-scale, 600),
+  lead: map.get(config.$size-scale, 500),
+  sub-heading: map.get(config.$size-scale, 800),
+  heading: map.get(config.$size-scale, 900),
 ) !default;
 
 $set-font-sizes: () !default;

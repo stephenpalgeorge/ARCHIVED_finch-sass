@@ -4,11 +4,13 @@
 
 $line-height-utils: false !default;
 
-$line-height-tight: 1;
+$line-height-x-tight: 1;
+$line-height-tight: 1.2;
 $line-height-base: 1.5;
 $line-height-tall: 1.75;
 
 $finch-line-heights: (
+  x-tight: $line-height-x-tight,
   tight: $line-height-tight,
   base: $line-height-base,
   tall: $line-height-tall,
