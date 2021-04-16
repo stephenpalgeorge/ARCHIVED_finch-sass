@@ -16,6 +16,8 @@ $font-responsive: (
   line-height: false,
   letter-spacing: false,
   text-align: false,
+  text-indent: false,
+  text-transform: false,
   word-spacing: false,
 );
 /// provide custom 'responsive' settings for this module.
@@ -35,6 +37,8 @@ $font-utilities: (
   line-height: false,
   letter-spacing: false,
   text-align: false,
+  text-indent: false,
+  text-transform: false,
   word-spacing: false,
 );
 /// provide custom 'utilities' settings for this module.
@@ -101,6 +105,22 @@ $line-heights: () !default;
   $text-align-utils: map.get($utilities, text-align),
 );
 
+/// TEXT-INDENT
+/// ----------
+/// provide custom text-indents for the module, these are consumed by the _text-indent partial.
+/// @example @use '<path-to-finch>/typography' with ($text-indents: (x-wide: 2rem));
+$text-indents: () !default;
+@use 'text-indent' as * with (
+  $set-text-indents: $text-indents,
+  $text-indent-utils: map.get($utilities, text-indent),
+);
+
+/// TEXT-TRANSFORM
+/// ----------
+@use 'text-transform' as * with (
+  $text-transform-utils: map.get($utilities, text-transform),
+);
+
 /// WORD-SPACING
 /// ----------
 /// provide custom word-spacings for the module, these are consumed by the _word-spacings partial.
@@ -123,16 +143,20 @@ $word-spacings: () !default;
     @include m.gen-responsive($key, 'line-height', 'line-height', $heights);
     @include m.gen-responsive($key, 'letter-spacing', 'letter-spacing', $l-spacings);
     @include m.gen-responsive($key, 'text-align', 'text-align', $alignments);
+    @include m.gen-responsive($key, 'text-indent', 'indent', $indents);
+    @include m.gen-responsize($key, 'text-transform', 'text-transform', $transforms);
     @include m.gen-responsive($key, 'word-spacing', 'word-spacing', $w-spacings);
   }
 }
 
 @mixin text-style(
   $alignment: start,
+  $indent: none,
   $family: sans-serif,
   $letter-spacing: base,
   $line-height: base,
   $size: base,
+  $transform: none,
   $weight: base,
   $word-spacing: base
 ) {
@@ -142,11 +166,14 @@ $word-spacings: () !default;
   letter-spacing: letter-spacing($letter-spacing);
   line-height: line-height($line-height);
   text-align: $alignment;
+  text-indent: indent($indent);
+  text-transform: $transform;
   word-spacing: word-spacing($word-spacing);
   // set some recommended values that aren't browser defaults.
   // In some cases, these won't have any affect as they are not well supported,
   // and the end-user can always override them in their stylesheets anyway...
   font-kerning: normal;
+  overflow-wrap: break-word;
 }
 
 .text-body {
