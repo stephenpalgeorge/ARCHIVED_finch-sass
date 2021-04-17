@@ -9,6 +9,7 @@ $set-font-sizes: () !default;
 $set-font-weights: () !default;
 $set-letter-spacings: () !default;
 $set-line-heights: () !default;
+$set-text-decoration-thicknesses: () !default;
 $set-text-indents: () !default;
 $set-word-spacings: () !default;
 $set-font-responsive: () !default;
@@ -31,6 +32,7 @@ $set-use-web-safe: false !default;
   $font-weights: $set-font-weights,
   $letter-spacings: $set-letter-spacings,
   $line-heights: $set-line-heights,
+  $text-decoration-thicknesses: $set-text-decoration-thicknesses,
   $text-indents: $set-text-indents,
   $word-spacings: $set-word-spacings,
   $set-responsive: $set-font-responsive,
@@ -45,5 +47,6 @@ $set-use-web-safe: false !default;
 @forward './typography/font-weights' as type-*;
 @forward './typography/letter-spacings' as type-*;
 @forward './typography/line-heights' as type-*;
+@forward './typography/text-decoration' as type-*;
 @forward './typography/text-indent' as type-*;
 @forward './typography/word-spacings' as type-*;

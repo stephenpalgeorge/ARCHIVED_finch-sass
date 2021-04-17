@@ -13,6 +13,9 @@
 // );
 
 @use '../../src/typography' as type with (
+  $font-sizes: (
+    test: 5rem,
+  ),
   $set-responsive: (
     'font-size': true,
     'font-weight': true,
@@ -23,3 +26,12 @@
   ),
   $use-web-safe: false,
 );
+
+.text {
+  @include type.text-style($size: test);
+  @include type.overline($color: red, $thickness: thick);
+}
+
+.body {
+  font-size: type.size(test);
+}

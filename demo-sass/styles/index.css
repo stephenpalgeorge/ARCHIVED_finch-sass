@@ -22,6 +22,10 @@
   font-size: 3rem;
 }
 
+.size--test {
+  font-size: 5rem;
+}
+
 .weight--x-light {
   font-weight: 200;
 }
@@ -40,6 +44,34 @@
 
 .weight--heavy {
   font-weight: 900;
+}
+
+.text-align--start {
+  text-align: start;
+}
+
+.text-align--end {
+  text-align: end;
+}
+
+.text-align--left {
+  text-align: left;
+}
+
+.text-align--right {
+  text-align: right;
+}
+
+.text-align--center {
+  text-align: center;
+}
+
+.text-align--justify {
+  text-align: justify;
+}
+
+.text-align--match-parent {
+  text-align: match-parent;
 }
 
 @media screen and (min-width: 0) {
@@ -61,6 +93,10 @@
 
   .xs\:size--heading {
     font-size: 3rem;
+  }
+
+  .xs\:size--test {
+    font-size: 5rem;
   }
 
   .xs\:weight--x-light {
@@ -104,6 +140,10 @@
     font-size: 3rem;
   }
 
+  .sm\:size--test {
+    font-size: 5rem;
+  }
+
   .sm\:weight--x-light {
     font-weight: 200;
   }
@@ -143,6 +183,10 @@
 
   .md\:size--heading {
     font-size: 3rem;
+  }
+
+  .md\:size--test {
+    font-size: 5rem;
   }
 
   .md\:weight--x-light {
@@ -186,6 +230,10 @@
     font-size: 3rem;
   }
 
+  .lg\:size--test {
+    font-size: 5rem;
+  }
+
   .lg\:weight--x-light {
     font-weight: 200;
   }
@@ -227,6 +275,10 @@
     font-size: 3rem;
   }
 
+  .xl\:size--test {
+    font-size: 5rem;
+  }
+
   .xl\:weight--x-light {
     font-weight: 200;
   }
@@ -249,44 +301,60 @@
 }
 .text-body, p:not([class]) {
   font-family: "Poppins", sans-serif;
-  font-weight: 400;
   font-size: 1rem;
-  line-height: 1.75;
+  font-weight: 400;
   letter-spacing: 0;
+  line-height: 1.75;
+  text-align: start;
+  text-indent: 0;
+  text-transform: none;
   word-spacing: 0;
   font-kerning: normal;
-  max-width: 60ch;
+  overflow-wrap: break-word;
+  max-width: 70ch;
 }
 
 .text-lead {
   font-family: "Poppins", sans-serif;
-  font-weight: 200;
   font-size: 1.2rem;
-  line-height: 1.5;
+  font-weight: 200;
   letter-spacing: 0;
+  line-height: 1.5;
+  text-align: start;
+  text-indent: 0;
+  text-transform: none;
   word-spacing: 0;
   font-kerning: normal;
-  max-width: 50ch;
+  overflow-wrap: break-word;
+  max-width: 62ch;
 }
 
 .text-subheading, h2, h3 {
   font-family: "Playfair Display", serif;
-  font-weight: 400;
   font-size: 2rem;
-  line-height: 1.2;
+  font-weight: 400;
   letter-spacing: 0;
+  line-height: 1.2;
+  text-align: start;
+  text-indent: 0;
+  text-transform: none;
   word-spacing: 0;
   font-kerning: normal;
+  overflow-wrap: break-word;
 }
 
 .text-heading, h1 {
   font-family: "Playfair Display", serif;
-  font-weight: 900;
   font-size: 3rem;
-  line-height: 1.2;
+  font-weight: 900;
   letter-spacing: 0;
+  line-height: 1.2;
+  text-align: start;
+  text-indent: 0;
+  text-transform: none;
   word-spacing: 0;
   font-kerning: normal;
+  overflow-wrap: break-word;
 }
 
 h1 {
@@ -300,4 +368,26 @@ h2, h3 {
 
 h3 {
   font-weight: 400;
+}
+
+.text {
+  font-family: "Poppins", sans-serif;
+  font-size: 5rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.5;
+  text-align: start;
+  text-indent: 0;
+  text-transform: none;
+  word-spacing: 0;
+  font-kerning: normal;
+  overflow-wrap: break-word;
+  text-decoration-line: overline;
+  text-decoration-color: red;
+  text-decoration-style: solid;
+  text-decoration-thickness: thick;
+}
+
+.body {
+  font-size: 5rem;
 }

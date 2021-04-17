@@ -11,7 +11,7 @@ $alignments: (
 );
 
 @if text-align-utils {
-  @each $key, $value in $keywords {
+  @each $key, $value in $alignments {
     .text-align--#{$key} {
       text-align: $value;
     }

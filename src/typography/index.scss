@@ -1,3 +1,4 @@
+
 @use 'sass:map';
 @use '../config';
 @use '../layout';
@@ -5,6 +6,7 @@
 /// ----------
 /// MODULE SETUP
 /// ----------
+/// These are some high level settings that the rest of the typography module depends on:
 $use-web-safe: false !default;
 /// @author stephen pal-george
 /// This map controls whether the styles are generated specifically for each breakpoint.
@@ -16,6 +18,7 @@ $font-responsive: (
   line-height: false,
   letter-spacing: false,
   text-align: false,
+  text-decoration: false,
   text-indent: false,
   text-transform: false,
   word-spacing: false,
@@ -37,6 +40,7 @@ $font-utilities: (
   line-height: false,
   letter-spacing: false,
   text-align: false,
+  text-decoration: false,
   text-indent: false,
   text-transform: false,
   word-spacing: false,
@@ -45,15 +49,24 @@ $font-utilities: (
 /// @example @use '<path-to-finch>/typography' with ($set-utilities: (font-weight: true));
 $set-utilities: () !default;
 $utilities: map.merge($font-utilities, $set-utilities);
-  
-@use '../_mixins' as m with ($responsive-map: $responsive, $utilities-map: $utilities);
+
+/// MODULE CONFIG
+/// ----------
+/// These are the variables that the module can be `@used` with, to customise the compiled CSS output.
+/// @example @use '<path-to-finch>/typography' with ($font-sizes: (big: 5rem));
+/// @example @use '<path-to-finch>/typography' with ($line-heights: (double: 2));
+$font-sizes: () !default;
+$font-families: () !default;
+$font-weights: () !default;
+$letter-spacings: () !default;
+$line-heights: () !default;
+$text-decoration-thicknesses: () !default;
+$text-indents: () !default;
+$word-spacings: () !default;
 
 /// FONT-FAMILIES
 /// ----------
-/// provide custom font-families for the module, these are consumed by the _font-families partial.
-/// @example @use '<path-to-finch>/typography' with ($font-families: (headings: <url-to-font>));
-$font-families: () !default;
-@use 'font-families' as * with (
+@forward 'font-families' with (
   $set-font-families: $font-families,
   $font-family-utils: map.get($utilities, font-family),
   $prefer-web-safe: $use-web-safe,
@@ -61,80 +74,85 @@ $font-families: () !default;
 
 /// FONT-SIZE
 /// ----------
-/// provide custom font-sizes for the module, these are consumed by the _font-sizes partial.
-/// @example @use '<path-to-finch>/typography' with ($font-sizes: (headline: 5rem));
-$font-sizes: () !default;
-@use 'font-sizes' as * with (
+@forward 'font-sizes' with (
   $set-font-sizes: $font-sizes,
   $size-utils: map.get($utilities, font-size),
 );
 
 /// FONT-WEIGHT
 /// ----------
-/// provide custom font-weights for the module, these are consumed by the _font-weights partial.
-/// @example @use '<path-to-finch>/typography' with ($font-weights: (heavy: 800));
-$font-weights: () !default;
-@use 'font-weights' as * with (
+@forward 'font-weights' with (
   $set-font-weights: $font-weights,
   $weight-utils: map.get($utilities, font-weight),
 );
 
 /// LETTER-SPACING
 /// ----------
-/// provide custom letter-spacings for the module, these are consumed by the _letter-spacings partial.
-/// @example @use '<path-to-finch>/typography' with ($letter-spacings: (x-wide: .25rem));
-$letter-spacings: () !default;
-@use 'letter-spacings' as * with (
+@forward 'letter-spacings' with (
   $set-letter-spacings: $letter-spacings,
   $letter-spacing-utils: map.get($utilities, letter-spacing),
 );
 
 /// LINE-HEIGHT
 /// ----------
-/// provide custom line-heights for the module, these are consumed by the _line-heights partial.
-/// @example @use '<path-to-finch>/typography' with ($line-heights: (x-tall: 2));
-$line-heights: () !default;
-@use 'line-heights' as * with (
+@forward 'line-heights' with (
   $set-line-heights: $line-heights,
   $line-height-utils: map.get($utilities, line-height),
 );
 
 /// TEXT-ALIGN
 /// ----------
-@use 'text-align' as * with (
+@forward 'text-align' with (
   $text-align-utils: map.get($utilities, text-align),
+);
+
+/// TEXT-DECORATION
+/// ----------
+@forward 'text-decoration' with (
+  $text-decoration-utils: map.get($utilities, text-decoration),
+  $set-decoration-thicknesses: $text-decoration-thicknesses,
 );
 
 /// TEXT-INDENT
 /// ----------
-/// provide custom text-indents for the module, these are consumed by the _text-indent partial.
-/// @example @use '<path-to-finch>/typography' with ($text-indents: (x-wide: 2rem));
-$text-indents: () !default;
-@use 'text-indent' as * with (
+@forward 'text-indent' with (
   $set-text-indents: $text-indents,
   $text-indent-utils: map.get($utilities, text-indent),
 );
 
 /// TEXT-TRANSFORM
 /// ----------
-@use 'text-transform' as * with (
+@forward 'text-transform' with (
   $text-transform-utils: map.get($utilities, text-transform),
 );
 
 /// WORD-SPACING
 /// ----------
-/// provide custom word-spacings for the module, these are consumed by the _word-spacings partial.
-/// @example @use '<path-to-finch>/typography' with ($word-spacings: (stretch: 1px));
-$word-spacings: () !default;
-@use 'word-spacings' as * with (
+@forward 'word-spacings' with (
   $set-word-spacings: $word-spacings,
   $word-spacing-utils: map.get($utilities, word-spacing),
 );
 
-// create responsize class names:
-// the following code generates classes such as `sm:size--lead`, or `xl:weight--heavy`.
-// the classes will only be generated if the corresponding property is set to 'true' in
-// the $font-responsive and $font-utilities maps.
+/// LOAD THE PROPERTIES
+/// ----------
+/// We use the property files within the module itself, to generate responsive classes,
+/// and as part of the composition of some top-level mixins, we therefore load them all in here:
+@use '../_mixins' as m with ($responsive-map: $responsive, $utilities-map: $utilities);
+@use 'font-families' as *;
+@use 'font-sizes' as *;
+@use 'font-weights' as *;
+@use 'letter-spacings' as *;
+@use 'line-heights' as *;
+@use 'text-align' as *;
+@use 'text-indent' as *;
+@use 'text-transform' as *;
+@use 'word-spacings' as *;
+
+/// GENERATE RESPONSIVE CLASS NAMES
+/// ----------
+/// the following code generates classes such as `sm:size--lead`, or `xl:weight--heavy`.
+/// the classes will only be generated if the corresponding property is set to 'true' in
+/// the $font-responsive and $font-utilities maps.
 @each $key, $value in layout.$breakpoints {
   @include layout.break($key) {
     @include m.gen-responsive($key, 'font-family', 'font', $families);
@@ -144,11 +162,16 @@ $word-spacings: () !default;
     @include m.gen-responsive($key, 'letter-spacing', 'letter-spacing', $l-spacings);
     @include m.gen-responsive($key, 'text-align', 'text-align', $alignments);
     @include m.gen-responsive($key, 'text-indent', 'indent', $indents);
-    @include m.gen-responsize($key, 'text-transform', 'text-transform', $transforms);
+    @include m.gen-responsive($key, 'text-transform', 'text-transform', $transforms);
     @include m.gen-responsive($key, 'word-spacing', 'word-spacing', $w-spacings);
   }
 }
 
+/// DEFINE MODULE-LEVEL MIXINS
+/// ----------
+/// These mixins combine behaviour of several/many of the different properties that have been defined so far.
+
+/// TEXT STYLE
 @mixin text-style(
   $alignment: start,
   $indent: none,
@@ -178,13 +201,13 @@ $word-spacings: () !default;
 
 .text-body {
   @include text-style($line-height: tall);
-  max-width: 60ch;
+  max-width: 70ch;
 }
 
 .text-lead {
   @include text-style($size: lead, $weight: x-light);
   // this next line is just here for demo purposes, this kind of thing should live in the layout module
-  max-width: 50ch;
+  max-width: 62ch;
 }
 
 .text-subheading {
@@ -216,3 +239,4 @@ h3 {
 p:not([class]) {
   @extend .text-body;
 }
+

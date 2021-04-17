@@ -1,0 +1,48 @@
+@use 'sass:map';
+@use 'sass:list';
+@use '../config';
+
+$text-decoration-utils: false !default;
+
+$text-decoration-lines: (
+  none: none,
+  underline: underline,
+  overline: overline,
+  both: underline overline,
+  line-through: line-through,
+);
+
+$text-decoration-styles: (solid, double, dotted, dashed, wavy);
+
+$text-decoration-thickness-thin: map.get(config.$atomic-scale, 500);
+$text-decoration-thickness-base: map.get(config.$atomic-scale, 600);
+$text-decoration-thickness-thick: map.get(config.$atomic-scale, 700);
+
+$finch-text-decoration-thicknesses: (
+  thin: $text-decoration-thickness-thin,
+  base: $text-decoration-thickness-base,
+  thick: $text-decoration-thickness-thick,
+);
+$set-decoration-thicknesses: () !default;
+$thicknesses: map.merge($finch-text-decoration-thicknesses, $set-decoration-thicknesses);
+
+// define mixins for including text-decoration separately.
+@mixin decorate($line: underline, $color: currentColor, $style: solid, $thickness: thin) {
+  text-decoration-line: $line;
+  text-decoration-color: $color;
+  text-decoration-style: $style;
+  text-decoration-thickness: $thickness;
+}
+
+/// Text Decoration Utilities
+@mixin underline($color: currentColor, $style: solid, $thickness: thin) {
+  @include decorate($line: underline, $color: $color, $style: $style, $thickness: $thickness);
+}
+
+@mixin overline($color: currentColor, $style: solid, $thickness: thin) {
+  @include decorate($line: overline, $color: $color, $style: $style, $thickness: $thickness);
+}
+
+@mixin strike($color: currentColor, $style: solid, $thickness: thin) {
+  @include decorate($line: line-through, $color: $color, $style: $style, $thickness: $thickness);
+}
