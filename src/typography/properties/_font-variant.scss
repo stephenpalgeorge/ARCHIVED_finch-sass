@@ -1,0 +1,18 @@
+$font-variant-utils: false !default;
+
+$variants: (
+  small-caps: small-caps,
+  all-small-caps: all-small-caps,
+  petite-caps: petite-caps,
+  all-petite-caps: all-petite-caps,
+  unicase: unicase,
+  titling-caps: titling-caps,
+);
+
+@if $font-variant-utils {
+  @each $key, $value in $variants {
+    .variant--#{$key} {
+      font-variant: $value;
+    }
+  }
+}

@@ -14,6 +14,7 @@ $use-web-safe: false !default;
 $font-responsive: (
   font-family: false,
   font-size: false,
+  font-variant: false,
   font-weight: false,
   line-height: false,
   letter-spacing: false,
@@ -36,6 +37,7 @@ $responsive: map.merge($font-responsive, $set-responsive);
 $font-utilities: (
   font-family: false,
   font-size: false,
+  font-variant: false,
   font-weight: false,
   line-height: false,
   letter-spacing: false,
@@ -66,7 +68,7 @@ $word-spacings: () !default;
 
 /// FONT-FAMILIES
 /// ----------
-@forward 'font-families' with (
+@forward 'properties/font-families' with (
   $set-font-families: $font-families,
   $font-family-utils: map.get($utilities, font-family),
   $prefer-web-safe: $use-web-safe,
@@ -74,61 +76,68 @@ $word-spacings: () !default;
 
 /// FONT-SIZE
 /// ----------
-@forward 'font-sizes' with (
+@forward 'properties/font-sizes' with (
   $set-font-sizes: $font-sizes,
   $size-utils: map.get($utilities, font-size),
 );
 
+/// FONT-VARIANT
+/// ----------
+@forward 'properties/font-variant' with (
+  $font-variant-utils: map.get($utilities, font-variant),
+);
+
 /// FONT-WEIGHT
 /// ----------
-@forward 'font-weights' with (
+@forward 'properties/font-weights' with (
   $set-font-weights: $font-weights,
   $weight-utils: map.get($utilities, font-weight),
 );
 
+
 /// LETTER-SPACING
 /// ----------
-@forward 'letter-spacings' with (
+@forward 'properties/letter-spacings' with (
   $set-letter-spacings: $letter-spacings,
   $letter-spacing-utils: map.get($utilities, letter-spacing),
 );
 
 /// LINE-HEIGHT
 /// ----------
-@forward 'line-heights' with (
+@forward 'properties/line-heights' with (
   $set-line-heights: $line-heights,
   $line-height-utils: map.get($utilities, line-height),
 );
 
 /// TEXT-ALIGN
 /// ----------
-@forward 'text-align' with (
+@forward 'properties/text-align' with (
   $text-align-utils: map.get($utilities, text-align),
 );
 
 /// TEXT-DECORATION
 /// ----------
-@forward 'text-decoration' with (
+@forward 'properties/text-decoration' with (
   $text-decoration-utils: map.get($utilities, text-decoration),
   $set-decoration-thicknesses: $text-decoration-thicknesses,
 );
 
 /// TEXT-INDENT
 /// ----------
-@forward 'text-indent' with (
+@forward 'properties/text-indent' with (
   $set-text-indents: $text-indents,
   $text-indent-utils: map.get($utilities, text-indent),
 );
 
 /// TEXT-TRANSFORM
 /// ----------
-@forward 'text-transform' with (
+@forward 'properties/text-transform' with (
   $text-transform-utils: map.get($utilities, text-transform),
 );
 
 /// WORD-SPACING
 /// ----------
-@forward 'word-spacings' with (
+@forward 'properties/word-spacings' with (
   $set-word-spacings: $word-spacings,
   $word-spacing-utils: map.get($utilities, word-spacing),
 );
@@ -138,15 +147,16 @@ $word-spacings: () !default;
 /// We use the property files within the module itself, to generate responsive classes,
 /// and as part of the composition of some top-level mixins, we therefore load them all in here:
 @use '../_mixins' as m with ($responsive-map: $responsive, $utilities-map: $utilities);
-@use 'font-families' as *;
-@use 'font-sizes' as *;
-@use 'font-weights' as *;
-@use 'letter-spacings' as *;
-@use 'line-heights' as *;
-@use 'text-align' as *;
-@use 'text-indent' as *;
-@use 'text-transform' as *;
-@use 'word-spacings' as *;
+@use 'properties/font-families' as *;
+@use 'properties/font-sizes' as *;
+@use 'properties/font-variant' as *;
+@use 'properties/font-weights' as *;
+@use 'properties/letter-spacings' as *;
+@use 'properties/line-heights' as *;
+@use 'properties/text-align' as *;
+@use 'properties/text-indent' as *;
+@use 'properties/text-transform' as *;
+@use 'properties/word-spacings' as *;
 
 /// GENERATE RESPONSIVE CLASS NAMES
 /// ----------
@@ -158,6 +168,7 @@ $word-spacings: () !default;
     @include m.gen-responsive($key, 'font-family', 'font', $families);
     @include m.gen-responsive($key, 'font-size', 'size', $sizes);
     @include m.gen-responsive($key, 'font-weight', 'weight', $weights);
+    @include m.gen-responsive($key, 'font-variant', 'variant', $variants);
     @include m.gen-responsive($key, 'line-height', 'line-height', $heights);
     @include m.gen-responsive($key, 'letter-spacing', 'letter-spacing', $l-spacings);
     @include m.gen-responsive($key, 'text-align', 'text-align', $alignments);
@@ -181,7 +192,8 @@ $word-spacings: () !default;
   $size: base,
   $transform: none,
   $weight: base,
-  $word-spacing: base
+  $word-spacing: base,
+  $optimise: false,
 ) {
   font-family: font-family($family);
   font-size: size($size);
@@ -195,8 +207,10 @@ $word-spacings: () !default;
   // set some recommended values that aren't browser defaults.
   // In some cases, these won't have any affect as they are not well supported,
   // and the end-user can always override them in their stylesheets anyway...
-  font-kerning: normal;
-  overflow-wrap: break-word;
+  @if $optimise {
+    font-kerning: normal;
+    overflow-wrap: break-word;
+  }
 }
 
 .text-body {

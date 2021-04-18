@@ -42,11 +42,14 @@ $set-use-web-safe: false !default;
 // N.B. must make sure none of the partials share any variable names,
 // otherwise they will clash on load.
 @forward './typography' as type-*;
-@forward './typography/font-families' as type-*;
-@forward './typography/font-sizes' as type-*;
-@forward './typography/font-weights' as type-*;
-@forward './typography/letter-spacings' as type-*;
-@forward './typography/line-heights' as type-*;
-@forward './typography/text-decoration' as type-*;
-@forward './typography/text-indent' as type-*;
-@forward './typography/word-spacings' as type-*;
+@forward './typography/properties/font-families' as type-*;
+@forward './typography/properties/font-sizes' as type-*;
+@forward './typography/properties/font-variant' as type-*;
+@forward './typography/properties/font-weights' as type-*;
+@forward './typography/properties/letter-spacings' as type-*;
+@forward './typography/properties/line-heights' as type-*;
+@forward './typography/properties/text-align' as type-*;
+@forward './typography/properties/text-decoration' as type-*;
+@forward './typography/properties/text-indent' as type-*;
+@forward './typography/properties/text-transform' as type-*;
+@forward './typography/properties/word-spacings' as type-*;
