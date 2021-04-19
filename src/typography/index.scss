@@ -185,22 +185,29 @@ $word-spacings: () !default;
 /// TEXT STYLE
 @mixin text-style(
   $alignment: start,
-  $indent: none,
   $family: sans-serif,
-  $letter-spacing: base,
   $line-height: base,
   $size: base,
-  $transform: none,
   $weight: base,
-  $word-spacing: base,
-  $optimise: false,
 ) {
   font-family: font-family($family);
   font-size: size($size);
   font-weight: weight($weight);
-  letter-spacing: letter-spacing($letter-spacing);
   line-height: line-height($line-height);
   text-align: $alignment;
+}
+
+/// TEXT ALTER
+@mixin text-alter(
+  $indent: none,
+  $letter-spacing: base,
+  $transform: none,
+  $variant: normal,
+  $word-spacing: base,
+  $optimise: false,
+) {
+  font-variant: $variant;
+  letter-spacing: letter-spacing($letter-spacing);
   text-indent: indent($indent);
   text-transform: $transform;
   word-spacing: word-spacing($word-spacing);

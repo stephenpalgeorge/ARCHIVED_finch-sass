@@ -28,7 +28,12 @@ $thicknesses: map.merge($finch-text-decoration-thicknesses, $set-decoration-thic
 
 // define mixins for including text-decoration separately.
 @mixin decorate($line: underline, $color: currentColor, $style: solid, $thickness: thin) {
-  text-decoration-line: $line;
+  @if $line == both {
+    text-decoration-line: underline overline;
+  }
+  @else {
+    text-decoration-line: $line;
+  }
   text-decoration-color: $color;
   text-decoration-style: $style;
   text-decoration-thickness: $thickness;
