@@ -106,3 +106,87 @@ Examples of using the decorate utilities follow:
   @include decorate($line: both);
 }
 ```
+
+## Property files
+
+The typography module contains a file for each property that it interacts with. These generally follow a similar pattern to each other, and are then all `@used` in the module's `index.scss` file to have some common behaviours/configuration applied. Here follows an example of a typical 'property' file and a detailed explanation of the different sections of it. We'll then take a close look at the `typography/index.scss` file and how these properties are consumed.
+First, the file (the example is the `typography/properties/_font-sizes.scss` file):
+
+```scss
+// # 1. IMPORTS
+@use 'sass:map';
+@use 'sass:list';
+@use '../../config';
+
+// # 2. PROPERTY CONFIG
+$size-utils: false !default;
+
+$finch-font-sizes: (
+  small-print: map.get(config.$size-scale, 300),
+  base: map.get(config.$size-scale, 400),
+  lead: map.get(config.$size-scale, 500),
+  sub-heading: map.get(config.$size-scale, 800),
+  heading: map.get(config.$size-scale, 900),
+) !default;
+
+$set-font-sizes: () !default;
+$sizes: map.merge($finch-font-sizes, $set-font-sizes);
+
+// # 3. PROPERTY GETTER FUNCTION
+@function size($key) {
+  // return the given value immediately if it is a reserved keyword for this property:
+  $spec-values: (xx-small, x-small, small, medium, large, x-large, xx-large, xxx-large);
+  @if list.index(config.$global-values, $key) or list.index($spec-values, $key) {
+    @return $key;
+  }
+
+  $value: map.get($sizes, $key);
+  @if $value {
+    @return $value;
+  }
+
+  @warn 'no font-size found for "#{$key}"';
+  @return null;
+}
+
+// 4. UTILITY CLASSES
+@if $size-utils {
+  @each $key, $value in $sizes {
+    .size--#{$key} {
+      font-size: $value;
+    }
+  }
+}
+
+```
+
+The numbered comments are just to give us an index to work with, you won't find them if you go and look in the source code.
+
+## 1. Imports
+
+This is simple enough, we use the global 'map' and 'list' modules that are built in to Sass. We also bring in the Finch config, that lives in the project root directory (two levels up from this file).
+
+## 2. Property config
+
+This is where some of the fun starts. First off, we define a boolean variable, that is defaulted to 'false'. This will be used as a flag for whether or not the utility class names will be generated for this property (more on this later). Next, we define a couple of Sass maps. The first are the default values for the property. In the case of some properties (like font-weight, for example), we define a series of variables for each item in the map just before the map itself. The next is an empty map that is declared as a `!default`, meaning it can therefore be overridden. These two maps are then merged. Obviously, the default result of that merge is that (in this example) `$sizes` is exactly the same as `$finch-font-sizes` BUT this pattern means the end user has complete flexibility to implement their own sizes instead of just using the defaults. For example, a developer might construct a `$set-font-sizes` map that has a `lead` key to override the default value for `lead`. Or they might pass in a map that contains a new font-size definition, like "hero", set to 5rem. This would get effectively 'appended' to the default values. A full example of this is shown below:
+```scss
+// developer uses the typography module their own custom font-sizes:
+@use '<path-to-finch>/typography' with ($font-sizes: (lead: 4rem, hero: 5rem));
+
+// this will then get passed into the font-size property file and merged with Finch's defaults,
+// the final `$sizes` map would contain the following key: value pairs:
+$sizes: (
+  small-print: map.get(config.$size-scale, 300),
+  base: map.get(config.$size-scale, 400),
+  sub-heading: map.get(config.$size-scale, 800),
+  heading: map.get(config.$size-scale, 900),
+  lead: 4rem,
+  hero: 5rem,
+);
+```
+
+This would mean that the developer would be able to do things like `font-size: size(hero)` in their scss code, or, if they have configured Finch to generate utility classes, they would have access to the `.font-size--hero` class name for their markup, or for `@extend`-ing in their scss.
+
+## 3. Property "getter" function
+
+This simply defines a function that will return a value for the property. We first of all define a list of `spec-values`, that are the css-defined keywords for this property. We then check if the value that has been passed in exists in one of two lists - the spec values, or the global-values that are defined in Finch config.

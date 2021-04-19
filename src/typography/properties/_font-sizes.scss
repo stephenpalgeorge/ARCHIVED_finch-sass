@@ -33,7 +33,7 @@ $sizes: map.merge($finch-font-sizes, $set-font-sizes);
 
 @if $size-utils {
   @each $key, $value in $sizes {
-    .size--#{$key} {
+    .font-size--#{$key} {
       font-size: $value;
     }
   }
