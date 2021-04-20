@@ -93,7 +93,8 @@ The decorate mixin is a utility for the `text-decoration` property. The `text-de
 
 Examples of using the decorate utilities follow:
 ```scss
-.text-emphasis {
+em.text-emphasis {
+  @include text-alter($letter-spacing: wide, $word-spacing: wide);
   @include underline;
 }
 
@@ -102,6 +103,7 @@ Examples of using the decorate utilities follow:
 }
 
 .text-framed {
+  @include text-style(size: lead);
   // the keyword 'both' is used in the `decorate` mixin to set the text-decoration-line property to `underline overline`
   @include decorate($line: both);
 }
