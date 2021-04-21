@@ -1,12 +1,14 @@
 
 @use 'sass:map';
-@use '../config';
 @use '../layout';
 
 /// ----------
 /// MODULE SETUP
 /// ----------
 /// These are some high level settings that the rest of the typography module depends on:
+$use-scale: major-thirds !default;
+@use '../config' with ($scale: $use-scale);
+
 $use-web-safe: false !default;
 /// @author stephen pal-george
 /// This map controls whether the styles are generated specifically for each breakpoint.
@@ -36,7 +38,7 @@ $responsive: map.merge($font-responsive, $set-responsive);
 /// classes as well.
 $font-utilities: (
   font-family: false,
-  font-size: false,
+  font-size: true,
   font-variant: false,
   font-weight: false,
   line-height: false,

@@ -1,27 +1,74 @@
 @use 'sass:map';
 
-
 /// SIZES
 /// ----------
 /// @author stephen pal-george
 ///
 $size-base: 1rem !default;
 
+/// Custom Finch Scale:
 $finch-size-scale: (
-  100: $size-base * .4,
-  200: $size-base * .6,
-  300: $size-base * .8,
-  400: $size-base,
-  500: $size-base * 1.2,
-  600: $size-base * 1.4,
-  700: $size-base * 1.8,
-  800: $size-base * 2,
-  900: $size-base * 3,
-  1000: $size-base * 4,
+  100: $size-base * .4,   // .4rem
+  200: $size-base * .6,   // .6rem
+  300: $size-base * .8,   // .8rem
+  400: $size-base,        // 1rem
+  500: $size-base * 1.2,  // 1.2rem
+  600: $size-base * 1.4,  // 1.4rem
+  700: $size-base * 1.8,  // 1.8rem
+  800: $size-base * 2,    // 2rem
+  900: $size-base * 3,    // 3rem
+  1000: $size-base * 4,   // 4rem
 );
 
+$minor-thirds: (
+  100: (($size-base / 1.2) / 1.2) 1.2,
+  200: ($size-base / 1.2) / 1.2,
+  300: $size-base / 1.2,
+  400: $size-base,
+  500: $size-base * 1.2,
+  600: ($size-base * 1.2) * 1.2,
+  700: (($size-base * 1.2) * 1.2) * 1.2,
+  800: ((($size-base * 1.2) * 1.2) * 1.2) * 1.2,
+  900: (((($size-base * 1.2) * 1.2) * 1.2) * 1.2) * 1.2,
+  1000: ((((($size-base * 1.2) * 1.2) * 1.2) * 1.2) * 1.2) * 1.2,
+);
+
+$major-thirds: (
+  100: (($size-base / 1.25) / 1.25) / 1.25,
+  200: ($size-base / 1.25) / 1.25,
+  300: $size-base / 1.25,
+  400: $size-base,
+  500: $size-base * 1.25,
+  600: ($size-base * 1.25) * 1.25,
+  700: (($size-base * 1.25) * 1.25) * 1.25,
+  800: ((($size-base * 1.25) * 1.25) * 1.25) * 1.25,
+  900: (((($size-base * 1.25) * 1.25) * 1.25) * 1.25) * 1.25,
+  1000: ((((($size-base * 1.25) * 1.25) * 1.25) * 1.25) * 1.25) * 1.25,
+);
+
+$perfect-fourths: (
+  100: (($size-base / 1.333) / 1.333) / 1.333,
+  200: ($size-base / 1.333) / 1.333,
+  300: $size-base / 1.333,
+  400: $size-base,
+  500: $size-base * 1.333,
+  600: ($size-base * 1.333) * 1.333,
+  700: (($size-base * 1.333) * 1.333) * 1.333,
+  800: ((($size-base * 1.333) * 1.333) * 1.333) * 1.333,
+  900: (((($size-base * 1.333) * 1.333) * 1.333) * 1.333) * 1.333,
+  1000: ((((($size-base * 1.333) * 1.333) * 1.333) * 1.333) * 1.333) * 1.333,
+);
+
+$scales: (
+  root: $finch-size-scale,
+  minor-thirds: $minor-thirds,
+  major-thirds: $major-thirds,
+  perfect-fourths: $perfect-fourths,
+);
+
+$scale: root !default;
 $set-size-scale: () !default;
-$size-scale: map.merge($finch-size-scale, $set-size-scale);
+$size-scale: map.merge(map.get($scales, $scale), $set-size-scale);
 
 $finch-atomic-scale: (
   100: -.25rem,

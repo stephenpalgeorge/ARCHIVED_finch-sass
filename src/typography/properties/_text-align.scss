@@ -10,7 +10,7 @@ $alignments: (
   match-parent: match-parent
 );
 
-@if text-align-utils {
+@if $text-align-utils {
   @each $key, $value in $alignments {
     .text-align--#{$key} {
       text-align: $value;
