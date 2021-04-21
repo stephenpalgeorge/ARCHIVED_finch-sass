@@ -2,6 +2,12 @@
 
 The *Finch Typography Module* handles everything to do with how text is styled and rendered in the browser. The typography module alone should be enough to make the text of any website readable, accessible and aesthetically pleasing (when using the defaults, and finch elements), but also provides mixins and functions to make the styling of text within your own design system as straighforward as possible.
 
+This document contains:
+
+- **Mixins:** an overview of the main mixins that the typography module provides, including examlpes and a formal syntax.
+- **Property Files:** an detailed description of what is contained in each individual property file, and why it's there.
+- **Configuration:** a description of how the module can be adapted and customised.
+
 ## Mixins
 
 The typography module exposes 3 main mixins for composing text styles:
@@ -48,7 +54,7 @@ Some examples of using the `text-style` mixin:
 }
 ```
 
-## 2. @include text-alter
+### 2. @include text-alter
 
 The `text-alter` mixin exposes css porperties that alter the layout of the text by adjusting it's spacing, the type of typography and other, lesser-used properties that alter the appearance of the text. This mixin also allows for optional "optimisations" - these are values that are not the browser defaults that Finch thinks should be set, like `font-kerning: normal`, for example. The properties that this mixin exposes are:
 
@@ -85,7 +91,7 @@ Some examples of using the `text-alter` mixin follow (these examples combine `te
 }
 ```
 
-## 3. @include decorate
+### 3. @include decorate
 
 The decorate mixin is a utility for the `text-decoration` property. The `text-decoration-line` property is used as the variable 'pivot' to create other utility mixins that accept arguments for the other properties that handled by the `text-decoration` shorthand. I.e. there exists an `underline` mixin, which directly sets the decorate mixin's `$line` parameter to `underline` and passes along arguments for $color, $style and $thickness.
 
