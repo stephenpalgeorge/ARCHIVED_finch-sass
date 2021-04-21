@@ -166,7 +166,7 @@ $word-spacings: () !default;
 @each $key, $value in layout.$breakpoints {
   @include layout.break($key) {
     @include m.gen-responsive($key, 'font-family', 'font', $families);
-    @include m.gen-responsive($key, 'font-size', 'size', $sizes);
+    @include m.gen-responsive($key, 'font-size', 'font-size', $sizes);
     @include m.gen-responsive($key, 'font-weight', 'weight', $weights);
     @include m.gen-responsive($key, 'font-variant', 'variant', $variants);
     @include m.gen-responsive($key, 'line-height', 'line-height', $heights);
