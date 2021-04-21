@@ -227,10 +227,10 @@ When you use the typography module, you can configure it with a number of variab
 - $text-indents
 - $word-spacings
 
-The first two (set-responsive, set-utilities) require some extra attention and explanation. The rest can be discussed quicly as one. Basically, for every property that the module deals with, you can pass your own map to override or the extend the default Finch values. This was discussed briefly in the **Property files** section above, but another quick example follows:
+The first two (set-responsive, set-utilities) require some extra attention and explanation. The rest can be discussed quickly as one. Basically, for every property that the module deals with, you can pass your own map to override or the extend the default Finch values. This was discussed briefly in the **Property files** section above, but another quick example follows:
 
 ```scss
-@use '<path-to-finch>/typography with (line-heights: (double: 2));'
+@use '<path-to-finch>/typography' with (line-heights: (double: 2));
 ```
 
 The above code would mean that Finch would take your extra `line-heights` into consideration when running the rest of it's processes. So, for example, if it was generating utility classes for `line-heights` you would end up with an extra `.line-height--double` class available to you.
