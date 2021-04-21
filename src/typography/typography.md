@@ -218,6 +218,8 @@ When you use the typography module, you can configure it with a number of variab
 
 - $set-responsive
 - $set-utilities
+- $use-scale
+- $use-websafe
 - $font-sizes
 - $font-families
 - $font-weights
@@ -227,13 +229,15 @@ When you use the typography module, you can configure it with a number of variab
 - $text-indents
 - $word-spacings
 
-The first two (set-responsive, set-utilities) require some extra attention and explanation. The rest can be discussed quickly as one. Basically, for every property that the module deals with, you can pass your own map to override or the extend the default Finch values. This was discussed briefly in the **Property files** section above, but another quick example follows:
+The first two (set-responsive, set-utilities) require some extra attention and explanation. The next two, which we'll call `preferences` should also be explained. The rest can be discussed quickly as one. Basically, for every property that the module deals with, you can pass your own map to override or the extend the default Finch values. This was discussed briefly in the **Property files** section above, but another quick example follows:
 
 ```scss
 @use '<path-to-finch>/typography' with (line-heights: (double: 2));
 ```
 
 The above code would mean that Finch would take your extra `line-heights` into consideration when running the rest of it's processes. So, for example, if it was generating utility classes for `line-heights` you would end up with an extra `.line-height--double` class available to you.
+
+### Utilities
 
 The *set-responsive* and *set-utilities* map are special configuration maps. Both of them hold a list of all the properties that the module handles as 'keys', and sets a boolean value against each one. These are *all* `false` by default and must be manually/intentionally overridden by the user.
 The boolean values from the `set-utilities` map are passed into their corresponding property files to determine whether or not that property should generate utility classes or not. So, you could, for example, use the typography module with the following configuration:
@@ -269,5 +273,9 @@ An example, to close, would be the following:
 ```
 
 The above code would generate class names `.font-size--small-print` etc, and `.font-weight--light` etc and `.lg:font-size--lead` etc; but *not* `sm:font-weight--heavy` etc, since the `font-weight` property was not set to true in the responsive map. It would also not generate *any* utility classes at all for `letter-spacing` since that property was ommitted from the `set-utilities` map.
+
+### Preferences
+
+The two 'preference' variables are `$use-web-safe`, which accepts a boolean value, and `$use-scale`, which accepts a value that should correspond to a key in the `config.scales` map. Currently, the accepted values are `root | minor-thirds | major-thirds | perfect-fourths`. This will affect the values of anything that uses `config.$size-scale` which, in this module, are the `font-size` and `text-indent` properties.
 
 Happy typographying.
