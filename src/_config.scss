@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use '_functions' as func;
 
 /// SIZES
 /// ----------
@@ -66,9 +67,9 @@ $scales: (
   perfect-fourths: $perfect-fourths,
 );
 
-$scale: root !default;
+$use-scale: root !default;
 $set-size-scale: () !default;
-$size-scale: map.merge(map.get($scales, $scale), $set-size-scale);
+$size-scale: map.merge(map.get($scales, $use-scale), $set-size-scale);
 
 $finch-atomic-scale: (
   100: -.25rem,
@@ -88,3 +89,49 @@ $atomic-scale: map.merge($finch-atomic-scale, $set-size-scale);
 
 /// GLOBAL VALUES
 $global-values: (initial, inherit, unset);
+
+/// BREAKPOINTS
+$breakpoint-x-small: 0 !default;
+$breakpoint-small: 576px !default;
+$breakpoint-medium: 768px !default;
+$breakpoint-large: 992px !default;
+$breakpoint-x-large: 1200px !default;
+
+$finch-breakpoints: (
+  xs: $breakpoint-x-small,
+  sm: $breakpoint-small,
+  md: $breakpoint-medium,
+  lg: $breakpoint-large,
+  xl: $breakpoint-x-large,
+);
+
+$set-breakpoints: () !default;
+$breakpoints-map: map.merge($finch-breakpoints, $set-breakpoints);
+
+@mixin break($breakpoint, $dir: up) {
+  $width: map.get($breakpoints-map, $breakpoint);
+  @if $dir == up {
+    @media screen and (min-width: $width) {
+      @content;
+    }
+  }
+
+  @else if $dir == down {
+    @media screen and (max-width: $width - 1) {
+      @content;
+    }
+  }
+
+  @else {
+    @error "Unknown direction #{$dir}.";
+  }
+}
+
+@mixin break-only($breakpoint) {
+  $width: map.get($breakpoints-map, $breakpoint);
+  $next-breakpoint: func.map-get-next($breakpoints-map, $breakpoint);
+
+  @media screen and (min-width: $width) and (max-width: $next-breakpoint - 1) {
+    @content;
+  }
+}

@@ -1,1 +1,67 @@
-@forward './breakpoints';
+@use 'sass:map';
+@use '../config';
+
+/// MODULE SETUP
+/// ----------
+/// @author stephen pal-george
+/// This map controls whether the styles are generated specifically for each breakpoint.
+/// If true, then placeholders and classes such as `(\.|%)sm\:spacer--large` will be created.
+$layout-responsive: (
+  margin: false,
+);
+/// provide custom 'responsive' settings for this module.
+/// @example @use '<path-to-finch>/layout' with ($set-responsive: (margin-left: true));
+$set-responsive: () !default;
+$responsive: map.merge($layout-responsive, $set-responsive);
+
+/// @author stephen pal-george
+/// This map controls whether or not utility classes are generated. By default,
+/// Finch will not create any class names. Switching any of these values to `true`
+/// will create the classes for that property.
+$layout-utilities: (
+  margin: false,
+);
+/// provide custom 'utilities' settings for this module.
+/// @example @use '<path-to-finch>/layout' with ($set-utilities: (padding-top: true));
+$set-utilities: () !default;
+$utilities: map.merge($layout-utilities, $set-utilities);
+
+/// MODULE CONFIG
+/// ----------
+/// These are the variables that the module can be `@used` with, to customise the compiled CSS output.
+/// @example @use '<path-to-finch>/layout' with ($spacers: (large: 5rem));
+/// @example @use '<path-to-finch>/layout' with ($offset: (large: 4rem));
+$margins: () !default;
+
+/// MARGIN
+/// ----------
+@forward './properties/margins' with (
+  $margin-utils: map.get($utilities, margin),
+  $set-margins: $margins,
+);
+
+/// LOAD THE PROPERTIES
+/// ----------
+/// We use the property files within the module itself, to generate responsive classes,
+/// and as part of the composition of some top-level mixins, we therefore load them all in here:
+@use '../_mixins' as m;
+@use 'properties/margins' as *;
+
+$layout-maps: (
+  margin: $margin-sizes,
+);
+
+/// GENERATE RESPONSIVE CLASS NAMES
+/// ----------
+/// the following code generates classes such as `sm:size--lead`, or `xl:weight--heavy`.
+/// the classes will only be generated if the corresponding property is set to 'true' in
+/// the $responsive and $utilities maps.
+@each $key, $value in config.$breakpoints-map {
+  @include config.break($key) {
+    @each $property, $flag in $responsive {
+      @if $flag {
+        @include m.gen-responsive($key, $property, map.get($layout-maps, $property));
+      }
+    }
+  }
+}

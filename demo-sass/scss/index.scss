@@ -12,26 +12,41 @@
 //   $set-use-web-safe: true,
 // );
 
-@use '../../src/typography' as type with (
-  $font-sizes: (
-    test: 5rem,
-  ),
-  $set-responsive: (
-    'font-size': true,
-    'font-weight': true,
-  ),
-  $set-utilities: (
-    'font-weight': true,
-    'font-size': true,
-  ),
-  $use-web-safe: false,
+// @use '../../src/typography' as type with (
+//   $font-sizes: (
+//     test: 5rem,
+//   ),
+//   $set-responsive: (
+//     'font-size': true,
+//     'font-weight': true,
+//   ),
+//   $set-utilities: (
+//     'font-weight': true,
+//     'font-size': true,
+//   ),
+//   $use-web-safe: false,
+// );
+@use '../../src/config' with (
+  $use-scale: major-thirds,
 );
 
-.text {
-  @include type.text-style($size: test);
-  @include type.overline($color: red, $thickness: thick);
-}
+@use '../../src/typography/' as typ with (
+  $set-utilities: (
+    font-size: true,
+  ),
+);
 
-.body {
-  font-size: type.size(test);
-}
+@use '../../src/layout/' as lyt with (
+  $set-utilities: (
+    margin: true,
+  ),
+);
+
+// .text {
+//   @include type.text-style($size: test);
+//   @include type.overline($color: red, $thickness: thick);
+// }
+
+// .body {
+//   font-size: type.size(test);
+// }

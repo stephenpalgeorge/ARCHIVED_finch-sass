@@ -2,359 +2,58 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,900&display=swap");
-.size--small-print {
+.font-size--small-print {
   font-size: 0.8rem;
 }
 
-.size--base {
+.font-size--base {
   font-size: 1rem;
 }
 
-.size--lead {
-  font-size: 1.2rem;
+.font-size--lead {
+  font-size: 1.25rem;
 }
 
-.size--sub-heading {
-  font-size: 2rem;
+.font-size--sub-heading {
+  font-size: 2.44140625rem;
 }
 
-.size--heading {
-  font-size: 3rem;
+.font-size--heading {
+  font-size: 3.0517578125rem;
 }
 
-.size--test {
-  font-size: 5rem;
-}
-
-.weight--x-light {
-  font-weight: 200;
-}
-
-.weight--light {
-  font-weight: 300;
-}
-
-.weight--base {
-  font-weight: 400;
-}
-
-.weight--thick {
-  font-weight: 600;
-}
-
-.weight--heavy {
-  font-weight: 900;
-}
-
-.text-align--start {
-  text-align: start;
-}
-
-.text-align--end {
-  text-align: end;
-}
-
-.text-align--left {
-  text-align: left;
-}
-
-.text-align--right {
-  text-align: right;
-}
-
-.text-align--center {
-  text-align: center;
-}
-
-.text-align--justify {
-  text-align: justify;
-}
-
-.text-align--match-parent {
-  text-align: match-parent;
-}
-
-@media screen and (min-width: 0) {
-  .xs\:size--small-print {
-    font-size: 0.8rem;
-  }
-
-  .xs\:size--base {
-    font-size: 1rem;
-  }
-
-  .xs\:size--lead {
-    font-size: 1.2rem;
-  }
-
-  .xs\:size--sub-heading {
-    font-size: 2rem;
-  }
-
-  .xs\:size--heading {
-    font-size: 3rem;
-  }
-
-  .xs\:size--test {
-    font-size: 5rem;
-  }
-
-  .xs\:weight--x-light {
-    font-weight: 200;
-  }
-
-  .xs\:weight--light {
-    font-weight: 300;
-  }
-
-  .xs\:weight--base {
-    font-weight: 400;
-  }
-
-  .xs\:weight--thick {
-    font-weight: 600;
-  }
-
-  .xs\:weight--heavy {
-    font-weight: 900;
-  }
-}
-@media screen and (min-width: 576px) {
-  .sm\:size--small-print {
-    font-size: 0.8rem;
-  }
-
-  .sm\:size--base {
-    font-size: 1rem;
-  }
-
-  .sm\:size--lead {
-    font-size: 1.2rem;
-  }
-
-  .sm\:size--sub-heading {
-    font-size: 2rem;
-  }
-
-  .sm\:size--heading {
-    font-size: 3rem;
-  }
-
-  .sm\:size--test {
-    font-size: 5rem;
-  }
-
-  .sm\:weight--x-light {
-    font-weight: 200;
-  }
-
-  .sm\:weight--light {
-    font-weight: 300;
-  }
-
-  .sm\:weight--base {
-    font-weight: 400;
-  }
-
-  .sm\:weight--thick {
-    font-weight: 600;
-  }
-
-  .sm\:weight--heavy {
-    font-weight: 900;
-  }
-}
-@media screen and (min-width: 768px) {
-  .md\:size--small-print {
-    font-size: 0.8rem;
-  }
-
-  .md\:size--base {
-    font-size: 1rem;
-  }
-
-  .md\:size--lead {
-    font-size: 1.2rem;
-  }
-
-  .md\:size--sub-heading {
-    font-size: 2rem;
-  }
-
-  .md\:size--heading {
-    font-size: 3rem;
-  }
-
-  .md\:size--test {
-    font-size: 5rem;
-  }
-
-  .md\:weight--x-light {
-    font-weight: 200;
-  }
-
-  .md\:weight--light {
-    font-weight: 300;
-  }
-
-  .md\:weight--base {
-    font-weight: 400;
-  }
-
-  .md\:weight--thick {
-    font-weight: 600;
-  }
-
-  .md\:weight--heavy {
-    font-weight: 900;
-  }
-}
-@media screen and (min-width: 992px) {
-  .lg\:size--small-print {
-    font-size: 0.8rem;
-  }
-
-  .lg\:size--base {
-    font-size: 1rem;
-  }
-
-  .lg\:size--lead {
-    font-size: 1.2rem;
-  }
-
-  .lg\:size--sub-heading {
-    font-size: 2rem;
-  }
-
-  .lg\:size--heading {
-    font-size: 3rem;
-  }
-
-  .lg\:size--test {
-    font-size: 5rem;
-  }
-
-  .lg\:weight--x-light {
-    font-weight: 200;
-  }
-
-  .lg\:weight--light {
-    font-weight: 300;
-  }
-
-  .lg\:weight--base {
-    font-weight: 400;
-  }
-
-  .lg\:weight--thick {
-    font-weight: 600;
-  }
-
-  .lg\:weight--heavy {
-    font-weight: 900;
-  }
-}
-@media screen and (min-width: 1200px) {
-  .xl\:size--small-print {
-    font-size: 0.8rem;
-  }
-
-  .xl\:size--base {
-    font-size: 1rem;
-  }
-
-  .xl\:size--lead {
-    font-size: 1.2rem;
-  }
-
-  .xl\:size--sub-heading {
-    font-size: 2rem;
-  }
-
-  .xl\:size--heading {
-    font-size: 3rem;
-  }
-
-  .xl\:size--test {
-    font-size: 5rem;
-  }
-
-  .xl\:weight--x-light {
-    font-weight: 200;
-  }
-
-  .xl\:weight--light {
-    font-weight: 300;
-  }
-
-  .xl\:weight--base {
-    font-weight: 400;
-  }
-
-  .xl\:weight--thick {
-    font-weight: 600;
-  }
-
-  .xl\:weight--heavy {
-    font-weight: 900;
-  }
-}
 .text-body, p:not([class]) {
   font-family: "Poppins", sans-serif;
   font-size: 1rem;
   font-weight: 400;
-  letter-spacing: 0;
   line-height: 1.75;
   text-align: start;
-  text-indent: 0;
-  text-transform: none;
-  word-spacing: 0;
-  font-kerning: normal;
-  overflow-wrap: break-word;
   max-width: 70ch;
 }
 
 .text-lead {
   font-family: "Poppins", sans-serif;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-weight: 200;
-  letter-spacing: 0;
   line-height: 1.5;
   text-align: start;
-  text-indent: 0;
-  text-transform: none;
-  word-spacing: 0;
-  font-kerning: normal;
-  overflow-wrap: break-word;
   max-width: 62ch;
 }
 
 .text-subheading, h2, h3 {
   font-family: "Playfair Display", serif;
-  font-size: 2rem;
+  font-size: 2.44140625rem;
   font-weight: 400;
-  letter-spacing: 0;
   line-height: 1.2;
   text-align: start;
-  text-indent: 0;
-  text-transform: none;
-  word-spacing: 0;
-  font-kerning: normal;
-  overflow-wrap: break-word;
 }
 
 .text-heading, h1 {
   font-family: "Playfair Display", serif;
-  font-size: 3rem;
+  font-size: 3.0517578125rem;
   font-weight: 900;
-  letter-spacing: 0;
   line-height: 1.2;
   text-align: start;
-  text-indent: 0;
-  text-transform: none;
-  word-spacing: 0;
-  font-kerning: normal;
-  overflow-wrap: break-word;
 }
 
 h1 {
@@ -370,24 +69,18 @@ h3 {
   font-weight: 400;
 }
 
-.text {
-  font-family: "Poppins", sans-serif;
-  font-size: 5rem;
-  font-weight: 400;
-  letter-spacing: 0;
-  line-height: 1.5;
-  text-align: start;
-  text-indent: 0;
-  text-transform: none;
-  word-spacing: 0;
-  font-kerning: normal;
-  overflow-wrap: break-word;
-  text-decoration-line: overline;
-  text-decoration-color: red;
-  text-decoration-style: solid;
-  text-decoration-thickness: thick;
+.margin--small {
+  margin: 0.64rem;
 }
 
-.body {
-  font-size: 5rem;
+.margin--base {
+  margin: 1rem;
+}
+
+.margin--large {
+  margin: 1.953125rem;
+}
+
+.margin--x-large {
+  margin: 3.8146972656rem;
 }

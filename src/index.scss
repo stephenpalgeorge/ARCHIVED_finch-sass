@@ -14,7 +14,7 @@ $set-font-utilities: () !default;
 $set-use-web-safe: false !default;
 
 @use './layout' with (
-  $set-breakpoints: $set-breakpoints,
+  $breakpoints: $set-breakpoints,
 );
 
 @use './typography' with (
@@ -33,6 +33,8 @@ $set-use-web-safe: false !default;
 
 // N.B. must make sure none of the partials share any variable names,
 // otherwise they will clash on load.
+@forward './layout' as lyt-*;
+
 @forward './typography' as type-*;
 @forward './typography/properties/font-families' as type-*;
 @forward './typography/properties/font-sizes' as type-*;

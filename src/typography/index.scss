@@ -1,18 +1,14 @@
-
 @use 'sass:map';
-@use '../layout';
+@use '../config';
 
 /// ----------
 /// MODULE SETUP
 /// ----------
 /// These are some high level settings that the rest of the typography module depends on:
-$use-scale: major-thirds !default;
-@use '../config' with ($scale: $use-scale);
-
 $use-web-safe: false !default;
 /// @author stephen pal-george
 /// This map controls whether the styles are generated specifically for each breakpoint.
-/// If true, then placeholders and classes such as `(\.|%)sm\:size--lead` will be created.
+/// If true, then placeholders and classes such as `(\.|%)sm\:font-size--lead` will be created.
 $font-responsive: (
   font-family: false,
   font-size: false,
@@ -33,12 +29,11 @@ $responsive: map.merge($font-responsive, $set-responsive);
 
 /// @author stephen pal-george
 /// This map controls whether or not utility classes are generated. By default,
-/// Finch will create everything within it's module's partials as placeholders (%),
-/// rather than classes (.). Switching any of these values to `true` will create the
-/// classes as well.
+/// Finch will not create any class names. Switching any of these values to `true`
+/// will create the classes for that property.
 $font-utilities: (
   font-family: false,
-  font-size: true,
+  font-size: false,
   font-variant: false,
   font-weight: false,
   line-height: false,
@@ -148,7 +143,7 @@ $word-spacings: () !default;
 /// ----------
 /// We use the property files within the module itself, to generate responsive classes,
 /// and as part of the composition of some top-level mixins, we therefore load them all in here:
-@use '../_mixins' as m with ($responsive-map: $responsive, $utilities-map: $utilities);
+@use '../_mixins' as m;
 @use 'properties/font-families' as *;
 @use 'properties/font-sizes' as *;
 @use 'properties/font-variant' as *;
@@ -160,23 +155,31 @@ $word-spacings: () !default;
 @use 'properties/text-transform' as *;
 @use 'properties/word-spacings' as *;
 
+$typography-maps: (
+  font-families: $families,
+  font-size: $sizes,
+  font-weight: $weights,
+  font-variant: $variants,
+  line-height: $heights,
+  letter-spacing: $l-spacings,
+  text-align: $alignments,
+  text-indent: $indents,
+  text-transform: $transforms,
+  word-spacing: $w-spacings,
+);
+
 /// GENERATE RESPONSIVE CLASS NAMES
 /// ----------
 /// the following code generates classes such as `sm:size--lead`, or `xl:weight--heavy`.
 /// the classes will only be generated if the corresponding property is set to 'true' in
 /// the $font-responsive and $font-utilities maps.
-@each $key, $value in layout.$breakpoints {
-  @include layout.break($key) {
-    @include m.gen-responsive($key, 'font-family', 'font', $families);
-    @include m.gen-responsive($key, 'font-size', 'font-size', $sizes);
-    @include m.gen-responsive($key, 'font-weight', 'weight', $weights);
-    @include m.gen-responsive($key, 'font-variant', 'variant', $variants);
-    @include m.gen-responsive($key, 'line-height', 'line-height', $heights);
-    @include m.gen-responsive($key, 'letter-spacing', 'letter-spacing', $l-spacings);
-    @include m.gen-responsive($key, 'text-align', 'text-align', $alignments);
-    @include m.gen-responsive($key, 'text-indent', 'indent', $indents);
-    @include m.gen-responsive($key, 'text-transform', 'text-transform', $transforms);
-    @include m.gen-responsive($key, 'word-spacing', 'word-spacing', $w-spacings);
+@each $key, $value in config.$breakpoints-map {
+  @include config.break($key) {
+    @each $property, $flag in $responsive {
+      @if $flag {
+        @include m.gen-responsive($key, $property, map.get($typography-maps, $property));
+      }
+    }
   }
 }
 

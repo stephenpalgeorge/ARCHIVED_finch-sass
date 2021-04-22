@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 /// @author stephen pal-george
 /// @param {Map} $map
 /// @param {String} $target the initial key of the map, whose neighbour you want to find.
