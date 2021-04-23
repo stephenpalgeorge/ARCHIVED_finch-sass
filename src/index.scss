@@ -1,5 +1,13 @@
+/// Config map over-rides:
+$set-size-base: 1rem !default;
+$set-scale: root !default;
+$set-config-atomic-scale: () !default;
+$set-config-breakpoints: () !default;
+$set-config-size-scale: () !default;
 /// Layout map over-rides:
-$set-breakpoints: () !default;
+$set-margins: () !default;
+$set-layout-responsive: () !default;
+$set-layout-utilities: () !default;
 /// Typography map over-rides:
 $set-font-families: () !default;
 $set-font-sizes: () !default;
@@ -13,8 +21,18 @@ $set-font-responsive: () !default;
 $set-font-utilities: () !default;
 $set-use-web-safe: false !default;
 
+@use './config' with (
+  $set-atomic-scale: $set-config-atomic-scale,
+  $set-breakpoints: $set-config-breakpoints,
+  $set-size-scale: $set-config-size-scale,
+  $size-base: $set-size-base,
+  $use-scale: $set-scale,
+);
+
 @use './layout' with (
-  $breakpoints: $set-breakpoints,
+  $margins: $set-margins,
+  $set-responsive: $set-layout-responsive,
+  $set-utilities: $set-layout-utilities,
 );
 
 @use './typography' with (
@@ -34,6 +52,7 @@ $set-use-web-safe: false !default;
 // N.B. must make sure none of the partials share any variable names,
 // otherwise they will clash on load.
 @forward './layout' as lyt-*;
+@forward './layout/properties/margins' as lyt-*;
 
 @forward './typography' as type-*;
 @forward './typography/properties/font-families' as type-*;

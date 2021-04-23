@@ -21,7 +21,7 @@ $margin-sizes: map.merge($finch-margins, $set-margins);
     @return $key;
   }
 
-  $value: map.get($margins, $key);
+  $value: map.get($margin-sizes, $key);
   @if $value {
     @return $value;
   }
