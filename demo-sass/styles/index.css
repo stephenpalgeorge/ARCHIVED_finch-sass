@@ -223,9 +223,13 @@ h3 {
   text-decoration-line: overline;
   text-decoration-color: red;
   text-decoration-style: solid;
-  text-decoration-thickness: thick;
-  margin-left: 1rem;
-  margin-right: 1rem;
+  margin-left: 3.8146972656rem;
+  margin-right: 3.8146972656rem;
+}
+@supports (text-decoration-thickness: 1px) {
+  .text {
+    text-decoration-thickness: 0.25rem;
+  }
 }
 
 .body {

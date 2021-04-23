@@ -35,7 +35,7 @@
 .text {
   @include finch.type-text-style($size: base);
   @include finch.type-overline($color: red, $thickness: thick);
-  @include finch.lyt-margin(base, x);
+  @include finch.lyt-margin(x-large, x);
 }
 
 .body {
