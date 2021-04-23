@@ -8,6 +8,7 @@
 /// If true, then placeholders and classes such as `(\.|%)sm\:spacer--large` will be created.
 $layout-responsive: (
   margin: false,
+  padding: false,
 );
 /// provide custom 'responsive' settings for this module.
 /// @example @use '<path-to-finch>/layout' with ($set-responsive: (margin-left: true));
@@ -20,6 +21,7 @@ $responsive: map.merge($layout-responsive, $set-responsive);
 /// will create the classes for that property.
 $layout-utilities: (
   margin: false,
+  padding: false,
 );
 /// provide custom 'utilities' settings for this module.
 /// @example @use '<path-to-finch>/layout' with ($set-utilities: (padding-top: true));
@@ -46,9 +48,11 @@ $margins: () !default;
 /// and as part of the composition of some top-level mixins, we therefore load them all in here:
 @use '../_mixins' as m;
 @use 'properties/margins' as *;
+@use 'properties/paddings' as *;
 
 $layout-maps: (
   margin: $margin-sizes,
+  padding: $padding-sizes,
 );
 
 /// GENERATE RESPONSIVE CLASS NAMES

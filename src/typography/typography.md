@@ -254,10 +254,6 @@ That would mean in your output css, you would have use of classes like `.font-si
 
 Similarly, Finch can do further heavy lifting for you via the `set-responsive` map. This map will configure Finch to create additional, responsive utility class names. What that means is that you'll get one class per breakpoint for the given property. So, if you were to configure Finch to generate responsive utilities for `font-size`, you'd end up with class names like `.xl:font-size--lead` and `.sm:font-size--base` that you could use in your markup. These would apply the given style to the breakpoint specified.
 
-*N.B. for responsive classes to be generated, the property **must** be set to `true` in both the `set-utilities` and `set-responsive` maps.*
-
-An example, to close, would be the following:
-
 ```scss
 @use 'finch/typography' as typ with (
   $set-utilities: (
@@ -271,7 +267,7 @@ An example, to close, would be the following:
 );
 ```
 
-The above code would generate class names `.font-size--small-print` etc, and `.font-weight--light` etc and `.lg:font-size--lead` etc; but *not* `sm:font-weight--heavy` etc, since the `font-weight` property was not set to true in the responsive map. It would also not generate *any* utility classes at all for `letter-spacing` since that property was ommitted from the `set-utilities` map.
+The above code would generate class names `.font-size--small-print` etc, and `.font-weight--light` etc and `.lg:font-size--lead` etc; but *not* `.sm:font-weight--heavy` etc, since the `font-weight` property was not set to true in the responsive map. It would also generate `.sm:letter-spacing--base` etc but *not* the basic `.letter-spacing--base` etc classes, since that property has only be set to `true` in the `$set-responsive` map.
 
 ### Preferences
 
