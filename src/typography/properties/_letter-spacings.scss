@@ -17,7 +17,7 @@ $finch-letter-spacings: (
 $set-letter-spacings: () !default;
 $l-spacings: map.merge($finch-letter-spacings, $set-letter-spacings);
 
-@function letter-spacing($key) {
+@function get-letter-spacing($key) {
   // return the given value immediately if it is a reserved keyword for this property:
   $spec-values: (normal);
   @if list.index(config.$global-values, $key) or list.index($spec-values, $key) {

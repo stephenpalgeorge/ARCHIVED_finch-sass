@@ -19,7 +19,7 @@ $finch-line-heights: (
 $set-line-heights: () !default;
 $heights: map.merge($finch-line-heights, $set-line-heights);
 
-@function line-height($key) {
+@function get-line-height($key) {
   // return the given value immediately if it is a reserved keyword for this property:
   $spec-values: (normal);
   @if list.index(config.$global-values, $key) or list.index($spec-values, $key) {

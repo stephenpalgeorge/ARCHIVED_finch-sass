@@ -15,7 +15,7 @@ $finch-font-sizes: (
 $set-font-sizes: () !default;
 $sizes: map.merge($finch-font-sizes, $set-font-sizes);
 
-@function size($key) {
+@function get-font-size($key) {
   // return the given value immediately if it is a reserved keyword for this property:
   $spec-values: (xx-small, x-small, small, medium, large, x-large, xx-large, xxx-large);
   @if list.index(config.$global-values, $key) or list.index($spec-values, $key) {

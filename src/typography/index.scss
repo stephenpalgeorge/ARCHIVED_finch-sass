@@ -195,10 +195,10 @@ $typography-maps: (
   $size: base,
   $weight: base,
 ) {
-  font-family: font-family($family);
-  font-size: size($size);
-  font-weight: weight($weight);
-  line-height: line-height($line-height);
+  font-family: get-font-family($family);
+  font-size: get-font-size($size);
+  font-weight: get-font-weight($weight);
+  line-height: get-line-height($line-height);
   text-align: $alignment;
 }
 
@@ -212,10 +212,10 @@ $typography-maps: (
   $optimise: false,
 ) {
   font-variant: $variant;
-  letter-spacing: letter-spacing($letter-spacing);
-  text-indent: indent($indent);
+  letter-spacing: get-letter-spacing($letter-spacing);
+  text-indent: get-text-indent($indent);
   text-transform: $transform;
-  word-spacing: word-spacing($word-spacing);
+  word-spacing: get-word-spacing($word-spacing);
   // set some recommended values that aren't browser defaults.
   // In some cases, these won't have any affect as they are not well supported,
   // and the end-user can always override them in their stylesheets anyway...
@@ -254,12 +254,12 @@ h1 {
 
 h2, h3 {
   @extend .text-subheading;
-  font-weight: weight(heavy);
+  font-weight: get-font-weight(heavy);
   // this next line is just here for demo purposes, this kind of thing should live in the layout module
   max-width: 25ch;
 }
 h3 {
-  font-weight: weight(base);
+  font-weight: get-font-weight(base);
 }
 
 p:not([class]) {

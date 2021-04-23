@@ -61,7 +61,7 @@ $web-safe: (
   'Brush Script MT': $font-family-brush-script-mt,
 );
 
-@function font-family($key) {
+@function get-font-family($key) {
   $generic-names: (fantasy, system-ui, ui-serif, ui-sans-serif, ui-monospace, ui-rounded, math, emoji, fangsong);
   @if list.index(config.$global-values, $key) or list.index($web-safe, $key) or list.index($generic-names, $key) {
     @return $key;

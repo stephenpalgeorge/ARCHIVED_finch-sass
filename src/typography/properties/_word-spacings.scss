@@ -17,7 +17,7 @@ $finch-word-spacings: (
 $set-word-spacings: () !default;
 $w-spacings: map.merge($finch-word-spacings, $set-word-spacings);
 
-@function word-spacing($key) {
+@function get-word-spacing($key) {
   // return the given value immediately if it is a reserved keyword for this porperty:
   $spec-values: (normal);
   @if list.index(config.$global-values, $key) or list.index($spec-values, $key) {

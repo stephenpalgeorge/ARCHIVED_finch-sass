@@ -21,7 +21,7 @@ $finch-font-weights: (
 $set-font-weights: () !default;
 $weights: map.merge($finch-font-weights, $set-font-weights);
 
-@function weight($key) {
+@function get-font-weight($key) {
   // return the given value immediately if it is a reserved keyword for this property:
   $spec-values: (normal, bold, lighter, bolder);
   @if list.index(config.$global-values, $key) or list.index($spec-values, $key) {

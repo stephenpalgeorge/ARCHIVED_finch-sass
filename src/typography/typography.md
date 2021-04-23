@@ -218,7 +218,6 @@ When you use the typography module, you can configure it with a number of variab
 
 - $set-responsive
 - $set-utilities
-- $use-scale
 - $use-websafe
 - $font-sizes
 - $font-families
@@ -276,6 +275,20 @@ The above code would generate class names `.font-size--small-print` etc, and `.f
 
 ### Preferences
 
-The two 'preference' variables are `$use-web-safe`, which accepts a boolean value, and `$use-scale`, which accepts a value that should correspond to a key in the `config.scales` map. Currently, the accepted values are `root | minor-thirds | major-thirds | perfect-fourths`. This will affect the values of anything that uses `config.$size-scale` which, in this module, are the `font-size` and `text-indent` properties.
+The 'preference' variable is `$use-web-safe`, which accepts a boolean value. Setting this variable to `true` (it is `false` by default) will cause Finch to use a different collection of fonts. By default, we are importing 4 fonts from [Google Fonts](https://fonts.google.com/) to make up our standard Finch font collection:
+
+1. Serif font: [Playfair Display](https://fonts.google.com/specimen/Playfair+Display)
+2. Sans-serif font: [Poppins](https://fonts.google.com/specimen/Poppins)
+3. Cursive font: [Dancing Script](https://fonts.google.com/specimen/Dancing+Script)
+4. Monospace font: [Source Code Pro](https://fonts.google.com/specimen/Source+Code+Pro)
+
+But, you may want to use instead. By default, when set to use web safe, Finch will override the above families (and not import them) with the following font families:
+
+1. Serif font: Georgia
+2. Sans-serif font: Verdana
+3. Cursive font: Brush Script MT
+4. Monospace font: Courier New
+
+You can replace any of these by passing in a custom `font-families` map to the module.
 
 Happy typographying.
