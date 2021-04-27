@@ -30,17 +30,46 @@ $margin-sizes: map.merge($finch-margins, $set-margins);
   @return null;
 }
 
-@mixin margin($key, $axis: null) {
+@mixin margin($key, $axis: null, $mode: horizontal-tb) {
+  // X-AXIS
+  // normally, the x-axis will correspond to margin-inline,
+  // however for writing modes that are vertical, the x-axis
+  // (left and right) will correspond to margin-block.
   @if $axis == x or $axis == 'x' {
-    margin-left: get-margin($key);
-    margin-right: get-margin($key);
+    @if $mode == vertical-rl or $mode == vertical-lr {
+      margin-block: get-margin($key);
+    }
+    @else {
+      margin-inline: get-margin($key);
+    }
+    // browsers that don't support logical properties get a
+    // fallback of margin-left, margin-right:
+    @supports not (margin-inline: 0) {
+      margin-left: get-margin($key);
+      margin-right: get-margin($key);
+    }
   }
 
+  // Y-AXIS
+  // normally, the y-axis will correspond to margin-block,
+  // however for writing modes that are vertical, the y-axis
+  // (top and bottom) will correspond to margin-inline.
   @else if $axis == y or $axis == 'y' {
-    margin-top: get-margin($key);
-    margin-bottom: get-margin($key);
+    @if $mode == vertical-rl or $mode == vertical-lr {
+      margin-inline: get-margin($key);
+    }
+    @else {
+      margin-block: get-margin($key);
+    }
+    // browsers that don't support logical properties get a
+    // fallmack of margin-top, margin-bottom:
+    @supports not (margin-block: 0) {
+      margin-top: get-margin($key);
+      margin-bottom: get-margin($key);
+    }
   }
 
+  // if no `$axis` is provided, the margin is applied to all sides:
   @else {
     margin: get-margin($key);
   }

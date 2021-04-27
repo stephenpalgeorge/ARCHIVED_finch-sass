@@ -29,17 +29,46 @@ $padding-sizes: map.merge($finch-paddings, $set-paddings);
   @return null;
 }
 
-@mixin padding($key, $axis: null) {
+@mixin padding($key, $axis: null, $mode: horizontal-tb) {
+  // X-AXIS
+  // normally, the x-axis will correspond to padding-inline,
+  // however for writing modes that are vertical, the x-axis
+  // (left and right) will correspond to padding-block.
   @if $axis == x or $axis == 'x' {
-    padding-left: get-padding($key);
-    padding-right: get-padding($key);
+    @if $mode == vertical-rl or $mode == vertical-lr {
+      padding-block: get-padding($key);
+    }
+    @else {
+      padding-inline: get-padding($key);
+    }
+    // browsers that don't support logical properties get a
+    // fallback of padding-left, padding-right:
+    @supports not (padding-inline: 0) {
+      padding-left: get-padding($key);
+      padding-right: get-padding($key);
+    }
   }
 
+  // Y-AXIS
+  // normally, the y-axis will correspond to padding-block,
+  // however for writing modes that are vertical, the y-axis
+  // (top and bottom) will correspond to padding-inline.
   @else if $axis == y or $axis == 'y' {
-    padding-top: get-padding($key);
-    padding-bottom: get-padding($key);
+    @if $mode == vertical-rl or $mode == vertical-lr {
+      padding-inline: get-padding($key);
+    }
+    @else {
+      padding-block: get-padding($key);
+    }
+    // browsers that don't support logical properties get a
+    // fallback of padding-top, padding-bottom:
+    @supports not (padding-block: 0) {
+      padding-top: get-padding($key);
+      padding-bottom: get-padding($key);
+    }
   }
 
+  // If no `$axis` is provided, the padding is applied to all sides:
   @else {
     padding: get-padding($key);
   }
