@@ -9,6 +9,7 @@
 $layout-responsive: (
   margin: false,
   padding: false,
+  position: false,
 );
 /// provide custom 'responsive' settings for this module.
 /// @example @use '<path-to-finch>/layout' with ($set-responsive: (margin-left: true));
@@ -22,6 +23,7 @@ $responsive: map.merge($layout-responsive, $set-responsive);
 $layout-utilities: (
   margin: false,
   padding: false,
+  position: false,
 );
 /// provide custom 'utilities' settings for this module.
 /// @example @use '<path-to-finch>/layout' with ($set-utilities: (padding-top: true));
@@ -34,12 +36,26 @@ $utilities: map.merge($layout-utilities, $set-utilities);
 /// @example @use '<path-to-finch>/layout' with ($spacers: (large: 5rem));
 /// @example @use '<path-to-finch>/layout' with ($offset: (large: 4rem));
 $margins: () !default;
+$paddings: () !default;
 
 /// MARGIN
 /// ----------
 @forward './properties/margins' with (
   $margin-utils: map.get($utilities, margin),
   $set-margins: $margins,
+);
+
+/// PADDING
+/// ----------
+@forward './properties/paddings' with (
+  $padding-utils: map.get($utilities, padding),
+  $set-paddings: $paddings,
+);
+
+/// POSITION
+/// ----------
+@forward './properties/positions' with (
+  $position-utils: map.get($utilities, position),
 );
 
 /// LOAD THE PROPERTIES
@@ -49,10 +65,12 @@ $margins: () !default;
 @use '../_mixins' as m;
 @use 'properties/margins' as *;
 @use 'properties/paddings' as *;
+@use 'properties/positions' as *;
 
 $layout-maps: (
   margin: $margin-sizes,
   padding: $padding-sizes,
+  position: $positions,
 );
 
 /// GENERATE RESPONSIVE CLASS NAMES

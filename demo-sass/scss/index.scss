@@ -1,43 +1,47 @@
 // USE FINCH AS A SINGLE IMPORT
-@use '../../src' as finch with (
-  $set-scale: major-thirds,
-  $set-font-sizes: (
-    'display': 6rem,
-  ),
-  $set-font-responsive: (
-    'font-size': true,
-  ),
-  $set-font-utilities: (
-    'font-size': true,
-    'font-weight': true,
-  ),
-  $set-use-web-safe: true,
-);
+// @use '../../src' as finch with (
+//   $set-scale: major-thirds,
+//   $set-font-sizes: (
+//     'display': 6rem,
+//   ),
+//   $set-font-responsive: (
+//     'font-size': true,
+//   ),
+//   $set-font-utilities: (
+//     'font-size': true,
+//     'font-weight': true,
+//   ),
+//   $set-use-web-safe: true,
+// );
 
 // USE FINCH MODULES INDIVIDUALLY
-// @use '../../src/config' with (
-//   $use-scale: major-thirds,
-// );
+@use '../../src/config' with (
+  $use-scale: major-thirds,
+);
 
-// @use '../../src/typography/' as typ with (
-//   $set-utilities: (
-//     font-size: true,
-//   ),
-// );
+@use '../../src/typography/' as typ with (
+  $set-utilities: (
+    font-size: true,
+  ),
+);
 
-// @use '../../src/layout/' as lyt with (
-//   $set-utilities: (
-//     margin: true,
-//   ),
-// );
+@use '../../src/layout/' as lyt with (
+  $set-utilities: (
+    margin: true,
+  ),
+);
 
 // USE IMPORTED FINCH MIXINS/VARS
 .text {
-  @include finch.type-text-style($size: base);
-  @include finch.type-overline($color: red, $thickness: thick);
-  @include finch.lyt-margin(x-large, x);
+  @include typ.text-style($size: base);
+  @include typ.overline($color: red, $thickness: thick);
 }
 
 .body {
-  font-size: finch.type-get-font-size(base);
+  @include lyt.fixed($top: 0, $left: 0);
+  font-size: typ.get-font-size(base);
+}
+
+body {
+  @include lyt.padding(x-large);
 }

@@ -6,6 +6,7 @@ $set-config-breakpoints: () !default;
 $set-config-size-scale: () !default;
 /// Layout map over-rides:
 $set-margins: () !default;
+$set-paddings: () !default;
 $set-layout-responsive: () !default;
 $set-layout-utilities: () !default;
 /// Typography map over-rides:
@@ -31,6 +32,7 @@ $set-use-web-safe: false !default;
 
 @use './layout' with (
   $margins: $set-margins,
+  $paddings: $set-paddings,
   $set-responsive: $set-layout-responsive,
   $set-utilities: $set-layout-utilities,
 );
@@ -53,6 +55,8 @@ $set-use-web-safe: false !default;
 // otherwise they will clash on load.
 @forward './layout' as lyt-*;
 @forward './layout/properties/margins' as lyt-*;
+@forward './layout/properties/paddings' as lyt-*;
+@forward './layout/properties/positions' as lyt-*;
 
 @forward './typography' as type-*;
 @forward './typography/properties/font-families' as type-*;

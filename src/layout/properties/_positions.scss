@@ -1,0 +1,83 @@
+@use 'sass:map';
+@use 'sass:list';
+@use '../../config';
+
+$position-utils: false !default;
+
+$positions: (
+  static: static,
+  relative: relative,
+  absolute: absolute,
+  fixed: fixed,
+  sticky: sticky,
+);
+
+@if $position-utils {
+  @each $key, $value in $positions {
+    .position--#{$key} {
+      position: $value;
+    }
+  }
+}
+
+@function get-pos($key) {
+  // immediately return the given value if it is one of the global css values:
+  @if list.index(config.$global-values, $key) {
+    @return $key;
+  }
+
+  $value: map.get($positions, $key);
+  @if $value {
+    @return $value;
+  }
+
+  @warn 'No position found for "#{$key}"';
+  @return null;
+}
+
+@mixin pos($type: static, $top, $right, $bottom, $left) {
+  position: get-pos($type);
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+/// In some cases, elements may need positioning removed. For example,
+/// if an absolutely positioned element is set with `top: 0` on desktop,
+/// but `bottom: 0` on mobile, then the mobile version should `unset` the
+/// top value, and vice-versa.
+/// The pos-reset mixin provides a quick way of doing just that, by unsetting
+/// all position related values. As long as the new, desired values are declared
+/// *after* the pos-reset declaration, they will be applied as expected thanks
+/// to the cascade.
+@mixin pos-reset() {
+  top: unset;
+  right: unset;
+  bottom: unset;
+  left: unset;
+}
+
+/// UTILITY MIXINS
+/// ----------
+/// These mixins provide a shorthand for setting the position of an element.
+@mixin absolute($top: null, $right: null, $bottom: null, $left: null, $reset: false) {
+  @if $reset {
+    @include pos-reset;
+  }
+  @include pos(absolute, $top: $top, $right: $right, $bottom: $bottom, $left: $left);
+}
+
+@mixin fixed($top: null, $right: null, $bottom: null, $left: null, $reset: false) {
+  @if $reset {
+    @include pos-reset;
+  }
+  @include pos(fixed, $top: $top, $right: $right, $bottom: $bottom, $left: $left);
+}
+
+@mixin sticky($top: null, $right: null, $bottom: null, $left: null, $reset: false) {
+  @if $reset {
+    @include pos-reset;
+  }
+  @include pos(sticky, $top: $top, $right: $right, $bottom: $bottom, $left: $left);
+}

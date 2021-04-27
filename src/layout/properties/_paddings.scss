@@ -12,7 +12,7 @@ $finch-paddings: (
 );
 
 $set-paddings: () !default;
-$paddings-sizes: map.merge($finch-paddings, $set-paddings);
+$padding-sizes: map.merge($finch-paddings, $set-paddings);
 
 @function get-padding($key) {
   // immediately return the given value if it is a 'global' value:
@@ -20,7 +20,7 @@ $paddings-sizes: map.merge($finch-paddings, $set-paddings);
     @return $key;
   }
 
-  $value: map.get($paddings-sizes, $key);
+  $value: map.get($padding-sizes, $key);
   @if $value {
     @return $value;
   }
@@ -46,7 +46,7 @@ $paddings-sizes: map.merge($finch-paddings, $set-paddings);
 }
 
 @if $padding-utils {
-  @each $key, $value in $paddings-sizes {
+  @each $key, $value in $padding-sizes {
     .padding--#{$key} {
       padding: $value;
     }
