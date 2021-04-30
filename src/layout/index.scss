@@ -8,7 +8,7 @@
 /// If true, then placeholders and classes such as `(\.|%)sm\:spacer--large` will be created.
 $layout-responsive: (
   margin: false,
-  padding: false,
+  padding: true,
   position: false,
 );
 /// provide custom 'responsive' settings for this module.
@@ -22,7 +22,7 @@ $responsive: map.merge($layout-responsive, $set-responsive);
 /// will create the classes for that property.
 $layout-utilities: (
   margin: false,
-  padding: false,
+  padding: true,
   position: false,
 );
 /// provide custom 'utilities' settings for this module.

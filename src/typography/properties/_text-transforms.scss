@@ -1,3 +1,6 @@
+@use 'sass:map';
+@use '../../prop-labels' as labels;
+
 $text-transform-utils: false !default;
 
 $transforms: (
@@ -10,8 +13,9 @@ $transforms: (
 );
 
 @if $text-transform-utils {
+  $label: map.get(labels.$prop-labels, text-transform);
   @each $key, $value in $transforms {
-    .text-transform--#{$key} {
+    .#{$label}--#{$key} {
       text-transform: $value;
     }
   }

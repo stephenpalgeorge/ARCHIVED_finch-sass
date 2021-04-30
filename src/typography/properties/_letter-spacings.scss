@@ -1,6 +1,7 @@
 @use 'sass:map';
 @use 'sass:list';
 @use '../../config';
+@use '../../prop-labels' as labels;
 
 $letter-spacing-utils: false !default;
 
@@ -34,8 +35,9 @@ $l-spacings: map.merge($finch-letter-spacings, $set-letter-spacings);
 }
 
 @if $letter-spacing-utils {
+  $label: map.get(labels.$prop-labels, letter-spacing);
   @each $key, $value in $l-spacings {
-    .letter-spacing--#{$key} {
+    .#{$label}--#{$key} {
       letter-spacing: $value;
     }
   }

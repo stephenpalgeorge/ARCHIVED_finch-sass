@@ -1,6 +1,7 @@
 @use 'sass:map';
 @use 'sass:list';
 @use '../../config';
+@use '../../prop-labels' as labels;
 
 $margin-utils: false !default;
 
@@ -76,8 +77,9 @@ $margin-sizes: map.merge($finch-margins, $set-margins);
 }
 
 @if $margin-utils {
+  $label: map.get(labels.$prop-labels, margin);
   @each $key, $value in $margin-sizes {
-    .margin--#{$key} {
+    .#{$label}--#{$key} {
       margin: $value;
     }
   }

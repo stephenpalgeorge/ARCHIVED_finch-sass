@@ -2,8 +2,6 @@
 @use 'sass:list';
 @use '../../config';
 
-$text-decoration-utils: false !default;
-
 $text-decoration-lines: (
   none: none,
   underline: underline,

@@ -1,6 +1,7 @@
 @use 'sass:map';
 @use 'sass:list';
 @use '../../config';
+@use '../../prop-labels' as labels;
 
 $position-utils: false !default;
 
@@ -13,8 +14,9 @@ $positions: (
 );
 
 @if $position-utils {
+  $label: map.get(labels.$prop-labels, position);
   @each $key, $value in $positions {
-    .position--#{$key} {
+    .#{$label}--#{$key} {
       position: $value;
     }
   }

@@ -1,9 +1,11 @@
 @use 'sass:map';
 @use '../config';
+@use '../prop-labels' as labels;
 
 @mixin gen-responsive($breakpoint, $prop, $propMap) {
+  $label: map.get(labels.$prop-labels, $prop);
   @each $key, $value in $propMap {
-    .#{$breakpoint}\:#{$prop}--#{$key} {
+    .#{$breakpoint}\:#{$label}--#{$key} {
       #{$prop}: $value;
     }
   }

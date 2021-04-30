@@ -9,15 +9,17 @@ $use-web-safe: false !default;
 /// @author stephen pal-george
 /// This map controls whether the styles are generated specifically for each breakpoint.
 /// If true, then placeholders and classes such as `(\.|%)sm\:font-size--lead` will be created.
+/// `text-decoration` is deliberately omitted from this map as there are too many variables to make
+/// utility classes practical/useful.
 $font-responsive: (
   font-family: false,
   font-size: false,
+  font-style: false,
   font-variant: false,
   font-weight: false,
   line-height: false,
   letter-spacing: false,
   text-align: false,
-  text-decoration: false,
   text-indent: false,
   text-transform: false,
   word-spacing: false,
@@ -31,15 +33,17 @@ $responsive: map.merge($font-responsive, $set-responsive);
 /// This map controls whether or not utility classes are generated. By default,
 /// Finch will not create any class names. Switching any of these values to `true`
 /// will create the classes for that property.
+/// `text-decoration` is deliberately omitted from this map as there are too many variables to make
+/// utility classes practical/useful.
 $font-utilities: (
   font-family: false,
   font-size: false,
+  font-style: false,
   font-variant: false,
   font-weight: false,
   line-height: false,
   letter-spacing: false,
   text-align: false,
-  text-decoration: false,
   text-indent: false,
   text-transform: false,
   word-spacing: false,
@@ -78,9 +82,13 @@ $word-spacings: () !default;
   $size-utils: map.get($utilities, font-size),
 );
 
+@forward 'properties/font-styles' with (
+  $font-style-utils: map.get($utilities, font-style),
+);
+
 /// FONT-VARIANT
 /// ----------
-@forward 'properties/font-variant' with (
+@forward 'properties/font-variants' with (
   $font-variant-utils: map.get($utilities, font-variant),
 );
 
@@ -108,27 +116,26 @@ $word-spacings: () !default;
 
 /// TEXT-ALIGN
 /// ----------
-@forward 'properties/text-align' with (
+@forward 'properties/text-aligns' with (
   $text-align-utils: map.get($utilities, text-align),
 );
 
 /// TEXT-DECORATION
 /// ----------
-@forward 'properties/text-decoration' with (
-  $text-decoration-utils: map.get($utilities, text-decoration),
+@forward 'properties/text-decorations' with (
   $set-decoration-thicknesses: $text-decoration-thicknesses,
 );
 
 /// TEXT-INDENT
 /// ----------
-@forward 'properties/text-indent' with (
+@forward 'properties/text-indents' with (
   $set-text-indents: $text-indents,
   $text-indent-utils: map.get($utilities, text-indent),
 );
 
 /// TEXT-TRANSFORM
 /// ----------
-@forward 'properties/text-transform' with (
+@forward 'properties/text-transforms' with (
   $text-transform-utils: map.get($utilities, text-transform),
 );
 
@@ -146,18 +153,20 @@ $word-spacings: () !default;
 @use '../_mixins' as m;
 @use 'properties/font-families' as *;
 @use 'properties/font-sizes' as *;
-@use 'properties/font-variant' as *;
+@use 'properties/font-styles' as *;
+@use 'properties/font-variants' as *;
 @use 'properties/font-weights' as *;
 @use 'properties/letter-spacings' as *;
 @use 'properties/line-heights' as *;
-@use 'properties/text-align' as *;
-@use 'properties/text-indent' as *;
-@use 'properties/text-transform' as *;
+@use 'properties/text-aligns' as *;
+@use 'properties/text-indents' as *;
+@use 'properties/text-transforms' as *;
 @use 'properties/word-spacings' as *;
 
 $typography-maps: (
   font-families: $families,
   font-size: $sizes,
+  font-style: $styles,
   font-weight: $weights,
   font-variant: $variants,
   line-height: $heights,

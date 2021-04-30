@@ -1,6 +1,7 @@
 @use 'sass:map';
 @use 'sass:list';
 @use '../../config';
+@use '../../prop-labels' as labels;
 
 $weight-utils: false !default;
 
@@ -38,8 +39,9 @@ $weights: map.merge($finch-font-weights, $set-font-weights);
 }
 
 @if $weight-utils {
+  $label: map.get(labels.$prop-labels, font-weight);
   @each $key, $value in $weights {
-    .weight--#{$key} {
+    .#{$label}--#{$key} {
       font-weight: $value;
     }
   }

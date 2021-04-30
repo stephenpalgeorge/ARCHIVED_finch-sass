@@ -1,3 +1,6 @@
+@use 'sass:map';
+@use '../../prop-labels' as labels;
+
 $font-variant-utils: false !default;
 
 $variants: (
@@ -10,8 +13,9 @@ $variants: (
 );
 
 @if $font-variant-utils {
+  $label: map.get(labels.$prop-labels, font-variant);
   @each $key, $value in $variants {
-    .variant--#{$key} {
+    .#{$label}--#{$key} {
       font-variant: $value;
     }
   }
