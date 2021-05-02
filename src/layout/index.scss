@@ -41,30 +41,12 @@ $margins: () !default;
 $paddings: () !default;
 $z-indices: () !default;
 
-/// MARGIN
-/// ----------
-@forward './properties/margins' with (
-  $margin-utils: map.get($utilities, margin),
-  $set-margins: $margins,
-);
-
-/// PADDING
-/// ----------
-@forward './properties/paddings' with (
-  $padding-utils: map.get($utilities, padding),
-  $set-paddings: $paddings,
-);
-
-/// POSITION
-/// ----------
-@forward './properties/positions' with (
-  $position-utils: map.get($utilities, position),
-);
-
-@forward './properties/z-indices' with (
-  $z-index-utils: map.get($utilities, z-index),
-  $set-z-indices: $z-indices,
-);
+/// FORWARD THE PROPERTIES
+/// We pass along the property files with any custom configuration as required.
+@forward './properties/margins' with ($set-margins: $margins);
+@forward './properties/paddings' with ($set-paddings: $paddings);
+@forward './properties/positions';
+@forward './properties/z-indices' with ($set-z-indices: $z-indices);
 
 /// LOAD THE PROPERTIES
 /// ----------
@@ -83,11 +65,21 @@ $layout-maps: (
   z-index: $indices,
 );
 
+/// GENERATE UTILITY CLASS NAMES
+/// the following code generates classes such as `.pad--large` or `.pos--absolute`.
+/// the classes will only be generated if the corresponding property is set to `true` in
+/// the $layout-utilities map.
+@each $property, $flag in $utilities {
+  @if $flag {
+    @include m.gen-utils($property, map.get($layout-maps, $property));
+  }
+}
+
 /// GENERATE RESPONSIVE CLASS NAMES
 /// ----------
 /// the following code generates classes such as `sm:size--lead`, or `xl:weight--heavy`.
 /// the classes will only be generated if the corresponding property is set to 'true' in
-/// the $responsive and $utilities maps.
+/// the $responsive map.
 @each $key, $value in config.$breakpoints-map {
   @include config.break($key) {
     @each $property, $flag in $responsive {

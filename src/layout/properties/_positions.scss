@@ -1,9 +1,6 @@
 @use 'sass:map';
 @use 'sass:list';
 @use '../../config';
-@use '../../prop-labels' as labels;
-
-$position-utils: false !default;
 
 $positions: (
   static: static,
@@ -12,15 +9,6 @@ $positions: (
   fixed: fixed,
   sticky: sticky,
 );
-
-@if $position-utils {
-  $label: map.get(labels.$prop-labels, position);
-  @each $key, $value in $positions {
-    .#{$label}--#{$key} {
-      position: $value;
-    }
-  }
-}
 
 @function get-pos($key) {
   // immediately return the given value if it is one of the global css values:

@@ -1,9 +1,6 @@
 @use 'sass:map';
 @use 'sass:list';
 @use '../../config';
-@use '../../prop-labels' as labels;
-
-$margin-utils: false !default;
 
 $finch-margins: (
   small: map.get(config.$size-scale, 200),
@@ -73,14 +70,5 @@ $margin-sizes: map.merge($finch-margins, $set-margins);
   // if no `$axis` is provided, the margin is applied to all sides:
   @else {
     margin: get-margin($key);
-  }
-}
-
-@if $margin-utils {
-  $label: map.get(labels.$prop-labels, margin);
-  @each $key, $value in $margin-sizes {
-    .#{$label}--#{$key} {
-      margin: $value;
-    }
   }
 }

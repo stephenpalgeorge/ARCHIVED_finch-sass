@@ -1,9 +1,6 @@
 @use 'sass:map';
 @use 'sass:list';
 @use '../../config';
-@use '../../prop-labels' as labels;
-
-$padding-utils: false !default;
 
 $finch-paddings: (
   small: map.get(config.$size-scale, 200),
@@ -72,14 +69,5 @@ $padding-sizes: map.merge($finch-paddings, $set-paddings);
   // If no `$axis` is provided, the padding is applied to all sides:
   @else {
     padding: get-padding($key);
-  }
-}
-
-@if $padding-utils {
-  $label: map.get(labels.$prop-labels, padding);
-  @each $key, $value in $padding-sizes {
-    .#{$label}--#{$key} {
-      padding: $value;
-    }
   }
 }

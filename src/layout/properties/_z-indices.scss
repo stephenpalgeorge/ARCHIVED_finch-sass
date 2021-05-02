@@ -1,9 +1,6 @@
 @use 'sass:map';
 @use 'sass:list';
 @use '../../config';
-@use '../../prop-labels' as labels;
-
-$z-index-utils: false !default;
 
 $z-index-back: -20;
 $z-index-background: -10;
@@ -21,15 +18,6 @@ $finch-z-indices: (
 
 $set-z-indices: () !default;
 $indices: map.merge($finch-z-indices, $set-z-indices);
-
-@if $z-index-utils {
-  $label: map.get(labels.$prop-labels, z-index);
-  @each $key, $value in $indices {
-    .#{$label}--#{$key} {
-      z-index: $value;
-    }
-  }
-}
 
 @function get-index($key) {
   $spec-values: (auto);
