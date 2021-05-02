@@ -2,6 +2,15 @@
 @use '../config';
 @use '../prop-labels' as labels;
 
+@mixin gen-utils($prop, $propMap) {
+  $label: map.get(labels.$prop-labels, $prop);
+  @each $key, $value in $propMap {
+    .#{$label}--#{$key} {
+      #{$prop}: $value;
+    }
+  }
+}
+
 @mixin gen-responsive($breakpoint, $prop, $propMap) {
   $label: map.get(labels.$prop-labels, $prop);
   @each $key, $value in $propMap {

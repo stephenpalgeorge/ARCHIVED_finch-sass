@@ -37,7 +37,7 @@ $responsive: map.merge($font-responsive, $set-responsive);
 /// utility classes practical/useful.
 $font-utilities: (
   font-family: false,
-  font-size: false,
+  font-size: true,
   font-style: false,
   font-variant: false,
   font-weight: false,
@@ -67,84 +67,24 @@ $text-decoration-thicknesses: () !default;
 $text-indents: () !default;
 $word-spacings: () !default;
 
-/// FONT-FAMILIES
+/// FORWARD THE PROPERTIES
 /// ----------
+/// We pass along the property files with the custom configuration where appropriate.
 @forward 'properties/font-families' with (
   $set-font-families: $font-families,
-  $font-family-utils: map.get($utilities, font-family),
   $prefer-web-safe: $use-web-safe,
 );
-
-/// FONT-SIZE
-/// ----------
-@forward 'properties/font-sizes' with (
-  $set-font-sizes: $font-sizes,
-  $size-utils: map.get($utilities, font-size),
-);
-
-@forward 'properties/font-styles' with (
-  $font-style-utils: map.get($utilities, font-style),
-);
-
-/// FONT-VARIANT
-/// ----------
-@forward 'properties/font-variants' with (
-  $font-variant-utils: map.get($utilities, font-variant),
-);
-
-/// FONT-WEIGHT
-/// ----------
-@forward 'properties/font-weights' with (
-  $set-font-weights: $font-weights,
-  $weight-utils: map.get($utilities, font-weight),
-);
-
-
-/// LETTER-SPACING
-/// ----------
-@forward 'properties/letter-spacings' with (
-  $set-letter-spacings: $letter-spacings,
-  $letter-spacing-utils: map.get($utilities, letter-spacing),
-);
-
-/// LINE-HEIGHT
-/// ----------
-@forward 'properties/line-heights' with (
-  $set-line-heights: $line-heights,
-  $line-height-utils: map.get($utilities, line-height),
-);
-
-/// TEXT-ALIGN
-/// ----------
-@forward 'properties/text-aligns' with (
-  $text-align-utils: map.get($utilities, text-align),
-);
-
-/// TEXT-DECORATION
-/// ----------
-@forward 'properties/text-decorations' with (
-  $set-decoration-thicknesses: $text-decoration-thicknesses,
-);
-
-/// TEXT-INDENT
-/// ----------
-@forward 'properties/text-indents' with (
-  $set-text-indents: $text-indents,
-  $text-indent-utils: map.get($utilities, text-indent),
-);
-
-/// TEXT-TRANSFORM
-/// ----------
-@forward 'properties/text-transforms' with (
-  $text-transform-utils: map.get($utilities, text-transform),
-);
-
-/// WORD-SPACING
-/// ----------
-@forward 'properties/word-spacings' with (
-  $set-word-spacings: $word-spacings,
-  $word-spacing-utils: map.get($utilities, word-spacing),
-);
+@forward 'properties/font-sizes' with ($set-font-sizes: $font-sizes);
+@forward 'properties/font-styles';
+@forward 'properties/font-variants';
+@forward 'properties/font-weights' with ($set-font-weights: $font-weights);
+@forward 'properties/letter-spacings' with ($set-letter-spacings: $letter-spacings);
+@forward 'properties/line-heights' with ($set-line-heights: $line-heights);
+@forward 'properties/text-aligns';
+@forward 'properties/text-decorations';
+@forward 'properties/text-indents' with ($set-text-indents: $text-indents);
+@forward 'properties/text-transforms';
+@forward 'properties/word-spacings' with ($set-word-spacings: $word-spacings);
 
 /// LOAD THE PROPERTIES
 /// ----------
@@ -177,11 +117,21 @@ $typography-maps: (
   word-spacing: $w-spacings,
 );
 
+/// GENERATE UTILITY CLASS NAMES
+/// the following code generates classes such as `.txt-align--center` or `.ln-hgt--tall`.
+/// the classes will only be generated if the corresponding property is set to `true` in
+/// the $font-utilities map.
+@each $property, $flag in $utilities {
+  @if $flag {
+    @include m.gen-utils($property, map.get($typography-maps, $property));
+  }
+}
+
 /// GENERATE RESPONSIVE CLASS NAMES
 /// ----------
-/// the following code generates classes such as `sm:size--lead`, or `xl:weight--heavy`.
+/// the following code generates classes such as `.sm:fnt-sz--lead`, or `.xl:fnt-wgt--heavy`.
 /// the classes will only be generated if the corresponding property is set to 'true' in
-/// the $font-responsive and $font-utilities maps.
+/// the $font-responsive map.
 @each $key, $value in config.$breakpoints-map {
   @include config.break($key) {
     @each $property, $flag in $responsive {

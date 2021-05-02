@@ -1,0 +1,93 @@
+@use 'sass:map';
+@use 'sass:list';
+@use '../../config';
+@use '../../prop-labels' as labels;
+
+$z-index-utils: false !default;
+
+$z-index-back: -20;
+$z-index-background: -10;
+$z-index-base: 0;
+$z-index-foreground: 10;
+$z-index-front: 20;
+
+$finch-z-indices: (
+  back: $z-index-back,
+  background: $z-index-background,
+  base: $z-index-base,
+  foreground: $z-index-foreground,
+  front: $z-index-front,
+);
+
+$set-z-indices: () !default;
+$indices: map.merge($finch-z-indices, $set-z-indices);
+
+@if $z-index-utils {
+  $label: map.get(labels.$prop-labels, z-index);
+  @each $key, $value in $indices {
+    .#{$label}--#{$key} {
+      z-index: $value;
+    }
+  }
+}
+
+@function get-index($key) {
+  $spec-values: (auto);
+  // immediately return the given value if it is a keyword value for this prop:
+  @if list.index(config.$global-values, $key) or list.index($spec-values, $key) {
+    @return $key;
+  }
+
+  $value: map.get($indices, $key);
+  @if $value {
+    @return $value;
+  }
+
+  @warn 'No index found for "#{$key}"';
+  @return null;
+}
+
+// Utility mixins:
+// back, background, base, foreground, front, lift (+1), suppress (-1), new-stacking-ctx,
+@mixin layer($key, $position: relative) {
+  position: $position;
+  z-index: get-index($key);
+}
+
+@mixin z-back($pos: relative) {
+  @include layer($key: back, $position: $pos);
+}
+
+@mixin z-background($pos: relative) {
+  @include layer($key: background, $position: $pos);
+}
+
+@mixin z-base($pos: relative) {
+  @include layer($key: base, $position: $pos);
+}
+
+@mixin z-foreground($pos: relative) {
+  @include layer($key: foreground, $position: $pos);
+}
+
+@mixin z-front($pos: relative) {
+  @include layer($key: front, $position: $pos);
+}
+
+@mixin z-lift($pos: relative) {
+  position: $pos;
+  z-index: 1;
+}
+
+@mixin z-suppress($pos: relative) {
+  position: $pos;
+  z-index: -1;
+}
+
+@mixin new-stacking-ctx() {
+  isolation: isolate;
+  @supports not (isolation: auto) {
+    position: relative;
+    z-index: 0;
+  }
+}

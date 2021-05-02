@@ -1,9 +1,6 @@
 @use 'sass:map';
 @use 'sass:list';
 @use '../../config';
-@use '../../prop-labels' as labels;
-
-$letter-spacing-utils: false !default;
 
 $letter-spacing-tight: map.get(config.$atomic-scale, 300);
 $letter-spacing-base: map.get(config.$atomic-scale, 400);
@@ -32,13 +29,4 @@ $l-spacings: map.merge($finch-letter-spacings, $set-letter-spacings);
 
   @warn 'No spacing found for "#{$key}"';
   @return null;
-}
-
-@if $letter-spacing-utils {
-  $label: map.get(labels.$prop-labels, letter-spacing);
-  @each $key, $value in $l-spacings {
-    .#{$label}--#{$key} {
-      letter-spacing: $value;
-    }
-  }
 }

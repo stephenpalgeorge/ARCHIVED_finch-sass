@@ -1,9 +1,7 @@
 @use 'sass:map';
 @use 'sass:list';
 @use '../../config';
-@use '../../prop-labels' as labels;
 
-$font-family-utils: false !default;
 $prefer-web-safe: false !default;
 
 @if not $prefer-web-safe {
@@ -75,13 +73,4 @@ $web-safe: (
 
   @warn 'No font-family found for "#{$key}"';
   @return null;
-}
-
-@if $font-family-utils {
-  $label: map.get(labels.$prop-labels, font-family);
-  @each $key, $value in $families {
-    .#{$label}--#{$key} {
-      font-family: $value;
-    }
-  }
 }

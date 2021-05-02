@@ -1,9 +1,6 @@
 @use 'sass:map';
 @use 'sass:list';
 @use '../../config';
-@use '../../prop-labels' as labels;
-
-$word-spacing-utils: false !default;
 
 $word-spacing-tight: map.get(config.$atomic-scale, 300);
 $word-spacing-base: map.get(config.$atomic-scale, 400);
@@ -32,13 +29,4 @@ $w-spacings: map.merge($finch-word-spacings, $set-word-spacings);
 
   @warn 'No word-spacing found for "#{$key}"';
   @return null;
-}
-
-@if $word-spacing-utils {
-  $label: map.get(labels.$prop-labels, word-spacing);
-  @each $key, $value in $w-spacings {
-    .#{$label}--#{$key} {
-      word-spacing: $value;
-    }
-  }
 }

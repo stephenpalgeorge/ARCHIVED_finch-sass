@@ -10,6 +10,7 @@ $layout-responsive: (
   margin: false,
   padding: true,
   position: false,
+  z-index: false,
 );
 /// provide custom 'responsive' settings for this module.
 /// @example @use '<path-to-finch>/layout' with ($set-responsive: (margin-left: true));
@@ -24,6 +25,7 @@ $layout-utilities: (
   margin: false,
   padding: true,
   position: false,
+  z-index: false,
 );
 /// provide custom 'utilities' settings for this module.
 /// @example @use '<path-to-finch>/layout' with ($set-utilities: (padding-top: true));
@@ -37,6 +39,7 @@ $utilities: map.merge($layout-utilities, $set-utilities);
 /// @example @use '<path-to-finch>/layout' with ($offset: (large: 4rem));
 $margins: () !default;
 $paddings: () !default;
+$z-indices: () !default;
 
 /// MARGIN
 /// ----------
@@ -58,6 +61,11 @@ $paddings: () !default;
   $position-utils: map.get($utilities, position),
 );
 
+@forward './properties/z-indices' with (
+  $z-index-utils: map.get($utilities, z-index),
+  $set-z-indices: $z-indices,
+);
+
 /// LOAD THE PROPERTIES
 /// ----------
 /// We use the property files within the module itself, to generate responsive classes,
@@ -66,11 +74,13 @@ $paddings: () !default;
 @use 'properties/margins' as *;
 @use 'properties/paddings' as *;
 @use 'properties/positions' as *;
+@use 'properties/z-indices' as *;
 
 $layout-maps: (
   margin: $margin-sizes,
   padding: $padding-sizes,
   position: $positions,
+  z-index: $indices,
 );
 
 /// GENERATE RESPONSIVE CLASS NAMES

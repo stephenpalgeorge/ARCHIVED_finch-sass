@@ -1,9 +1,6 @@
 @use 'sass:map';
 @use 'sass:list';
 @use '../../config';
-@use '../../prop-labels' as labels;
-
-$size-utils: false !default;
 
 $finch-font-sizes: (
   small-print: map.get(config.$size-scale, 300),
@@ -30,13 +27,4 @@ $sizes: map.merge($finch-font-sizes, $set-font-sizes);
 
   @warn 'no font-size found for "#{$key}"';
   @return null;
-}
-
-@if $size-utils {
-  $label: map.get(labels.$prop-labels, font-size);
-  @each $key, $value in $sizes {
-    .#{$label}--#{$key} {
-      font-size: $value;
-    }
-  }
 }

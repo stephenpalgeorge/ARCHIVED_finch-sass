@@ -1,9 +1,6 @@
 @use 'sass:map';
 @use 'sass:list';
 @use '../../config';
-@use '../../prop-labels' as labels;
-
-$text-indent-utils: false !default;
 
 $text-indent-none: 0;
 $text-indent-tight: map.get(config.$size-scale, 200);
@@ -32,13 +29,4 @@ $indents: map.merge($finch-text-indents, $set-text-indents);
 
   @warn 'No indent found for "#{$key}"';
   @return null;
-}
-
-@if $text-indent-utils {
-  $label: map.get(labels.$prop-labels, text-indent);
-  @each $key, $value in $indents {
-    .#{$label}--#{$key} {
-      text-indent: $value;
-    }
-  }
 }

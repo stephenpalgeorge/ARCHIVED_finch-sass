@@ -1,19 +1,5 @@
-@use 'sass:map';
-@use '../../prop-labels' as labels;
-
-$font-style-utils: false !default;
-
 $styles: (
   normal: normal,
   italic: italic,
   oblique: oblique,
 );
-
-@if $font-style-utils {
-  $label: map.get(labels.$prop-labels, font-style);
-  @each $key, $value in $styles {
-    .#{$label}--#{$key} {
-      font-style: $value;
-    }
-  }
-}

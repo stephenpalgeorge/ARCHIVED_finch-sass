@@ -1,9 +1,6 @@
 @use 'sass:map';
 @use 'sass:list';
 @use '../../config';
-@use '../../prop-labels' as labels;
-
-$line-height-utils: false !default;
 
 $line-height-x-tight: 1;
 $line-height-tight: 1.2;
@@ -34,13 +31,4 @@ $heights: map.merge($finch-line-heights, $set-line-heights);
 
   @warn 'no line-height found for "#{$key}"';
   @return null;
-}
-
-@if $line-height-utils {
-  $label: map.get(labels.$prop-labels, line-height);
-  @each $key, $value in $heights {
-    .#{$label}--#{$key} {
-      line-height: $value;
-    }
-  }
 }

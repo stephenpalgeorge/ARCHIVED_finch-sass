@@ -1,8 +1,3 @@
-@use 'sass:map';
-@use '../../prop-labels' as labels;
-
-$text-align-utils: false !default;
-
 $alignments: (
   start: start,
   end: end,
@@ -12,12 +7,3 @@ $alignments: (
   justify: justify,
   match-parent: match-parent
 );
-
-@if $text-align-utils {
-  $label: map.get(labels.$prop-labels, text-align);
-  @each $key, $value in $alignments {
-    .#{$label}--#{$key} {
-      text-align: $value;
-    }
-  }
-}
