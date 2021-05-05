@@ -147,10 +147,10 @@ $typography-maps: (
 /// These mixins combine behaviour of several/many of the different properties that have been defined so far.
 
 /// TEXT STYLE
-@mixin text-style(
+@mixin text-format(
   $alignment: start,
   $family: sans-serif,
-  $line-height: base,
+  $line-height: tall,
   $size: base,
   $weight: base,
 ) {
@@ -185,22 +185,22 @@ $typography-maps: (
 }
 
 .text-body {
-  @include text-style($line-height: tall);
+  @include text-format($line-height: tall);
   max-width: 70ch;
 }
 
 .text-lead {
-  @include text-style($size: lead, $weight: x-light);
+  @include text-format($size: lead, $weight: x-light);
   // this next line is just here for demo purposes, this kind of thing should live in the layout module
   max-width: 62ch;
 }
 
 .text-subheading {
-  @include text-style($family: serif, $size: sub-heading, $line-height: tight);
+  @include text-format($family: serif, $size: sub-heading, $line-height: tight);
 }
 
 .text-heading {
-  @include text-style($family: serif, $size: heading, $line-height: tight, $weight: heavy);
+  @include text-format($family: serif, $size: heading, $line-height: tight, $weight: heavy);
 }
 
 // ALL OF THIS FOLLOWING CODE SHOULD ONE DAY LIVE IN AN 'Elements' MODULE, it's here for now

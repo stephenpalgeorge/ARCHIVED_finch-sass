@@ -8,7 +8,7 @@ $finch-font-sizes: (
   lead: map.get(config.$size-scale, 500),
   sub-heading: map.get(config.$size-scale, 800),
   heading: map.get(config.$size-scale, 900),
-) !default;
+);
 
 $set-font-sizes: () !default;
 $sizes: map.merge($finch-font-sizes, $set-font-sizes);

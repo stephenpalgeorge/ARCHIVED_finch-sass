@@ -7,6 +7,7 @@
 /// This map controls whether the styles are generated specifically for each breakpoint.
 /// If true, then placeholders and classes such as `(\.|%)sm\:spacer--large` will be created.
 $layout-responsive: (
+  display: false,
   margin: false,
   padding: true,
   position: false,
@@ -22,6 +23,7 @@ $responsive: map.merge($layout-responsive, $set-responsive);
 /// Finch will not create any class names. Switching any of these values to `true`
 /// will create the classes for that property.
 $layout-utilities: (
+  display: false,
   margin: false,
   padding: true,
   position: false,
@@ -43,6 +45,7 @@ $z-indices: () !default;
 
 /// FORWARD THE PROPERTIES
 /// We pass along the property files with any custom configuration as required.
+@forward './properties/displays';
 @forward './properties/margins' with ($set-margins: $margins);
 @forward './properties/paddings' with ($set-paddings: $paddings);
 @forward './properties/positions';
@@ -53,12 +56,14 @@ $z-indices: () !default;
 /// We use the property files within the module itself, to generate responsive classes,
 /// and as part of the composition of some top-level mixins, we therefore load them all in here:
 @use '../_mixins' as m;
+@use 'properties/displays' as *;
 @use 'properties/margins' as *;
 @use 'properties/paddings' as *;
 @use 'properties/positions' as *;
 @use 'properties/z-indices' as *;
 
 $layout-maps: (
+  display: $displays,
   margin: $margin-sizes,
   padding: $padding-sizes,
   position: $positions,

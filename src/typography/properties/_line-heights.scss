@@ -2,16 +2,11 @@
 @use 'sass:list';
 @use '../../config';
 
-$line-height-x-tight: 1;
-$line-height-tight: 1.2;
-$line-height-base: 1.5;
-$line-height-tall: 1.75;
-
 $finch-line-heights: (
-  x-tight: $line-height-x-tight,
-  tight: $line-height-tight,
-  base: $line-height-base,
-  tall: $line-height-tall,
+  x-tight: map.get(config.$interval-scale, 400),
+  tight: map.get(config.$interval-scale, 500),
+  base: map.get(config.$interval-scale, 600),
+  tall: map.get(config.$interval-scale, 700),
 );
 
 $set-line-heights: () !default;

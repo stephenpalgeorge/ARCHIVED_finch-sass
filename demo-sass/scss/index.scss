@@ -1,3 +1,4 @@
+@use 'sass:map';
 // USE FINCH AS A SINGLE IMPORT
 // @use '../../src' as finch with (
 //   $set-scale: major-thirds,
@@ -16,10 +17,14 @@
 
 // USE FINCH MODULES INDIVIDUALLY
 @use '../../src/config' with (
-  $use-scale: major-thirds,
+  $use-scale: minor-thirds,
 );
 
 @use '../../src/typography/' as typ with (
+  $font-sizes: (
+    heading: map.get(config.$size-scale, 700),
+    sub-heading: map.get(config.$size-scale, 600),
+  ),
   $set-utilities: (
     font-size: true,
   ),

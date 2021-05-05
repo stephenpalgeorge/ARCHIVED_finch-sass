@@ -2,47 +2,67 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,900&display=swap");
-.font-size--small-print {
-  font-size: 0.8rem;
+.font-size\:small-print {
+  font-size: 0.8333333333rem;
 }
 
-.font-size--base {
+.font-size\:small-print\! {
+  font-size: 0.8333333333rem !important;
+}
+
+.font-size\:base {
   font-size: 1rem;
 }
 
-.font-size--lead {
-  font-size: 1.25rem;
+.font-size\:base\! {
+  font-size: 1rem !important;
 }
 
-.font-size--sub-heading {
-  font-size: 2.44140625rem;
+.font-size\:lead {
+  font-size: 1.2rem;
 }
 
-.font-size--heading {
-  font-size: 3.0517578125rem;
+.font-size\:lead\! {
+  font-size: 1.2rem !important;
+}
+
+.font-size\:sub-heading {
+  font-size: 1.44rem;
+}
+
+.font-size\:sub-heading\! {
+  font-size: 1.44rem !important;
+}
+
+.font-size\:heading {
+  font-size: 1.728rem;
+}
+
+.font-size\:heading\! {
+  font-size: 1.728rem !important;
 }
 
 .text-body, p:not([class]) {
   font-family: "Poppins", sans-serif;
   font-size: 1rem;
   font-weight: 400;
-  line-height: 1.75;
+  line-height: 1.728;
   text-align: start;
   max-width: 70ch;
 }
 
 .text-lead {
   font-family: "Poppins", sans-serif;
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 200;
-  line-height: 1.5;
+  line-height: 1.44;
   text-align: start;
   max-width: 62ch;
 }
 
 .text-subheading, h2, h3 {
   font-family: "Playfair Display", serif;
-  font-size: 2.44140625rem;
+  font-size: 1.44rem;
   font-weight: 400;
   line-height: 1.2;
   text-align: start;
@@ -50,7 +70,7 @@
 
 .text-heading, h1 {
   font-family: "Playfair Display", serif;
-  font-size: 3.0517578125rem;
+  font-size: 1.728rem;
   font-weight: 900;
   line-height: 1.2;
   text-align: start;
@@ -69,27 +89,240 @@ h3 {
   font-weight: 400;
 }
 
-.margin--small {
-  margin: 0.64rem;
+.margin\:small {
+  margin: 0.6944444444rem;
 }
 
-.margin--base {
+.margin\:small\! {
+  margin: 0.6944444444rem !important;
+}
+
+.margin\:base {
   margin: 1rem;
 }
 
-.margin--large {
-  margin: 1.953125rem;
+.margin\:base\! {
+  margin: 1rem !important;
 }
 
-.margin--x-large {
-  margin: 3.8146972656rem;
+.margin\:large {
+  margin: 1.728rem;
 }
 
+.margin\:large\! {
+  margin: 1.728rem !important;
+}
+
+.margin\:x-large {
+  margin: 2.985984rem;
+}
+
+.margin\:x-large\! {
+  margin: 2.985984rem !important;
+}
+
+.padding\:small {
+  padding: 0.6944444444rem;
+}
+
+.padding\:small\! {
+  padding: 0.6944444444rem !important;
+}
+
+.padding\:base {
+  padding: 1rem;
+}
+
+.padding\:base\! {
+  padding: 1rem !important;
+}
+
+.padding\:large {
+  padding: 1.728rem;
+}
+
+.padding\:large\! {
+  padding: 1.728rem !important;
+}
+
+.padding\:x-large {
+  padding: 2.985984rem;
+}
+
+.padding\:x-large\! {
+  padding: 2.985984rem !important;
+}
+
+@media screen and (min-width: 0) {
+  .padding\:small\@xs {
+    padding: 0.6944444444rem;
+  }
+
+  .padding\:small\@xs\! {
+    padding: 0.6944444444rem !important;
+  }
+
+  .padding\:base\@xs {
+    padding: 1rem;
+  }
+
+  .padding\:base\@xs\! {
+    padding: 1rem !important;
+  }
+
+  .padding\:large\@xs {
+    padding: 1.728rem;
+  }
+
+  .padding\:large\@xs\! {
+    padding: 1.728rem !important;
+  }
+
+  .padding\:x-large\@xs {
+    padding: 2.985984rem;
+  }
+
+  .padding\:x-large\@xs\! {
+    padding: 2.985984rem !important;
+  }
+}
+@media screen and (min-width: 576px) {
+  .padding\:small\@sm {
+    padding: 0.6944444444rem;
+  }
+
+  .padding\:small\@sm\! {
+    padding: 0.6944444444rem !important;
+  }
+
+  .padding\:base\@sm {
+    padding: 1rem;
+  }
+
+  .padding\:base\@sm\! {
+    padding: 1rem !important;
+  }
+
+  .padding\:large\@sm {
+    padding: 1.728rem;
+  }
+
+  .padding\:large\@sm\! {
+    padding: 1.728rem !important;
+  }
+
+  .padding\:x-large\@sm {
+    padding: 2.985984rem;
+  }
+
+  .padding\:x-large\@sm\! {
+    padding: 2.985984rem !important;
+  }
+}
+@media screen and (min-width: 768px) {
+  .padding\:small\@md {
+    padding: 0.6944444444rem;
+  }
+
+  .padding\:small\@md\! {
+    padding: 0.6944444444rem !important;
+  }
+
+  .padding\:base\@md {
+    padding: 1rem;
+  }
+
+  .padding\:base\@md\! {
+    padding: 1rem !important;
+  }
+
+  .padding\:large\@md {
+    padding: 1.728rem;
+  }
+
+  .padding\:large\@md\! {
+    padding: 1.728rem !important;
+  }
+
+  .padding\:x-large\@md {
+    padding: 2.985984rem;
+  }
+
+  .padding\:x-large\@md\! {
+    padding: 2.985984rem !important;
+  }
+}
+@media screen and (min-width: 992px) {
+  .padding\:small\@lg {
+    padding: 0.6944444444rem;
+  }
+
+  .padding\:small\@lg\! {
+    padding: 0.6944444444rem !important;
+  }
+
+  .padding\:base\@lg {
+    padding: 1rem;
+  }
+
+  .padding\:base\@lg\! {
+    padding: 1rem !important;
+  }
+
+  .padding\:large\@lg {
+    padding: 1.728rem;
+  }
+
+  .padding\:large\@lg\! {
+    padding: 1.728rem !important;
+  }
+
+  .padding\:x-large\@lg {
+    padding: 2.985984rem;
+  }
+
+  .padding\:x-large\@lg\! {
+    padding: 2.985984rem !important;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .padding\:small\@xl {
+    padding: 0.6944444444rem;
+  }
+
+  .padding\:small\@xl\! {
+    padding: 0.6944444444rem !important;
+  }
+
+  .padding\:base\@xl {
+    padding: 1rem;
+  }
+
+  .padding\:base\@xl\! {
+    padding: 1rem !important;
+  }
+
+  .padding\:large\@xl {
+    padding: 1.728rem;
+  }
+
+  .padding\:large\@xl\! {
+    padding: 1.728rem !important;
+  }
+
+  .padding\:x-large\@xl {
+    padding: 2.985984rem;
+  }
+
+  .padding\:x-large\@xl\! {
+    padding: 2.985984rem !important;
+  }
+}
 .text {
   font-family: "Poppins", sans-serif;
   font-size: 1rem;
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 1.44;
   text-align: start;
   text-decoration-line: overline;
   text-decoration-color: red;
@@ -109,5 +342,5 @@ h3 {
 }
 
 body {
-  padding: 3.8146972656rem;
+  padding: 2.985984rem;
 }
