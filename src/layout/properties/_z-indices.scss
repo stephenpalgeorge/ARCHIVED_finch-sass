@@ -37,29 +37,29 @@ $indices: map.merge($finch-z-indices, $set-z-indices);
 
 // Utility mixins:
 // back, background, base, foreground, front, lift (+1), suppress (-1), new-stacking-ctx,
-@mixin layer($key, $position: relative) {
+@mixin set-layer($key, $position: relative) {
   position: $position;
   z-index: get-index($key);
 }
 
 @mixin z-back($pos: relative) {
-  @include layer($key: back, $position: $pos);
+  @include set-layer($key: back, $position: $pos);
 }
 
 @mixin z-background($pos: relative) {
-  @include layer($key: background, $position: $pos);
+  @include set-layer($key: background, $position: $pos);
 }
 
 @mixin z-base($pos: relative) {
-  @include layer($key: base, $position: $pos);
+  @include set-layer($key: base, $position: $pos);
 }
 
 @mixin z-foreground($pos: relative) {
-  @include layer($key: foreground, $position: $pos);
+  @include set-layer($key: foreground, $position: $pos);
 }
 
 @mixin z-front($pos: relative) {
-  @include layer($key: front, $position: $pos);
+  @include set-layer($key: front, $position: $pos);
 }
 
 @mixin z-lift($pos: relative) {

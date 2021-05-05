@@ -5,8 +5,12 @@
 @mixin gen-utils($prop, $propMap) {
   $label: map.get(labels.$prop-labels, $prop);
   @each $key, $value in $propMap {
-    .#{$label}--#{$key} {
+    .#{$label}\:#{$key} {
       #{$prop}: $value;
+    }
+
+    .#{$label}\:#{$key}\! {
+      #{$prop}: $value !important;
     }
   }
 }
@@ -14,8 +18,12 @@
 @mixin gen-responsive($breakpoint, $prop, $propMap) {
   $label: map.get(labels.$prop-labels, $prop);
   @each $key, $value in $propMap {
-    .#{$breakpoint}\:#{$label}--#{$key} {
+    .#{$label}\:#{$key}\@#{$breakpoint} {
       #{$prop}: $value;
+    }
+
+    .#{$label}\:#{$key}\@#{$breakpoint}\! {
+      #{$prop}: $value !important;
     }
   }
 }
