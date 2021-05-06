@@ -7,6 +7,7 @@ $finch-line-heights: (
   tight: map.get(config.$interval-scale, 500),
   base: map.get(config.$interval-scale, 600),
   tall: map.get(config.$interval-scale, 700),
+  x-tall: map.get(config.$interval-scale, 800),
 );
 
 $set-line-heights: () !default;

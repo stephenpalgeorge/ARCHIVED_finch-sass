@@ -56,6 +56,7 @@ $set-use-web-safe: false !default;
 // N.B. must make sure none of the partials share any variable names,
 // otherwise they will clash on load.
 @forward './layout' as lyt-*;
+@forward './layout/properties/displays' as lyt-*;
 @forward './layout/properties/margins' as lyt-*;
 @forward './layout/properties/paddings' as lyt-*;
 @forward './layout/properties/positions' as lyt-*;

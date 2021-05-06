@@ -2,14 +2,10 @@
 @use 'sass:list';
 @use '../../config';
 
-$word-spacing-tight: map.get(config.$atomic-scale, 300);
-$word-spacing-base: map.get(config.$atomic-scale, 400);
-$word-spacing-wide: map.get(config.$atomic-scale, 700);
-
 $finch-word-spacings: (
-  'tight': $word-spacing-tight,
-  'base': $word-spacing-base,
-  'wide': $word-spacing-wide,
+  tight: map.get(config.$atomic-scale, 300),
+  base: map.get(config.$atomic-scale, 400),
+  wide: map.get(config.$atomic-scale, 700),
 );
 
 $set-word-spacings: () !default;
