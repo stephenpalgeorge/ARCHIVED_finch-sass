@@ -3,6 +3,7 @@
 @use '../../config';
 
 $finch-paddings: (
+  none: 0,
   small: map.get(config.$size-scale, 200),
   base: map.get(config.$size-scale, 400),
   large: map.get(config.$size-scale, 700),

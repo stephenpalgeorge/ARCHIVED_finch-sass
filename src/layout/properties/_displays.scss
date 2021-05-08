@@ -31,3 +31,14 @@ $displays: (
     }
   }
 }
+
+@mixin flex-columns($column-min: 16rem, $reverse: false) {
+  display: flex;
+  @if $reverse { flex-flow: row-reverse wrap; }
+  @else { flex-flow: row wrap; }
+
+  > * {
+    flex: 1 1;
+    min-width: $column-min;
+  }
+}

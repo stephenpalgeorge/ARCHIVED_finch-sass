@@ -27,19 +27,19 @@
 }
 
 .font-size\:sub-heading {
-  font-size: 1.44rem;
+  font-size: 2.0736rem;
 }
 
 .font-size\:sub-heading\! {
-  font-size: 1.44rem !important;
+  font-size: 2.0736rem !important;
 }
 
 .font-size\:heading {
-  font-size: 1.728rem;
+  font-size: 2.48832rem;
 }
 
 .font-size\:heading\! {
-  font-size: 1.728rem !important;
+  font-size: 2.48832rem !important;
 }
 
 .text-body, p:not([class]) {
@@ -55,14 +55,14 @@
   font-family: "Poppins", sans-serif;
   font-size: 1.2rem;
   font-weight: 200;
-  line-height: 1.44;
+  line-height: 1.728;
   text-align: start;
   max-width: 62ch;
 }
 
 .text-subheading, h2, h3 {
   font-family: "Playfair Display", serif;
-  font-size: 1.44rem;
+  font-size: 2.0736rem;
   font-weight: 400;
   line-height: 1.2;
   text-align: start;
@@ -70,7 +70,7 @@
 
 .text-heading, h1 {
   font-family: "Playfair Display", serif;
-  font-size: 1.728rem;
+  font-size: 2.48832rem;
   font-weight: 900;
   line-height: 1.2;
   text-align: start;
@@ -87,38 +87,6 @@ h2, h3 {
 
 h3 {
   font-weight: 400;
-}
-
-.margin\:small {
-  margin: 0.6944444444rem;
-}
-
-.margin\:small\! {
-  margin: 0.6944444444rem !important;
-}
-
-.margin\:base {
-  margin: 1rem;
-}
-
-.margin\:base\! {
-  margin: 1rem !important;
-}
-
-.margin\:large {
-  margin: 1.728rem;
-}
-
-.margin\:large\! {
-  margin: 1.728rem !important;
-}
-
-.margin\:x-large {
-  margin: 2.985984rem;
-}
-
-.margin\:x-large\! {
-  margin: 2.985984rem !important;
 }
 
 .padding\:small {
@@ -318,11 +286,15 @@ h3 {
     padding: 2.985984rem !important;
   }
 }
+section div {
+  padding: 1rem;
+}
+
 .text {
   font-family: "Poppins", sans-serif;
   font-size: 1rem;
   font-weight: 400;
-  line-height: 1.44;
+  line-height: 1.728;
   text-align: start;
   text-decoration-line: overline;
   text-decoration-color: red;
@@ -342,5 +314,6 @@ h3 {
 }
 
 body {
-  padding: 2.985984rem;
+  margin: 0;
+  padding: 0;
 }

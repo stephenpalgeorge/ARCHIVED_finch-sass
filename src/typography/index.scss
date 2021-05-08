@@ -142,11 +142,11 @@ $typography-maps: (
   }
 }
 
-/// DEFINE MODULE-LEVEL MIXINS
+/// MODULE-LEVEL MIXINS
 /// ----------
 /// These mixins combine behaviour of several/many of the different properties that have been defined so far.
 
-/// TEXT STYLE
+/// TEXT FORMAT
 @mixin text-format(
   $alignment: start,
   $family: sans-serif,

@@ -28,6 +28,7 @@ $layout-utilities: (
   padding: true,
   position: false,
   z-index: false,
+  stack: false,
 );
 /// provide custom 'utilities' settings for this module.
 /// @example @use '<path-to-finch>/layout' with ($set-utilities: (padding-top: true));
@@ -91,6 +92,55 @@ $layout-maps: (
       @if $flag {
         @include m.gen-responsive($key, $property, map.get($layout-maps, $property));
       }
+    }
+  }
+}
+
+/// MODULE-LEVEL MIXINS
+/// ----------
+/// the module level mixins combine several different properties from within the layout module.
+
+/// BOX-RESET
+@mixin box-reset($content: true, $border: true) {
+  @include padding(none);
+  @include margin(none);
+  
+  @if $content {
+    width: initial;
+    height: initial;
+  }
+
+  @if $border {
+    border: none;
+  }
+}
+
+/// STACK [LAYOUT-PRIMITIVES]
+/// ----------
+@mixin stack($flow: large, $recursive: false) {
+  /// Recursive stack:
+  /// Top margin is applied to any element that follows any other element
+  /// regardless of nesting/depth.
+  @if $recursive {
+    * + * { margin-top: get-margin($flow); }
+  }
+
+  /// Non-recursive stack (this is the default):
+  /// Top margin is applied only to the immediate children of the 'stack'
+  /// element, not to their children as well.
+  @else {
+    > * + * { margin-top: get-margin($flow); }
+  }
+}
+/* stack utilities - generates classes like `.stack:large`, `.stack-recursive:base` etc */
+@if map.get($utilities, stack) {
+  @each $mar, $val in $margin-sizes {
+    .stack\:#{$mar} {
+      @include stack($flow: $mar);
+    }
+  
+    .stack-recursive\:#{$mar} {
+      @include stack($flow: $mar, $recursive: true);
     }
   }
 }

@@ -20,25 +20,17 @@
   $use-scale: minor-thirds,
 );
 
-@use '../../src/typography/' as typ with (
-  $font-sizes: (
-    heading: map.get(config.$size-scale, 700),
-    sub-heading: map.get(config.$size-scale, 600),
-  ),
-  $set-utilities: (
-    font-size: true,
-  ),
-);
+@use '../../src/typography/' as typ;
+@use '../../src/layout/' as lyt;
 
-@use '../../src/layout/' as lyt with (
-  $set-utilities: (
-    margin: true,
-  ),
-);
-
+section {
+  div {
+    @include lyt.padding(base);
+  }
+}
 // USE IMPORTED FINCH MIXINS/VARS
 .text {
-  @include typ.text-style($size: base);
+  @include typ.text-format($size: base);
   @include typ.overline($color: red, $thickness: thick);
 }
 
@@ -48,5 +40,6 @@
 }
 
 body {
-  @include lyt.padding(x-large);
+  margin: 0;
+  padding: 0;
 }
