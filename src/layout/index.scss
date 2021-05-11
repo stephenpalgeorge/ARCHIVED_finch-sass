@@ -115,6 +115,70 @@ $layout-maps: (
   }
 }
 
+/// BOX [LAYOUT-PRIMITIVES]
+/// ----------
+@mixin box($padding: base) {
+  padding: get-padding($padding);
+  // the outline code below is used to "draw" the box when a user has 'high-contrast' mode turned on:
+  outline: .125rem solid transparent;
+  outline-offset: -.125rem;
+
+  & * {
+    color: inherit;
+  }
+}
+
+/// CENTER [LAYOUT-PRIMITIVES]
+/// ----------
+@mixin center($max: null, $padding: base, $intrinsic: false) {
+  box-sizing: content-box;
+  margin-inline: auto;
+  padding-inline: get-padding($padding);
+  @supports not (margin-inline: 0) {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @supports not (padding-inline: 0) {
+    padding-left: $padding;
+    padding-right: $padding;
+  }
+
+  @if $max {
+    width: min(100%, $max);
+  }
+
+  /// instrinsic centering means a "center"'s children will also be centered
+  /// if their width is less than that of their parents.
+  @if $intrinsic {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/// CLUSTER [LAYOUT PRIMITIVES]
+/// ----------
+@mixin cluster(
+  $gap: map.get(config.$size-scale, 400),
+  $justify: flex-start,
+  $align: center
+) {
+  overflow: hidden;
+
+  & > * {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: $justify;
+    align-items: $align;
+    margin: ($gap / 2) * -1;
+
+    & > * {
+      margin: $gap / 2;
+    }
+  }
+}
+
 /// STACK [LAYOUT-PRIMITIVES]
 /// ----------
 @mixin stack($flow: large, $recursive: false) {
