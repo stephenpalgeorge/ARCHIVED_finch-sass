@@ -166,14 +166,14 @@ $layout-maps: (
 ) {
   overflow: hidden;
 
-  & > * {
+  > * {
     display: flex;
     flex-wrap: wrap;
     justify-content: $justify;
     align-items: $align;
     margin: ($gap / 2) * -1;
 
-    & > * {
+    > * {
       margin: $gap / 2;
     }
   }
@@ -206,5 +206,39 @@ $layout-maps: (
     .stack-recursive\:#{$mar} {
       @include stack($flow: $mar, $recursive: true);
     }
+  }
+}
+
+/// SIDEBAR [LAYOUT PRIMITIVES]
+/// ----------
+%main-content {
+  flex-basis: 0;
+  flex-grow: 999;
+  min-width: $break-at - $gap;
+}
+
+@mixin sidebar($gap: map.get(config.$size-scale, 400), $side-width: 20rem, $break-at: 50%, $side: left) {
+  > * {
+    display: flex;
+    flex-wrap: wrap;
+    margin: ($gap / 2) * -1;
+  }
+
+  > * > * {
+    margin: $gap / 2;
+    flex-basis: $side-width;
+    flex-grow: 1;
+  }
+
+  @if $side == left or $side == 'left' {
+    :last-child { @extend %main-content; }
+  }
+
+  @else if $side == right or $side == 'right' {
+    :first-child { @extend %main-content; }
+  }
+
+  @else {
+    @warn "side value '#{$side}' not recognised. Shoulde be 'left' or 'right'.";
   }
 }
