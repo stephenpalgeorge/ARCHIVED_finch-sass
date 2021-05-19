@@ -52,22 +52,16 @@ $positions: (
 /// ----------
 /// These mixins provide a shorthand for setting the position of an element.
 @mixin absolute($top: null, $right: null, $bottom: null, $left: null, $reset: false) {
-  @if $reset {
-    @include pos-reset;
-  }
+  @if $reset { @include pos-reset; }
   @include pos(absolute, $top: $top, $right: $right, $bottom: $bottom, $left: $left);
 }
 
 @mixin fixed($top: null, $right: null, $bottom: null, $left: null, $reset: false) {
-  @if $reset {
-    @include pos-reset;
-  }
+  @if $reset { @include pos-reset; }
   @include pos(fixed, $top: $top, $right: $right, $bottom: $bottom, $left: $left);
 }
 
 @mixin sticky($top: null, $right: null, $bottom: null, $left: null, $reset: false) {
-  @if $reset {
-    @include pos-reset;
-  }
+  @if $reset { @include pos-reset; }
   @include pos(sticky, $top: $top, $right: $right, $bottom: $bottom, $left: $left);
 }

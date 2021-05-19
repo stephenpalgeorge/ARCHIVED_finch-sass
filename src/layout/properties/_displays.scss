@@ -32,13 +32,15 @@ $displays: (
   }
 }
 
-@mixin flex-columns($column-min: 16rem, $reverse: false) {
+@mixin flex-blocks($block-min: 16rem, $justify: flex-start, $align: flex-start, $reverse: false) {
   display: flex;
+  justify-content: $justify;
+  align-items: $align;
   @if $reverse { flex-flow: row-reverse wrap; }
   @else { flex-flow: row wrap; }
 
   > * {
     flex: 1 1;
-    min-width: $column-min;
+    min-width: $block-min;
   }
 }
