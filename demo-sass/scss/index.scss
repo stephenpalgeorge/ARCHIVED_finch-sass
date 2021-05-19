@@ -17,29 +17,28 @@
 
 // USE FINCH MODULES INDIVIDUALLY
 @use '../../src/config' with (
-  $use-scale: minor-thirds,
+  $use-scale: major-thirds,
 );
 
 @use '../../src/typography/' as typ;
 @use '../../src/layout/' as lyt;
 
-section {
-  div {
-    @include lyt.padding(base);
-  }
-}
-// USE IMPORTED FINCH MIXINS/VARS
 .text {
   @include typ.text-format($size: base);
-  @include typ.overline($color: red, $thickness: thick);
 }
 
 .body {
-  @include lyt.fixed($top: 0, $left: 0);
   font-size: typ.get-font-size(base);
 }
 
 body {
   margin: 0;
   padding: 0;
+
+  section {
+    @include lyt.flex-blocks;
+    > * {
+      @include lyt.box($padding: x-large);
+    }
+  }
 }
