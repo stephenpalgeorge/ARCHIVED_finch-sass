@@ -157,28 +157,6 @@ $layout-maps: (
   }
 }
 
-/// CLUSTER [LAYOUT PRIMITIVES]
-/// ----------
-@mixin cluster(
-  $gap: map.get(config.$size-scale, 400),
-  $justify: flex-start,
-  $align: center
-) {
-  overflow: hidden;
-
-  > * {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: $justify;
-    align-items: $align;
-    margin: ($gap / 2) * -1;
-
-    > * {
-      margin: $gap / 2;
-    }
-  }
-}
-
 /// STACK [LAYOUT-PRIMITIVES]
 /// ----------
 @mixin stack($flow: large, $recursive: false) {
@@ -211,13 +189,14 @@ $layout-maps: (
 
 /// SIDEBAR [LAYOUT PRIMITIVES]
 /// ----------
-%main-content {
-  flex-basis: 0;
-  flex-grow: 999;
-  min-width: $break-at - $gap;
-}
 
 @mixin sidebar($gap: map.get(config.$size-scale, 400), $side-width: 20rem, $break-at: 50%, $side: left) {
+  %main-content {
+    flex-basis: 0;
+    flex-grow: 999;
+    min-width: $break-at - $gap;
+  }
+  
   > * {
     display: flex;
     flex-wrap: wrap;
@@ -242,3 +221,33 @@ $layout-maps: (
     @warn "side value '#{$side}' not recognised. Shoulde be 'left' or 'right'.";
   }
 }
+
+/*
+The code below has been removed for the time being. The decision has been taken that 
+layouts should not be included if they depend on a particular setup/structure in the
+markup.
+
+We may revisit this at a later date, or implement some kind of Finch UI library...
+
+/// CLUSTER [LAYOUT PRIMITIVES]
+/// ----------
+@mixin cluster(
+  $gap: map.get(config.$size-scale, 400),
+  $justify: flex-start,
+  $align: center
+) {
+  overflow: hidden;
+
+  > * {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: $justify;
+    align-items: $align;
+    margin: ($gap / 2) * -1;
+
+    > * {
+      margin: $gap / 2;
+    }
+  }
+}
+*/
