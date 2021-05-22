@@ -117,7 +117,8 @@ $layout-maps: (
 
 /// BOX [LAYOUT-PRIMITIVES]
 /// ----------
-@mixin box($padding: base) {
+@mixin box($padding: base, $reset: false) {
+  @if $reset { @include box-reset; }
   padding: get-padding($padding);
   // the outline code below is used to "draw" the box when a user has 'high-contrast' mode turned on:
   outline: .125rem solid transparent;
@@ -128,22 +129,13 @@ $layout-maps: (
   }
 }
 
-/// CENTER [LAYOUT-PRIMITIVES]
+/// PILLAR [LAYOUT-PRIMITIVES]
 /// ----------
-@mixin center($max: null, $padding: base, $intrinsic: false) {
+@mixin pillar($max: null, $padding: base, $intrinsic: false) {
   box-sizing: content-box;
-  margin-inline: auto;
-  padding-inline: get-padding($padding);
-  @supports not (margin-inline: 0) {
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  @supports not (padding-inline: 0) {
-    padding-left: $padding;
-    padding-right: $padding;
-  }
-
+  @include margin($key: auto, $axis: x);
+  @include padding($key: $padding, $axis: x);
+  
   @if $max {
     width: min(100%, $max);
   }
@@ -210,11 +202,11 @@ $layout-maps: (
   }
 
   @if $side == left or $side == 'left' {
-    :last-child { @extend %main-content; }
+    &:last-child { @extend %main-content; }
   }
 
   @else if $side == right or $side == 'right' {
-    :first-child { @extend %main-content; }
+    &:first-child { @extend %main-content; }
   }
 
   @else {
