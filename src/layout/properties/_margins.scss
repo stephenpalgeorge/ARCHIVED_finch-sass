@@ -29,13 +29,13 @@ $margin-sizes: map.merge($finch-margins, $set-margins);
   @return null;
 }
 
-@mixin margin($key, $axis: null, $mode: horizontal-tb) {
+@mixin margin($key, $axis: null) {
   // X-AXIS
   // normally, the x-axis will correspond to margin-inline,
   // however for writing modes that are vertical, the x-axis
   // (left and right) will correspond to margin-block.
   @if $axis == x or $axis == 'x' {
-    @if $mode == vertical-rl or $mode == vertical-lr {
+    @if config.$writing-mode == vertical-rl or config.$writing-mode == vertical-lr {
       margin-block: get-margin($key);
     }
     @else {
@@ -54,7 +54,7 @@ $margin-sizes: map.merge($finch-margins, $set-margins);
   // however for writing modes that are vertical, the y-axis
   // (top and bottom) will correspond to margin-inline.
   @else if $axis == y or $axis == 'y' {
-    @if $mode == vertical-rl or $mode == vertical-lr {
+    @if config.$writing-mode == vertical-rl or config.$writing-mode == vertical-lr {
       margin-inline: get-margin($key);
     }
     @else {
@@ -72,4 +72,37 @@ $margin-sizes: map.merge($finch-margins, $set-margins);
   @else {
     margin: get-margin($key);
   }
+}
+
+@mixin margin-logical($key, $dir) {
+  @if list.index((inline, block), $dir) {
+    margin-#{$dir}: get-margin($key);
+
+    @supports not (margin-inline: 0) {
+      margin-#{$dir}-start: get-margin($key);
+      margin-#{$dir}-end: get-margin($key);
+    }
+
+    @supports not (margin-inline-start: 0) {
+      @if $dir == inline {
+        margin-left: get-margin($key);
+        margin-right: get-margin($key);
+      }
+      @else if $dir == block {
+        margin-top: get-margin($key);
+        margin-bottom: get-margin($key);
+      }
+    }
+  }
+  @else {
+    @warn 'Could not understand direction "#{$dir}"';
+  }
+}
+
+@mixin margin-inline($key) {
+  @include margin-logical($key: $key, $dir: inline);
+}
+
+@mixin margin-block($key) {
+  @include margin-logical($key: $key, $dir: block);
 }

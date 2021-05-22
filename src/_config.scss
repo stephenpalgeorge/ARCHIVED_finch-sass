@@ -103,6 +103,7 @@ $atomic-scale: map.merge($finch-atomic-scale, $set-size-scale);
 
 /// GLOBAL VALUES
 $global-values: (initial, inherit, unset);
+$writing-mode: horizontal-tb;
 
 /// BREAKPOINTS
 $breakpoint-x-small: 0 !default;
