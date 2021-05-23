@@ -2,7 +2,6 @@
 @use 'sass:list';
 @use '../../config';
 
-$font-family-utils: false !default;
 $prefer-web-safe: false !default;
 
 @if not $prefer-web-safe {
@@ -61,7 +60,7 @@ $web-safe: (
   'Brush Script MT': $font-family-brush-script-mt,
 );
 
-@function font-family($key) {
+@function get-font-family($key) {
   $generic-names: (fantasy, system-ui, ui-serif, ui-sans-serif, ui-monospace, ui-rounded, math, emoji, fangsong);
   @if list.index(config.$global-values, $key) or list.index($web-safe, $key) or list.index($generic-names, $key) {
     @return $key;
@@ -74,12 +73,4 @@ $web-safe: (
 
   @warn 'No font-family found for "#{$key}"';
   @return null;
-}
-
-@if $font-family-utils {
-  @each $key, $value in $families {
-    .font--#{$key} {
-      font-family: $value;
-    }
-  }
 }

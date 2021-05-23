@@ -1,0 +1,108 @@
+@use 'sass:map';
+@use 'sass:list';
+@use '../../config';
+
+$finch-margins: (
+  none: 0,
+  small: map.get(config.$size-scale, 200),
+  base: map.get(config.$size-scale, 400),
+  large: map.get(config.$size-scale, 700),
+  x-large: map.get(config.$size-scale, 1000),
+);
+
+$set-margins: () !default;
+$margin-sizes: map.merge($finch-margins, $set-margins);
+
+@function get-margin($key) {
+  // return the given value immediately if it is a reserved keyword for this property:
+  $spec-values: (auto);
+  @if list.index(config.$global-values, $key) or list.index($spec-values, $key) {
+    @return $key;
+  }
+
+  $value: map.get($margin-sizes, $key);
+  @if $value {
+    @return $value;
+  }
+
+  @warn 'No margin found for "#{$key}"';
+  @return null;
+}
+
+@mixin margin($key, $axis: null) {
+  // X-AXIS
+  // normally, the x-axis will correspond to margin-inline,
+  // however for writing modes that are vertical, the x-axis
+  // (left and right) will correspond to margin-block.
+  @if $axis == x or $axis == 'x' {
+    @if config.$writing-mode == vertical-rl or config.$writing-mode == vertical-lr {
+      margin-block: get-margin($key);
+    }
+    @else {
+      margin-inline: get-margin($key);
+    }
+    // browsers that don't support logical properties get a
+    // fallback of margin-left, margin-right:
+    @supports not (margin-inline: 0) {
+      margin-left: get-margin($key);
+      margin-right: get-margin($key);
+    }
+  }
+
+  // Y-AXIS
+  // normally, the y-axis will correspond to margin-block,
+  // however for writing modes that are vertical, the y-axis
+  // (top and bottom) will correspond to margin-inline.
+  @else if $axis == y or $axis == 'y' {
+    @if config.$writing-mode == vertical-rl or config.$writing-mode == vertical-lr {
+      margin-inline: get-margin($key);
+    }
+    @else {
+      margin-block: get-margin($key);
+    }
+    // browsers that don't support logical properties get a
+    // fallmack of margin-top, margin-bottom:
+    @supports not (margin-block: 0) {
+      margin-top: get-margin($key);
+      margin-bottom: get-margin($key);
+    }
+  }
+
+  // if no `$axis` is provided, the margin is applied to all sides:
+  @else {
+    margin: get-margin($key);
+  }
+}
+
+@mixin margin-logical($key, $dir) {
+  @if list.index((inline, block), $dir) {
+    margin-#{$dir}: get-margin($key);
+
+    @supports not (margin-inline: 0) {
+      margin-#{$dir}-start: get-margin($key);
+      margin-#{$dir}-end: get-margin($key);
+    }
+
+    @supports not (margin-inline-start: 0) {
+      @if $dir == inline {
+        margin-left: get-margin($key);
+        margin-right: get-margin($key);
+      }
+      @else if $dir == block {
+        margin-top: get-margin($key);
+        margin-bottom: get-margin($key);
+      }
+    }
+  }
+  @else {
+    @warn 'Could not understand direction "#{$dir}"';
+  }
+}
+
+@mixin margin-inline($key) {
+  @include margin-logical($key: $key, $dir: inline);
+}
+
+@mixin margin-block($key) {
+  @include margin-logical($key: $key, $dir: block);
+}

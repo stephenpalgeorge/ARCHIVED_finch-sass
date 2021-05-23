@@ -2,8 +2,6 @@
 @use 'sass:list';
 @use '../../config';
 
-$text-decoration-utils: false !default;
-
 $text-decoration-lines: (
   none: none,
   underline: underline,
@@ -36,7 +34,9 @@ $thicknesses: map.merge($finch-text-decoration-thicknesses, $set-decoration-thic
   }
   text-decoration-color: $color;
   text-decoration-style: $style;
-  text-decoration-thickness: $thickness;
+  @supports (text-decoration-thickness: 1px) {
+    text-decoration-thickness: map.get($thicknesses, $thickness);
+  }
 }
 
 /// Text Decoration Utilities

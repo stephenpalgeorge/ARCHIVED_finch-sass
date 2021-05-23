@@ -1,8 +1,8 @@
-- think about what to do with font-variant.
-<!-- - text-align needs to be included in typography partials. -->
+- typography module:
+  - add 'text-shadow' property.
 
-<!-- - font-kerning should be used in text-styles, might be ok to leave as the default actually. -->
-
+- layout module properties:
+  - display: might be worth breaking this up into 3 or 4 different files as it will include grid and flexbox.
 
 ## possible text style considerations:
 ```scss

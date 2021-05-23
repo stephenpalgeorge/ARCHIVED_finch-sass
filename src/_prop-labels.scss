@@ -1,0 +1,25 @@
+@use 'sass:map';
+
+$finch-prop-labels: (
+  display: 'display',
+  font-family: 'font',
+  font-size: 'font-size',
+  font-style: 'font-style',
+  font-variant: 'font-variant',
+  font-weight: 'font-weight',
+  letter-spacing: 'letter-spacing',
+  line-height: 'line-height',
+  margin: 'margin',
+  padding: 'padding',
+  position: 'position',
+  text-align: 'text-align',
+  text-decoration: 'text-decoration',
+  text-indent: 'text-indent',
+  text-transform: 'text-transform',
+  word-spacing: 'word-spacing',
+  z-index: 'z-index',
+);
+
+$set-prop-labels: () !default;
+
+$prop-labels: map.merge($finch-prop-labels, $set-prop-labels);

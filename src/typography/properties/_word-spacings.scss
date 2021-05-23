@@ -2,22 +2,16 @@
 @use 'sass:list';
 @use '../../config';
 
-$word-spacing-utils: false !default;
-
-$word-spacing-tight: map.get(config.$atomic-scale, 300);
-$word-spacing-base: map.get(config.$atomic-scale, 400);
-$word-spacing-wide: map.get(config.$atomic-scale, 700);
-
 $finch-word-spacings: (
-  'tight': $word-spacing-tight,
-  'base': $word-spacing-base,
-  'wide': $word-spacing-wide,
+  tight: map.get(config.$atomic-scale, 300),
+  base: map.get(config.$atomic-scale, 400),
+  wide: map.get(config.$atomic-scale, 700),
 );
 
 $set-word-spacings: () !default;
 $w-spacings: map.merge($finch-word-spacings, $set-word-spacings);
 
-@function word-spacing($key) {
+@function get-word-spacing($key) {
   // return the given value immediately if it is a reserved keyword for this porperty:
   $spec-values: (normal);
   @if list.index(config.$global-values, $key) or list.index($spec-values, $key) {
@@ -31,12 +25,4 @@ $w-spacings: map.merge($finch-word-spacings, $set-word-spacings);
 
   @warn 'No word-spacing found for "#{$key}"';
   @return null;
-}
-
-@if $word-spacing-utils {
-  @each $key, $value in $w-spacings {
-    .word-spacing--#{$key} {
-      word-spacing: $value;
-    }
-  }
 }
