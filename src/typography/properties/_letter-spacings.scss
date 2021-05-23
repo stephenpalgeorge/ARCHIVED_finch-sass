@@ -2,22 +2,16 @@
 @use 'sass:list';
 @use '../../config';
 
-$letter-spacing-utils: false !default;
-
-$letter-spacing-tight: map.get(config.$atomic-scale, 300);
-$letter-spacing-base: map.get(config.$atomic-scale, 400);
-$letter-spacing-wide: map.get(config.$atomic-scale, 600);
-
 $finch-letter-spacings: (
-  tight: $letter-spacing-tight,
-  base: $letter-spacing-base,
-  wide: $letter-spacing-wide,
+  tight: map.get(config.$atomic-scale, 300),
+  base: map.get(config.$atomic-scale, 400),
+  wide: map.get(config.$atomic-scale, 600),
 );
 
 $set-letter-spacings: () !default;
 $l-spacings: map.merge($finch-letter-spacings, $set-letter-spacings);
 
-@function letter-spacing($key) {
+@function get-letter-spacing($key) {
   // return the given value immediately if it is a reserved keyword for this property:
   $spec-values: (normal);
   @if list.index(config.$global-values, $key) or list.index($spec-values, $key) {
@@ -31,12 +25,4 @@ $l-spacings: map.merge($finch-letter-spacings, $set-letter-spacings);
 
   @warn 'No spacing found for "#{$key}"';
   @return null;
-}
-
-@if $letter-spacing-utils {
-  @each $key, $value in $l-spacings {
-    .letter-spacing--#{$key} {
-      letter-spacing: $value;
-    }
-  }
 }

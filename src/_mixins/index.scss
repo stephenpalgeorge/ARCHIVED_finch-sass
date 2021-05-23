@@ -1,14 +1,29 @@
 @use 'sass:map';
+@use '../config';
+@use '../prop-labels' as labels;
 
-$responsive-map: () !default;
-$utilities-map: () !default;
+@mixin gen-utils($prop, $propMap) {
+  $label: map.get(labels.$prop-labels, $prop);
+  @each $key, $value in $propMap {
+    .#{$label}\:#{$key} {
+      #{$prop}: $value;
+    }
 
-@mixin gen-responsive($breakpoint, $prop, $propLabel, $propMap) {
-  @if map.get($responsive-map, $prop) and map.get($utilities-map, $prop) {
-    @each $key, $value in $propMap {
-      .#{$breakpoint}\:#{$propLabel}--#{$key} {
-        #{$prop}: $value;
-      }
+    .#{$label}\:#{$key}\! {
+      #{$prop}: $value !important;
+    }
+  }
+}
+
+@mixin gen-responsive($breakpoint, $prop, $propMap) {
+  $label: map.get(labels.$prop-labels, $prop);
+  @each $key, $value in $propMap {
+    .#{$label}\:#{$key}\@#{$breakpoint} {
+      #{$prop}: $value;
+    }
+
+    .#{$label}\:#{$key}\@#{$breakpoint}\! {
+      #{$prop}: $value !important;
     }
   }
 }

@@ -1,1 +1,245 @@
-@forward './breakpoints';
+@use 'sass:map';
+@use '../config';
+
+/// MODULE SETUP
+/// ----------
+/// @author stephen pal-george
+/// This map controls whether the styles are generated specifically for each breakpoint.
+/// If true, then placeholders and classes such as `(\.|%)sm\:spacer--large` will be created.
+$layout-responsive: (
+  display: false,
+  margin: false,
+  padding: true,
+  position: false,
+  z-index: false,
+);
+/// provide custom 'responsive' settings for this module.
+/// @example @use '<path-to-finch>/layout' with ($set-responsive: (margin-left: true));
+$set-responsive: () !default;
+$responsive: map.merge($layout-responsive, $set-responsive);
+
+/// @author stephen pal-george
+/// This map controls whether or not utility classes are generated. By default,
+/// Finch will not create any class names. Switching any of these values to `true`
+/// will create the classes for that property.
+$layout-utilities: (
+  display: false,
+  margin: false,
+  padding: true,
+  position: false,
+  z-index: false,
+  stack: false,
+);
+/// provide custom 'utilities' settings for this module.
+/// @example @use '<path-to-finch>/layout' with ($set-utilities: (padding-top: true));
+$set-utilities: () !default;
+$utilities: map.merge($layout-utilities, $set-utilities);
+
+/// MODULE CONFIG
+/// ----------
+/// These are the variables that the module can be `@used` with, to customise the compiled CSS output.
+/// @example @use '<path-to-finch>/layout' with ($spacers: (large: 5rem));
+/// @example @use '<path-to-finch>/layout' with ($offset: (large: 4rem));
+$margins: () !default;
+$paddings: () !default;
+$z-indices: () !default;
+
+/// FORWARD THE PROPERTIES
+/// We pass along the property files with any custom configuration as required.
+@forward './properties/displays';
+@forward './properties/margins' with ($set-margins: $margins);
+@forward './properties/paddings' with ($set-paddings: $paddings);
+@forward './properties/positions';
+@forward './properties/z-indices' with ($set-z-indices: $z-indices);
+
+/// LOAD THE PROPERTIES
+/// ----------
+/// We use the property files within the module itself, to generate responsive classes,
+/// and as part of the composition of some top-level mixins, we therefore load them all in here:
+@use '../_mixins' as m;
+@use 'properties/displays' as *;
+@use 'properties/margins' as *;
+@use 'properties/paddings' as *;
+@use 'properties/positions' as *;
+@use 'properties/z-indices' as *;
+
+$layout-maps: (
+  display: $displays,
+  margin: $margin-sizes,
+  padding: $padding-sizes,
+  position: $positions,
+  z-index: $indices,
+);
+
+/// GENERATE UTILITY CLASS NAMES
+/// the following code generates classes such as `.pad--large` or `.pos--absolute`.
+/// the classes will only be generated if the corresponding property is set to `true` in
+/// the $layout-utilities map.
+@each $property, $flag in $utilities {
+  @if $flag {
+    @include m.gen-utils($property, map.get($layout-maps, $property));
+  }
+}
+
+/// GENERATE RESPONSIVE CLASS NAMES
+/// ----------
+/// the following code generates classes such as `sm:size--lead`, or `xl:weight--heavy`.
+/// the classes will only be generated if the corresponding property is set to 'true' in
+/// the $responsive map.
+@each $key, $value in config.$breakpoints-map {
+  @include config.break($key) {
+    @each $property, $flag in $responsive {
+      @if $flag {
+        @include m.gen-responsive($key, $property, map.get($layout-maps, $property));
+      }
+    }
+  }
+}
+
+/// MODULE-LEVEL MIXINS
+/// ----------
+/// the module level mixins combine several different properties from within the layout module.
+
+/// BOX-RESET
+@mixin box-reset($content: true, $border: true) {
+  @include padding(none);
+  @include margin(none);
+  
+  @if $content {
+    width: initial;
+    height: initial;
+  }
+
+  @if $border {
+    border: none;
+  }
+}
+
+/// BOX [LAYOUT-PRIMITIVES]
+/// ----------
+@mixin box($padding: base, $reset: false) {
+  @if $reset { @include box-reset; }
+  padding: get-padding($padding);
+  // the outline code below is used to "draw" the box when a user has 'high-contrast' mode turned on:
+  outline: .125rem solid transparent;
+  outline-offset: -.125rem;
+
+  & * {
+    color: inherit;
+  }
+}
+
+/// PILLAR [LAYOUT-PRIMITIVES]
+/// ----------
+@mixin pillar($max: null, $padding: base, $intrinsic: false) {
+  box-sizing: content-box;
+  @include margin($key: auto, $axis: x);
+  @include padding($key: $padding, $axis: x);
+  
+  @if $max {
+    width: min(100%, $max);
+  }
+
+  /// instrinsic centering means a "center"'s children will also be centered
+  /// if their width is less than that of their parents.
+  @if $intrinsic {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/// STACK [LAYOUT-PRIMITIVES]
+/// ----------
+@mixin stack($flow: large, $recursive: false) {
+  /// Recursive stack:
+  /// Top margin is applied to any element that follows any other element
+  /// regardless of nesting/depth.
+  @if $recursive {
+    * + * { margin-top: get-margin($flow); }
+  }
+
+  /// Non-recursive stack (this is the default):
+  /// Top margin is applied only to the immediate children of the 'stack'
+  /// element, not to their children as well.
+  @else {
+    > * + * { margin-top: get-margin($flow); }
+  }
+}
+/* stack utilities - generates classes like `.stack:large`, `.stack-recursive:base` etc */
+@if map.get($utilities, stack) {
+  @each $mar, $val in $margin-sizes {
+    .stack\:#{$mar} {
+      @include stack($flow: $mar);
+    }
+  
+    .stack-recursive\:#{$mar} {
+      @include stack($flow: $mar, $recursive: true);
+    }
+  }
+}
+
+/// SIDEBAR [LAYOUT PRIMITIVES]
+/// ----------
+
+@mixin sidebar($gap: map.get(config.$size-scale, 400), $side-width: 20rem, $break-at: 50%, $side: left) {
+  %main-content {
+    flex-basis: 0;
+    flex-grow: 999;
+    min-width: $break-at - $gap;
+  }
+  
+  > * {
+    display: flex;
+    flex-wrap: wrap;
+    margin: ($gap / 2) * -1;
+  }
+
+  > * > * {
+    margin: $gap / 2;
+    flex-basis: $side-width;
+    flex-grow: 1;
+  }
+
+  @if $side == left or $side == 'left' {
+    &:last-child { @extend %main-content; }
+  }
+
+  @else if $side == right or $side == 'right' {
+    &:first-child { @extend %main-content; }
+  }
+
+  @else {
+    @warn "side value '#{$side}' not recognised. Shoulde be 'left' or 'right'.";
+  }
+}
+
+/*
+The code below has been removed for the time being. The decision has been taken that 
+layouts should not be included if they depend on a particular setup/structure in the
+markup.
+
+We may revisit this at a later date, or implement some kind of Finch UI library...
+
+/// CLUSTER [LAYOUT PRIMITIVES]
+/// ----------
+@mixin cluster(
+  $gap: map.get(config.$size-scale, 400),
+  $justify: flex-start,
+  $align: center
+) {
+  overflow: hidden;
+
+  > * {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: $justify;
+    align-items: $align;
+    margin: ($gap / 2) * -1;
+
+    > * {
+      margin: $gap / 2;
+    }
+  }
+}
+*/

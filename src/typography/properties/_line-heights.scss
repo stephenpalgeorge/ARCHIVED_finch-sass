@@ -2,24 +2,18 @@
 @use 'sass:list';
 @use '../../config';
 
-$line-height-utils: false !default;
-
-$line-height-x-tight: 1;
-$line-height-tight: 1.2;
-$line-height-base: 1.5;
-$line-height-tall: 1.75;
-
 $finch-line-heights: (
-  x-tight: $line-height-x-tight,
-  tight: $line-height-tight,
-  base: $line-height-base,
-  tall: $line-height-tall,
+  x-tight: map.get(config.$interval-scale, 400),
+  tight: map.get(config.$interval-scale, 500),
+  base: map.get(config.$interval-scale, 600),
+  tall: map.get(config.$interval-scale, 700),
+  x-tall: map.get(config.$interval-scale, 800),
 );
 
 $set-line-heights: () !default;
 $heights: map.merge($finch-line-heights, $set-line-heights);
 
-@function line-height($key) {
+@function get-line-height($key) {
   // return the given value immediately if it is a reserved keyword for this property:
   $spec-values: (normal);
   @if list.index(config.$global-values, $key) or list.index($spec-values, $key) {
@@ -33,12 +27,4 @@ $heights: map.merge($finch-line-heights, $set-line-heights);
 
   @warn 'no line-height found for "#{$key}"';
   @return null;
-}
-
-@if $line-height-utils {
-  @each $key, $value in $heights {
-    .line-height--#{$key} {
-      line-height: $value;
-    }
-  }
 }

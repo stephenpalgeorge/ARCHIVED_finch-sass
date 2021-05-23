@@ -1,0 +1,3 @@
+# Layout module
+
+The *Finch Layout module* handles everything to do with how things are positioned in the document. The layout module alone should give you all the tools you need to quickly create any sort of layout that CSS can generate, be it grid, flexible box, or positioned elements. The defaults should give a pleasing, well-spaced layout, but the module is also fully configurable to use your design system and variables.

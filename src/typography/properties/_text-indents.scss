@@ -2,8 +2,6 @@
 @use 'sass:list';
 @use '../../config';
 
-$text-indent-utils: false !default;
-
 $text-indent-none: 0;
 $text-indent-tight: map.get(config.$size-scale, 200);
 $text-indent-base: map.get(config.$size-scale, 400);
@@ -18,7 +16,7 @@ $finch-text-indents: (
 $set-text-indents: () !default;
 $indents: map.merge($finch-text-indents, $set-text-indents);
 
-@function indent($key) {
+@function get-text-indent($key) {
   // return the given value immediately if it is a global property value:
   @if list.index(config.$global-values, $key) {
     @return $key;
@@ -31,12 +29,4 @@ $indents: map.merge($finch-text-indents, $set-text-indents);
 
   @warn 'No indent found for "#{$key}"';
   @return null;
-}
-
-@if $text-indent-utils {
-  @each $key, $value in $indents {
-    .indent--#{$key} {
-      text-indent: $value;
-    }
-  }
 }

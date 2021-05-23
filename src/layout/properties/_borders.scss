@@ -1,0 +1,154 @@
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:meta';
+@use '../../config';
+
+/// BORDER WIDTH
+/// ----------
+$finch-border-widths: (
+  thin: map.get(config.$atomic-scale, 500), // default 1px
+  base: map.get(config.$atomic-scale, 600), // default .125rem / 2px
+  medium: map.get(config.$atomic-scale, 600), // default .125rem / 2px
+  thick: map.get(config.$atomic-scale, 700), // default .25rem / 4px
+  heavy: map.get(config.$atomic-scale, 800), // default .4rem / 6.4px
+);
+
+@function get-width($key) {
+  /// if the given key is one of the global css values, return it immediately:
+  @if list.index(config.$global-values, $key) {
+    @return $key;
+  }
+
+  $value: map.get($finch-border-widths, $key);
+  @if $value {
+    @return $value;
+  }
+
+  @warn 'no border width found for "#{$key}"';
+  @return null;
+}
+
+/// BORDER RADIUS
+/// ----------
+$finch-border-radii: (
+  none: 0,
+  subtle: .125rem,
+  base: .5rem,
+  round: 1.5rem,
+);
+
+@function get-radius($keey) {
+  @if list.index(config.$global-values, $key) {
+    @return $key;
+  }
+
+  $value: map.get($finch-border-radii, $key);
+  @if $value {
+    @return $value;
+  }
+
+  @warn 'No radius found for "#{$key}"';
+  @return null;
+}
+
+@mixin border-radius($rad: base, $corner: null) {
+  @if list.index((top-right, bottom-right, bottom-left, bottom-right), $corner) {
+    border-#{$corner}-radius: get-radius($rad);
+  }
+
+  @else {
+    border-radius: get-radius($rad);
+  }
+}
+
+/// UTILITY MIXINS
+/// ----------
+
+/// BORDER
+/// @author stephen pal-george
+/// Sets the border values, including radius.
+@mixin border($width: base, $style: solid, $color: #000, $radius: null, $sides: null) {
+  $sides-list: (top, right, bottom, left, inline-end, inline-start, block-end, block-start);
+  // if $sides is a list, e.g. (top, right), iterate through it and apply the variables to each.
+  @if meta.type-of($sides) == list {
+    @each $side in $sides {
+      @if list.index($sides-list, $side) {
+        border-#{$side}-width: get-width($width);
+        border-#{$side}-style: $style;
+        border-#{$side}-color: $color;
+      }
+      // during the iteration, if one of the list items doesn't match the sides-list, show a warning:
+      @else {
+        @warn 'No side defined for "#{$side}"';
+      }
+    }
+  }
+  
+  // this code runs if $sides is NOT a list.
+  @else {
+    @if list.index($sides-list, $side) {
+      border-#{$side}-width: get-width($width);
+      border-#{$side}-style: $style;
+      border-#{$side}-color: $color;
+    }
+    // if the value passed isn't present is the sides-list, simply apply the variables to all sides.
+    @else {
+      border-width: get-width($width);
+      border-style: $style;
+      border-color: $color;
+    }
+  }
+  // border radius is applied to all corners or none. If different radii are required,
+  // the border-radius mixin should be used after this.
+  @if $radius {
+    border-radius: get-radius($radius);
+  }
+}
+
+/// BORDER LOGICAL
+/// Sets border value (excluding radius) using the 
+@mixin border-logical($width: base, $style: solid, $color: #000, $dir: inline) {
+  @if list.index((inline, block), $dir) {
+    // this is the ideal situation:
+    border-#{$dir}-width: get-width($width); 
+    border-#{$dir}-style: $style;
+    border-#{$dir}-color: $color;
+    // some browsers, like Edge, don't support the `border-inline/border-block` shorthand,
+    // but do support the individual `start/end` declarations:
+    @supports not (border-inline: 0) {
+      border-#{$dir}-start-width: get-width($width); 
+      border-#{$dir}-start-style: $style;
+      border-#{$dir}-start-color: $color;
+      border-#{$dir}-end-width: get-width($width); 
+      border-#{$dir}-end-style: $style;
+      border-#{$dir}-end-color: $color;
+    }
+    // browsers that don't support the `inline/block` syntax at all, we assume
+    // a horizontal writing mode and set top/bottom or left/right accordingly.
+    @supports not (border-inline-start: 0) {
+      @if $dir == inline {
+        @include border($width: $width, $style: $style, $color: $color, $side: bottom);
+        @include border($width: $width, $style: $style, $color: $color, $side: top);
+      }
+      @else if $dir == block {
+        @include border($width: $width, $style: $style, $color: $color, $side: right);
+        @include border($width: $width, $style: $style, $color: $color, $side: left);
+      }
+    }
+  }
+  @else {
+    @warn 'could not understand the direction #{$dir}';
+  }
+}
+
+/// BORDER-INLINE
+/// A shorthand for `border-logical` where $dir = inline
+@mixin border-inline($width: base, $style: solid, $color: #000) {
+  @include border-logical($width: $width, $style: $style, $color: $color, $dir: inline);
+}
+
+/// BORDER-BLOCK
+/// A shorthand for `border-logical` where $dir = block
+@mixin border-block($width: base, $style: solid, $color: #000) {
+  @include border-logical($width: $width, $style: $style, $color: $color, $dir: block);
+}

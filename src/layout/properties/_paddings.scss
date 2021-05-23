@@ -1,0 +1,107 @@
+@use 'sass:map';
+@use 'sass:list';
+@use '../../config';
+
+$finch-paddings: (
+  none: 0,
+  small: map.get(config.$size-scale, 200),
+  base: map.get(config.$size-scale, 400),
+  large: map.get(config.$size-scale, 700),
+  x-large: map.get(config.$size-scale, 1000),
+);
+
+$set-paddings: () !default;
+$padding-sizes: map.merge($finch-paddings, $set-paddings);
+
+@function get-padding($key) {
+  // immediately return the given value if it is a 'global' value:
+  @if list.index(config.$global-values, $key) {
+    @return $key;
+  }
+
+  $value: map.get($padding-sizes, $key);
+  @if $value {
+    @return $value;
+  }
+
+  @warn 'No padding found for "#{$key}"';
+  @return null;
+}
+
+@mixin padding($key, $axis: null) {
+  // X-AXIS
+  // normally, the x-axis will correspond to padding-inline,
+  // however for writing modes that are vertical, the x-axis
+  // (left and right) will correspond to padding-block.
+  @if $axis == x or $axis == 'x' {
+    @if config.$writing-mode == vertical-rl or config.$writing-mode == vertical-lr {
+      padding-block: get-padding($key);
+    }
+    @else {
+      padding-inline: get-padding($key);
+    }
+    // browsers that don't support logical properties get a
+    // fallback of padding-left, padding-right:
+    @supports not (padding-inline: 0) {
+      padding-left: get-padding($key);
+      padding-right: get-padding($key);
+    }
+  }
+
+  // Y-AXIS
+  // normally, the y-axis will correspond to padding-block,
+  // however for writing modes that are vertical, the y-axis
+  // (top and bottom) will correspond to padding-inline.
+  @else if $axis == y or $axis == 'y' {
+    @if config.$writing-mode == vertical-rl or config.$writing-mode == vertical-lr {
+      padding-inline: get-padding($key);
+    }
+    @else {
+      padding-block: get-padding($key);
+    }
+    // browsers that don't support logical properties get a
+    // fallback of padding-top, padding-bottom:
+    @supports not (padding-block: 0) {
+      padding-top: get-padding($key);
+      padding-bottom: get-padding($key);
+    }
+  }
+
+  // If no `$axis` is provided, the padding is applied to all sides:
+  @else {
+    padding: get-padding($key);
+  }
+}
+
+@mixin padding-logical($key, $dir: inline) {
+  @if list.index((inline, block), $dir) {
+    padding-#{$dir}: get-padding($key);
+
+    @supports not (padding-inline: 0) {
+      padding-#{$dir}-start: get-padding($key);
+      padding-#{$dir}-end: get-padding($key);
+    }
+
+    @supports not (padding-inline-start: 0) {
+      @if $dir == inline {
+        padding-left: get-padding($key);
+        padding-right: get-padding($key);
+      }
+      @else if $dir == block {
+        padding-top: get-padding($key);
+        padding-bottom: get-padding($key);
+      }
+    }
+  }
+  @else {
+    @warn 'Could not understand direction "#{$dir}"';
+  }
+}
+
+@mixin padding-inline($key) {
+  @include padding-logical($key: $key, $dir: inline);
+}
+
+@mixin padding-block($key) {
+  @include padding-logical($key: $key, $dir: block);
+}
