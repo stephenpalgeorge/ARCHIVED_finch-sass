@@ -1,7 +1,27 @@
+// ------------------------
+// BOX MODEL
+// ------------------------
+// 1. set *everything* to be `border-box`.
+// 2. remove default margin and padding.
 *,
 *::after,
 *::before {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+  box-sizing: border-box; /* 1 */
+  margin: 0; /* 2 */
+  padding: 0; /* 2 */
+}
+
+// ------------------------
+// TYPOGRAPHY
+// ------------------------
+// restore the font-size for html elements that the browser automatically resizes.
+// 1. restore font for chrome, firefox, safari.
+// 2. restore font for Opera (also works for IE, but we're not interested in that).
+//
+// More info is at https://code.iamkate.com/html-and-css/fixing-browsers-broken-monospace-font-handling/
+// The majority of the content of this article has been copied into `/_reference/monospace-font-handling.md`
+// for the sake of posterity.
+pre, code, kbd, samp {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
 }
