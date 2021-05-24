@@ -16,12 +16,13 @@ $finch-text-indents: (
 $set-text-indents: () !default;
 $indents: map.merge($finch-text-indents, $set-text-indents);
 
+// Getter function
 @function get-text-indent($key) {
   // return the given value immediately if it is a global property value:
   @if list.index(config.$global-values, $key) {
     @return $key;
   }
-
+  // try and find the value in the map and either return it, or handle the error case below.
   $value: map.get($indents, $key);
   @if $value {
     @return $value;

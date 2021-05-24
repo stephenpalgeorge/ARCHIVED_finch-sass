@@ -12,6 +12,7 @@ $text-decoration-lines: (
 
 $text-decoration-styles: (solid, double, dotted, dashed, wavy);
 
+// only `text-decoration-thickness` is configurable, and uses the modular scale:
 $text-decoration-thickness-thin: map.get(config.$atomic-scale, 500);
 $text-decoration-thickness-base: map.get(config.$atomic-scale, 600);
 $text-decoration-thickness-thick: map.get(config.$atomic-scale, 700);
@@ -24,7 +25,15 @@ $finch-text-decoration-thicknesses: (
 $set-decoration-thicknesses: () !default;
 $thicknesses: map.merge($finch-text-decoration-thicknesses, $set-decoration-thicknesses);
 
-// define mixins for including text-decoration separately.
+/// define mixins for including text-decoration separately.
+/// ----------
+/// Decorate
+/// ----------
+/// @author stephen pal-george
+/// @param $line a value to be set against the text-decoration-line property.
+/// @param $color a value to be set against the text-decoration-color property.
+/// @param $style a value to be set against the text-decoration-style property.
+/// @param $thickness a value to be used for a lookup in the `thicknesses` map.
 @mixin decorate($line: underline, $color: currentColor, $style: solid, $thickness: thin) {
   @if $line == both {
     text-decoration-line: underline overline;
@@ -40,6 +49,8 @@ $thicknesses: map.merge($finch-text-decoration-thicknesses, $set-decoration-thic
 }
 
 /// Text Decoration Utilities
+/// ----------
+/// use the `decorate` mixin above to set particular, common, text-decoration values.
 @mixin underline($color: currentColor, $style: solid, $thickness: thin) {
   @include decorate($line: underline, $color: $color, $style: $style, $thickness: $thickness);
 }

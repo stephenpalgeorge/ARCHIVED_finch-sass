@@ -20,7 +20,10 @@
   $use-scale: major-thirds,
 );
 
-@use '../../src/typography/' as typ;
+@use '../../src/typography/' as typ with (
+  $use-web-safe: true,
+);
+
 @use '../../src/layout/' as lyt;
 
 .text {

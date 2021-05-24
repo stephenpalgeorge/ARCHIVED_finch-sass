@@ -58,8 +58,8 @@ $utilities: map.merge($font-utilities, $set-utilities);
 /// These are the variables that the module can be `@used` with, to customise the compiled CSS output.
 /// @example @use '<path-to-finch>/typography' with ($font-sizes: (big: 5rem));
 /// @example @use '<path-to-finch>/typography' with ($line-heights: (double: 2));
-$font-sizes: () !default;
 $font-families: () !default;
+$font-sizes: () !default;
 $font-weights: () !default;
 $letter-spacings: () !default;
 $line-heights: () !default;

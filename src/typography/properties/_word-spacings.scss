@@ -11,13 +11,14 @@ $finch-word-spacings: (
 $set-word-spacings: () !default;
 $w-spacings: map.merge($finch-word-spacings, $set-word-spacings);
 
+// Getter function
 @function get-word-spacing($key) {
   // return the given value immediately if it is a reserved keyword for this porperty:
   $spec-values: (normal);
   @if list.index(config.$global-values, $key) or list.index($spec-values, $key) {
     @return $key;
   }
-
+  // try and find the value in the map and either return it, or handle the error case below.
   $value: map.get($w-spacings, $key);
   @if $value {
     @return $value;
