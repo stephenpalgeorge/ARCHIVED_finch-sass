@@ -1,8 +1,19 @@
+// SOURCES
+// - Specific content is referenced inline, but general articles that were consulted, rather than directly copied,
+// are listed here, and copied in the `/_reference` directory incase they are ever taken offline.
+//
+// 1. A Modern CSS Reset (Andy Bell): https://piccalil.li/blog/a-modern-css-reset/
+// 2. Normalize CSS source code: https://github.com/necolas/normalize.css/blob/master/normalize.css
+// 3. Reboot, Resets and Reasoning (Chris Coyier): https://css-tricks.com/reboot-resets-reasoning/
+//
+
 // ------------------------
 // BOX MODEL
 // ------------------------
+
 // 1. set *everything* to be `border-box`.
 // 2. remove default margin and padding.
+
 *,
 *::after,
 *::before {
@@ -14,14 +25,121 @@
 // ------------------------
 // TYPOGRAPHY
 // ------------------------
-// restore the font-size for html elements that the browser automatically resizes.
+
+// - restore the font-size for html elements that the browser automatically resizes.
 // 1. restore font for chrome, firefox, safari.
 // 2. restore font for Opera (also works for IE, but we're not interested in that).
 //
-// More info is at https://code.iamkate.com/html-and-css/fixing-browsers-broken-monospace-font-handling/
+// - More info is at https://code.iamkate.com/html-and-css/fixing-browsers-broken-monospace-font-handling/
 // The majority of the content of this article has been copied into `/_reference/monospace-font-handling.md`
 // for the sake of posterity.
+// 3. form elements should inherit their font.
+// 4. optimize speed for font-rendering.
+// 5. Prevent adjustments of font size after orientation changes in IE on Windows Phone and in iOS.
+
 pre, code, kbd, samp {
   font-family: monospace, monospace; /* 1 */
   font-size: 1em; /* 2 */
+}
+
+input, button, textarea, select, optgroup {
+  font: inherit; /* 3 */
+}
+
+body {
+  text-rendering: optimizeSpeed; /* 4 */
+}
+
+html {
+  -webkit-text-size-adjust: 100%; /* 5 */
+}
+
+// ------------------------
+// LAYOUT
+// ------------------------
+
+// 1. make images easier to work with.
+
+img, picture {
+  max-width: 100%; /* 1 */
+  display: block; /* 1 */
+}
+
+// ------------------------
+// ELEMENTS
+// ------------------------
+
+// 1. sort out smooth scrolling.
+//
+// - the reason for using 'focus-within' here is well documented in the article
+// https://css-tricks.com/fixing-smooth-scrolling-with-find-on-page/.
+// The majority of the contents of this article have been copied to `_reference/fixing-smooth-scrolling.md`
+// for the sake of posterity.
+// 2. remove default list styles when role is specified.
+// - set correct display values for cross-browser consistency.
+// 3. set details as block.
+// 4. set summary as list-item.
+// 5. set anything with the 'hidden' attr as none.
+// 6. make sure there are no double-borders on tables.
+// 7. remove styles from links that don't go anywhere.
+// 8. anything that acts as a button should have the `pointer` cursor.
+
+html:focus-within {
+  scroll-behavior: smooth; /* 1 */
+}
+
+ul[role="list"], ol[role="list"] {
+  list-style: none; /* 2 */
+}
+
+details {
+  display: block; /* 3 */
+}
+
+summary {
+  display: list-item; /* 4 */
+}
+
+[hidden] {
+  display: none !important; /* 5 */
+}
+
+table {
+  border-collapse: collapse; /* 6 */
+}
+
+a:not([href]):not([class]) {
+  color: inherit; /* 7 */
+  text-decoration: none; /* 7 */
+
+  &:hover {
+    color: inherit; /* 7 */
+    text-decoration: none; /* 7 */
+  }
+}
+
+[role="button"] {
+  cursor: pointer; /* 8 */
+}
+
+// ------------------------
+// SYSTEM PREFERENCES
+// ------------------------
+
+// 1. Set the scroll behaviour back to the default.
+// 2. Remove/minimise any animations to point of inperceptibility.
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+   scroll-behavior: auto; /* 1 */
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important; /* 2 */
+    animation-iteration-count: 1 !important; /* 2 */
+    transition-duration: 0.01ms !important; /* 2 */
+    scroll-behavior: auto !important; /* 1 */
+  }
 }
