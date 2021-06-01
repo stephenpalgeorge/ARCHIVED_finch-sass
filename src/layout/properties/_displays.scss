@@ -1,37 +1,41 @@
-$displays: (
-  none: none,
-  block: block,
-  inline: inline,
-  inline-block: inline-block,
-  grid: grid,
-  flex: flex,
-);
+/// UTILITY MIXINS
+/// ----------
 
-// utility mixins:
+/// FLEX-CENTER
+/// @param $axis one of `x|y|both` that determines how the centering should be achieved.
+/// @param $dir one of `row|column` that affects the context of the "centering" property.
+/// ----------
+/// Uses css `flexbox` api to center content horizontally, vertically, or both.
+///
 @mixin flex-center($axis: both, $dir: row) {
   display: flex;
   flex-direction: $dir;
+  // the below conditionals should allow this mixin to work regardless of the "context"
+  // of the flex container. I.e., if the flex-direction of the container is "row", then centering
+  // on the x-axis would be done with "justify-content", **but** if the flex-direction is "column",
+  // then the same effect would be achieved with "align-items". The same switch applies to the
+  // y-axis, where "row" centering would be done with "align-items", but "column" centering would
+  // require the "justify-content" as the main axis has changed.
   @if $dir == row {
-    @if $axis == x or $axis == both {
-      justify-content: center;
-    }
-
-    @if $axis == y or $axis == both {
-      align-items: center;
-    }
+    @if $axis == x or $axis == both { justify-content: center; }
+    @if $axis == y or $axis == both { align-items: center; }
   }
 
   @else if $dir == column {
-    @if $axis == x or $axis == both {
-      align-items: center;
-    }
-
-    @if $axis == y or $axis == both {
-      justify-content: center;
-    }
+    @if $axis == x or $axis == both { align-items: center; }
+    @if $axis == y or $axis == both { justify-content: center; }
   }
 }
 
+/// FLEX BLOCKS
+/// @param $block-min {Length} a minimum width for the child elements of the flex-container.
+/// @param $justify a keyword value for the `justify-content` property.
+/// @param $align a keyword value for the `align-items` property.
+/// @param $reverse {Boolean} when true, the flex-flow property is set to 'row-reverse'.
+/// ----------
+/// Uses css `flexbox` to create a container for "blocks" that will wrap on to the next line and
+/// obey a minimum-width if one is set.
+///
 @mixin flex-blocks($block-min: 16rem, $justify: flex-start, $align: flex-start, $reverse: false) {
   display: flex;
   justify-content: $justify;

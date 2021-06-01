@@ -2,16 +2,6 @@
 @use 'sass:list';
 @use '../../config';
 
-$text-decoration-lines: (
-  none: none,
-  underline: underline,
-  overline: overline,
-  both: underline overline,
-  line-through: line-through,
-);
-
-$text-decoration-styles: (solid, double, dotted, dashed, wavy);
-
 // only `text-decoration-thickness` is configurable, and uses the modular scale:
 $text-decoration-thickness-thin: map.get(config.$atomic-scale, 500);
 $text-decoration-thickness-base: map.get(config.$atomic-scale, 600);
@@ -25,16 +15,19 @@ $finch-text-decoration-thicknesses: (
 $set-decoration-thicknesses: () !default;
 $thicknesses: map.merge($finch-text-decoration-thicknesses, $set-decoration-thicknesses);
 
-/// define mixins for including text-decoration separately.
+/// UTILITY MIXINS
 /// ----------
-/// Decorate
-/// ----------
-/// @author stephen pal-george
+
+/// DECORATE
 /// @param $line a value to be set against the text-decoration-line property.
 /// @param $color a value to be set against the text-decoration-color property.
 /// @param $style a value to be set against the text-decoration-style property.
-/// @param $thickness a value to be used for a lookup in the `thicknesses` map.
+/// @param $thickness a value to be used for a lookup in the `$thicknesses` map.
+/// ----------
+/// set the `text-decoration` properties, including 'thickness' if it is supported.
 @mixin decorate($line: underline, $color: currentColor, $style: solid, $thickness: thin) {
+  // handle the exception: "both" is the only instance of a value we accept that doesn't directly map
+  // to a keyword in the css spec for this property.
   @if $line == both {
     text-decoration-line: underline overline;
   }
@@ -43,22 +36,28 @@ $thicknesses: map.merge($finch-text-decoration-thicknesses, $set-decoration-thic
   }
   text-decoration-color: $color;
   text-decoration-style: $style;
+  // only set thickness if it is supported.
+  // https://caniuse.com/?search=text-decoration-thickness
   @supports (text-decoration-thickness: 1px) {
     text-decoration-thickness: map.get($thicknesses, $thickness);
   }
 }
 
-/// Text Decoration Utilities
-/// ----------
 /// use the `decorate` mixin above to set particular, common, text-decoration values.
+/// UNDERLINE
+/// a shorthand for `decorate` with the `$line` set to `underline`
 @mixin underline($color: currentColor, $style: solid, $thickness: thin) {
   @include decorate($line: underline, $color: $color, $style: $style, $thickness: $thickness);
 }
 
+/// OVERLINE
+/// a shorthand for `decorate` with the `$line` set to `overline`
 @mixin overline($color: currentColor, $style: solid, $thickness: thin) {
   @include decorate($line: overline, $color: $color, $style: $style, $thickness: $thickness);
 }
 
+/// STRIKE
+/// a shorthand for `decorate` with the `$line` set to `strike`
 @mixin strike($color: currentColor, $style: solid, $thickness: thin) {
   @include decorate($line: line-through, $color: $color, $style: $style, $thickness: $thickness);
 }

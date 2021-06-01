@@ -12,14 +12,18 @@ $finch-border-widths: (
   thick: map.get(config.$atomic-scale, 700), // default .25rem / 4px
   heavy: map.get(config.$atomic-scale, 800), // default .4rem / 6.4px
 );
+$set-border-widths: () !default;
+$b-widths: map.merge($finch-border-widths, $set-border-widths);
 
+/// Getter function for `border-width`
+/// @param $key one of the keys of the 
 @function get-width($key) {
   /// if the given key is one of the global css values, return it immediately:
   @if list.index(config.$global-values, $key) {
     @return $key;
   }
-
-  $value: map.get($finch-border-widths, $key);
+  /// otherwise we try and find the value in the given map and return it, and handle the error case below if it isn't found:
+  $value: map.get($b-widths, $key);
   @if $value {
     @return $value;
   }
@@ -36,13 +40,17 @@ $finch-border-radii: (
   base: .5rem,
   round: 1.5rem,
 );
+$set-border-radii: () !default;
+$b-radii: map.merge($finch-border-radii, $set-border-radii);
 
-@function get-radius($keey) {
+/// Getter function for `border-radius`
+@function get-radius($key) {
+  // if the given value is one of the `global-values` return it immediately:
   @if list.index(config.$global-values, $key) {
     @return $key;
   }
-
-  $value: map.get($finch-border-radii, $key);
+  // otherwise, try and find the value for $key in the associated map, and handle the error case below if not found:
+  $value: map.get($b-radii, $key);
   @if $value {
     @return $value;
   }
@@ -51,22 +59,50 @@ $finch-border-radii: (
   @return null;
 }
 
-@mixin border-radius($rad: base, $corner: null) {
-  @if list.index((top-right, bottom-right, bottom-left, bottom-right), $corner) {
-    border-#{$corner}-radius: get-radius($rad);
-  }
-
-  @else {
-    border-radius: get-radius($rad);
-  }
-}
 
 /// UTILITY MIXINS
 /// ----------
 
+/// BORDER RADIUS
+/// @author stephen pal-george
+/// @param $rad one of the keys from the `$b-radii` map.
+/// @param $corners either a single keyword, or a list of keywords that specify the corners that should have a radius.
+/// ----------
+/// Sets the border radius for any given corners.
+///
+@mixin border-radius($rad: base, $corners: null) {
+  @if meta.type-of($corners) == list {
+    // $corners is a list of values, so iterate over them and set the border radius for each:
+    @each $corner in $corners {
+      @if list.index((top-right, bottom-right, bottom-left, bottom-right), $corner) {
+        border-#{$corner}-radius: get-radius($rad);
+      }
+      // If the `$corners` list contains an invalid value we simply ignore it and show a warning:
+      @else {
+        @warn 'No side defined for "#{$corner}"';
+      }
+    }
+  } @else {
+    // $corners is **not** a list and can therefore be assumed to be a global-value, or a length:
+    @if list.index((top-right, bottom-right, bottom-left, bottom-right), $corners) {
+      border-#{$corners}-radius: get-radius($rad);
+    } @else {
+      // if $corners is null, or an invalid value is passed, we fallback to setting radius on all corners:
+      border-radius: get-radius($rad);
+    }
+  }
+}
+
 /// BORDER
 /// @author stephen pal-george
+/// @param $width one of the keys of the `$b-widths` map.
+/// @param $style a keyword value for the `border-style` property.
+/// @param $color a color of any definition for the `border-color` property.
+/// @param $radius one of the keys of the `$b-radii` map.
+/// @param $sides a single value, or list of values that specify the sides that should have a border applied.
+/// ----------
 /// Sets the border values, including radius.
+///
 @mixin border($width: base, $style: solid, $color: #000, $radius: null, $sides: null) {
   $sides-list: (top, right, bottom, left, inline-end, inline-start, block-end, block-start);
   // if $sides is a list, e.g. (top, right), iterate through it and apply the variables to each.
@@ -106,7 +142,13 @@ $finch-border-radii: (
 }
 
 /// BORDER LOGICAL
-/// Sets border value (excluding radius) using the 
+/// @param $width one of the keys of the `$b-widths` map.
+/// @param $style a keyword value for the `border-style` property.
+/// @param $color a color of any definition for the `border-color` property.
+/// @param $dir a direction (either `inline` or `block`) to set the desired logical properties.
+/// ----------
+/// Sets border value (excluding radius) using logical properties.
+///
 @mixin border-logical($width: base, $style: solid, $color: #000, $dir: inline) {
   @if list.index((inline, block), $dir) {
     // this is the ideal situation:
@@ -114,7 +156,8 @@ $finch-border-radii: (
     border-#{$dir}-style: $style;
     border-#{$dir}-color: $color;
     // some browsers, like Edge, don't support the `border-inline/border-block` shorthand,
-    // but do support the individual `start/end` declarations:
+    // but do support the individual `start/end` declarations.
+    // https://caniuse.com/?search=border-inline
     @supports not (border-inline: 0) {
       border-#{$dir}-start-width: get-width($width); 
       border-#{$dir}-start-style: $style;
@@ -125,6 +168,7 @@ $finch-border-radii: (
     }
     // browsers that don't support the `inline/block` syntax at all, we assume
     // a horizontal writing mode and set top/bottom or left/right accordingly.
+    // https://caniuse.com/?search=border-inline-start
     @supports not (border-inline-start: 0) {
       @if $dir == inline {
         @include border($width: $width, $style: $style, $color: $color, $side: bottom);

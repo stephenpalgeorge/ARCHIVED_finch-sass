@@ -7,11 +7,12 @@ $finch-word-spacings: (
   base: map.get(config.$atomic-scale, 400),
   wide: map.get(config.$atomic-scale, 700),
 );
-
 $set-word-spacings: () !default;
 $w-spacings: map.merge($finch-word-spacings, $set-word-spacings);
 
-// Getter function
+/// Getter function
+/// @param $key one of the keys of the `$w-spacings` map.
+/// @return {Length | null} the `word-spacing` declaration associated with the given `$key`, or `null` if that `$key` is not found:
 @function get-word-spacing($key) {
   // return the given value immediately if it is a reserved keyword for this porperty:
   $spec-values: (normal);

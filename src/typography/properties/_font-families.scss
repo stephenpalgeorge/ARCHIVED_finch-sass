@@ -63,7 +63,9 @@ $web-safe: (
   'Brush Script MT': $font-family-brush-script-mt,
 );
 
-// Getter function
+/// Getter function
+/// @param $key one of the keys from the `$families` map.
+/// @return {String | null} the font-family declaration associated with the given `$key`, or `null` if `$key` is not found.
 @function get-font-family($key) {
   // if a system, web-safe or global value is passed (e.g. ui-serif, Arial, inherit respectively) we just pass it straight back:
   $generic-names: (fantasy, system-ui, ui-serif, ui-sans-serif, ui-monospace, ui-rounded, math, emoji, fangsong);

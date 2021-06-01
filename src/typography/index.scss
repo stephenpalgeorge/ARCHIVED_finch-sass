@@ -93,27 +93,23 @@ $word-spacings: () !default;
 @use '../_mixins' as m;
 @use 'properties/font-families' as *;
 @use 'properties/font-sizes' as *;
-@use 'properties/font-styles' as *;
-@use 'properties/font-variants' as *;
 @use 'properties/font-weights' as *;
 @use 'properties/letter-spacings' as *;
 @use 'properties/line-heights' as *;
-@use 'properties/text-aligns' as *;
 @use 'properties/text-indents' as *;
-@use 'properties/text-transforms' as *;
 @use 'properties/word-spacings' as *;
 
-$typography-maps: (
+$typography-values: (
   font-families: $families,
   font-size: $sizes,
-  font-style: $styles,
+  font-style: (normal, italic, oblique),
+  font-variant: (small-caps, all-small-caps, petite-caps, all-petite-caps, unicase, titling-caps),
   font-weight: $weights,
-  font-variant: $variants,
   line-height: $heights,
   letter-spacing: $l-spacings,
-  text-align: $alignments,
+  text-align: (start, end, left, right, center, justify, match-parent),
   text-indent: $indents,
-  text-transform: $transforms,
+  text-transform: (none, capitalize, uppercase, lowercase, full-width, full-size-kana),
   word-spacing: $w-spacings,
 );
 
@@ -123,7 +119,7 @@ $typography-maps: (
 /// the $font-utilities map.
 @each $property, $flag in $utilities {
   @if $flag {
-    @include m.gen-utils($property, map.get($typography-maps, $property));
+    @include m.gen-utils($property, map.get($typography-values, $property));
   }
 }
 
@@ -136,7 +132,7 @@ $typography-maps: (
   @include config.break($key) {
     @each $property, $flag in $responsive {
       @if $flag {
-        @include m.gen-responsive($key, $property, map.get($typography-maps, $property));
+        @include m.gen-responsive($key, $property, map.get($typography-values, $property));
       }
     }
   }

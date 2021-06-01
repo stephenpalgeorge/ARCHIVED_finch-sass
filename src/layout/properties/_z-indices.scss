@@ -15,7 +15,6 @@ $finch-z-indices: (
   foreground: $z-index-foreground,
   front: $z-index-front,
 );
-
 $set-z-indices: () !default;
 $indices: map.merge($finch-z-indices, $set-z-indices);
 
@@ -25,7 +24,7 @@ $indices: map.merge($finch-z-indices, $set-z-indices);
   @if list.index(config.$global-values, $key) or list.index($spec-values, $key) {
     @return $key;
   }
-
+  // otherwise try and find the value in the relevant map or handle the error below if the value can't be found:
   $value: map.get($indices, $key);
   @if $value {
     @return $value;
@@ -35,43 +34,73 @@ $indices: map.merge($finch-z-indices, $set-z-indices);
   @return null;
 }
 
-// Utility mixins:
-// back, background, base, foreground, front, lift (+1), suppress (-1), new-stacking-ctx,
+/// UTILITY MIXINS
+/// ----------
+
+/// SET LAYER
+/// @param $key one of the keys of the `$indices` map.
+/// @param $position a keyword value for the `position` property, as defined in the css spec.
+/// ----------
+/// A basic mixin that set's `z-index`, this is consumed by all other `z-index` mixins.
+///
 @mixin set-layer($key, $position: relative) {
   position: $position;
   z-index: get-index($key);
 }
 
+/// Z BACK
+/// @param $pos a keyword value for the `position` property, as defined in the css spec.
+/// a shorthand for the `set-layer` mixin, with `$key` set to `back`.
 @mixin z-back($pos: relative) {
   @include set-layer($key: back, $position: $pos);
 }
 
+/// Z BACKGROUND
+/// @param $pos a keyword value for the `position` property, as defined in the css spec.
+/// a shorthand for the `set-layer` mixin, with `$key` set to `background`.
 @mixin z-background($pos: relative) {
   @include set-layer($key: background, $position: $pos);
 }
 
+/// Z BASE
+/// @param $pos a keyword value for the `position` property, as defined in the css spec.
+/// a shorthand for the `set-layer` mixin, with `$key` set to `base`.
 @mixin z-base($pos: relative) {
   @include set-layer($key: base, $position: $pos);
 }
 
+/// Z FOREGROUND
+/// @param $pos a keyword value for the `position` property, as defined in the css spec.
+/// a shorthand for the `set-layer` mixin, with `$key` set to `foreground`.
 @mixin z-foreground($pos: relative) {
   @include set-layer($key: foreground, $position: $pos);
 }
 
+/// Z FRONT
+/// @param $pos a keyword value for the `position` property, as defined in the css spec.
+/// a shorthand for the `set-layer` mixin, with `$key` set to `front`.
 @mixin z-front($pos: relative) {
   @include set-layer($key: front, $position: $pos);
 }
 
+/// Z LIFT
+/// @param $pos a keyword value for the `position` property, as defined in the css spec.
+/// "raises" the z-index, setting it to one to lift it above the rest of its stacking context.
 @mixin z-lift($pos: relative) {
   position: $pos;
   z-index: 1;
 }
 
+/// Z SUPPRESS
+/// @param $pos a keyword value for the `position` property, as defined in the css spec.
+/// "suppresses" the z-index, setting it to negative one and pushing it behind the rest of its stacking context.
 @mixin z-suppress($pos: relative) {
   position: $pos;
   z-index: -1;
 }
 
+/// NEW STACKING CONTEXT
+/// Creates a new stacking context to break the content out of the normal "stacking order".
 @mixin new-stacking-ctx() {
   isolation: isolate;
   @supports not (isolation: auto) {

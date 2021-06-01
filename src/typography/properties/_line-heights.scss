@@ -9,11 +9,12 @@ $finch-line-heights: (
   tall: map.get(config.$interval-scale, 700),
   x-tall: map.get(config.$interval-scale, 800),
 );
-
 $set-line-heights: () !default;
 $heights: map.merge($finch-line-heights, $set-line-heights);
 
-// Getter function
+/// Getter function
+/// @param $key one of the keys from the `$heights` map.
+/// @return {Number | null} the `line-height` declaration that is associated with the given `$key`, or `null` if that `$key` is not found.
 @function get-line-height($key) {
   // return the given value immediately if it is a reserved keyword for this property:
   $spec-values: (normal);

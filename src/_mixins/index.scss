@@ -1,29 +1,42 @@
 @use 'sass:map';
+@use 'sass:meta';
 @use '../config';
 @use '../prop-labels' as labels;
 
-@mixin gen-utils($prop, $propMap) {
+@mixin gen-utils($prop, $propValues) {
   $label: map.get(labels.$prop-labels, $prop);
-  @each $key, $value in $propMap {
-    .#{$label}\:#{$key} {
-      #{$prop}: $value;
+  @if meta.type-of($propValues) == list {
+    // when $propValues is a list:
+    @each $value in $propValues {
+      // e.g. `.text-align:center` && `.text-align:center!`
+      .#{$label}\:#{$value} { #{$prop}: $value; }
+      .#{$label}\:#{$value}\! { #{$prop}: $value !important; }
     }
-
-    .#{$label}\:#{$key}\! {
-      #{$prop}: $value !important;
+  } @else if meta.type-of($propValues) == map {
+    // when $propValues is a map:
+    @each $key, $value in $propValues {
+      // e.g. `.font-size:lead` && `.font-size:lead!`
+      .#{$label}\:#{$key} { #{$prop}: $value; }
+      .#{$label}\:#{$key}\! { #{$prop}: $value !important; }
     }
   }
 }
 
-@mixin gen-responsive($breakpoint, $prop, $propMap) {
+@mixin gen-responsive($breakpoint, $prop, $propValues) {
   $label: map.get(labels.$prop-labels, $prop);
-  @each $key, $value in $propMap {
-    .#{$label}\:#{$key}\@#{$breakpoint} {
-      #{$prop}: $value;
+  @if meta.type-of($propValues) == list {
+    // when $propValues is a list:
+    @each $value in $propValues {
+      // e.g. `.text-align:center@sm` && `.text-align:center@sm!`
+      .#{$label}\:#{$value}\@#{$breakpoint} { #{$prop}: $value; }
+      .#{$label}\:#{$value}\@#{$breakpoint}\! { #{$prop}: $value !important; }
     }
-
-    .#{$label}\:#{$key}\@#{$breakpoint}\! {
-      #{$prop}: $value !important;
+  } @else if meta.type-of($propValues) == map {
+    // when $propValues is a map
+    @each $key, $value in $propValues {
+      // e.g. `.font-size:lead@sm` && `.font-size:lead@sm!`
+      .#{$label}\:#{$key}\@#{$breakpoint} { #{$prop}: $value; }
+      .#{$label}\:#{$key}\@#{$breakpoint}\! { #{$prop}: $value !important; }
     }
   }
 }

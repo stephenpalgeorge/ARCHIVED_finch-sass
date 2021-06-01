@@ -4,8 +4,7 @@ The *Finch Typography Module* handles everything to do with how text is styled a
 
 This document contains:
 
-- **Mixins:** an overview of the main mixins that the typography module provides, including examlpes and a formal syntax.
-- **Property Files:** an detailed description of what is contained in each individual property file, and why it's there.
+- **Mixins:** an overview of the main mixins that the typography module provides, including examples and a formal syntax.
 - **Configuration:** a description of how the module can be adapted and customised.
 
 ## Mixins

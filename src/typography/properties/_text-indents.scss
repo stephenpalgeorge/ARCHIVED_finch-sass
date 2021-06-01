@@ -16,7 +16,9 @@ $finch-text-indents: (
 $set-text-indents: () !default;
 $indents: map.merge($finch-text-indents, $set-text-indents);
 
-// Getter function
+/// Getter function
+/// @param $key one of the keys from the `$indents` map.
+/// @return {Length | null} the `text-indent` declaration associated with the given `$key`, or `null` if that `$key` is not found.
 @function get-text-indent($key) {
   // return the given value immediately if it is a global property value:
   @if list.index(config.$global-values, $key) {

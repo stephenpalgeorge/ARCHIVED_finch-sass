@@ -9,16 +9,18 @@ $finch-paddings: (
   large: map.get(config.$size-scale, 700),
   x-large: map.get(config.$size-scale, 1000),
 );
-
 $set-paddings: () !default;
 $padding-sizes: map.merge($finch-paddings, $set-paddings);
 
+/// Getter function
+/// @param $key one of the keys of the `$padding-sizes` map.
+/// @return {Length | null} the `padding` declaration associated with the given `$key`, or `null` if the `$key` is not found.
 @function get-padding($key) {
   // immediately return the given value if it is a 'global' value:
   @if list.index(config.$global-values, $key) {
     @return $key;
   }
-
+  // otherwise, try and find the value in the relevant map, or handle the error case below:
   $value: map.get($padding-sizes, $key);
   @if $value {
     @return $value;
@@ -28,6 +30,13 @@ $padding-sizes: map.merge($finch-paddings, $set-paddings);
   @return null;
 }
 
+/// UTILITY MIXINS
+/// ----------
+
+/// PADDING
+/// @param $key one of the keys of the `$padding-sizes` map.
+/// @param $axis one of `x|y|null`, determines where the padding should be set. (If `null`, padding will be applied to all sides).
+///
 @mixin padding($key, $axis: null) {
   // X-AXIS
   // normally, the x-axis will correspond to padding-inline,
@@ -41,7 +50,8 @@ $padding-sizes: map.merge($finch-paddings, $set-paddings);
       padding-inline: get-padding($key);
     }
     // browsers that don't support logical properties get a
-    // fallback of padding-left, padding-right:
+    // fallback of padding-left, padding-right.
+    // https://caniuse.com/?search=padding-inline
     @supports not (padding-inline: 0) {
       padding-left: get-padding($key);
       padding-right: get-padding($key);
@@ -60,7 +70,8 @@ $padding-sizes: map.merge($finch-paddings, $set-paddings);
       padding-block: get-padding($key);
     }
     // browsers that don't support logical properties get a
-    // fallback of padding-top, padding-bottom:
+    // fallback of padding-top, padding-bottom.
+    // https://caniuse.com/?search=padding-block
     @supports not (padding-block: 0) {
       padding-top: get-padding($key);
       padding-bottom: get-padding($key);
@@ -73,15 +84,23 @@ $padding-sizes: map.merge($finch-paddings, $set-paddings);
   }
 }
 
+/// PADDING LOGICAL
+/// @param $key one of the keys of the `$padding-sizes` map.
+/// @param $dir one of `inline|block` that determines where the padding should be set.
+///
 @mixin padding-logical($key, $dir: inline) {
   @if list.index((inline, block), $dir) {
     padding-#{$dir}: get-padding($key);
 
+    // some browsers (like `edge`) don't support the `padding-inline` shorthand
+    // but do support the full `padding-inline-start` and `padding-inline-end` properties.
+    // https://caniuse.com/?search=padding-inline
     @supports not (padding-inline: 0) {
       padding-#{$dir}-start: get-padding($key);
       padding-#{$dir}-end: get-padding($key);
     }
-
+    // browsers that don't support logical properties at all get a sensible fallback.
+    // https://caniuse.com/?search=padding-inline-start
     @supports not (padding-inline-start: 0) {
       @if $dir == inline {
         padding-left: get-padding($key);
@@ -98,10 +117,14 @@ $padding-sizes: map.merge($finch-paddings, $set-paddings);
   }
 }
 
+/// PADDING INLINE
+/// a shorthand for the `padding-logical` mixin with the `$dir` set to `inline`.
 @mixin padding-inline($key) {
   @include padding-logical($key: $key, $dir: inline);
 }
 
+/// PADDING BLOCK
+/// a shorthand for the `padding-logical` mixin with the `$dir` set to `block`.
 @mixin padding-block($key) {
   @include padding-logical($key: $key, $dir: block);
 }

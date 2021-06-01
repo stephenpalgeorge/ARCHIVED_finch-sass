@@ -15,11 +15,12 @@ $finch-font-weights: (
   thick: $weight-thick,
   heavy: $weight-heavy,
 );
-
 $set-font-weights: () !default;
 $weights: map.merge($finch-font-weights, $set-font-weights);
 
-// Getter function
+/// Getter function
+/// @param $key one of the keys of the `$weights` map.
+/// @return {Number | null} the font-weight declaration associated with the given `$key`, or `null` if the `$key` is not found.
 @function get-font-weight($key) {
   // return the given value immediately if it is a reserved keyword for this property:
   $spec-values: (normal, bold, lighter, bolder);
