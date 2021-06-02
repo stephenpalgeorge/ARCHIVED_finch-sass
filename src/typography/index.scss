@@ -6,7 +6,6 @@
 /// ----------
 /// These are some high level settings that the rest of the typography module depends on:
 $use-web-safe: false !default;
-/// @author stephen pal-george
 /// This map controls whether the styles are generated specifically for each breakpoint.
 /// If true, then placeholders and classes such as `(\.|%)sm\:font-size--lead` will be created.
 /// `text-decoration` is deliberately omitted from this map as there are too many variables to make
@@ -29,7 +28,6 @@ $font-responsive: (
 $set-responsive: () !default;
 $responsive: map.merge($font-responsive, $set-responsive);
 
-/// @author stephen pal-george
 /// This map controls whether or not utility classes are generated. By default,
 /// Finch will not create any class names. Switching any of these values to `true`
 /// will create the classes for that property.

@@ -3,7 +3,6 @@
 
 /// MODULE SETUP
 /// ----------
-/// @author stephen pal-george
 /// This map controls whether the styles are generated specifically for each breakpoint.
 /// If true, then placeholders and classes such as `(\.|%)sm\:spacer--large` will be created.
 $layout-responsive: (
@@ -22,7 +21,6 @@ $layout-responsive: (
 $set-responsive: () !default;
 $responsive: map.merge($layout-responsive, $set-responsive);
 
-/// @author stephen pal-george
 /// This map controls whether or not utility classes are generated. By default,
 /// Finch will not create any class names. Switching any of these values to `true`
 /// will create the classes for that property.
@@ -116,7 +114,6 @@ $layout-maps: (
 /// the module level mixins combine several different properties from within the layout module.
 
 /// BOX-RESET
-/// @author stephen pal-george
 /// @param $size {Boolean} determines if the width and height properties should be reset.
 /// @param $border {Boolean} determines if the border property should be reset.
 @mixin box-reset($size: true, $border: true) {
@@ -137,7 +134,6 @@ $layout-maps: (
 
 /// BOX [LAYOUT-PRIMITIVES]
 /// ----------
-/// @author stephen pal-george
 /// @param $padding a keyword value that represents a key in the 'paddings' map.
 /// @param $reset {Boolean} a flag that determines whether or not the `box-reset` mixin should be included.
 @mixin box($padding: base, $reset: false) {
@@ -162,7 +158,6 @@ $layout-maps: (
 
 /// PILLAR [LAYOUT-PRIMITIVES]
 /// ----------
-/// @author stephen pal-george
 /// @param $max a width that will limit the size of the pillar.
 /// @param $padding a keyword value that represents a key in the 'paddings' map.
 /// @param $intrinsic a flag that determines if the flex column code should be included.
@@ -246,7 +241,6 @@ We may revisit this at a later date, or implement some kind of Finch UI library.
 
 /// SIDEBAR [LAYOUT PRIMITIVES]
 /// ----------
-/// @author stephen pal-george
 /// @param $gap {Number} one of the key values for the modular scale map
 /// @param $side-width the ideal size of the 'sidebar' element
 /// @param $break-at the 

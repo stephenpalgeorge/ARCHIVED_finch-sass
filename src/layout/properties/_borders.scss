@@ -64,7 +64,6 @@ $b-radii: map.merge($finch-border-radii, $set-border-radii);
 /// ----------
 
 /// BORDER RADIUS
-/// @author stephen pal-george
 /// @param $rad one of the keys from the `$b-radii` map.
 /// @param $corners either a single keyword, or a list of keywords that specify the corners that should have a radius.
 /// ----------
@@ -94,7 +93,6 @@ $b-radii: map.merge($finch-border-radii, $set-border-radii);
 }
 
 /// BORDER
-/// @author stephen pal-george
 /// @param $width one of the keys of the `$b-widths` map.
 /// @param $style a keyword value for the `border-style` property.
 /// @param $color a color of any definition for the `border-color` property.
