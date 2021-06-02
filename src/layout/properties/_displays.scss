@@ -45,6 +45,8 @@
 
   > * {
     flex: 1 1;
-    min-width: $block-min;
+    @if $block-min {
+      min-width: $block-min;
+    }
   }
 }

@@ -83,7 +83,7 @@ $b-radii: map.merge($finch-border-radii, $set-border-radii);
       }
     }
   } @else {
-    // $corners is **not** a list and can therefore be assumed to be a global-value, or a length:
+    // $corners is **not** a list and can therefore be assumed to be a single corner:
     @if list.index((top-right, bottom-right, bottom-left, bottom-right), $corners) {
       border-#{$corners}-radius: get-radius($rad);
     } @else {

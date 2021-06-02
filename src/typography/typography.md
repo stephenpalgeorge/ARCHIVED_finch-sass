@@ -115,9 +115,11 @@ em.text-emphasis {
 }
 ```
 
+---
+
 ## Configuration
 
-When you use the typography module, you can configure it with a number of variables that are declared as `!default` in the module's index. The typography module has the current, configurable, variables:
+When you use the typography module, you can configure it with a number of variables that are declared as `!default` in the module's index. The typography module currently has the following configurable variables:
 
 - $use-web-safe
 - $set-responsive
@@ -131,17 +133,17 @@ When you use the typography module, you can configure it with a number of variab
 - $text-indents
 - $word-spacings
 
-The first two (set-responsive, set-utilities) require some extra attention and explanation. The next two, which we'll call `preferences` should also be explained. The rest can be discussed quickly as one. Basically, for every property that the module deals with, you can pass your own map to override or the extend the default Finch values. This was discussed briefly in the **Property files** section above, but another quick example follows:
+The top variables ($use-web-safe), should be explained. The next two (set-responsive, set-utilities) also require some extra attention and explanation. The rest can be discussed quickly as one. Basically, for every property that the module deals with, you can pass your own map to override or the extend the default Finch values. A quick example follows:
 
 ```scss
-@use '<path-to-finch>/typography' with (line-heights: (double: 2));
+@use 'finch/typography' with (line-heights: (double: 2));
 ```
 
 The above code would mean that Finch would take your extra `line-heights` into consideration when running the rest of it's processes. So, for example, if it was generating utility classes for `line-heights` you would end up with an extra `.line-height--double` class available to you.
 
 ### Utilities
 
-The *set-responsive* and *set-utilities* map are special configuration maps. Both of them hold a list of all the properties that the module handles as 'keys', and sets a boolean value against each one. These are *all* `false` by default and must be manually/intentionally overridden by the user.
+The *set-responsive* and *set-utilities* maps are special configuration maps. Both of them hold a list of all the properties that the module handles as 'keys', and sets a boolean value against each one. These are *all* `false` by default and must be manually/intentionally overridden by the user.
 The boolean values from these maps are iterated over to generate utility classes for the properties and their values, and for each breakpoint, if the `responsive` flag is `true`. Each utility class also creates an `!important` version, the class name for which simply appends a '!'.
 
 ```scss
