@@ -1,6 +1,8 @@
 @use 'sass:map';
 
 $finch-prop-labels: (
+  border-radius: 'border-radius',
+  border-width: 'border-width',
   display: 'display',
   font-family: 'font',
   font-size: 'font-size',

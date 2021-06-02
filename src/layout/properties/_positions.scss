@@ -1,36 +1,30 @@
+@use 'sass:meta';
 @use 'sass:map';
 @use 'sass:list';
 @use '../../config';
 
-$positions: (
-  static: static,
-  relative: relative,
-  absolute: absolute,
-  fixed: fixed,
-  sticky: sticky,
-);
+/// UTILITY MIXINS
+/// ----------
 
-@function get-pos($key) {
-  // immediately return the given value if it is one of the global css values:
-  @if list.index(config.$global-values, $key) {
-    @return $key;
+/// POS
+/// @param $type one of the keyword values for the `position` property as defined in the css spec.
+/// @param $distance {Length} the value that each specified side should recieve.
+/// @param $sides {List} the sides that the `$distance` should be applied to.
+/// ----------
+/// this mixin is intended for setting a consistent value on 2 or more sides.
+/// If the styles require different values on multiple sides, normal css should be written
+/// as there's no real benefit to writing `@include pos($type: absolute, $top: 2rem, $right: 5rem)`
+/// instead of `position: absolute; top: 2rem; right: 5rem` within a selector.
+///
+@mixin pos($type: static, $distance, $sides: null) {
+  position: $type;
+  @if meta.type-of($sides) == list {
+    @each $side in $sides {
+      #{$side}: $distance;
+    }
+  } @else {
+    @warn '$sides should recieve a list of values';
   }
-
-  $value: map.get($positions, $key);
-  @if $value {
-    @return $value;
-  }
-
-  @warn 'No position found for "#{$key}"';
-  @return null;
-}
-
-@mixin pos($type: static, $top, $right, $bottom, $left) {
-  position: get-pos($type);
-  top: $top;
-  right: $right;
-  bottom: $bottom;
-  left: $left;
 }
 
 /// In some cases, elements may need positioning removed. For example,
@@ -48,20 +42,23 @@ $positions: (
   left: unset;
 }
 
-/// UTILITY MIXINS
-/// ----------
-/// These mixins provide a shorthand for setting the position of an element.
-@mixin absolute($top: null, $right: null, $bottom: null, $left: null, $reset: false) {
+/// ABSOLUTE
+/// a shorthand for the `pos` mixin with `$type` set to `absolute`
+@mixin absolute($distance, $sides: null, $reset: false) {
   @if $reset { @include pos-reset; }
-  @include pos(absolute, $top: $top, $right: $right, $bottom: $bottom, $left: $left);
+  @include pos($type: absolute, $distance: $distance, $sides: $sides);
 }
 
-@mixin fixed($top: null, $right: null, $bottom: null, $left: null, $reset: false) {
+/// FIXED
+/// a shorthand for the `pos` mixin with `$type` set to `fixed`
+@mixin fixed($distance, $sides: null, $reset: false) {
   @if $reset { @include pos-reset; }
-  @include pos(fixed, $top: $top, $right: $right, $bottom: $bottom, $left: $left);
+  @include pos($type: fixed, $distance: $distance, $sides: $sides);
 }
 
-@mixin sticky($top: null, $right: null, $bottom: null, $left: null, $reset: false) {
+/// STICKY
+/// a shorthand for the `pos` mixin with `$type` set to `sticky`
+@mixin sticky($distance, $sides: null, $reset: false) {
   @if $reset { @include pos-reset; }
-  @include pos(sticky, $top: $top, $right: $right, $bottom: $bottom, $left: $left);
+  @include pos($type: sticky, $distance: $distance, $sides: $sides);
 }

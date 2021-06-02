@@ -7,17 +7,19 @@ $finch-letter-spacings: (
   base: map.get(config.$atomic-scale, 400),
   wide: map.get(config.$atomic-scale, 600),
 );
-
 $set-letter-spacings: () !default;
 $l-spacings: map.merge($finch-letter-spacings, $set-letter-spacings);
 
+/// Getter function
+/// @param $key one of the keys of the `$l-spacings` map.
+/// @return {Length | null} the letter-spacing declaration associated with the given `$key`, or `null` if the `$key` is not found.
 @function get-letter-spacing($key) {
   // return the given value immediately if it is a reserved keyword for this property:
   $spec-values: (normal);
   @if list.index(config.$global-values, $key) or list.index($spec-values, $key) {
     @return $key;
   }
-
+  // try and find the value in the map and either return it, or handle the error case below.
   $value: map.get($l-spacings, $key);
   @if $value {
     @return $value;

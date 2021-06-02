@@ -6,7 +6,6 @@
 /// ----------
 /// These are some high level settings that the rest of the typography module depends on:
 $use-web-safe: false !default;
-/// @author stephen pal-george
 /// This map controls whether the styles are generated specifically for each breakpoint.
 /// If true, then placeholders and classes such as `(\.|%)sm\:font-size--lead` will be created.
 /// `text-decoration` is deliberately omitted from this map as there are too many variables to make
@@ -29,7 +28,6 @@ $font-responsive: (
 $set-responsive: () !default;
 $responsive: map.merge($font-responsive, $set-responsive);
 
-/// @author stephen pal-george
 /// This map controls whether or not utility classes are generated. By default,
 /// Finch will not create any class names. Switching any of these values to `true`
 /// will create the classes for that property.
@@ -58,8 +56,8 @@ $utilities: map.merge($font-utilities, $set-utilities);
 /// These are the variables that the module can be `@used` with, to customise the compiled CSS output.
 /// @example @use '<path-to-finch>/typography' with ($font-sizes: (big: 5rem));
 /// @example @use '<path-to-finch>/typography' with ($line-heights: (double: 2));
-$font-sizes: () !default;
 $font-families: () !default;
+$font-sizes: () !default;
 $font-weights: () !default;
 $letter-spacings: () !default;
 $line-heights: () !default;
@@ -93,27 +91,23 @@ $word-spacings: () !default;
 @use '../_mixins' as m;
 @use 'properties/font-families' as *;
 @use 'properties/font-sizes' as *;
-@use 'properties/font-styles' as *;
-@use 'properties/font-variants' as *;
 @use 'properties/font-weights' as *;
 @use 'properties/letter-spacings' as *;
 @use 'properties/line-heights' as *;
-@use 'properties/text-aligns' as *;
 @use 'properties/text-indents' as *;
-@use 'properties/text-transforms' as *;
 @use 'properties/word-spacings' as *;
 
-$typography-maps: (
+$typography-values: (
   font-families: $families,
   font-size: $sizes,
-  font-style: $styles,
+  font-style: (normal, italic, oblique),
+  font-variant: (small-caps, all-small-caps, petite-caps, all-petite-caps, unicase, titling-caps),
   font-weight: $weights,
-  font-variant: $variants,
   line-height: $heights,
   letter-spacing: $l-spacings,
-  text-align: $alignments,
+  text-align: (start, end, left, right, center, justify, match-parent),
   text-indent: $indents,
-  text-transform: $transforms,
+  text-transform: (none, capitalize, uppercase, lowercase, full-width, full-size-kana),
   word-spacing: $w-spacings,
 );
 
@@ -123,7 +117,7 @@ $typography-maps: (
 /// the $font-utilities map.
 @each $property, $flag in $utilities {
   @if $flag {
-    @include m.gen-utils($property, map.get($typography-maps, $property));
+    @include m.gen-utils($property, map.get($typography-values, $property));
   }
 }
 
@@ -136,7 +130,7 @@ $typography-maps: (
   @include config.break($key) {
     @each $property, $flag in $responsive {
       @if $flag {
-        @include m.gen-responsive($key, $property, map.get($typography-maps, $property));
+        @include m.gen-responsive($key, $property, map.get($typography-values, $property));
       }
     }
   }

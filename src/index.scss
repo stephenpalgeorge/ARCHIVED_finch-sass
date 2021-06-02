@@ -5,6 +5,8 @@ $set-config-atomic-scale: () !default;
 $set-config-breakpoints: () !default;
 $set-config-size-scale: () !default;
 /// Layout map over-rides:
+$set-border-radii: () !default;
+$set-border-widths: () !default;
 $set-margins: () !default;
 $set-paddings: () !default;
 $set-z-indices: () !default;
@@ -32,6 +34,8 @@ $set-use-web-safe: false !default;
 );
 
 @use './layout' with (
+  $border-radii: $set-border-radii,
+  $border-widths: $set-border-widths,
   $margins: $set-margins,
   $paddings: $set-paddings,
   $z-indices: $set-z-indices,
@@ -56,6 +60,7 @@ $set-use-web-safe: false !default;
 // N.B. must make sure none of the partials share any variable names,
 // otherwise they will clash on load.
 @forward './layout' as lyt-*;
+@forward './layout/properties/borders' as lyt-*;
 @forward './layout/properties/displays' as lyt-*;
 @forward './layout/properties/margins' as lyt-*;
 @forward './layout/properties/paddings' as lyt-*;

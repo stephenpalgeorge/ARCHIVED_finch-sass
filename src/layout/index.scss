@@ -3,32 +3,37 @@
 
 /// MODULE SETUP
 /// ----------
-/// @author stephen pal-george
 /// This map controls whether the styles are generated specifically for each breakpoint.
 /// If true, then placeholders and classes such as `(\.|%)sm\:spacer--large` will be created.
 $layout-responsive: (
-  display: false,
-  margin: false,
-  padding: true,
-  position: false,
-  z-index: false,
-);
-/// provide custom 'responsive' settings for this module.
-/// @example @use '<path-to-finch>/layout' with ($set-responsive: (margin-left: true));
-$set-responsive: () !default;
-$responsive: map.merge($layout-responsive, $set-responsive);
-
-/// @author stephen pal-george
-/// This map controls whether or not utility classes are generated. By default,
-/// Finch will not create any class names. Switching any of these values to `true`
-/// will create the classes for that property.
-$layout-utilities: (
+  border-radius: false,
+  border-width: false,
   display: false,
   margin: false,
   padding: true,
   position: false,
   z-index: false,
   stack: false,
+  box: false,
+);
+/// provide custom 'responsive' settings for this module.
+/// @example @use '<path-to-finch>/layout' with ($set-responsive: (margin-left: true));
+$set-responsive: () !default;
+$responsive: map.merge($layout-responsive, $set-responsive);
+
+/// This map controls whether or not utility classes are generated. By default,
+/// Finch will not create any class names. Switching any of these values to `true`
+/// will create the classes for that property.
+$layout-utilities: (
+  border-radius: false,
+  border-width: false,
+  display: false,
+  margin: false,
+  padding: true,
+  position: false,
+  z-index: false,
+  stack: false,
+  box: false,
 );
 /// provide custom 'utilities' settings for this module.
 /// @example @use '<path-to-finch>/layout' with ($set-utilities: (padding-top: true));
@@ -40,12 +45,18 @@ $utilities: map.merge($layout-utilities, $set-utilities);
 /// These are the variables that the module can be `@used` with, to customise the compiled CSS output.
 /// @example @use '<path-to-finch>/layout' with ($spacers: (large: 5rem));
 /// @example @use '<path-to-finch>/layout' with ($offset: (large: 4rem));
+$border-radii: () !default;
+$border-widths: () !default;
 $margins: () !default;
 $paddings: () !default;
 $z-indices: () !default;
 
 /// FORWARD THE PROPERTIES
 /// We pass along the property files with any custom configuration as required.
+@forward './properties/borders' with (
+  $set-border-radii: $border-radii,
+  $set-border-widths: $border-widths
+);
 @forward './properties/displays';
 @forward './properties/margins' with ($set-margins: $margins);
 @forward './properties/paddings' with ($set-paddings: $paddings);
@@ -57,14 +68,16 @@ $z-indices: () !default;
 /// We use the property files within the module itself, to generate responsive classes,
 /// and as part of the composition of some top-level mixins, we therefore load them all in here:
 @use '../_mixins' as m;
-@use 'properties/displays' as *;
+@use 'properties/borders' as *;
 @use 'properties/margins' as *;
 @use 'properties/paddings' as *;
 @use 'properties/positions' as *;
 @use 'properties/z-indices' as *;
 
 $layout-maps: (
-  display: $displays,
+  border-radius: $b-radii,
+  border-width: $b-widths,
+  display: (none, block, inline, inline-block, grid, flex),
   margin: $margin-sizes,
   padding: $padding-sizes,
   position: $positions,
@@ -101,11 +114,13 @@ $layout-maps: (
 /// the module level mixins combine several different properties from within the layout module.
 
 /// BOX-RESET
-@mixin box-reset($content: true, $border: true) {
+/// @param $size {Boolean} determines if the width and height properties should be reset.
+/// @param $border {Boolean} determines if the border property should be reset.
+@mixin box-reset($size: true, $border: true) {
   @include padding(none);
   @include margin(none);
   
-  @if $content {
+  @if $size {
     width: initial;
     height: initial;
   }
@@ -115,8 +130,12 @@ $layout-maps: (
   }
 }
 
+.box-reset { @include box-reset; }
+
 /// BOX [LAYOUT-PRIMITIVES]
 /// ----------
+/// @param $padding a keyword value that represents a key in the 'paddings' map.
+/// @param $reset {Boolean} a flag that determines whether or not the `box-reset` mixin should be included.
 @mixin box($padding: base, $reset: false) {
   @if $reset { @include box-reset; }
   padding: get-padding($padding);
@@ -128,9 +147,20 @@ $layout-maps: (
     color: inherit;
   }
 }
+/* box utilities - generates classes like `.box:large` `.box:base` */
+@if map.get($utilities, box) {
+  @each $pad, $val in $padding-sizes {
+    .box\:pad-#{$pad} {
+      @include box($padding: $pad);
+    }
+  }
+}
 
 /// PILLAR [LAYOUT-PRIMITIVES]
 /// ----------
+/// @param $max a width that will limit the size of the pillar.
+/// @param $padding a keyword value that represents a key in the 'paddings' map.
+/// @param $intrinsic a flag that determines if the flex column code should be included.
 @mixin pillar($max: null, $padding: base, $intrinsic: false) {
   box-sizing: content-box;
   @include margin($key: auto, $axis: x);
@@ -152,18 +182,19 @@ $layout-maps: (
 /// STACK [LAYOUT-PRIMITIVES]
 /// ----------
 @mixin stack($flow: large, $recursive: false) {
+  $stack-gap: get-margin($flow);
   /// Recursive stack:
   /// Top margin is applied to any element that follows any other element
   /// regardless of nesting/depth.
   @if $recursive {
-    * + * { margin-top: get-margin($flow); }
+    * + * { margin-top: $stack-gap; }
   }
 
   /// Non-recursive stack (this is the default):
   /// Top margin is applied only to the immediate children of the 'stack'
   /// element, not to their children as well.
   @else {
-    > * + * { margin-top: get-margin($flow); }
+    > * + * { margin-top: $stack-gap; }
   }
 }
 /* stack utilities - generates classes like `.stack:large`, `.stack-recursive:base` etc */
@@ -176,41 +207,6 @@ $layout-maps: (
     .stack-recursive\:#{$mar} {
       @include stack($flow: $mar, $recursive: true);
     }
-  }
-}
-
-/// SIDEBAR [LAYOUT PRIMITIVES]
-/// ----------
-
-@mixin sidebar($gap: map.get(config.$size-scale, 400), $side-width: 20rem, $break-at: 50%, $side: left) {
-  %main-content {
-    flex-basis: 0;
-    flex-grow: 999;
-    min-width: $break-at - $gap;
-  }
-  
-  > * {
-    display: flex;
-    flex-wrap: wrap;
-    margin: ($gap / 2) * -1;
-  }
-
-  > * > * {
-    margin: $gap / 2;
-    flex-basis: $side-width;
-    flex-grow: 1;
-  }
-
-  @if $side == left or $side == 'left' {
-    &:last-child { @extend %main-content; }
-  }
-
-  @else if $side == right or $side == 'right' {
-    &:first-child { @extend %main-content; }
-  }
-
-  @else {
-    @warn "side value '#{$side}' not recognised. Shoulde be 'left' or 'right'.";
   }
 }
 
@@ -240,6 +236,45 @@ We may revisit this at a later date, or implement some kind of Finch UI library.
     > * {
       margin: $gap / 2;
     }
+  }
+}
+
+/// SIDEBAR [LAYOUT PRIMITIVES]
+/// ----------
+/// @param $gap {Number} one of the key values for the modular scale map
+/// @param $side-width the ideal size of the 'sidebar' element
+/// @param $break-at the 
+@mixin sidebar($gap: 400, $side-width: 20rem, $break-at: 50%, $side: left) {
+  $gap-value: map.get(config.$size-scale, $gap);
+
+  %main-content {
+    flex-basis: 0;
+    flex-grow: 999;
+    min-width: $break-at - $gap;
+  }
+  
+  > * {
+    display: flex;
+    flex-wrap: wrap;
+    margin: ($gap-value / 2) * -1;
+  }
+
+  > * > * {
+    margin: $gap / 2;
+    flex-basis: $side-width;
+    flex-grow: 1;
+  }
+
+  @if $side == left or $side == 'left' {
+    &:last-child { @extend %main-content; }
+  }
+
+  @else if $side == right or $side == 'right' {
+    &:first-child { @extend %main-content; }
+  }
+
+  @else {
+    @warn "side value '#{$side}' not recognised. Shoulde be 'left' or 'right'.";
   }
 }
 */

@@ -1,7 +1,6 @@
 @use 'sass:map';
 @use 'sass:math';
 
-/// @author stephen pal-george
 /// @param {Map} $map
 /// @param {String} $target the initial key of the map, whose neighbour you want to find.
 @function map-get-next($map, $target) {
@@ -31,15 +30,14 @@
   }
 }
 
-/// @author stephen pal-george
 /// @param {Length} $base the initial size for "normal" text/padding etc.
 /// @param {Number} $ratio the amount by which each succesive step in the scale should be multiplied.
 /// @return {Map} function returns a map that contains 10 size values derived from the params.
 @function create-scale($base: 1rem, $ratio) {
   $scale: (
-    100: $base / math.pow($ratio, 3),
-    200: $base / math.pow($ratio, 2),
-    300: $base / math.pow($ratio, 1),
+    100: math.div($base, math.pow($ratio, 3)),
+    200: math.div($base, math.pow($ratio, 2)),
+    300: math.div($base, math.pow($ratio, 1)),
     400: $base,
     500: $base * math.pow($ratio, 1),
     600: $base * math.pow($ratio, 2),

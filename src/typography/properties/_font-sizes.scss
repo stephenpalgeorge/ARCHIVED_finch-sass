@@ -13,13 +13,16 @@ $finch-font-sizes: (
 $set-font-sizes: () !default;
 $sizes: map.merge($finch-font-sizes, $set-font-sizes);
 
+/// Getter function
+/// @param $key one of the keys from the `$sizes` map.
+/// @return {Length | null} the font-size declaration associated with the given `$key`, or `null` if `$key` is not found.
 @function get-font-size($key) {
   // return the given value immediately if it is a reserved keyword for this property:
   $spec-values: (xx-small, x-small, small, medium, large, x-large, xx-large, xxx-large);
   @if list.index(config.$global-values, $key) or list.index($spec-values, $key) {
     @return $key;
   }
-
+  // try and find the value in the map and either return it, or handle the error case below.
   $value: map.get($sizes, $key);
   @if $value {
     @return $value;
