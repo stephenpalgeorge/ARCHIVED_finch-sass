@@ -350,6 +350,6 @@ The boolean values from these maps are iterated over to generate utility classes
   ),
 );
 
-// classes like `.padding:large`, `margin:small!` and `.padding:small@sm`
+// classes like `.padding:large`, `.margin:small!` and `.padding:small@sm`
 // are now available.
 ```
