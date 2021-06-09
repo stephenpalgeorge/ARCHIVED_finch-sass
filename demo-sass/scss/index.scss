@@ -36,16 +36,19 @@
 
 h1 {
   color: clr.use(yellow);
+  background-color: clr.use(yellow, 900);
 }
 
 body {
   margin: 0;
   padding: lyt.get-padding(x-large);
-  background-color: clr.use(red);
+  background-color: clr.use(red, 700);
 
   section {
+    margin: -(lyt.get-margin(base));
     @include lyt.flex-blocks;
     > * {
+      margin: lyt.get-margin(base);
       @include lyt.box($padding: base);
       @include lyt.border-block($color: clr.use(white));
     }

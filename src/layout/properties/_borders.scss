@@ -104,7 +104,6 @@ $b-radii: map.merge($finch-border-radii, $set-border-radii);
 @mixin border($width: base, $style: solid, $color: #000, $radius: null, $sides: null) {
   $sides-list: (top, right, bottom, left, inline-end, inline-start, block-end, block-start);
   // if $sides is a list, e.g. (top, right), iterate through it and apply the variables to each.
-  @debug meta.type-of($sides);
   @if meta.type-of($sides) == list {
     @each $side in $sides {
       @if list.index($sides-list, $side) {

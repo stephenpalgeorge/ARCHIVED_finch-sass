@@ -1,6 +1,7 @@
 @use 'sass:list';
 @use 'sass:map';
 @use '../config';
+@use '../_functions' as func;
 
 /// MODULE SETUP
 /// ----------
@@ -42,11 +43,15 @@ $finch-purple: hsl(279, 82%, 41%) !default; // pairs with white, AAA
 $finch-orange: hsl(22, 100%, 53%) !default; // pairs with black, AAA
 $finch-indigo: hsl(231, 57%, 70%) !default; // pairs with black, AAA
 $finch-violet: hsl(270, 100%, 46%) !default; // pairs with white, AAA
+$finch-light: hsl(285, 50%, 98%) !default; // pairs with black, AAA
+$finch-dark: hsl(0, 0, 13%) !default; // pairs with white, AAA
 $finch-colors: (
   // THEME COLORS
   main: $finch-red,
   secondary: $finch-blue,
   tertiary:$finch-yellow,
+  light: $finch-light,
+  dark: $finch-dark,
   // NAMED COLORS
   white: hsl(0, 0%, 100%),
   black: hsl(0, 0%, 0%),
@@ -90,9 +95,25 @@ $color-palette: map.merge($finch-colors, $colors);
 
 /// USE
 /// ----------
+/// Create all of the shades.
+///
+
+// initialise an empty map.
+$shades-map: ();
+// loop over all the colors and create a map of shades for each. The `$shades-map` should
+// then contain a map for each colour in `$color-palette`, with 11 shades for each.
+@each $name, $clr in $color-palette {
+  // generate a map for each color.
+  $shades-map: map.set($shades-map, $name, func.create-shades($clr));
+}
+
 /// The 'use' function provides a shorthand for accessing value in the `$color-palette` map
-/// that the color module defines.
-@function use($key) {
+/// that the color module defines. It also accepts an optional `$shade` parameter, that will
+/// adjust the color to be lighter (1000) or darker (0).
+/// @param $key one of the keys from the color-palette map.
+/// @param $shade {Number} a number from 0 - 1000, in increments of 100.
+///
+@function use($key, $shade: null) {
   $spec-values: (currentColor);
   // if the given value is one of the `global-values`, or one of the `spec-values` return it immediately:
   @if list.index(config.$global-values, $key) or list.index($spec-values, $key) {
@@ -100,6 +121,11 @@ $color-palette: map.merge($finch-colors, $colors);
   }
   // try and find the value in the map and either return it, or handle the error case below.
   $value: map.get($color-palette, $key);
+  @if $shade {
+    $map: map.get($shades-map, $key);
+    $value: map.get($map, $shade);
+  }
+  
   @if $value {
     @return $value;
   }

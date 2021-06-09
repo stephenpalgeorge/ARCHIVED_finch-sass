@@ -359,14 +359,16 @@ h3 {
 
 h1 {
   color: #f7c326;
+  background-color: #fefaeb;
 }
 
 body {
   margin: 0;
   padding: 3.8146972656rem;
-  background-color: #b1021c;
+  background-color: #fe8194;
 }
 body section {
+  margin: -1rem;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
@@ -377,6 +379,7 @@ body section > * {
   min-width: 16rem;
 }
 body section > * {
+  margin: 1rem;
   padding: 1rem;
   outline: 0.125rem solid transparent;
   outline-offset: -0.125rem;
