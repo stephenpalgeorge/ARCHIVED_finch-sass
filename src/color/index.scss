@@ -2,13 +2,15 @@
 @use 'sass:map';
 @use '../config';
 @use '../_functions' as func;
+@use '../_mixins' as m;
 
 /// MODULE SETUP
 /// ----------
 /// This map controls whether the styles are generated specifically for each breakpoint.
 /// If true, then placeholders and classes such as `.color:blue@sm` will be created.
 $color-responsive: (
-  
+  color: false,
+  background-color: false,
 );
 /// provide custom 'responsive' settings for this module.
 /// @example @use '<path-to-finch>/color' with ($set-responsive: (background-color: true));
@@ -19,7 +21,8 @@ $responsive: map.merge($color-responsive, $set-responsive);
 /// Finch will not create any class names. Switching any of these values to `true`
 /// will create the classes for that property.
 $color-utilities: (
-  
+  color: false,
+  background-color: false,
 );
 /// provide custom 'utilities' settings for this module.
 /// @example @use '<path-to-finch>/color' with ($set-utilities: (color: true));
@@ -44,7 +47,7 @@ $finch-orange: hsl(22, 100%, 53%) !default; // pairs with black, AAA
 $finch-indigo: hsl(231, 57%, 70%) !default; // pairs with black, AAA
 $finch-violet: hsl(270, 100%, 46%) !default; // pairs with white, AAA
 $finch-light: hsl(285, 50%, 98%) !default; // pairs with black, AAA
-$finch-dark: hsl(0, 0, 13%) !default; // pairs with white, AAA
+$finch-dark: hsl(0, 0%, 13%) !default; // pairs with white, AAA
 $finch-colors: (
   // THEME COLORS
   main: $finch-red,
@@ -132,4 +135,30 @@ $shades-map: ();
 
   @warn 'No color found for key "#{$key}"';
   @return null;
+}
+
+/// GENERATE UTILITY CLASS NAMES
+/// ----------
+/// the following code generates classes such as `.color:white` or `.bg-color:indigo`.
+/// the classes will only be generated if the corresponding property is set to `true` in
+/// the $layout-utilities map.
+@each $property, $flag in $utilities {
+  @if $flag {
+    @include m.gen-utils($property, $color-palette);
+  }
+}
+
+/// GENERATE RESPONSIVE CLASS NAMES
+/// ----------
+/// the following code generates classes such as `sm:size--lead`, or `xl:weight--heavy`.
+/// the classes will only be generated if the corresponding property is set to 'true' in
+/// the $responsive map.
+@each $key, $value in config.$breakpoints-map {
+  @include config.break($key) {
+    @each $property, $flag in $responsive {
+      @if $flag {
+        @include m.gen-responsive($key, $property, $color-palette);
+      }
+    }
+  }
 }

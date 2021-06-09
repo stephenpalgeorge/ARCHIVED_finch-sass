@@ -108,6 +108,7 @@ $typography-values: (
 );
 
 /// GENERATE UTILITY CLASS NAMES
+/// ----------
 /// the following code generates classes such as `.txt-align--center` or `.ln-hgt--tall`.
 /// the classes will only be generated if the corresponding property is set to `true` in
 /// the $font-utilities map.
@@ -119,7 +120,7 @@ $typography-values: (
 
 /// GENERATE RESPONSIVE CLASS NAMES
 /// ----------
-/// the following code generates classes such as `.sm:fnt-sz--lead`, or `.xl:fnt-wgt--heavy`.
+/// the following code generates classes such as `.font-size:lead@sm`, or `.font-weight:heavy@xl`.
 /// the classes will only be generated if the corresponding property is set to 'true' in
 /// the $font-responsive map.
 @each $key, $value in config.$breakpoints-map {

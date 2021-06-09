@@ -344,6 +344,166 @@ h3 {
 
 /* box utilities - generates classes like `.box:large` `.box:base` */
 /* stack utilities - generates classes like `.stack:large`, `.stack-recursive:base` etc */
+.color\:main {
+  color: #b1021c;
+}
+
+.color\:main\! {
+  color: #b1021c !important;
+}
+
+.color\:secondary {
+  color: #3cabec;
+}
+
+.color\:secondary\! {
+  color: #3cabec !important;
+}
+
+.color\:tertiary {
+  color: #f7c326;
+}
+
+.color\:tertiary\! {
+  color: #f7c326 !important;
+}
+
+.color\:light {
+  color: #fbf7fc;
+}
+
+.color\:light\! {
+  color: #fbf7fc !important;
+}
+
+.color\:dark {
+  color: #212121;
+}
+
+.color\:dark\! {
+  color: #212121 !important;
+}
+
+.color\:white {
+  color: white;
+}
+
+.color\:white\! {
+  color: white !important;
+}
+
+.color\:black {
+  color: black;
+}
+
+.color\:black\! {
+  color: black !important;
+}
+
+.color\:red {
+  color: #b1021c;
+}
+
+.color\:red\! {
+  color: #b1021c !important;
+}
+
+.color\:blue {
+  color: #3cabec;
+}
+
+.color\:blue\! {
+  color: #3cabec !important;
+}
+
+.color\:green {
+  color: #425e21;
+}
+
+.color\:green\! {
+  color: #425e21 !important;
+}
+
+.color\:yellow {
+  color: #f7c326;
+}
+
+.color\:yellow\! {
+  color: #f7c326 !important;
+}
+
+.color\:pink {
+  color: #e071ac;
+}
+
+.color\:pink\! {
+  color: #e071ac !important;
+}
+
+.color\:purple {
+  color: #8213be;
+}
+
+.color\:purple\! {
+  color: #8213be !important;
+}
+
+.color\:orange {
+  color: #ff670f;
+}
+
+.color\:orange\! {
+  color: #ff670f !important;
+}
+
+.color\:indigo {
+  color: #8794de;
+}
+
+.color\:indigo\! {
+  color: #8794de !important;
+}
+
+.color\:violet {
+  color: #7500eb;
+}
+
+.color\:violet\! {
+  color: #7500eb !important;
+}
+
+.color\:error {
+  color: #b1021c;
+}
+
+.color\:error\! {
+  color: #b1021c !important;
+}
+
+.color\:info {
+  color: #3cabec;
+}
+
+.color\:info\! {
+  color: #3cabec !important;
+}
+
+.color\:success {
+  color: #425e21;
+}
+
+.color\:success\! {
+  color: #425e21 !important;
+}
+
+.color\:warning {
+  color: #f7c326;
+}
+
+.color\:warning\! {
+  color: #f7c326 !important;
+}
+
 .text {
   font-family: "Poppins", sans-serif;
   font-size: 1rem;

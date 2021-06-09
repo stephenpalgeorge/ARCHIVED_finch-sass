@@ -85,6 +85,7 @@ $layout-maps: (
 );
 
 /// GENERATE UTILITY CLASS NAMES
+/// ----------
 /// the following code generates classes such as `.pad--large` or `.pos--absolute`.
 /// the classes will only be generated if the corresponding property is set to `true` in
 /// the $layout-utilities map.
@@ -96,7 +97,7 @@ $layout-maps: (
 
 /// GENERATE RESPONSIVE CLASS NAMES
 /// ----------
-/// the following code generates classes such as `sm:size--lead`, or `xl:weight--heavy`.
+/// the following code generates classes such as `.margin:large`, or `.padding:base@sm`.
 /// the classes will only be generated if the corresponding property is set to 'true' in
 /// the $responsive map.
 @each $key, $value in config.$breakpoints-map {

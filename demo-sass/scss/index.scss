@@ -23,7 +23,9 @@
 @use '../../src/typography/' as typ;
 
 @use '../../src/layout/' as lyt;
-@use '../../src/color/' as clr;
+@use '../../src/color/' as clr with (
+  $set-utilities: (color: true),
+);
 
 .text {
   @include typ.text-format($size: base);

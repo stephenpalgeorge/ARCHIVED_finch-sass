@@ -16,8 +16,8 @@
     // when $propValues is a map:
     @each $key, $value in $propValues {
       // e.g. `.font-size:lead` && `.font-size:lead!`
-      .#{$label}\:#{$key} { #{$prop}: $value; }
-      .#{$label}\:#{$key}\! { #{$prop}: $value !important; }
+      .#{$label}\:#{"" + $key} { #{$prop}: $value; }
+      .#{$label}\:#{"" + $key}\! { #{$prop}: $value !important; }
     }
   }
 }
@@ -35,8 +35,8 @@
     // when $propValues is a map
     @each $key, $value in $propValues {
       // e.g. `.font-size:lead@sm` && `.font-size:lead@sm!`
-      .#{$label}\:#{$key}\@#{$breakpoint} { #{$prop}: $value; }
-      .#{$label}\:#{$key}\@#{$breakpoint}\! { #{$prop}: $value !important; }
+      .#{$label}\:#{"" + $key}\@#{$breakpoint} { #{$prop}: $value; }
+      .#{$label}\:#{"" + $key}\@#{$breakpoint}\! { #{$prop}: $value !important; }
     }
   }
 }
