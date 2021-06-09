@@ -1,4 +1,6 @@
+@use 'sass:list';
 @use 'sass:map';
+@use '../config';
 
 /// MODULE SETUP
 /// ----------
@@ -29,10 +31,17 @@ $utilities: map.merge($color-utilities, $set-utilities);
 $use-pure: false;
 /// Define default colors for the module:
 ///
+/// Data for contrast checking and pass/fail on `AA` and `AAA` standards
+/// taken from [WebAIM](https://webaim.org/resources/contrastchecker/).
 $finch-red: hsl(351, 98%, 35%) !default; // pairs with white, AAA
 $finch-blue: hsl(202, 82%, 58%) !default; // pairs with black, AAA
 $finch-green: hsl(88, 48%, 25%) !default; // pairs with white, AAA
 $finch-yellow: hsl(45, 93%, 56%) !default; // pairs with black, AAA
+$finch-pink: hsl(328, 64%, 66%) !default; // pairs with black, AAA
+$finch-purple: hsl(279, 82%, 41%) !default; // pairs with white, AAA
+$finch-orange: hsl(22, 100%, 53%) !default; // pairs with black, AAA
+$finch-indigo: hsl(231, 57%, 70%) !default; // pairs with black, AAA
+$finch-violet: hsl(270, 100%, 46%) !default; // pairs with white, AAA
 $finch-colors: (
   // THEME COLORS
   main: $finch-red,
@@ -45,11 +54,11 @@ $finch-colors: (
   blue: $finch-blue,
   green: $finch-green,
   yellow: $finch-yellow,
-  pink: hsl(328, 64%, 56%),
-  purple: hsl(279, 82%, 41%),
-  orange: hsl(22, 100%, 51%),
-  indigo: hsl(231, 57%, 60%),
-  violet: hsl(270, 100%, 50%),
+  pink: $finch-pink,
+  purple: $finch-purple,
+  orange: $finch-orange,
+  indigo: $finch-indigo,
+  violet: $finch-violet,
   // CONTEXTUAL COLORS
   error: $finch-red,
   info: $finch-blue,
@@ -73,3 +82,28 @@ $pure-colors: (
 @if $use-pure { $finch-colors: map.merge($finch-colors, $pure-colors); }
 $colors: () !default;
 $color-palette: map.merge($finch-colors, $colors);
+
+/// COLOR FUNCTIONS
+/// ----------
+/// Module-level functions for using and handling colors.
+///
+
+/// USE
+/// ----------
+/// The 'use' function provides a shorthand for accessing value in the `$color-palette` map
+/// that the color module defines.
+@function use($key) {
+  $spec-values: (currentColor);
+  // if the given value is one of the `global-values`, or one of the `spec-values` return it immediately:
+  @if list.index(config.$global-values, $key) or list.index($spec-values, $key) {
+    @return $key;
+  }
+  // try and find the value in the map and either return it, or handle the error case below.
+  $value: map.get($color-palette, $key);
+  @if $value {
+    @return $value;
+  }
+
+  @warn 'No color found for key "#{$key}"';
+  @return null;
+}
