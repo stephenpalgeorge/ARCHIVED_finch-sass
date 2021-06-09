@@ -1,3 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,900&display=swap");
 .font-size\:small-print {
   font-size: 0.8rem;
 }
@@ -39,7 +43,7 @@
 }
 
 .text-body, p:not([class]) {
-  font-family: Verdana, sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.953125;
@@ -48,7 +52,7 @@
 }
 
 .text-lead {
-  font-family: Verdana, sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 1.25rem;
   font-weight: 200;
   line-height: 1.953125;
@@ -57,7 +61,7 @@
 }
 
 .text-subheading, h2, h3 {
-  font-family: Georgia, serif;
+  font-family: "Playfair Display", serif;
   font-size: 2.44140625rem;
   font-weight: 400;
   line-height: 1.25;
@@ -65,7 +69,7 @@
 }
 
 .text-heading, h1 {
-  font-family: Georgia, serif;
+  font-family: "Playfair Display", serif;
   font-size: 3.0517578125rem;
   font-weight: 900;
   line-height: 1.25;
@@ -341,20 +345,26 @@ h3 {
 /* box utilities - generates classes like `.box:large` `.box:base` */
 /* stack utilities - generates classes like `.stack:large`, `.stack-recursive:base` etc */
 .text {
-  font-family: Verdana, sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.953125;
   text-align: start;
+  color: white;
 }
 
 .body {
   font-size: 1rem;
 }
 
+h1 {
+  color: #f7c326;
+}
+
 body {
   margin: 0;
-  padding: 0;
+  padding: 3.8146972656rem;
+  background-color: #b1021c;
 }
 body section {
   display: flex;
@@ -367,10 +377,33 @@ body section > * {
   min-width: 16rem;
 }
 body section > * {
-  padding: 3.8146972656rem;
+  padding: 1rem;
   outline: 0.125rem solid transparent;
   outline-offset: -0.125rem;
+  border-block-width: 0.125rem;
+  border-block-style: solid;
+  border-block-color: white;
 }
 body section > * * {
   color: inherit;
+}
+@supports not (border-inline: 0) {
+  body section > * {
+    border-block-start-width: 0.125rem;
+    border-block-start-style: solid;
+    border-block-start-color: white;
+    border-block-end-width: 0.125rem;
+    border-block-end-style: solid;
+    border-block-end-color: white;
+  }
+}
+@supports not (border-inline-start: 0) {
+  body section > * {
+    border-right-width: 0.125rem;
+    border-right-style: solid;
+    border-right-color: white;
+    border-left-width: 0.125rem;
+    border-left-style: solid;
+    border-left-color: white;
+  }
 }

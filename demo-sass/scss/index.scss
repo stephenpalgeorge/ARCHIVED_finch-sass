@@ -20,28 +20,34 @@
   $use-scale: major-thirds,
 );
 
-@use '../../src/typography/' as typ with (
-  $use-web-safe: true,
-);
+@use '../../src/typography/' as typ;
 
 @use '../../src/layout/' as lyt;
+@use '../../src/color/' as clr;
 
 .text {
   @include typ.text-format($size: base);
+  color: clr.use(white);
 }
 
 .body {
   font-size: typ.get-font-size(base);
 }
 
+h1 {
+  color: clr.use(yellow);
+}
+
 body {
   margin: 0;
-  padding: 0;
+  padding: lyt.get-padding(x-large);
+  background-color: clr.use(red);
 
   section {
     @include lyt.flex-blocks;
     > * {
-      @include lyt.box($padding: x-large);
+      @include lyt.box($padding: base);
+      @include lyt.border-block($color: clr.use(white));
     }
   }
 }
