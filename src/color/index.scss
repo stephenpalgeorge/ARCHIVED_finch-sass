@@ -1,0 +1,75 @@
+@use 'sass:map';
+
+/// MODULE SETUP
+/// ----------
+/// This map controls whether the styles are generated specifically for each breakpoint.
+/// If true, then placeholders and classes such as `.color:blue@sm` will be created.
+$color-responsive: (
+  
+);
+/// provide custom 'responsive' settings for this module.
+/// @example @use '<path-to-finch>/color' with ($set-responsive: (background-color: true));
+$set-responsive: () !default;
+$responsive: map.merge($color-responsive, $set-responsive);
+
+/// This map controls whether or not utility classes are generated. By default,
+/// Finch will not create any class names. Switching any of these values to `true`
+/// will create the classes for that property.
+$color-utilities: (
+  
+);
+/// provide custom 'utilities' settings for this module.
+/// @example @use '<path-to-finch>/color' with ($set-utilities: (color: true));
+$set-utilities: () !default;
+$utilities: map.merge($color-utilities, $set-utilities);
+
+/// MODULE CONFIG
+/// ----------
+/// Define configuration variables:
+$use-pure: false;
+/// Define default colors for the module:
+///
+$finch-red: hsl(351, 98%, 35%) !default; // pairs with white, AAA
+$finch-blue: hsl(202, 82%, 58%) !default; // pairs with black, AAA
+$finch-green: hsl(88, 48%, 25%) !default; // pairs with white, AAA
+$finch-yellow: hsl(45, 93%, 56%) !default; // pairs with black, AAA
+$finch-colors: (
+  // THEME COLORS
+  main: $finch-red,
+  secondary: $finch-blue,
+  tertiary:$finch-yellow,
+  // NAMED COLORS
+  white: hsl(0, 0%, 100%),
+  black: hsl(0, 0%, 0%),
+  red: $finch-red,
+  blue: $finch-blue,
+  green: $finch-green,
+  yellow: $finch-yellow,
+  pink: hsl(328, 64%, 56%),
+  purple: hsl(279, 82%, 41%),
+  orange: hsl(22, 100%, 51%),
+  indigo: hsl(231, 57%, 60%),
+  violet: hsl(270, 100%, 50%),
+  // CONTEXTUAL COLORS
+  error: $finch-red,
+  info: $finch-blue,
+  success: $finch-green,
+  warning: $finch-yellow,
+);
+$pure-colors: (
+  red: hsl(0, 100%, 50%),
+  blue: hsl(240, 100%, 50%),
+  green: hsl(120, 100%, 50%),
+  yellow: hsl(60, 100%, 50%),
+  pink: hsl(300, 100%, 50%),
+  purple: hsl(300, 100%, 25%),
+  orange: hsl(39, 100%, 50%),
+  indigo: hsl(275, 100%, 25%),
+  violet: hsl(270, 100%, 50%),
+);
+
+// if `$use-pure` is set to `true`, then the "pure" colors will be merged into,
+// (and therefore will override) the `$finch-color` values of the same key.
+@if $use-pure { $finch-colors: map.merge($finch-colors, $pure-colors); }
+$colors: () !default;
+$color-palette: map.merge($finch-colors, $colors);

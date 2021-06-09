@@ -330,36 +330,16 @@ h3 {
     padding: 3.8146972656rem !important;
   }
 }
-/* stack utilities - generates classes like `.stack:large`, `.stack-recursive:base` etc */
-/*
-The code below has been removed for the time being. The decision has been taken that 
-layouts should not be included if they depend on a particular setup/structure in the
-markup.
-
-We may revisit this at a later date, or implement some kind of Finch UI library...
-
-/// CLUSTER [LAYOUT PRIMITIVES]
-/// ----------
-@mixin cluster(
-  $gap: map.get(config.$size-scale, 400),
-  $justify: flex-start,
-  $align: center
-) {
-  overflow: hidden;
-
-  > * {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: $justify;
-    align-items: $align;
-    margin: ($gap / 2) * -1;
-
-    > * {
-      margin: $gap / 2;
-    }
-  }
+.box-reset {
+  padding: 0;
+  margin: 0;
+  width: initial;
+  height: initial;
+  border: none;
 }
-*/
+
+/* box utilities - generates classes like `.box:large` `.box:base` */
+/* stack utilities - generates classes like `.stack:large`, `.stack-recursive:base` etc */
 .text {
   font-family: Verdana, sans-serif;
   font-size: 1rem;
