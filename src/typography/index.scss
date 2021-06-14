@@ -7,7 +7,7 @@
 /// These are some high level settings that the rest of the typography module depends on:
 $use-web-safe: false !default;
 /// This map controls whether the styles are generated specifically for each breakpoint.
-/// If true, then placeholders and classes such as `(\.|%)sm\:font-size--lead` will be created.
+/// If true, then placeholders and classes such as `.font-size:lead@lg` will be created.
 /// `text-decoration` is deliberately omitted from this map as there are too many variables to make
 /// utility classes practical/useful.
 $font-responsive: (
@@ -73,15 +73,11 @@ $word-spacings: () !default;
   $prefer-web-safe: $use-web-safe,
 );
 @forward 'properties/font-sizes' with ($set-font-sizes: $font-sizes);
-@forward 'properties/font-styles';
-@forward 'properties/font-variants';
 @forward 'properties/font-weights' with ($set-font-weights: $font-weights);
 @forward 'properties/letter-spacings' with ($set-letter-spacings: $letter-spacings);
 @forward 'properties/line-heights' with ($set-line-heights: $line-heights);
-@forward 'properties/text-aligns';
 @forward 'properties/text-decorations';
 @forward 'properties/text-indents' with ($set-text-indents: $text-indents);
-@forward 'properties/text-transforms';
 @forward 'properties/word-spacings' with ($set-word-spacings: $word-spacings);
 
 /// LOAD THE PROPERTIES
@@ -112,6 +108,7 @@ $typography-values: (
 );
 
 /// GENERATE UTILITY CLASS NAMES
+/// ----------
 /// the following code generates classes such as `.txt-align--center` or `.ln-hgt--tall`.
 /// the classes will only be generated if the corresponding property is set to `true` in
 /// the $font-utilities map.
@@ -123,7 +120,7 @@ $typography-values: (
 
 /// GENERATE RESPONSIVE CLASS NAMES
 /// ----------
-/// the following code generates classes such as `.sm:fnt-sz--lead`, or `.xl:fnt-wgt--heavy`.
+/// the following code generates classes such as `.font-size:lead@sm`, or `.font-weight:heavy@xl`.
 /// the classes will only be generated if the corresponding property is set to 'true' in
 /// the $font-responsive map.
 @each $key, $value in config.$breakpoints-map {

@@ -1,3 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,900&display=swap");
 .font-size\:small-print {
   font-size: 0.8rem;
 }
@@ -39,7 +43,7 @@
 }
 
 .text-body, p:not([class]) {
-  font-family: Verdana, sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.953125;
@@ -48,7 +52,7 @@
 }
 
 .text-lead {
-  font-family: Verdana, sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 1.25rem;
   font-weight: 200;
   line-height: 1.953125;
@@ -57,7 +61,7 @@
 }
 
 .text-subheading, h2, h3 {
-  font-family: Georgia, serif;
+  font-family: "Playfair Display", serif;
   font-size: 2.44140625rem;
   font-weight: 400;
   line-height: 1.25;
@@ -65,7 +69,7 @@
 }
 
 .text-heading, h1 {
-  font-family: Georgia, serif;
+  font-family: "Playfair Display", serif;
   font-size: 3.0517578125rem;
   font-weight: 900;
   line-height: 1.25;
@@ -330,53 +334,201 @@ h3 {
     padding: 3.8146972656rem !important;
   }
 }
-/* stack utilities - generates classes like `.stack:large`, `.stack-recursive:base` etc */
-/*
-The code below has been removed for the time being. The decision has been taken that 
-layouts should not be included if they depend on a particular setup/structure in the
-markup.
-
-We may revisit this at a later date, or implement some kind of Finch UI library...
-
-/// CLUSTER [LAYOUT PRIMITIVES]
-/// ----------
-@mixin cluster(
-  $gap: map.get(config.$size-scale, 400),
-  $justify: flex-start,
-  $align: center
-) {
-  overflow: hidden;
-
-  > * {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: $justify;
-    align-items: $align;
-    margin: ($gap / 2) * -1;
-
-    > * {
-      margin: $gap / 2;
-    }
-  }
+.box-reset {
+  padding: 0;
+  margin: 0;
+  width: initial;
+  height: initial;
+  border: none;
 }
-*/
+
+/* box utilities - generates classes like `.box:large` `.box:base` */
+/* stack utilities - generates classes like `.stack:large`, `.stack-recursive:base` etc */
+.color\:main {
+  color: #b1021c;
+}
+
+.color\:main\! {
+  color: #b1021c !important;
+}
+
+.color\:secondary {
+  color: #3cabec;
+}
+
+.color\:secondary\! {
+  color: #3cabec !important;
+}
+
+.color\:tertiary {
+  color: #f7c326;
+}
+
+.color\:tertiary\! {
+  color: #f7c326 !important;
+}
+
+.color\:light {
+  color: #fbf7fc;
+}
+
+.color\:light\! {
+  color: #fbf7fc !important;
+}
+
+.color\:dark {
+  color: #212121;
+}
+
+.color\:dark\! {
+  color: #212121 !important;
+}
+
+.color\:white {
+  color: white;
+}
+
+.color\:white\! {
+  color: white !important;
+}
+
+.color\:black {
+  color: black;
+}
+
+.color\:black\! {
+  color: black !important;
+}
+
+.color\:red {
+  color: #b1021c;
+}
+
+.color\:red\! {
+  color: #b1021c !important;
+}
+
+.color\:blue {
+  color: #3cabec;
+}
+
+.color\:blue\! {
+  color: #3cabec !important;
+}
+
+.color\:green {
+  color: #425e21;
+}
+
+.color\:green\! {
+  color: #425e21 !important;
+}
+
+.color\:yellow {
+  color: #f7c326;
+}
+
+.color\:yellow\! {
+  color: #f7c326 !important;
+}
+
+.color\:pink {
+  color: #e071ac;
+}
+
+.color\:pink\! {
+  color: #e071ac !important;
+}
+
+.color\:purple {
+  color: #8213be;
+}
+
+.color\:purple\! {
+  color: #8213be !important;
+}
+
+.color\:orange {
+  color: #ff670f;
+}
+
+.color\:orange\! {
+  color: #ff670f !important;
+}
+
+.color\:indigo {
+  color: #8794de;
+}
+
+.color\:indigo\! {
+  color: #8794de !important;
+}
+
+.color\:violet {
+  color: #7500eb;
+}
+
+.color\:violet\! {
+  color: #7500eb !important;
+}
+
+.color\:error {
+  color: #b1021c;
+}
+
+.color\:error\! {
+  color: #b1021c !important;
+}
+
+.color\:info {
+  color: #3cabec;
+}
+
+.color\:info\! {
+  color: #3cabec !important;
+}
+
+.color\:success {
+  color: #425e21;
+}
+
+.color\:success\! {
+  color: #425e21 !important;
+}
+
+.color\:warning {
+  color: #f7c326;
+}
+
+.color\:warning\! {
+  color: #f7c326 !important;
+}
+
 .text {
-  font-family: Verdana, sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.953125;
   text-align: start;
+  color: white;
 }
 
 .body {
   font-size: 1rem;
 }
 
+h1 {
+  color: #f7c326;
+  background-color: #fefaeb;
+}
+
 body {
   margin: 0;
-  padding: 0;
+  padding: 3.8146972656rem;
+  background-color: #fe8194;
 }
 body section {
+  margin: -1rem;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
@@ -387,10 +539,34 @@ body section > * {
   min-width: 16rem;
 }
 body section > * {
-  padding: 3.8146972656rem;
+  margin: 1rem;
+  padding: 1rem;
   outline: 0.125rem solid transparent;
   outline-offset: -0.125rem;
+  border-block-width: 0.125rem;
+  border-block-style: solid;
+  border-block-color: white;
 }
 body section > * * {
   color: inherit;
+}
+@supports not (border-inline: 0) {
+  body section > * {
+    border-block-start-width: 0.125rem;
+    border-block-start-style: solid;
+    border-block-start-color: white;
+    border-block-end-width: 0.125rem;
+    border-block-end-style: solid;
+    border-block-end-color: white;
+  }
+}
+@supports not (border-inline-start: 0) {
+  body section > * {
+    border-right-width: 0.125rem;
+    border-right-style: solid;
+    border-right-color: white;
+    border-left-width: 0.125rem;
+    border-left-style: solid;
+    border-left-color: white;
+  }
 }

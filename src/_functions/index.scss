@@ -1,8 +1,16 @@
+@use 'sass:color';
 @use 'sass:map';
 @use 'sass:math';
 
+/// MAP GET NEXT
+/// ----------
+/// Function finds the value of a map key that is following key of a specified target. For example,
+/// for the following map - `$test: (1: 'first', 2: 'second');` - calling `map-get-next($test, 1)`,
+/// will return `'second'` - the value of `2`.
+///
 /// @param {Map} $map
 /// @param {String} $target the initial key of the map, whose neighbour you want to find.
+///
 @function map-get-next($map, $target) {
   // initialise a counter:
   $i: 1;
@@ -30,9 +38,14 @@
   }
 }
 
+/// CREATE SCALE
+/// ----------
+/// Generate a map that represents a modular scale.
+///
 /// @param {Length} $base the initial size for "normal" text/padding etc.
 /// @param {Number} $ratio the amount by which each succesive step in the scale should be multiplied.
 /// @return {Map} function returns a map that contains 10 size values derived from the params.
+///
 @function create-scale($base: 1rem, $ratio) {
   $scale: (
     100: math.div($base, math.pow($ratio, 3)),
@@ -48,4 +61,50 @@
   );
 
   @return $scale;
+}
+
+/// CREATE SHADES
+/// ----------
+/// A color function that generates a map for a given color, using the initial value as a base and
+/// adjusting the lightness to create values from `0` - `1000` in increments of 100.
+/// The original colour will be included twice in the map. Once according to it's lightness, and once
+/// under the key of `base`, for ease of reference.
+///
+/// @param $clr {Color} any color value that will be used to calculate the rest of the map.
+///
+@function create-shades($clr) {
+  // initialise empty map.
+  $shades: (base: $clr);
+  // get initial values of the color's lightness and, from that, its "index".
+  // I.e., a color with lightness `60%` would create an `$init: 6` and therefore
+  // a map key of `600`.
+  $light: color.lightness($clr);
+  $init: math.floor(math.div($light, 10%));
+  
+  // set counter variables
+  $index: $init;
+  $counter: 0;
+  // loop until we reach 0, setting map items for each value as we go.
+  // we remove 10% more from the lightness on each loop, thanks to the counter variable.
+  @while $index > -1 {
+    $key: $index * 100;
+    $value: color.adjust($clr, $lightness: -10% * $counter);
+    $shades: map.set($shades, $key, $value);
+    $index: $index - 1;
+    $counter: $counter + 1;
+  }
+
+  // reassign the counter variables so we can start counting from the initial value again.
+  // we add 10% more to the lightness on each loop, thanks to the counter variable.
+  $index: $init + 1;
+  $counter: 1;
+  @while $index < 11 {
+    $key: $index * 100;
+    $value: color.adjust($clr, $lightness: 10% * $counter);
+    $shades: map.set($shades, $key, $value);
+    $index: $index + 1;
+    $counter: $counter + 1;
+  }
+
+  @return $shades;
 }

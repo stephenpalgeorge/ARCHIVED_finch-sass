@@ -1,0 +1,287 @@
+@use 'sass:color';
+@use 'sass:list';
+@use 'sass:map';
+@use '../config';
+@use '../_functions' as func;
+@use '../_mixins' as m;
+
+/// MODULE SETUP
+/// ----------
+/// This map controls whether the styles are generated specifically for each breakpoint.
+/// If true, then placeholders and classes such as `.color:blue@sm` will be created.
+$color-responsive: (
+  color: false,
+  background-color: false,
+);
+/// provide custom 'responsive' settings for this module.
+/// @example @use '<path-to-finch>/color' with ($set-responsive: (background-color: true));
+$set-responsive: () !default;
+$responsive: map.merge($color-responsive, $set-responsive);
+
+/// This map controls whether or not utility classes are generated. By default,
+/// Finch will not create any class names. Switching any of these values to `true`
+/// will create the classes for that property.
+$color-utilities: (
+  color: false,
+  background-color: false,
+);
+/// provide custom 'utilities' settings for this module.
+/// @example @use '<path-to-finch>/color' with ($set-utilities: (color: true));
+$set-utilities: () !default;
+$utilities: map.merge($color-utilities, $set-utilities);
+
+/// MODULE CONFIG
+/// ----------
+/// Define configuration variables:
+$use-pure: false;
+/// Define default colors for the module:
+///
+/// Data for contrast checking and pass/fail on `AA` and `AAA` standards
+/// taken from [WebAIM](https://webaim.org/resources/contrastchecker/).
+$finch-red: hsl(351, 98%, 35%) !default; // pairs with white, AAA
+$finch-blue: hsl(202, 82%, 58%) !default; // pairs with black, AAA
+$finch-green: hsl(88, 48%, 25%) !default; // pairs with white, AAA
+$finch-yellow: hsl(45, 93%, 56%) !default; // pairs with black, AAA
+$finch-pink: hsl(328, 64%, 66%) !default; // pairs with black, AAA
+$finch-purple: hsl(279, 82%, 41%) !default; // pairs with white, AAA
+$finch-orange: hsl(22, 100%, 53%) !default; // pairs with black, AAA
+$finch-indigo: hsl(231, 57%, 70%) !default; // pairs with black, AAA
+$finch-violet: hsl(270, 100%, 46%) !default; // pairs with white, AAA
+$finch-light: hsl(285, 50%, 98%) !default; // pairs with black, AAA
+$finch-dark: hsl(0, 0%, 13%) !default; // pairs with white, AAA
+$finch-colors: (
+  // THEME COLORS
+  main: $finch-red,
+  secondary: $finch-blue,
+  tertiary:$finch-yellow,
+  light: $finch-light,
+  dark: $finch-dark,
+  // NAMED COLORS
+  white: hsl(0, 0%, 100%),
+  black: hsl(0, 0%, 0%),
+  red: $finch-red,
+  blue: $finch-blue,
+  green: $finch-green,
+  yellow: $finch-yellow,
+  pink: $finch-pink,
+  purple: $finch-purple,
+  orange: $finch-orange,
+  indigo: $finch-indigo,
+  violet: $finch-violet,
+  // CONTEXTUAL COLORS
+  error: $finch-red,
+  info: $finch-blue,
+  success: $finch-green,
+  warning: $finch-yellow,
+);
+$pure-colors: (
+  red: hsl(0, 100%, 50%),
+  blue: hsl(240, 100%, 50%),
+  green: hsl(120, 100%, 50%),
+  yellow: hsl(60, 100%, 50%),
+  pink: hsl(300, 100%, 50%),
+  purple: hsl(300, 100%, 25%),
+  orange: hsl(39, 100%, 50%),
+  indigo: hsl(275, 100%, 25%),
+  violet: hsl(270, 100%, 50%),
+);
+
+// if `$use-pure` is set to `true`, then the "pure" colors will be merged into,
+// (and therefore will override) the `$finch-color` values of the same key.
+@if $use-pure { $finch-colors: map.merge($finch-colors, $pure-colors); }
+$colors: () !default;
+$color-palette: map.merge($finch-colors, $colors);
+
+/// COLOR FUNCTIONS
+/// ----------
+/// Module-level functions for using and handling colors.
+///
+
+/// USE
+/// ----------
+/// Create all of the shades.
+///
+
+// initialise an empty map.
+$shades-map: ();
+// loop over all the colors and create a map of shades for each. The `$shades-map` should
+// then contain a map for each colour in `$color-palette`, with 11 shades for each.
+@each $name, $clr in $color-palette {
+  // generate a map for each color.
+  $shades-map: map.set($shades-map, $name, func.create-shades($clr));
+}
+
+/// The 'use' function provides a shorthand for accessing value in the `$color-palette` map
+/// that the color module defines. It also accepts an optional `$shade` parameter, that will
+/// adjust the color to be lighter (1000) or darker (0).
+/// @param $key one of the keys from the color-palette map.
+/// @param $shade {Number} a number from 0 - 1000, in increments of 100.
+///
+@function use($key, $shade: null) {
+  $spec-values: (currentColor);
+  // if the given value is one of the `global-values`, or one of the `spec-values` return it immediately:
+  @if list.index(config.$global-values, $key) or list.index($spec-values, $key) {
+    @return $key;
+  }
+  // try and find the value in the map and either return it, or handle the error case below.
+  $value: map.get($color-palette, $key);
+  @if $shade {
+    $map: map.get($shades-map, $key);
+    $value: map.get($map, $shade);
+  }
+  
+  @if $value {
+    @return $value;
+  }
+
+  @warn 'No color found for key "#{$key}"';
+  @return null;
+}
+
+/// COLOR PALETTE FUNCTIONS
+/// ----------
+/// These functions find colors that are related to a given color - in all cases they generate a
+/// `$shades` map that can then be accessed to return a particular shade or tint of the newly found color.
+
+/// COMPLEMENTARY
+/// ----------
+/// Returns a color or map of shades for the color that is the complement of the specified color.
+/// @param $color {Color} the base color that will be used to calculate the complement and its shades.
+/// @param $shade {Number} a number from 0 - 1000, in increments of 100 (e.g. 300, 400, 500...) that represents
+/// the lightness value of the color that is to be returned (where `0` is `black` and `1000` is `white`).
+/// @param $map {Boolean} determines if the entire 'shades' map should be returned, or just one specific colour value.
+/// @return {Color | Map} a single color value by default, or the whole map of shades when `$map` is `true`.
+@function complementary($color, $shade: base, $map: false) {
+  $complement: color.adjust($color, $hue: 180deg);
+  $shades: func.create-shades($color);
+
+  @if $map {
+    @return $shades;
+  }
+
+  $value: map.get($shades, $shade);
+  @if $value {
+    @return $value;
+  }
+
+  @warn 'Could not access key: #{$shade} for this color...';
+  @return null;
+}
+
+/// ANALOGOUS
+/// ----------
+/// Returns a color, or map of shades based on the 2 'analogous' colors of the specified color.
+/// @param $color {Color} the base color that will be used to calculate the analogous palette and their shades.
+/// @param $key {String} one of either 'secondary' or 'tertiary' - representing which of the 2 colors should be referenced.
+/// @param $shade {Number} a number from 0 - 1000, in increments of 100 (e.g. 300, 400, 500...) that represents the lightness
+/// value of the color that is to be returned (where `0` is `black` and `1000` is `white`).
+/// @param $dir {String} one of either 'clockwise' or 'anti-clockwise/anticlockwise' will be understood and will determine how
+/// the hue is adjusted.
+/// @param $maps {Boolean} determines if the entire 'shades' map should be returned, or just one specific colour value.
+/// @return {Color | Map} a single color value by default, or the whole map of shades for both analogous colours when `$maps` is `true`.
+@function analogous($color, $key, $shade: base, $dir: 'clockwise', $maps: false) {
+  $interval: 30deg;
+  @if $dir == 'anti-clockwise' or $dir == 'anticlockwise' {
+    $interval: -30deg;
+  }
+
+  $analogous-colors: (
+    secondary: func.create-shades(color.adjust($color, $hue: $interval)),
+    tertiary: func.create-shades(color.adjust($color, $hue: $interval * 2)),
+  );
+
+  @if $maps {
+    @return $analogous-colors;
+  }
+
+  $value: map.get($analogous-colors, $key, $shade);
+  @if $value {
+    @return value;
+  }
+
+  @warn 'Could not access color for "#{$key} #{$shade}"';
+  @return null;
+}
+
+/// TRIADIC
+/// ----------
+/// Returns a color, or map of shades based on the 2 other 'triadic' colors that extrapolate from the 'base'.
+/// @param $color {Color} the base color that will be used to calculate the triadic palette and their shades.
+/// @param $key {String} one of either 'secondary' or 'tertiary' - representing which of the 2 colors should be referenced.
+/// @param $shade {Number} a number from 0 - 1000, in increments of 100 (e.g. 300, 400, 500...) that represents the lightness
+/// value of the color that is to be returned (where `0` is `black` and `1` is `white`).
+/// @param $maps {Boolean} determines if the entire 'shades' map shoould be returned, or just one specific color value.
+/// @return {Color | Map} a single color value by default, or the whole map of shades for both triadic colours when `$maps` is `true`.
+@function triadic($color, $key, $shade: base, $maps: false) {
+  $triadic-colors: (
+    secondary: func.create-shades(color.adjust($color, $hue: 120deg)),
+    tertiary: func.create-shades(color.adjust($color, $hue: 240deg)),
+  );
+
+  @if $maps {
+    @return $triadic-colors;
+  }
+
+  $value: map.get($triadic-colors, $key, $shade);
+  @if $value {
+    @return $value;
+  }
+
+  @warn 'Could not access color for "#{$key} #{$shade}"';
+  @return null;
+}
+
+/// TETRADIC
+/// ----------
+/// Returns a color, or may of shades based on the 3 other 'tetradic' colors that extrapolate from the 'base'.
+/// @param $color {Color} the base color that will be used to calculate the triadic palette and their shades.
+/// @param $key {String} one of 'secondary', 'tertiary' or 'quaternary' - representing which of the 3 colors should be referenced.
+/// @param $shade {Number} a number from 0 - 1000, in increments of 100 (e.g. 300, 400, 500...) that represents the lightness
+/// value of the color that is to be returned (where `0` is `black` and `1` is `white`).
+/// @param $maps {Boolean} determines if the entire 'shades' map should be returned, or just one specific color value.
+/// @return {Color | Map} a single color value by default, or the whole map of shades for all of the other tetradic colours when `$maps` is `true`.
+@function tetradic($color, $key, $shade: base, $maps: false) {
+  $tetradic-colors: (
+    secondary: func.create-shades(color.adjust($color, $hue: 90deg)),
+    tertiary: func.create-shades(color.adjust($color, $hue: 180deg)),
+    quartenary: func.create-shades(color.adjust($color, $hue: 270deg)),
+  );
+
+  @if $maps {
+    @return $maps;
+  }
+
+  $value: map.get($tetradic-colors, $key, $shade);
+  @if $value {
+    @return $value;
+  }
+
+  @warn 'Could not access color for "#{$key} #{$shade}"';
+  @return null;
+}
+
+/// GENERATE UTILITY CLASS NAMES
+/// ----------
+/// the following code generates classes such as `.color:white` or `.bg-color:indigo`.
+/// the classes will only be generated if the corresponding property is set to `true` in
+/// the $layout-utilities map.
+@each $property, $flag in $utilities {
+  @if $flag {
+    @include m.gen-utils($property, $color-palette);
+  }
+}
+
+/// GENERATE RESPONSIVE CLASS NAMES
+/// ----------
+/// the following code generates classes such as `sm:size--lead`, or `xl:weight--heavy`.
+/// the classes will only be generated if the corresponding property is set to 'true' in
+/// the $responsive map.
+@each $key, $value in config.$breakpoints-map {
+  @include config.break($key) {
+    @each $property, $flag in $responsive {
+      @if $flag {
+        @include m.gen-responsive($key, $property, $color-palette);
+      }
+    }
+  }
+}

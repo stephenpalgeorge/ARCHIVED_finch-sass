@@ -3,6 +3,25 @@
 @use '../../config';
 
 $prefer-web-safe: false !default;
+// Web Safe Fonts:
+// define variables for all standart web-safe fonts.
+$font-family-arial: Arial, sans-serif;
+$font-family-verdana: Verdana, sans-serif;
+$font-family-helvetica: Helvetica, sans-serif;
+$font-family-tahoma: Tahoma, sans-serif;
+$font-family-trebuchet-ms: 'Trebuchet MS', sans-serif;
+$font-family-times-new-roman: 'Times New Roman', serif;
+$font-family-georgia: Georgia, serif;
+$font-family-garamond: Garamond, serif;
+$font-family-courier-new: 'Courier New', monospace;
+$font-family-brush-script-mt: 'Brush Script MT', cursive;
+// If the module is being used with the 'use-web-safe' flag set to true,
+// then we set the font-family variables with some of the web-safe fonts
+// defined above.
+$font-family-serif: $font-family-georgia;
+$font-family-sans-serif: $font-family-verdana;
+$font-family-cursive: $font-family-brush-script-mt;
+$font-family-monospace: $font-family-courier-new;
 
 @if not $prefer-web-safe {
   // this is the default - we import 4 fonts from google fonts and set them against semantic variables.
@@ -17,28 +36,6 @@ $prefer-web-safe: false !default;
   $font-family-monospace: 'Source Code Pro', monospace;
 }
 
-// Web Safe Fonts:
-// define variables for all standart web-safe fonts.
-$font-family-arial: Arial, sans-serif;
-$font-family-verdana: Verdana, sans-serif;
-$font-family-helvetica: Helvetica, sans-serif;
-$font-family-tahoma: Tahoma, sans-serif;
-$font-family-trebuchet-ms: 'Trebuchet MS', sans-serif;
-$font-family-times-new-roman: 'Times New Roman', serif;
-$font-family-georgia: Georgia, serif;
-$font-family-garamond: Garamond, serif;
-$font-family-courier-new: 'Courier New', monospace;
-$font-family-brush-script-mt: 'Brush Script MT', cursive;
-
-// If the module is being used with the 'use-web-safe' flag set to true,
-// then we set the font-family variables with some of the web-safe fonts
-// defined above.
-@if $prefer-web-safe {
-  $font-family-serif: $font-family-georgia;
-  $font-family-sans-serif: $font-family-verdana;
-  $font-family-cursive: $font-family-brush-script-mt;
-  $font-family-monospace: $font-family-courier-new;
-}
 // by this point, the font-family vars will have either a google fonts font,
 // or a web-safe font assigned to them.
 $finch-font-families: (

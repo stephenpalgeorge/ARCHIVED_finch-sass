@@ -120,10 +120,10 @@ $b-radii: map.merge($finch-border-radii, $set-border-radii);
   
   // this code runs if $sides is NOT a list.
   @else {
-    @if list.index($sides-list, $side) {
-      border-#{$side}-width: get-width($width);
-      border-#{$side}-style: $style;
-      border-#{$side}-color: $color;
+    @if list.index($sides-list, $sides) {
+      border-#{$sides}-width: get-width($width);
+      border-#{$sides}-style: $style;
+      border-#{$sides}-color: $color;
     }
     // if the value passed isn't present is the sides-list, simply apply the variables to all sides.
     @else {
@@ -169,12 +169,12 @@ $b-radii: map.merge($finch-border-radii, $set-border-radii);
     // https://caniuse.com/?search=border-inline-start
     @supports not (border-inline-start: 0) {
       @if $dir == inline {
-        @include border($width: $width, $style: $style, $color: $color, $side: bottom);
-        @include border($width: $width, $style: $style, $color: $color, $side: top);
+        @include border($width: $width, $style: $style, $color: $color, $sides: bottom);
+        @include border($width: $width, $style: $style, $color: $color, $sides: top);
       }
       @else if $dir == block {
-        @include border($width: $width, $style: $style, $color: $color, $side: right);
-        @include border($width: $width, $style: $style, $color: $color, $side: left);
+        @include border($width: $width, $style: $style, $color: $color, $sides: right);
+        @include border($width: $width, $style: $style, $color: $color, $sides: left);
       }
     }
   }
