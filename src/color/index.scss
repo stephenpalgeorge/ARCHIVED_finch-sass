@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use 'sass:list';
 @use 'sass:map';
 @use '../config';
@@ -134,6 +135,128 @@ $shades-map: ();
   }
 
   @warn 'No color found for key "#{$key}"';
+  @return null;
+}
+
+/// COLOR PALETTE FUNCTIONS
+/// ----------
+/// These functions find colors that are related to a given color - in all cases they generate a
+/// `$shades` map that can then be accessed to return a particular shade or tint of the newly found color.
+
+/// COMPLEMENTARY
+/// ----------
+/// Returns a color or map of shades for the color that is the complement of the specified color.
+/// @param $color {Color} the base color that will be used to calculate the complement and its shades.
+/// @param $shade {Number} a number from 0 - 1000, in increments of 100 (e.g. 300, 400, 500...) that represents
+/// the lightness value of the color that is to be returned (where `0` is `black` and `1000` is `white`).
+/// @param $map {Boolean} determines if the entire 'shades' map should be returned, or just one specific colour value.
+/// @return {Color | Map} a single color value by default, or the whole map of shades when `$map` is `true`.
+@function complementary($color, $shade: base, $map: false) {
+  $complement: color.adjust($color, $hue: 180deg);
+  $shades: func.create-shades($color);
+
+  @if $map {
+    @return $shades;
+  }
+
+  $value: map.get($shades, $shade);
+  @if $value {
+    @return $value;
+  }
+
+  @warn 'Could not access key: #{$shade} for this color...';
+  @return null;
+}
+
+/// ANALOGOUS
+/// ----------
+/// Returns a color, or map of shades based on the 2 'analogous' colors of the specified color.
+/// @param $color {Color} the base color that will be used to calculate the analogous palette and their shades.
+/// @param $key {String} one of either 'secondary' or 'tertiary' - representing which of the 2 colors should be referenced.
+/// @param $shade {Number} a number from 0 - 1000, in increments of 100 (e.g. 300, 400, 500...) that represents the lightness
+/// value of the color that is to be returned (where `0` is `black` and `1000` is `white`).
+/// @param $dir {String} one of either 'clockwise' or 'anti-clockwise/anticlockwise' will be understood and will determine how
+/// the hue is adjusted.
+/// @param $maps {Boolean} determines if the entire 'shades' map should be returned, or just one specific colour value.
+/// @return {Color | Map} a single color value by default, or the whole map of shades for both analogous colours when `$maps` is `true`.
+@function analogous($color, $key, $shade: base, $dir: 'clockwise', $maps: false) {
+  $interval: 30deg;
+  @if $dir == 'anti-clockwise' or $dir == 'anticlockwise' {
+    $interval: -30deg;
+  }
+
+  $analogous-colors: (
+    secondary: func.create-shades(color.adjust($color, $hue: $interval)),
+    tertiary: func.create-shades(color.adjust($color, $hue: $interval * 2)),
+  );
+
+  @if $maps {
+    @return $analogous-colors;
+  }
+
+  $value: map.get($analogous-colors, $key, $shade);
+  @if $value {
+    @return value;
+  }
+
+  @warn 'Could not access color for "#{$key} #{$shade}"';
+  @return null;
+}
+
+/// TRIADIC
+/// ----------
+/// Returns a color, or map of shades based on the 2 other 'triadic' colors that extrapolate from the 'base'.
+/// @param $color {Color} the base color that will be used to calculate the triadic palette and their shades.
+/// @param $key {String} one of either 'secondary' or 'tertiary' - representing which of the 2 colors should be referenced.
+/// @param $shade {Number} a number from 0 - 1000, in increments of 100 (e.g. 300, 400, 500...) that represents the lightness
+/// value of the color that is to be returned (where `0` is `black` and `1` is `white`).
+/// @param $maps {Boolean} determines if the entire 'shades' map shoould be returned, or just one specific color value.
+/// @return {Color | Map} a single color value by default, or the whole map of shades for both triadic colours when `$maps` is `true`.
+@function triadic($color, $key, $shade: base, $maps: false) {
+  $triadic-colors: (
+    secondary: func.create-shades(color.adjust($color, $hue: 120deg)),
+    tertiary: func.create-shades(color.adjust($color, $hue: 240deg)),
+  );
+
+  @if $maps {
+    @return $triadic-colors;
+  }
+
+  $value: map.get($triadic-colors, $key, $shade);
+  @if $value {
+    @return $value;
+  }
+
+  @warn 'Could not access color for "#{$key} #{$shade}"';
+  @return null;
+}
+
+/// TETRADIC
+/// ----------
+/// Returns a color, or may of shades based on the 3 other 'tetradic' colors that extrapolate from the 'base'.
+/// @param $color {Color} the base color that will be used to calculate the triadic palette and their shades.
+/// @param $key {String} one of 'secondary', 'tertiary' or 'quaternary' - representing which of the 3 colors should be referenced.
+/// @param $shade {Number} a number from 0 - 1000, in increments of 100 (e.g. 300, 400, 500...) that represents the lightness
+/// value of the color that is to be returned (where `0` is `black` and `1` is `white`).
+/// @param $maps {Boolean} determines if the entire 'shades' map should be returned, or just one specific color value.
+/// @return {Color | Map} a single color value by default, or the whole map of shades for all of the other tetradic colours when `$maps` is `true`.
+@function tetradic($color, $key, $shade: base, $maps: false) {
+  $tetradic-colors: (
+    secondary: func.create-shades(color.adjust($color, $hue: 90deg)),
+    tertiary: func.create-shades(color.adjust($color, $hue: 180deg)),
+    quartenary: func.create-shades(color.adjust($color, $hue: 270deg)),
+  );
+
+  @if $maps {
+    @return $maps;
+  }
+
+  $value: map.get($tetradic-colors, $key, $shade);
+  @if $value {
+    @return $value;
+  }
+
+  @warn 'Could not access color for "#{$key} #{$shade}"';
   @return null;
 }
 
