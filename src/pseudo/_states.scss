@@ -1,0 +1,13 @@
+@mixin hover() {
+  &:not(:disabled):hover,
+  &:not(.disabled):hover {
+    @content;
+  }
+}
+
+@mixin focus() {
+  &:not(:disabled):focus,
+  &:not(.disabled):focus {
+    @content;
+  }
+}

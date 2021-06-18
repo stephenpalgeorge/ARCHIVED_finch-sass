@@ -1,0 +1,16 @@
+@mixin pseudo-element($type, $content: '', $pos: absolute) {
+  position: relative;
+  &::#{$type} {
+    content: $content;
+    position: $pos;
+    @content;
+  }
+}
+
+@mixin before($content, $pos) {
+  @include pseudo-element(before, $content: $content, $pos: $pos);
+}
+
+@mixin after($content, $pos) {
+  @include pseudo-element(after, $content: $content, $pos: $pos);
+}

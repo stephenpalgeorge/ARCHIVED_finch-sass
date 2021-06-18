@@ -4,6 +4,10 @@ $set-scale: root !default;
 $set-config-atomic-scale: () !default;
 $set-config-breakpoints: () !default;
 $set-config-size-scale: () !default;
+/// Color map over-rides:
+$set-colors: () !default;
+$set-color-responsive: () !default;
+$set-color-utilities: () !default;
 /// Layout map over-rides:
 $set-border-radii: () !default;
 $set-border-widths: () !default;
@@ -25,12 +29,20 @@ $set-font-responsive: () !default;
 $set-font-utilities: () !default;
 $set-use-web-safe: false !default;
 
+@use 'reset';
+
 @use './config' with (
   $set-atomic-scale: $set-config-atomic-scale,
   $set-breakpoints: $set-config-breakpoints,
   $set-size-scale: $set-config-size-scale,
   $size-base: $set-size-base,
   $use-scale: $set-scale,
+);
+
+@use './color' with (
+  $colors: $set-colors,
+  $set-responsive: $set-color-responsive,
+  $set-utilities: $set-color-utilities,
 );
 
 @use './layout' with (
@@ -59,6 +71,8 @@ $set-use-web-safe: false !default;
 
 // N.B. must make sure none of the partials share any variable names,
 // otherwise they will clash on load.
+@forward './color' as clr-*;
+
 @forward './layout' as lyt-*;
 @forward './layout/properties/borders' as lyt-*;
 @forward './layout/properties/displays' as lyt-*;
@@ -67,12 +81,12 @@ $set-use-web-safe: false !default;
 @forward './layout/properties/positions' as lyt-*;
 @forward './layout/properties/z-indices' as lyt-*;
 
-@forward './typography' as type-*;
-@forward './typography/properties/font-families' as type-*;
-@forward './typography/properties/font-sizes' as type-*;
-@forward './typography/properties/font-weights' as type-*;
-@forward './typography/properties/letter-spacings' as type-*;
-@forward './typography/properties/line-heights' as type-*;
-@forward './typography/properties/text-decorations' as type-*;
-@forward './typography/properties/text-indents' as type-*;
-@forward './typography/properties/word-spacings' as type-*;
+@forward './typography' as typ-*;
+@forward './typography/properties/font-families' as typ-*;
+@forward './typography/properties/font-sizes' as typ-*;
+@forward './typography/properties/font-weights' as typ-*;
+@forward './typography/properties/letter-spacings' as typ-*;
+@forward './typography/properties/line-heights' as typ-*;
+@forward './typography/properties/text-decorations' as typ-*;
+@forward './typography/properties/text-indents' as typ-*;
+@forward './typography/properties/word-spacings' as typ-*;
