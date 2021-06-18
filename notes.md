@@ -1,8 +1,8 @@
 - typography module:
   - add 'text-shadow' property.
 
-- layout module properties:
-  - display: might be worth breaking this up into 3 or 4 different files as it will include grid and flexbox.
+- pseudo module:
+  - consider some kind of 'index' mixin that acts as a catch all for `nth-child`, `nth-last-child`, `nth-of-type` etc...will need to consider what params would make this usable?
 
 ## possible text style considerations:
 ```scss
