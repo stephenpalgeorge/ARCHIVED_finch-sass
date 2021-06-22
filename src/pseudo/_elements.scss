@@ -1,3 +1,4 @@
+
 @mixin pseudo-element($type, $content: '', $pos: absolute) {
   position: relative;
   &::#{$type} {
