@@ -1,0 +1,103 @@
+/// Hover
+/// ----------
+/// Applies styles to an element when hovered, but not if the element is `disabled`.
+/// We consider the presence of a `disabled` class or attribute to be equivalent.
+///
+@mixin hover {
+  &:not(:disabled):hover,
+  &:not(.disabled):hover {
+    @content;
+  }
+}
+
+/// Focus
+/// ----------
+/// Applies styles to an element when hovered, but not if the element is `disabled`.
+/// We consider the presence of a `disabled` class or attribute to be equivalent.
+///
+@mixin focus {
+  &:not(:disabled):focus,
+  &:not(.disabled):focus {
+    @content;
+  }
+}
+
+/// From
+/// ----------
+/// Selects all sibling elements after a given index.
+/// A list of 5 `<li>` for example, and this usage of the mixin:
+/// ```scss
+/// @include from(3) {
+///   color: red;
+/// }
+/// ```
+/// would style elements 3, 4 and 5 (or 3 - end).
+/// @param $index {Number} the element from which the selection will begin.
+/// @param $filter a selector to filter the siblings by.
+///
+@mixin from($index: 0, $filter: null) {
+  @if $filter {
+    :nth-child(#{$index}),
+    :nth-child(-n+#{$index}) ~ #{$filter} {
+      @content;
+    }
+  }
+  @else {
+    :nth-child(#{$index}),
+    :nth-child(-n+#{$index}) ~ * {
+      @content;
+    }
+  }
+}
+
+/// To
+/// ----------
+/// Selects all sibling elements up to (and including )a given index.
+/// A list of 5 `<li>` for example, and this usage of the mixin:
+/// ```scss
+/// @include to(4) {
+///   color: red;
+/// }
+/// ```
+/// would style elements 1 - 4 inclusive.
+/// @param $index {Number} the element at which the selection will stop.
+///
+@mixin to($index: 1) {
+  :nth-child(-n+#{$index}) {
+    @content;
+  }
+}
+
+/// Between
+/// ----------
+/// Selects all sibling elements between (and including) and starting and
+/// finishing index.
+/// A list of 5 `<li>` for example, and this usage of the mixin:
+/// ```scss
+/// @include between(2, 4) {
+///   color: red;
+/// }
+/// ```
+/// would style elements 2, 3 and 4.
+/// @param $start {Number} the element at which the selection will begin.
+/// @param $end {Number} the element at which the selection will stop.
+///
+@mixin between($start: 0, $end) {
+  // just a nice DX point:
+  @if not $end {
+    @warn "You didn't give an ending index, you should probably use the `from` mixin instead.";
+    @include from($start) {
+      @content;
+    };
+  }
+  // assuming it's being used properly:
+  @else {
+    $count: $start;
+    @while $count <= $end {
+      :nth-child(#{$count}) {
+        @content;
+      }
+      $count: $count + 1;
+    }
+  }
+}

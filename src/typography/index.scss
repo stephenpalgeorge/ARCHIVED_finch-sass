@@ -175,44 +175,25 @@ $typography-values: (
   }
 }
 
-.text-body {
-  @include text-format($line-height: tall);
-  max-width: 70ch;
+/// Truncate
+/// ----------
+/// Cut text off when it reaches the end of it's container.
+/// @param $lines {Number} an optional number of lines to which the text can be written over.
+/// @param $max {Length} an optional max-width that will size the container if set.
+///
+@mixin truncate($lines, $maxWidth, $ellipsis: true) {
+  white-space: nowrap;
+  overflow: hidden;
+  @if $maxWidth {
+    width: 100%;
+    max-width: $maxWidth;
+  }
+  @if $ellipsis {
+    text-overflow: ellipsis;
+  }
+  @if $lines {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    line-clamp: $lines;
+  }
 }
-
-.text-lead {
-  @include text-format($size: lead, $weight: x-light);
-  // this next line is just here for demo purposes, this kind of thing should live in the layout module
-  max-width: 62ch;
-}
-
-.text-subheading {
-  @include text-format($family: serif, $size: sub-heading, $line-height: tight);
-}
-
-.text-heading {
-  @include text-format($family: serif, $size: heading, $line-height: tight, $weight: heavy);
-}
-
-// ALL OF THIS FOLLOWING CODE SHOULD ONE DAY LIVE IN AN 'Elements' MODULE, it's here for now
-// as a proof of concept/demo kind of thing.
-h1 {
-  @extend .text-heading;
-  // this next line is just here for demo purposes, this kind of thing should live in the layout module
-  max-width: 15ch;
-}
-
-h2, h3 {
-  @extend .text-subheading;
-  font-weight: get-font-weight(heavy);
-  // this next line is just here for demo purposes, this kind of thing should live in the layout module
-  max-width: 25ch;
-}
-h3 {
-  font-weight: get-font-weight(base);
-}
-
-p:not([class]) {
-  @extend .text-body;
-}
-

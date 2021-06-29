@@ -115,6 +115,21 @@ em.text-emphasis {
 }
 ```
 
+### 4. @include truncate
+
+The truncate mixin is a utility for shortening text fit within a given container. By default, the text is truncated with an ellipsis (...), although this can be turned off so the text simply ends. The mixin accepts 2 parameters, one for setting the `max-width` of the container and one for specifying the number of lines across which the text can be written.
+
+Examples of using the truncate utility follow:
+```scss
+.preview {
+  @include truncate;
+}
+
+.synopsis {
+  @include truncate($maxWidth: 10rem, $lines: 4);
+}
+```
+
 ---
 
 ## Configuration
