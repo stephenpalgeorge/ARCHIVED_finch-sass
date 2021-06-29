@@ -1,4 +1,11 @@
-
+/// PSEUDO ELEMENT
+/// ----------
+/// Style the `::before` or `::after` of a parent element. Allows us to set
+/// some reasonable defaults. `@content` ends up being mostly about size/position.
+/// @param $type {String} one of `before` or `after`, determines where the styles will be applied.
+/// @param $content {String} the value for the `content` property.
+/// @param $pos {Position} the value for the `position` property.
+///
 @mixin pseudo-element($type, $content: '', $pos: absolute) {
   position: relative;
   &::#{$type} {
@@ -8,10 +15,16 @@
   }
 }
 
+/// BEFORE
+/// -----------
+/// A shorthand for using the `pseudo-element` mixin with the $type set to `before`.
 @mixin before($content, $pos) {
   @include pseudo-element(before, $content: $content, $pos: $pos);
 }
 
+/// AFTER
+/// -----------
+/// A shorthand for using the `pseudo-element` mixin with the $type set to `after`.
 @mixin after($content, $pos) {
   @include pseudo-element(after, $content: $content, $pos: $pos);
 }

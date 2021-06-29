@@ -81,6 +81,8 @@ $set-use-web-safe: false !default;
 @forward './layout/properties/positions' as lyt-*;
 @forward './layout/properties/z-indices' as lyt-*;
 
+@forward './pseudo' as ps-*;
+
 @forward './typography' as typ-*;
 @forward './typography/properties/font-families' as typ-*;
 @forward './typography/properties/font-sizes' as typ-*;

@@ -3,7 +3,7 @@
 /// Applies styles to an element when hovered, but not if the element is `disabled`.
 /// We consider the presence of a `disabled` class or attribute to be equivalent.
 ///
-@mixin hover() {
+@mixin hover {
   &:not(:disabled):hover,
   &:not(.disabled):hover {
     @content;
@@ -15,7 +15,7 @@
 /// Applies styles to an element when hovered, but not if the element is `disabled`.
 /// We consider the presence of a `disabled` class or attribute to be equivalent.
 ///
-@mixin focus() {
+@mixin focus {
   &:not(:disabled):focus,
   &:not(.disabled):focus {
     @content;
@@ -33,11 +33,20 @@
 /// ```
 /// would style elements 3, 4 and 5 (or 3 - end).
 /// @param $index {Number} the element from which the selection will begin.
+/// @param $filter a selector to filter the siblings by.
 ///
-@mixin from($index: 0) {
-  &:nth-child(#{$index}),
-  &:nth-child(-n+#{$index}) ~ * {
-    @content;
+@mixin from($index: 0, $filter: null) {
+  @if $filter {
+    :nth-child(#{$index}),
+    :nth-child(-n+#{$index}) ~ #{$filter} {
+      @content;
+    }
+  }
+  @else {
+    :nth-child(#{$index}),
+    :nth-child(-n+#{$index}) ~ * {
+      @content;
+    }
   }
 }
 
@@ -54,7 +63,7 @@
 /// @param $index {Number} the element at which the selection will stop.
 ///
 @mixin to($index: 1) {
-  &:nth-child(-n+#{$index}) {
+  :nth-child(-n+#{$index}) {
     @content;
   }
 }
@@ -85,7 +94,7 @@
   @else {
     $count: $start;
     @while $count <= $end {
-      &:nth-child(#{$count}) {
+      :nth-child(#{$count}) {
         @content;
       }
       $count: $count + 1;
