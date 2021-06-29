@@ -1,6 +1,9 @@
 - typography module:
   - add 'text-shadow' property.
 
+- layout module:
+  - add 'box-shadow' stuff.
+
 ## possible text style considerations:
 ```scss
 .text-content {
