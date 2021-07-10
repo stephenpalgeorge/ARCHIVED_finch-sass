@@ -1,7 +1,165 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,900&display=swap");
+.box-reset {
+  padding: 0;
+  margin: 0;
+  width: initial;
+  height: initial;
+  border: none;
+}
+
+/* box utilities - generates classes like `.box:large` `.box:base` */
+/* stack utilities - generates classes like `.stack:large`, `.stack-recursive:base` etc */
+.stack\:none > * + * {
+  margin-top: 0;
+}
+
+.stack-recursive\:none * + * {
+  margin-top: 0;
+}
+
+.stack\:small > * + * {
+  margin-top: 0.64rem;
+}
+
+.stack-recursive\:small * + * {
+  margin-top: 0.64rem;
+}
+
+.stack\:base > * + * {
+  margin-top: 1rem;
+}
+
+.stack-recursive\:base * + * {
+  margin-top: 1rem;
+}
+
+.stack\:large > * + * {
+  margin-top: 1.953125rem;
+}
+
+.stack-recursive\:large * + * {
+  margin-top: 1.953125rem;
+}
+
+.stack\:x-large > * + * {
+  margin-top: 3.8146972656rem;
+}
+
+.stack-recursive\:x-large * + * {
+  margin-top: 3.8146972656rem;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  /* 1 */
+  margin: 0;
+  /* 2 */
+  padding: 0;
+  /* 2 */
+}
+
+pre, code, kbd, samp {
+  font-family: monospace, monospace;
+  /* 1 */
+  font-size: 1em;
+  /* 2 */
+}
+
+input, button, textarea, select, optgroup {
+  font: inherit;
+  /* 3 */
+}
+
+body {
+  text-rendering: optimizeSpeed;
+  /* 4 */
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  /* 5 */
+}
+
+img, picture {
+  max-width: 100%;
+  /* 1 */
+  display: block;
+  /* 1 */
+}
+
+html:focus-within {
+  scroll-behavior: smooth;
+  /* 1 */
+}
+
+ul[role=list], ol[role=list] {
+  list-style: none;
+  /* 2 */
+}
+
+details {
+  display: block;
+  /* 3 */
+}
+
+summary {
+  display: list-item;
+  /* 4 */
+}
+
+[hidden] {
+  display: none !important;
+  /* 5 */
+}
+
+table {
+  border-collapse: collapse;
+  /* 6 */
+}
+
+a:not([href]):not([class]) {
+  color: inherit;
+  /* 7 */
+  text-decoration: none;
+  /* 7 */
+}
+a:not([href]):not([class]):hover {
+  color: inherit;
+  /* 7 */
+  text-decoration: none;
+  /* 7 */
+}
+
+[role=button] {
+  cursor: pointer;
+  /* 8 */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+    /* 1 */
+  }
+
+  *,
+*::before,
+*::after {
+    animation-duration: 0.01ms !important;
+    /* 2 */
+    animation-iteration-count: 1 !important;
+    /* 2 */
+    transition-duration: 0.01ms !important;
+    /* 2 */
+    scroll-behavior: auto !important;
+    /* 1 */
+  }
+}
 .font-size\:small-print {
   font-size: 0.8rem;
 }
@@ -42,531 +200,471 @@
   font-size: 3.0517578125rem !important;
 }
 
-.text-body, p:not([class]) {
-  font-family: "Poppins", sans-serif;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.953125;
-  text-align: start;
-  max-width: 70ch;
-}
-
-.text-lead {
-  font-family: "Poppins", sans-serif;
-  font-size: 1.25rem;
-  font-weight: 200;
-  line-height: 1.953125;
-  text-align: start;
-  max-width: 62ch;
-}
-
-.text-subheading, h2, h3 {
-  font-family: "Playfair Display", serif;
-  font-size: 2.44140625rem;
-  font-weight: 400;
-  line-height: 1.25;
-  text-align: start;
-}
-
-.text-heading, h1 {
-  font-family: "Playfair Display", serif;
-  font-size: 3.0517578125rem;
-  font-weight: 900;
-  line-height: 1.25;
-  text-align: start;
-}
-
-h1 {
-  max-width: 15ch;
-}
-
-h2, h3 {
-  font-weight: 900;
-  max-width: 25ch;
-}
-
-h3 {
-  font-weight: 400;
-}
-
-.padding\:none {
-  padding: 0;
-}
-
-.padding\:none\! {
-  padding: 0 !important;
-}
-
-.padding\:small {
-  padding: 0.64rem;
-}
-
-.padding\:small\! {
-  padding: 0.64rem !important;
-}
-
-.padding\:base {
-  padding: 1rem;
-}
-
-.padding\:base\! {
-  padding: 1rem !important;
-}
-
-.padding\:large {
-  padding: 1.953125rem;
-}
-
-.padding\:large\! {
-  padding: 1.953125rem !important;
-}
-
-.padding\:x-large {
+.finch,
+#finch {
   padding: 3.8146972656rem;
+  /* #1 */
+  /* #2 */
+  /* #3 */
+  /* #1 */
 }
-
-.padding\:x-large\! {
-  padding: 3.8146972656rem !important;
-}
-
-@media screen and (min-width: 0) {
-  .padding\:none\@xs {
-    padding: 0;
-  }
-
-  .padding\:none\@xs\! {
-    padding: 0 !important;
-  }
-
-  .padding\:small\@xs {
-    padding: 0.64rem;
-  }
-
-  .padding\:small\@xs\! {
-    padding: 0.64rem !important;
-  }
-
-  .padding\:base\@xs {
-    padding: 1rem;
-  }
-
-  .padding\:base\@xs\! {
-    padding: 1rem !important;
-  }
-
-  .padding\:large\@xs {
-    padding: 1.953125rem;
-  }
-
-  .padding\:large\@xs\! {
-    padding: 1.953125rem !important;
-  }
-
-  .padding\:x-large\@xs {
-    padding: 3.8146972656rem;
-  }
-
-  .padding\:x-large\@xs\! {
-    padding: 3.8146972656rem !important;
-  }
-}
-@media screen and (min-width: 576px) {
-  .padding\:none\@sm {
-    padding: 0;
-  }
-
-  .padding\:none\@sm\! {
-    padding: 0 !important;
-  }
-
-  .padding\:small\@sm {
-    padding: 0.64rem;
-  }
-
-  .padding\:small\@sm\! {
-    padding: 0.64rem !important;
-  }
-
-  .padding\:base\@sm {
-    padding: 1rem;
-  }
-
-  .padding\:base\@sm\! {
-    padding: 1rem !important;
-  }
-
-  .padding\:large\@sm {
-    padding: 1.953125rem;
-  }
-
-  .padding\:large\@sm\! {
-    padding: 1.953125rem !important;
-  }
-
-  .padding\:x-large\@sm {
-    padding: 3.8146972656rem;
-  }
-
-  .padding\:x-large\@sm\! {
-    padding: 3.8146972656rem !important;
-  }
-}
-@media screen and (min-width: 768px) {
-  .padding\:none\@md {
-    padding: 0;
-  }
-
-  .padding\:none\@md\! {
-    padding: 0 !important;
-  }
-
-  .padding\:small\@md {
-    padding: 0.64rem;
-  }
-
-  .padding\:small\@md\! {
-    padding: 0.64rem !important;
-  }
-
-  .padding\:base\@md {
-    padding: 1rem;
-  }
-
-  .padding\:base\@md\! {
-    padding: 1rem !important;
-  }
-
-  .padding\:large\@md {
-    padding: 1.953125rem;
-  }
-
-  .padding\:large\@md\! {
-    padding: 1.953125rem !important;
-  }
-
-  .padding\:x-large\@md {
-    padding: 3.8146972656rem;
-  }
-
-  .padding\:x-large\@md\! {
-    padding: 3.8146972656rem !important;
-  }
-}
-@media screen and (min-width: 992px) {
-  .padding\:none\@lg {
-    padding: 0;
-  }
-
-  .padding\:none\@lg\! {
-    padding: 0 !important;
-  }
-
-  .padding\:small\@lg {
-    padding: 0.64rem;
-  }
-
-  .padding\:small\@lg\! {
-    padding: 0.64rem !important;
-  }
-
-  .padding\:base\@lg {
-    padding: 1rem;
-  }
-
-  .padding\:base\@lg\! {
-    padding: 1rem !important;
-  }
-
-  .padding\:large\@lg {
-    padding: 1.953125rem;
-  }
-
-  .padding\:large\@lg\! {
-    padding: 1.953125rem !important;
-  }
-
-  .padding\:x-large\@lg {
-    padding: 3.8146972656rem;
-  }
-
-  .padding\:x-large\@lg\! {
-    padding: 3.8146972656rem !important;
-  }
-}
-@media screen and (min-width: 1200px) {
-  .padding\:none\@xl {
-    padding: 0;
-  }
-
-  .padding\:none\@xl\! {
-    padding: 0 !important;
-  }
-
-  .padding\:small\@xl {
-    padding: 0.64rem;
-  }
-
-  .padding\:small\@xl\! {
-    padding: 0.64rem !important;
-  }
-
-  .padding\:base\@xl {
-    padding: 1rem;
-  }
-
-  .padding\:base\@xl\! {
-    padding: 1rem !important;
-  }
-
-  .padding\:large\@xl {
-    padding: 1.953125rem;
-  }
-
-  .padding\:large\@xl\! {
-    padding: 1.953125rem !important;
-  }
-
-  .padding\:x-large\@xl {
-    padding: 3.8146972656rem;
-  }
-
-  .padding\:x-large\@xl\! {
-    padding: 3.8146972656rem !important;
-  }
-}
-.box-reset {
-  padding: 0;
-  margin: 0;
-  width: initial;
-  height: initial;
-  border: none;
-}
-
-/* box utilities - generates classes like `.box:large` `.box:base` */
-/* stack utilities - generates classes like `.stack:large`, `.stack-recursive:base` etc */
-.color\:main {
-  color: #b1021c;
-}
-
-.color\:main\! {
-  color: #b1021c !important;
-}
-
-.color\:secondary {
-  color: #3cabec;
-}
-
-.color\:secondary\! {
-  color: #3cabec !important;
-}
-
-.color\:tertiary {
-  color: #f7c326;
-}
-
-.color\:tertiary\! {
-  color: #f7c326 !important;
-}
-
-.color\:light {
+.finch ::selection,
+#finch ::selection {
+  background-color: rgba(253, 28, 62, 0.99);
+  /* #1 */
   color: #fbf7fc;
+  /* #1 */
 }
-
-.color\:light\! {
-  color: #fbf7fc !important;
+.finch hr,
+#finch hr {
+  border: none;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: #bababa;
+  margin-block: 3.8146972656rem !important;
 }
-
-.color\:dark {
-  color: #212121;
+@supports not (margin-block: 0) {
+  .finch hr,
+#finch hr {
+    margin-top: 3.8146972656rem !important;
+    margin-bottom: 3.8146972656rem !important;
+  }
 }
-
-.color\:dark\! {
-  color: #212121 !important;
-}
-
-.color\:white {
-  color: white;
-}
-
-.color\:white\! {
-  color: white !important;
-}
-
-.color\:black {
-  color: black;
-}
-
-.color\:black\! {
-  color: black !important;
-}
-
-.color\:red {
-  color: #b1021c;
-}
-
-.color\:red\! {
-  color: #b1021c !important;
-}
-
-.color\:blue {
-  color: #3cabec;
-}
-
-.color\:blue\! {
-  color: #3cabec !important;
-}
-
-.color\:green {
-  color: #425e21;
-}
-
-.color\:green\! {
-  color: #425e21 !important;
-}
-
-.color\:yellow {
-  color: #f7c326;
-}
-
-.color\:yellow\! {
-  color: #f7c326 !important;
-}
-
-.color\:pink {
-  color: #e071ac;
-}
-
-.color\:pink\! {
-  color: #e071ac !important;
-}
-
-.color\:purple {
-  color: #8213be;
-}
-
-.color\:purple\! {
-  color: #8213be !important;
-}
-
-.color\:orange {
-  color: #ff670f;
-}
-
-.color\:orange\! {
-  color: #ff670f !important;
-}
-
-.color\:indigo {
-  color: #8794de;
-}
-
-.color\:indigo\! {
-  color: #8794de !important;
-}
-
-.color\:violet {
-  color: #7500eb;
-}
-
-.color\:violet\! {
-  color: #7500eb !important;
-}
-
-.color\:error {
-  color: #b1021c;
-}
-
-.color\:error\! {
-  color: #b1021c !important;
-}
-
-.color\:info {
-  color: #3cabec;
-}
-
-.color\:info\! {
-  color: #3cabec !important;
-}
-
-.color\:success {
-  color: #425e21;
-}
-
-.color\:success\! {
-  color: #425e21 !important;
-}
-
-.color\:warning {
-  color: #f7c326;
-}
-
-.color\:warning\! {
-  color: #f7c326 !important;
-}
-
-.text {
+.finch *,
+#finch * {
   font-family: "Poppins", sans-serif;
   font-size: 1rem;
+  font-style: normal;
   font-weight: 400;
   line-height: 1.953125;
   text-align: start;
-  color: white;
+  color: #000;
+  max-width: 65ch;
+  /* #1 */
 }
-
-.body {
+.finch h1, .finch h2, .finch h3, .finch h4, .finch h5, .finch h6,
+#finch h1,
+#finch h2,
+#finch h3,
+#finch h4,
+#finch h5,
+#finch h6 {
+  font-family: "Playfair Display", serif;
   font-size: 1rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 1.5625;
+  text-align: start;
+  color: #000;
+  max-width: 65ch;
+  /* #2 */
 }
-
-h1 {
+.finch h1,
+#finch h1 {
+  font-size: 3.0517578125rem;
+  /* #2 */
+  /* #3 */
+}
+.finch h1 + *,
+#finch h1 + * {
+  margin-block-start: 3.8146972656rem;
+}
+.finch h2, .finch h3,
+#finch h2,
+#finch h3 {
+  font-size: 2.44140625rem;
+  /* #2 */
+  /* #3 */
+}
+.finch h2 + *, .finch h3 + *,
+#finch h2 + *,
+#finch h3 + * {
+  margin-block-start: 1.953125rem;
+}
+.finch h3,
+#finch h3 {
+  font-weight: 600;
+}
+.finch p + *,
+#finch p + * {
+  margin-block-start: 1rem;
+}
+.finch a,
+#finch a {
+  font-family: "Playfair Display", serif;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.953125;
+  text-align: start;
+  color: #b1021c;
+  max-width: 65ch;
+  /* #1 */
+  transition: color 0.2s ease, background-color 0.2s ease;
+  /* #2 */
+  /* #3 */
+  /* #5 */
+}
+.finch a:not([href]),
+#finch a:not([href]) {
+  text-decoration-line: line-through;
+  text-decoration-color: currentColor;
+  text-decoration-style: solid;
+}
+@supports (text-decoration-thickness: 1px) {
+  .finch a:not([href]),
+#finch a:not([href]) {
+    text-decoration-thickness: 1px;
+  }
+}
+.finch a:disabled, .finch a.disabled,
+#finch a:disabled,
+#finch a.disabled {
+  color: #fe8194;
+  /* #4 */
+  pointer-events: none;
+  /* #4 */
+}
+.finch a:not(:disabled):hover, .finch a:not(.disabled):hover,
+#finch a:not(:disabled):hover,
+#finch a:not(.disabled):hover {
+  color: #7e0114;
+}
+.finch a:not(:disabled):focus, .finch a:not(.disabled):focus,
+#finch a:not(:disabled):focus,
+#finch a:not(.disabled):focus {
+  outline: none;
+  /* #6 */
+  color: #7e0114;
+  /* #6 */
+  background-color: rgba(254, 129, 148, 0.1);
+  /* #6 */
+}
+.finch blockquote,
+#finch blockquote {
+  /* #1 */
+  padding: 0.64rem;
+  /* #1 */
+  padding-inline-start: 1.953125rem;
+  /* #1 */
+  border-left-width: 0.125rem;
+  border-left-style: solid;
+  border-left-color: #b1021c;
+  /* #1 */
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.953125;
+  text-align: start;
+  color: #000;
+  max-width: 65ch;
+  /* #2 */
+}
+.finch blockquote + *,
+#finch blockquote + * {
+  margin-block-start: 0.64rem;
+}
+.finch blockquote > *:not(cite),
+#finch blockquote > *:not(cite) {
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.953125;
+  text-align: start;
+  color: #000;
+  max-width: 65ch;
+  /* #2 */
+}
+.finch cite,
+#finch cite {
+  display: block;
+  /* #3 */
+  padding-inline-start: 1rem;
+  /* #3 */
+  font-family: "Playfair Display", serif;
+  /* #3 */
+  position: relative;
+}
+.finch cite::before,
+#finch cite::before {
+  content: "-";
+  position: absolute;
+  left: 0;
+  /* #3 */
+}
+.finch ul + *, .finch ol + *,
+#finch ul + *,
+#finch ol + * {
+  margin-block-start: 1.953125rem;
+}
+.finch ul:not([role=list]),
+#finch ul:not([role=list]) {
+  list-style-type: none;
+}
+.finch ul:not([role=list]) li,
+#finch ul:not([role=list]) li {
+  padding-inline-start: 2rem;
+  /* #2 */
+  position: relative;
+}
+.finch ul:not([role=list]) li::before,
+#finch ul:not([role=list]) li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  /* #2 */
+  color: #b1021c;
+  /* #2, #2.a */
+}
+.finch ol:not([role=list]),
+#finch ol:not([role=list]) {
+  list-style-type: none;
+  counter-reset: orderedlist;
+  /* #2 */
+}
+.finch ol:not([role=list]) li,
+#finch ol:not([role=list]) li {
+  padding-inline-start: 2rem;
+  /* #2 */
+  counter-increment: orderedlist;
+  /* #2 */
+  /* #2 */
+  position: relative;
+}
+.finch ol:not([role=list]) li::before,
+#finch ol:not([role=list]) li::before {
+  content: counter(orderedlist) ".";
+  position: absolute;
+  left: 0;
+  /* #2 */
+  color: #b1021c;
+  /* #2, #2.a */
+  text-align: right;
+}
+.finch ul[data-bullet-color=main] li::before, .finch ol[data-bullet-color=main] li::before,
+#finch ul[data-bullet-color=main] li::before,
+#finch ol[data-bullet-color=main] li::before {
+  color: #b1021c;
+  /* #2.b */
+}
+.finch ul[data-bullet-color=secondary] li::before, .finch ol[data-bullet-color=secondary] li::before,
+#finch ul[data-bullet-color=secondary] li::before,
+#finch ol[data-bullet-color=secondary] li::before {
+  color: #3cabec;
+  /* #2.b */
+}
+.finch ul[data-bullet-color=tertiary] li::before, .finch ol[data-bullet-color=tertiary] li::before,
+#finch ul[data-bullet-color=tertiary] li::before,
+#finch ol[data-bullet-color=tertiary] li::before {
   color: #f7c326;
-  background-color: #fefaeb;
+  /* #2.b */
 }
-
-body {
-  margin: 0;
-  padding: 3.8146972656rem;
-  background-color: #fe8194;
+.finch ul[data-bullet-color=light] li::before, .finch ol[data-bullet-color=light] li::before,
+#finch ul[data-bullet-color=light] li::before,
+#finch ol[data-bullet-color=light] li::before {
+  color: #fbf7fc;
+  /* #2.b */
 }
-body section {
-  margin: -1rem;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  flex-flow: row wrap;
+.finch ul[data-bullet-color=dark] li::before, .finch ol[data-bullet-color=dark] li::before,
+#finch ul[data-bullet-color=dark] li::before,
+#finch ol[data-bullet-color=dark] li::before {
+  color: #212121;
+  /* #2.b */
 }
-body section > * {
-  flex: 1 1;
-  min-width: 16rem;
+.finch ul[data-bullet-color=white] li::before, .finch ol[data-bullet-color=white] li::before,
+#finch ul[data-bullet-color=white] li::before,
+#finch ol[data-bullet-color=white] li::before {
+  color: white;
+  /* #2.b */
 }
-body section > * {
-  margin: 1rem;
-  padding: 1rem;
-  outline: 0.125rem solid transparent;
-  outline-offset: -0.125rem;
-  border-block-width: 0.125rem;
-  border-block-style: solid;
-  border-block-color: white;
+.finch ul[data-bullet-color=black] li::before, .finch ol[data-bullet-color=black] li::before,
+#finch ul[data-bullet-color=black] li::before,
+#finch ol[data-bullet-color=black] li::before {
+  color: black;
+  /* #2.b */
 }
-body section > * * {
-  color: inherit;
+.finch ul[data-bullet-color=red] li::before, .finch ol[data-bullet-color=red] li::before,
+#finch ul[data-bullet-color=red] li::before,
+#finch ol[data-bullet-color=red] li::before {
+  color: #b1021c;
+  /* #2.b */
 }
-@supports not (border-inline: 0) {
-  body section > * {
-    border-block-start-width: 0.125rem;
-    border-block-start-style: solid;
-    border-block-start-color: white;
-    border-block-end-width: 0.125rem;
-    border-block-end-style: solid;
-    border-block-end-color: white;
-  }
+.finch ul[data-bullet-color=blue] li::before, .finch ol[data-bullet-color=blue] li::before,
+#finch ul[data-bullet-color=blue] li::before,
+#finch ol[data-bullet-color=blue] li::before {
+  color: #3cabec;
+  /* #2.b */
 }
-@supports not (border-inline-start: 0) {
-  body section > * {
-    border-right-width: 0.125rem;
-    border-right-style: solid;
-    border-right-color: white;
-    border-left-width: 0.125rem;
-    border-left-style: solid;
-    border-left-color: white;
-  }
+.finch ul[data-bullet-color=green] li::before, .finch ol[data-bullet-color=green] li::before,
+#finch ul[data-bullet-color=green] li::before,
+#finch ol[data-bullet-color=green] li::before {
+  color: #425e21;
+  /* #2.b */
+}
+.finch ul[data-bullet-color=yellow] li::before, .finch ol[data-bullet-color=yellow] li::before,
+#finch ul[data-bullet-color=yellow] li::before,
+#finch ol[data-bullet-color=yellow] li::before {
+  color: #f7c326;
+  /* #2.b */
+}
+.finch ul[data-bullet-color=pink] li::before, .finch ol[data-bullet-color=pink] li::before,
+#finch ul[data-bullet-color=pink] li::before,
+#finch ol[data-bullet-color=pink] li::before {
+  color: #e071ac;
+  /* #2.b */
+}
+.finch ul[data-bullet-color=purple] li::before, .finch ol[data-bullet-color=purple] li::before,
+#finch ul[data-bullet-color=purple] li::before,
+#finch ol[data-bullet-color=purple] li::before {
+  color: #8213be;
+  /* #2.b */
+}
+.finch ul[data-bullet-color=orange] li::before, .finch ol[data-bullet-color=orange] li::before,
+#finch ul[data-bullet-color=orange] li::before,
+#finch ol[data-bullet-color=orange] li::before {
+  color: #ff670f;
+  /* #2.b */
+}
+.finch ul[data-bullet-color=indigo] li::before, .finch ol[data-bullet-color=indigo] li::before,
+#finch ul[data-bullet-color=indigo] li::before,
+#finch ol[data-bullet-color=indigo] li::before {
+  color: #8794de;
+  /* #2.b */
+}
+.finch ul[data-bullet-color=violet] li::before, .finch ol[data-bullet-color=violet] li::before,
+#finch ul[data-bullet-color=violet] li::before,
+#finch ol[data-bullet-color=violet] li::before {
+  color: #7500eb;
+  /* #2.b */
+}
+.finch ul[data-bullet-color=error] li::before, .finch ol[data-bullet-color=error] li::before,
+#finch ul[data-bullet-color=error] li::before,
+#finch ol[data-bullet-color=error] li::before {
+  color: #b1021c;
+  /* #2.b */
+}
+.finch ul[data-bullet-color=info] li::before, .finch ol[data-bullet-color=info] li::before,
+#finch ul[data-bullet-color=info] li::before,
+#finch ol[data-bullet-color=info] li::before {
+  color: #3cabec;
+  /* #2.b */
+}
+.finch ul[data-bullet-color=success] li::before, .finch ol[data-bullet-color=success] li::before,
+#finch ul[data-bullet-color=success] li::before,
+#finch ol[data-bullet-color=success] li::before {
+  color: #425e21;
+  /* #2.b */
+}
+.finch ul[data-bullet-color=warning] li::before, .finch ol[data-bullet-color=warning] li::before,
+#finch ul[data-bullet-color=warning] li::before,
+#finch ol[data-bullet-color=warning] li::before {
+  color: #f7c326;
+  /* #2.b */
+}
+.finch mark,
+#finch mark {
+  background-color: rgba(251, 222, 137, 0.99);
+  /* #1 */
+}
+.finch mark[data-color=main],
+#finch mark[data-color=main] {
+  background-color: rgba(254, 129, 148, 0.99);
+  /* #2 */
+}
+.finch mark[data-color=secondary],
+#finch mark[data-color=secondary] {
+  background-color: rgba(153, 211, 245, 0.99);
+  /* #2 */
+}
+.finch mark[data-color=tertiary],
+#finch mark[data-color=tertiary] {
+  background-color: rgba(251, 222, 137, 0.99);
+  /* #2 */
+}
+.finch mark[data-color=light],
+#finch mark[data-color=light] {
+  background-color: rgba(213, 171, 227, 0.99);
+  /* #2 */
+}
+.finch mark[data-color=dark],
+#finch mark[data-color=dark] {
+  background-color: rgba(186, 186, 186, 0.99);
+  /* #2 */
+}
+.finch mark[data-color=white],
+#finch mark[data-color=white] {
+  background-color: rgba(179, 179, 179, 0.99);
+  /* #2 */
+}
+.finch mark[data-color=black],
+#finch mark[data-color=black] {
+  background-color: rgba(179, 179, 179, 0.99);
+  /* #2 */
+}
+.finch mark[data-color=red],
+#finch mark[data-color=red] {
+  background-color: rgba(254, 129, 148, 0.99);
+  /* #2 */
+}
+.finch mark[data-color=blue],
+#finch mark[data-color=blue] {
+  background-color: rgba(153, 211, 245, 0.99);
+  /* #2 */
+}
+.finch mark[data-color=green],
+#finch mark[data-color=green] {
+  background-color: rgba(193, 222, 161, 0.99);
+  /* #2 */
+}
+.finch mark[data-color=yellow],
+#finch mark[data-color=yellow] {
+  background-color: rgba(251, 222, 137, 0.99);
+  /* #2 */
+}
+.finch mark[data-color=pink],
+#finch mark[data-color=pink] {
+  background-color: rgba(233, 155, 196, 0.99);
+  /* #2 */
+}
+.finch mark[data-color=purple],
+#finch mark[data-color=purple] {
+  background-color: rgba(199, 120, 242, 0.99);
+  /* #2 */
+}
+.finch mark[data-color=orange],
+#finch mark[data-color=orange] {
+  background-color: rgba(255, 168, 117, 0.99);
+  /* #2 */
+}
+.finch mark[data-color=indigo],
+#finch mark[data-color=indigo] {
+  background-color: rgba(135, 148, 222, 0.99);
+  /* #2 */
+}
+.finch mark[data-color=violet],
+#finch mark[data-color=violet] {
+  background-color: rgba(194, 133, 255, 0.99);
+  /* #2 */
+}
+.finch mark[data-color=error],
+#finch mark[data-color=error] {
+  background-color: rgba(254, 129, 148, 0.99);
+  /* #2 */
+}
+.finch mark[data-color=info],
+#finch mark[data-color=info] {
+  background-color: rgba(153, 211, 245, 0.99);
+  /* #2 */
+}
+.finch mark[data-color=success],
+#finch mark[data-color=success] {
+  background-color: rgba(193, 222, 161, 0.99);
+  /* #2 */
+}
+.finch mark[data-color=warning],
+#finch mark[data-color=warning] {
+  background-color: rgba(251, 222, 137, 0.99);
+  /* #2 */
 }
