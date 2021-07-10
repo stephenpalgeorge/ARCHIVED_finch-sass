@@ -55,6 +55,13 @@ $major-thirds: func.create-scale($base: $size-base, $ratio: 1.25);
 $perfect-fourths--intervals: func.create-scale($base: $interval-base, $ratio: 1.333);
 $perfect-fourths: func.create-scale($base: $size-base, $ratio: 1.333);
 
+/// ROOT 2
+/// ----------
+/// 100: 0.354rem, 200: 0.5rem, 300: 0.707rem, 400: 1rem, 500: 1.414rem,
+/// 600: 1.999rem, 700: 2.827rem, 800: 3.998rem, 900: 5.653rem, 1000: 7.993rem
+$root-two--intervals: func.create-scale($base: $interval-base, $ratio: 1.414);
+$root-two: func.create-scale($base: $size-base, $ratio: 1.414);
+
 /// GOLDEN RATIO
 /// ----------
 /// 100: 0.236rem, 200: 0.382rem, 300: 0.618rem, 400: 1rem, 500: 1.618rem,
