@@ -35,6 +35,7 @@ $base-id: "finch" !default;
     /*-- #2 --*/
     // style the 'default' state of `contenteditable` elements:
     @include lyt.border($style: dashed, $color: rgba(clr.use(dark), .1));
+    @include lyt.padding(base);
     // style the 'active' state of `contenteditable` elements:
     &:hover, &:focus {
       border-color:rgba(clr.use(dark), .5);
