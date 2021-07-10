@@ -37,24 +37,31 @@ $padding-sizes: map.merge($finch-paddings, $set-paddings);
 /// @param $key one of the keys of the `$padding-sizes` map.
 /// @param $axis one of `x|y|null`, determines where the padding should be set. (If `null`, padding will be applied to all sides).
 ///
-@mixin padding($key, $axis: null) {
+@mixin padding($key, $axis: null, $important: false) {
   // X-AXIS
   // normally, the x-axis will correspond to padding-inline,
   // however for writing modes that are vertical, the x-axis
   // (left and right) will correspond to padding-block.
   @if $axis == x or $axis == 'x' {
     @if config.$writing-mode == vertical-rl or config.$writing-mode == vertical-lr {
-      padding-block: get-padding($key);
+      @if $important { padding-block: get-padding($key) !important; }
+      @else { padding-block: get-padding($key); }
     }
     @else {
-      padding-inline: get-padding($key);
+      @if $important { padding-inline: get-padding($key) !important; }
+      @else { padding-inline: get-padding($key); }
     }
     // browsers that don't support logical properties get a
     // fallback of padding-left, padding-right.
     // https://caniuse.com/?search=padding-inline
     @supports not (padding-inline: 0) {
-      padding-left: get-padding($key);
-      padding-right: get-padding($key);
+      @if $important {
+        padding-left: get-padding($key) !important;
+        padding-right: get-padding($key) !important;
+      } @else {
+        padding-left: get-padding($key);
+        padding-right: get-padding($key);
+      }
     }
   }
 
@@ -64,23 +71,31 @@ $padding-sizes: map.merge($finch-paddings, $set-paddings);
   // (top and bottom) will correspond to padding-inline.
   @else if $axis == y or $axis == 'y' {
     @if config.$writing-mode == vertical-rl or config.$writing-mode == vertical-lr {
-      padding-inline: get-padding($key);
+      @if $important { padding-inline: get-padding($key) !important; }
+      @else { padding-inline: get-padding($key); }
     }
     @else {
-      padding-block: get-padding($key);
+      @if $important { padding-block: get-padding($key) !important; }
+      @else { padding-block: get-padding($key); }
     }
     // browsers that don't support logical properties get a
     // fallback of padding-top, padding-bottom.
     // https://caniuse.com/?search=padding-block
     @supports not (padding-block: 0) {
-      padding-top: get-padding($key);
-      padding-bottom: get-padding($key);
+      @if $important {
+        padding-top: get-padding($key) !important;
+        padding-bottom: get-padding($key) !important;
+      } @else {
+        padding-top: get-padding($key);
+        padding-bottom: get-padding($key);
+      }
     }
   }
 
   // If no `$axis` is provided, the padding is applied to all sides:
   @else {
-    padding: get-padding($key);
+    @if $important { padding: get-padding($key) !important; }
+    @else { padding: get-padding($key); }
   }
 }
 
@@ -88,27 +103,43 @@ $padding-sizes: map.merge($finch-paddings, $set-paddings);
 /// @param $key one of the keys of the `$padding-sizes` map.
 /// @param $dir one of `inline|block` that determines where the padding should be set.
 ///
-@mixin padding-logical($key, $dir: inline) {
+@mixin padding-logical($key, $dir: inline, $important: false) {
   @if list.index((inline, block), $dir) {
-    padding-#{$dir}: get-padding($key);
+    @if $important { padding-#{$dir}: get-padding($key) !important; }
+    @else { padding-#{$dir}: get-padding($key); }
 
     // some browsers (like `edge`) don't support the `padding-inline` shorthand
     // but do support the full `padding-inline-start` and `padding-inline-end` properties.
     // https://caniuse.com/?search=padding-inline
     @supports not (padding-inline: 0) {
-      padding-#{$dir}-start: get-padding($key);
-      padding-#{$dir}-end: get-padding($key);
+      @if $important {
+        padding-#{$dir}-start: get-padding($key) !important;
+        padding-#{$dir}-end: get-padding($key) !important;
+      } @else {
+        padding-#{$dir}-start: get-padding($key);
+        padding-#{$dir}-end: get-padding($key);
+      }
     }
     // browsers that don't support logical properties at all get a sensible fallback.
     // https://caniuse.com/?search=padding-inline-start
     @supports not (padding-inline-start: 0) {
       @if $dir == inline {
-        padding-left: get-padding($key);
-        padding-right: get-padding($key);
+        @if $important {
+          padding-left: get-padding($key) !important;
+          padding-right: get-padding($key) !important;
+        } @else {
+          padding-left: get-padding($key);
+          padding-right: get-padding($key);
+        }
       }
       @else if $dir == block {
-        padding-top: get-padding($key);
-        padding-bottom: get-padding($key);
+        @if $important {
+          padding-top: get-padding($key) !important;
+          padding-bottom: get-padding($key) !important;
+        } @else {
+          padding-top: get-padding($key);
+          padding-bottom: get-padding($key);
+        }
       }
     }
   }
@@ -119,12 +150,12 @@ $padding-sizes: map.merge($finch-paddings, $set-paddings);
 
 /// PADDING INLINE
 /// a shorthand for the `padding-logical` mixin with the `$dir` set to `inline`.
-@mixin padding-inline($key) {
-  @include padding-logical($key: $key, $dir: inline);
+@mixin padding-inline($key, $important: false) {
+  @include padding-logical($key: $key, $dir: inline, $important: $important);
 }
 
 /// PADDING BLOCK
 /// a shorthand for the `padding-logical` mixin with the `$dir` set to `block`.
-@mixin padding-block($key) {
-  @include padding-logical($key: $key, $dir: block);
+@mixin padding-block($key, $important: false) {
+  @include padding-logical($key: $key, $dir: block, $important: $important);
 }
