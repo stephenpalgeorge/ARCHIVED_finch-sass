@@ -73,6 +73,7 @@ $finch-colors: (
   info: $finch-blue,
   success: $finch-green,
   warning: $finch-yellow,
+  required: $finch-red,
 );
 $pure-colors: (
   red: hsl(0, 100%, 50%),
