@@ -16,7 +16,8 @@ $base-id: "finch" !default;
   /// ----------
   /// #1 - set a default padding on the containing element, this just keeps things away from the edge of the screen.
   ///
-  @include lyt.padding(x-large); /* #1 */
+  /*-- #1 --*/
+  @include lyt.padding(x-large);
 
   /// MISC
   /// ----------
@@ -25,11 +26,26 @@ $base-id: "finch" !default;
   /// #3 - style `<hr>` elements.
   ///
   ::selection {
-    background-color: rgba(clr.use(main, 500), .99); /* #1 */
-    color: clr.use(light); /* #1 */
+    /*-- #1 --*/
+    background-color: rgba(clr.use(main, 500), .99);
+    color: clr.use(light);
+  }
+
+  *[contenteditable] {
+    /*-- #2 --*/
+    // style the 'default' state of `contenteditable` elements:
+    @include lyt.border($style: dashed, $color: rgba(clr.use(dark), .1));
+    // style the 'active' state of `contenteditable` elements:
+    &:hover, &:focus {
+      border-color:rgba(clr.use(dark), .5);
+      outline-color: rgba(clr.use(green, 900));
+      outline-width: .25rem;
+      outline-offset: .25rem;
+    }
   }
 
   hr {
+    /*-- #3 --*/
     border: none;
     @include lyt.border($width: thin, $color: clr.use(dark, 700), $sides: bottom);
     @include lyt.margin(x-large, y, true);
@@ -76,15 +92,17 @@ $base-id: "finch" !default;
 
     &:disabled,
     &.disabled {
-      color: clr.use(main, 700); /* #4 */
-      pointer-events: none; /* #4 */
+      /*-- #4 --*/
+      color: clr.use(main, 700);
+      pointer-events: none;
     }
 
     @include ps.hover { color: clr.use(main, 200); } /* #5 */
     @include ps.focus {
-      outline: none; /* #6 */
-      color: clr.use(main, 200); /* #6 */
-      background-color: rgba(clr.use(main, 700), .1); /* #6 */
+      /*-- #6 --*/
+      outline: none;
+      color: clr.use(main, 200);
+      background-color: rgba(clr.use(main, 700), .1);
     }
   }
 
@@ -95,26 +113,29 @@ $base-id: "finch" !default;
   /// #3 - Style the citation of a blockquote.
   ///
   blockquote {
-    + * { margin-block-start: lyt.get-margin(small); } /* #1 */
-    @include lyt.padding(small); /* #1 */
-    padding-inline-start: lyt.get-padding(large); /* #1 */
-    @include lyt.border($color: clr.use(main), $sides: left); /* #1 */
+    /*-- #1 --*/
+    + * { margin-block-start: lyt.get-margin(small); }
+    @include lyt.padding(small);
+    padding-inline-start: lyt.get-padding(large);
+    @include lyt.border($color: clr.use(main), $sides: left);
 
-    @include typ.format($style: italic, $weight: light); /* #2 */
+    /*-- #2 --*/
+    @include typ.format($style: italic, $weight: light);
     > *:not(cite) {
-      @include typ.format($style: italic, $weight: light); /* #2 */
+      @include typ.format($style: italic, $weight: light);
     }
   }
 
   cite {
+    /*-- #3 --*/
     // `<cite>` are `display: inline;` by default. Setting `display: block;` ensures that they
     // sit on their own line, rather than running on from the quote text, which is the effect
     // we want in this case.
-    display: block; /* #3 */
-    padding-inline-start: 1rem; /* #3 */
-    @include typ.font-family(serif); /* #3 */
+    display: block;
+    padding-inline-start: 1rem;
+    @include typ.font-family(serif);
     @include ps.before('-') {
-      left: 0; /* #3 */
+      left: 0;
     }
   }
 
@@ -122,40 +143,42 @@ $base-id: "finch" !default;
   /// ----------
   /// #1 - Set the vertical flow of list elements.
   /// #2 - Style the markers.
-  /// #2.a - Set a default marker color.
-  /// #2.b - Provide options for all colors.
   ///
 
+  /*-- #1 --*/
   ul + *, ol + * { margin-block-start: lyt.get-margin(large); } /* #1 */
 
   ul:not([role="list"]) {
+    /*-- #2 --*/
+    // style the "default" marker as yellow.
     list-style-type: none;
     li {
       // the padding on the list item makes room for the markers.
-      padding-inline-start: 2rem; /* #2 */
+      padding-inline-start: 2rem;
       // `\2022` is the unicode "bullet" character.
       @include ps.before('\2022') {
-        left: 0; /* #2 */
-        color: clr.use(main); /* #2, #2.a */
+        left: 0;
+        color: clr.use(main);
       };
     }
   }
 
   ol:not([role="list"]) {
     list-style-type: none;
-    counter-reset: orderedlist; /* #2 */
+    counter-reset: orderedlist;
     li {
-      padding-inline-start: 2rem; /* #2 */
-      counter-increment: orderedlist; /* #2 */
-      $bullet: counter(orderedlist) "."; /* #2 */
+      padding-inline-start: 2rem;
+      counter-increment: orderedlist;
+      $bullet: counter(orderedlist) ".";
       @include ps.before($bullet) {
-        left: 0; /* #2 */
-        color: clr.use(main); /* #2, #2.a */
+        left: 0;
+        color: clr.use(main);
       }
     }
   }
 
-  ul, ol {
+  // provide option for all colors of marker thourgh a data-attr api.
+  ul:not([role="list"]), ol:not([role="list"]) {
     @each $name, $value in clr.$color-palette {
       &[data-bullet-color='#{"" + $name}'] {
         li::before {
@@ -164,6 +187,7 @@ $base-id: "finch" !default;
       }
     }
   }
+
   /// FIGURES
   /// ----------
   ///
@@ -177,10 +201,12 @@ $base-id: "finch" !default;
   /// #1 - set default `<mark>` background color as yellow.
   /// #2 - provide options for all other colors.
   mark {
-    background-color: rgba(clr.use(yellow, 700), .99); /* #1 */
+    /*-- #1 --*/
+    background-color: rgba(clr.use(yellow, 700), .99);
+    /*-- #2 --*/
     @each $name, $value in clr.$color-palette {
-      &[data-color='#{"" + $name}'] {
-        background-color: rgba(clr.use($name, 700), .99); /* #2 */
+      &[data-bg-color='#{"" + $name}'] {
+        background-color: rgba(clr.use($name, 700), .99);
       }
     }
   }
@@ -188,30 +214,52 @@ $base-id: "finch" !default;
   /// FORMS
   /// ----------
   ///
+  form {
+
+  }
 
   /// INPUTS/FIELDSETS + their text elements
   /// ----------
   /// The text elements referred to in the title of this section are any text based content that relates to
-  /// any input element. This includes `<label>` and `<legend>`
+  /// any input element. This includes `<label>` and `<legend>`.
   ///
+  /// #1 - style 'required' inputs.
+  ///
+
+  /*-- #1 --*/
+  input[required],
+  input[aria-required="true"] {
+    /// @todo the `content` variable in the below mixin should contain the unicode for an asterisk.
+    @include ps.before('') {
+      color: clr.use(required);
+      @each $name, $value in clr.$color-palette {
+        &[data-asterisk-color='#{"" + $name}'] {
+          color: clr.use($name);
+        }
+      }
+    }
+  }
 
   /// BUTTONS
   /// ----------
   ///
 
-  /// INTERACTIVE ELEMENTS - DETAILS
+  /// ** INTERACTIVE ELEMENTS **
+  ///
+  
+  /// DETAILS
   /// ----------
   ///
 
-  /// INTERACTIVE ELEMENTS - DIALOG
+  /// DIALOG
   /// ----------
   ///
 
-  /// INTERACTIVE ELEMENTS - MENU
+  /// MENU
   /// ----------
   ///
 
-  /// INTERACTIVE ELEMENTS - SUMMARY
+  /// SUMMARY
   /// ----------
   ///
 
