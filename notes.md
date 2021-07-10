@@ -1,3 +1,6 @@
+- global:
+  - need to be able to pass an 'important' flag into most mixins.
+
 - typography module:
   - add 'text-shadow' property.
 
