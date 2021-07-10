@@ -30,3 +30,8 @@ $heights: map.merge($finch-line-heights, $set-line-heights);
   @warn 'no line-height found for "#{$key}"';
   @return null;
 }
+
+@mixin line-height($key, $important: false) {
+  @if $important { line-height: get-line-height($key) !important; }
+  @else { line-height: get-line-height($key); }
+}

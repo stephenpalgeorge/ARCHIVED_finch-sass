@@ -28,3 +28,8 @@ $l-spacings: map.merge($finch-letter-spacings, $set-letter-spacings);
   @warn 'No spacing found for "#{$key}"';
   @return null;
 }
+
+@mixin letter-spacing($key, $important: false) {
+  @if $important { letter-spacing: get-letter-spacing($key) !important; }
+  @else { letter-spacing: get-letter-spacing($key); }
+}

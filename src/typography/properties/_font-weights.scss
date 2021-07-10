@@ -37,6 +37,7 @@ $weights: map.merge($finch-font-weights, $set-font-weights);
   @return null;
 }
 
-@mixin font-weight($key) {
-  font-weight: get-font-weight($key);
+@mixin font-weight($key, $important: false) {
+  @if $important { font-weight: get-font-weight($key) !important; }
+  @else { font-weight: get-font-weight($key); }
 }

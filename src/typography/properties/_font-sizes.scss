@@ -32,6 +32,7 @@ $sizes: map.merge($finch-font-sizes, $set-font-sizes);
   @return null;
 }
 
-@mixin font-size($key) {
-  font-size: get-font-size($key);
+@mixin font-size($key, $important: false) {
+  @if $important { font-size: get-font-size($key) !important; }
+  @else { font-size: get-font-size($key); }
 }

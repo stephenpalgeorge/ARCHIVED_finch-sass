@@ -79,6 +79,7 @@ $web-safe: (
   @return null;
 }
 
-@mixin font-family($key) {
-  font-family: get-font-family($key);
+@mixin font-family($key, $important: false) {
+  @if $important { font-family: get-font-family($key) !important; }
+  @else { font-family: get-font-family($key); }
 }

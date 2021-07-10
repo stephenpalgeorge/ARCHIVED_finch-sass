@@ -33,3 +33,8 @@ $indents: map.merge($finch-text-indents, $set-text-indents);
   @warn 'No indent found for "#{$key}"';
   @return null;
 }
+
+@mixin text-indent($key, $important: false) {
+  @if $important { text-indent: get-text-indent($key) !important; }
+  @else { text-indent: get-text-indent($key); }
+}
