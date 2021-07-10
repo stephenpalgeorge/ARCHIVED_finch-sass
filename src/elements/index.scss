@@ -1,0 +1,218 @@
+@use '../color/' as clr;
+@use '../layout/' as lyt;
+@use '../pseudo/' as ps;
+@use '../reset';
+@use '../typography/' as typ;
+
+// all styles/opinions will be scoped under the class name or id `finch`. This is
+// configurable though, the end-user can set whatever base-selector they like :).
+$base-class: "finch" !default;
+$base-id: "finch" !default;
+
+
+.#{$base-class},
+##{$base-id} {
+  /// STRUCTURE
+  /// ----------
+  /// #1 - set a default padding on the containing element, this just keeps things away from the edge of the screen.
+  ///
+  @include lyt.padding(x-large); /* #1 */
+
+  /// MISC
+  /// ----------
+  /// #1 - style the selected text.
+  /// #2 - style 'contenteditable' elements.
+  /// #3 - style `<hr>` elements.
+  ///
+  ::selection {
+    background-color: rgba(clr.use(main, 500), .99); /* #1 */
+    color: clr.use(light); /* #1 */
+  }
+
+  hr {
+    border: none;
+    @include lyt.border($width: thin, $color: clr.use(dark, 700), $sides: bottom);
+    @include lyt.margin(x-large, y, true);
+  }
+
+  /// TYPOGRAPHY
+  /// ----------
+  /// #1 - Set global font styles.
+  /// #2 - Set heading style variations.
+  /// #3 - Set the vertical flow for different elements.
+  /// 
+  * {
+    @include typ.format; /* #1 */
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @include typ.format($family: serif, $weight: heavy, $line-height: base); /* #2 */
+  }
+
+  h1 {
+    @include typ.font-size(heading); /* #2 */
+    + * { margin-block-start: lyt.get-margin(x-large); } /* #3 */
+  }
+  h2, h3 {
+    @include typ.font-size(sub-heading); /* #2 */
+    + * { margin-block-start: lyt.get-margin(large); } /* #3 */
+  }
+  h3 { @include typ.font-weight(thick); } /* #2 */
+  
+  p + * { margin-block-start: lyt.get-margin(base); } /* #3 */
+
+  /// LINKS
+  /// ----------
+  /// #1 - Set basic link styles.
+  /// #2 - Set transitions for different link states.
+  /// #3 - Style links that don't go anywhere.
+  /// #4 - Style the disabled state.
+  /// #5 - Style the hover state.
+  /// #6 - Style the focus state.
+  a {
+    @include typ.format($family: serif, $color: clr.use(main)); /* #1 */
+    transition: color .2s ease, background-color .2s ease; /* #2 */
+    &:not([href]) { @include typ.strike; } /* #3 */
+
+    &:disabled,
+    &.disabled {
+      color: clr.use(main, 700); /* #4 */
+      pointer-events: none; /* #4 */
+    }
+
+    @include ps.hover { color: clr.use(main, 200); } /* #5 */
+    @include ps.focus {
+      outline: none; /* #6 */
+      color: clr.use(main, 200); /* #6 */
+      background-color: rgba(clr.use(main, 700), .1); /* #6 */
+    }
+  }
+
+  /// BLOCKQUOTES
+  /// ----------
+  /// #1 - Style the layout of a blockquote.
+  /// #2 - Style the text of a blockquote.
+  /// #3 - Style the citation of a blockquote.
+  ///
+  blockquote {
+    + * { margin-block-start: lyt.get-margin(small); } /* #1 */
+    @include lyt.padding(small); /* #1 */
+    padding-inline-start: lyt.get-padding(large); /* #1 */
+    @include lyt.border($color: clr.use(main), $sides: left); /* #1 */
+
+    @include typ.format($style: italic, $weight: light); /* #2 */
+    > *:not(cite) {
+      @include typ.format($style: italic, $weight: light); /* #2 */
+    }
+  }
+
+  cite {
+    // `<cite>` are `display: inline;` by default. Setting `display: block;` ensures that they
+    // sit on their own line, rather than running on from the quote text, which is the effect
+    // we want in this case.
+    display: block; /* #3 */
+    padding-inline-start: 1rem; /* #3 */
+    @include typ.font-family(serif); /* #3 */
+    @include ps.before('-') {
+      left: 0; /* #3 */
+    }
+  }
+
+  /// LISTS
+  /// ----------
+  /// #1 - Set the vertical flow of list elements.
+  /// #2 - Style the markers.
+  /// #2.a - Set a default marker color.
+  /// #2.b - Provide options for all colors.
+  ///
+
+  ul + *, ol + * { margin-block-start: lyt.get-margin(large); } /* #1 */
+
+  ul:not([role="list"]) {
+    list-style-type: none;
+    li {
+      // the padding on the list item makes room for the markers.
+      padding-inline-start: 2rem; /* #2 */
+      // `\2022` is the unicode "bullet" character.
+      @include ps.before('\2022') {
+        left: 0; /* #2 */
+        color: clr.use(main); /* #2, #2.a */
+      };
+    }
+  }
+
+  ol:not([role="list"]) {
+    list-style-type: none;
+    counter-reset: orderedlist; /* #2 */
+    li {
+      padding-inline-start: 2rem; /* #2 */
+      counter-increment: orderedlist; /* #2 */
+      $bullet: counter(orderedlist) "."; /* #2 */
+      @include ps.before($bullet) {
+        left: 0; /* #2 */
+        color: clr.use(main); /* #2, #2.a */
+      }
+    }
+  }
+
+  ul, ol {
+    @each $name, $value in clr.$color-palette {
+      &[data-bullet-color='#{"" + $name}'] {
+        li::before {
+          color: clr.use($name); /* #2.b */
+        }
+      }
+    }
+  }
+  /// FIGURES
+  /// ----------
+  ///
+
+  /// CODE BLOCKS
+  /// ----------
+  ///
+
+  /// MARKS
+  /// ----------
+  /// #1 - set default `<mark>` background color as yellow.
+  /// #2 - provide options for all other colors.
+  mark {
+    background-color: rgba(clr.use(yellow, 700), .99); /* #1 */
+    @each $name, $value in clr.$color-palette {
+      &[data-color='#{"" + $name}'] {
+        background-color: rgba(clr.use($name, 700), .99); /* #2 */
+      }
+    }
+  }
+
+  /// FORMS
+  /// ----------
+  ///
+
+  /// INPUTS/FIELDSETS + their text elements
+  /// ----------
+  /// The text elements referred to in the title of this section are any text based content that relates to
+  /// any input element. This includes `<label>` and `<legend>`
+  ///
+
+  /// BUTTONS
+  /// ----------
+  ///
+
+  /// INTERACTIVE ELEMENTS - DETAILS
+  /// ----------
+  ///
+
+  /// INTERACTIVE ELEMENTS - DIALOG
+  /// ----------
+  ///
+
+  /// INTERACTIVE ELEMENTS - MENU
+  /// ----------
+  ///
+
+  /// INTERACTIVE ELEMENTS - SUMMARY
+  /// ----------
+  ///
+
+}
