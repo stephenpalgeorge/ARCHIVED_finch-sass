@@ -24,7 +24,7 @@
     }
   } @else {
     // if `$sides` hasn't been set, apply the `$distance` equally to *all* sides
-    // using the `inset` property, or explicitly on all sides if `inset` is not supported.
+    // using the `inset` property, or explicitly on each side if `inset` is not supported.
     inset: $distance;
     @supports not (inset: 0) {
       top: $distance;

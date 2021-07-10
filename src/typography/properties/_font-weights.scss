@@ -36,3 +36,7 @@ $weights: map.merge($finch-font-weights, $set-font-weights);
   @warn 'No weight found for "#{$key}"';
   @return null;
 }
+
+@mixin font-weight($key) {
+  font-weight: get-font-weight($key);
+}

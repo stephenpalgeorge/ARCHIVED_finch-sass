@@ -6,6 +6,13 @@
 /// ----------
 /// These are some high level settings that the rest of the typography module depends on:
 $use-web-safe: false !default;
+$finch-measures: (
+  body: 65ch,
+  headings: 35ch,
+  sub-headings: 44ch,
+);
+$set-measures: () !default;
+$measures: map.merge($finch-measures, $set-measures);
 /// This map controls whether the styles are generated specifically for each breakpoint.
 /// If true, then placeholders and classes such as `.font-size:lead@lg` will be created.
 /// `text-decoration` is deliberately omitted from this map as there are too many variables to make
@@ -138,22 +145,28 @@ $typography-values: (
 /// These mixins combine behaviour of several/many of the different properties that have been defined so far.
 
 /// TEXT FORMAT
-@mixin text-format(
+@mixin format(
   $alignment: start,
   $family: sans-serif,
   $line-height: tall,
   $size: base,
+  $style: normal,
   $weight: base,
+  $color: #000,
+  $measure: body,
 ) {
   font-family: get-font-family($family);
   font-size: get-font-size($size);
+  font-style: $style;
   font-weight: get-font-weight($weight);
   line-height: get-line-height($line-height);
   text-align: $alignment;
+  color: $color;
+  max-width: map.get($measures, $measure);
 }
 
 /// TEXT ALTER
-@mixin text-alter(
+@mixin alter(
   $indent: none,
   $letter-spacing: base,
   $transform: none,

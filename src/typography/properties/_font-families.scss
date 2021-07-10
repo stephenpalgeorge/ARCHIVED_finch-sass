@@ -78,3 +78,7 @@ $web-safe: (
   @warn 'No font-family found for "#{$key}"';
   @return null;
 }
+
+@mixin font-family($key) {
+  font-family: get-font-family($key);
+}

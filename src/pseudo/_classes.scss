@@ -92,12 +92,16 @@
   }
   // assuming it's being used properly:
   @else {
-    $count: $start;
-    @while $count <= $end {
-      :nth-child(#{$count}) {
-        @content;
-      }
-      $count: $count + 1;
+    // n.b. I'm not convinced this works, leaving the old version in the comment below just in case we have to revert.
+    :nth-child(n+#{$start}):nth-child(-n+#{$end}) {
+      @content;
     }
+    // $count: $start;
+    // @while $count <= $end {
+    //   :nth-child(#{$count}) {
+    //     @content;
+    //   }
+    //   $count: $count + 1;
+    // }
   }
 }

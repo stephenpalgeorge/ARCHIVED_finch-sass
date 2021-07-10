@@ -38,23 +38,30 @@ $margin-sizes: map.merge($finch-margins, $set-margins);
 /// @param $key one of the keys of the `$margin-sizes` map.
 /// @param $axis one of `x|y|null`, if there is a value, then margin will be applied to that axis, otherwise it will be universally applied.
 ///
-@mixin margin($key, $axis: null) {
+@mixin margin($key, $axis: null, $important: false) {
   // X-AXIS
   // normally, the x-axis will correspond to margin-inline, however for writing modes that are vertical, the x-axis
   // (left and right) will correspond to margin-block.
   @if $axis == x or $axis == 'x' {
     @if config.$writing-mode == vertical-rl or config.$writing-mode == vertical-lr {
-      margin-block: get-margin($key);
+      @if $important { margin-block: get-margin($key) !important; } 
+      @else { margin-block: get-margin($key); }
     }
     @else {
-      margin-inline: get-margin($key);
+      @if $important { margin-inline: get-margin($key) !important; }
+      @else { margin-inline: get-margin($key); }
     }
     // browsers that don't support logical properties get a
     // fallback of margin-left, margin-right.
     // https://caniuse.com/?search=margin-inline
     @supports not (margin-inline: 0) {
-      margin-left: get-margin($key);
-      margin-right: get-margin($key);
+      @if $important {
+        margin-left: get-margin($key) !important;
+        margin-right: get-margin($key) !important;
+      } @else {
+        margin-left: get-margin($key);
+        margin-right: get-margin($key);
+      }
     }
   }
 
@@ -64,23 +71,31 @@ $margin-sizes: map.merge($finch-margins, $set-margins);
   // (top and bottom) will correspond to margin-inline.
   @else if $axis == y or $axis == 'y' {
     @if config.$writing-mode == vertical-rl or config.$writing-mode == vertical-lr {
-      margin-inline: get-margin($key);
+      @if $important { margin-inline: get-margin($key) !important; }
+      @else { margin-inline: get-margin($key); }
     }
     @else {
-      margin-block: get-margin($key);
+      @if $important { margin-block: get-margin($key) !important; }
+      @else { margin-block: get-margin($key); }
     }
     // browsers that don't support logical properties get a
     // fallmack of margin-top, margin-bottom.
     // https://caniuse.com/?search=margin-block
     @supports not (margin-block: 0) {
-      margin-top: get-margin($key);
-      margin-bottom: get-margin($key);
+      @if $important {
+        margin-top: get-margin($key) !important;
+        margin-bottom: get-margin($key) !important;
+      } @else {
+        margin-top: get-margin($key);
+        margin-bottom: get-margin($key);
+      }
     }
   }
 
   // if no `$axis` is provided, the margin is applied to all sides:
   @else {
-    margin: get-margin($key);
+    @if $important { margin: get-margin($key) !important; }
+    @else { margin: get-margin($key); }
   }
 }
 
@@ -88,27 +103,43 @@ $margin-sizes: map.merge($finch-margins, $set-margins);
 /// @param $key one of the keys of the `$margin-sizes` map.
 /// @param $dir one of `inline|block` that sets the margin values accordingly.
 ///
-@mixin margin-logical($key, $dir: inline) {
+@mixin margin-logical($key, $dir: inline, $important: false) {
   @if list.index((inline, block), $dir) {
-    margin-#{$dir}: get-margin($key);
+    @if $important { margin-#{$dir}: get-margin($key) !important; }
+    @else { margin-#{$dir}: get-margin($key); }
 
     // some browsers (like `edge`) don't support the `margin-inline` shorthand
     // but do support the full `margin-inline-start` and `margin-inline-end` properties.
     // https://caniuse.com/?search=margin-inline
     @supports not (margin-inline: 0) {
-      margin-#{$dir}-start: get-margin($key);
-      margin-#{$dir}-end: get-margin($key);
+      @if $important {
+        margin-#{$dir}-start: get-margin($key) !important;
+        margin-#{$dir}-end: get-margin($key) !important;
+      } @else {
+        margin-#{$dir}-start: get-margin($key);
+        margin-#{$dir}-end: get-margin($key);
+      }
     }
     // browsers that don't support logical properties at all get a sensible fallback.
     // https://caniuse.com/?search=margin-inline-start
     @supports not (margin-inline-start: 0) {
       @if $dir == inline {
-        margin-left: get-margin($key);
-        margin-right: get-margin($key);
+        @if $important {
+          margin-left: get-margin($key) !important;
+          margin-right: get-margin($key) !important;
+        } @else {
+          margin-left: get-margin($key);
+          margin-right: get-margin($key);
+        }
       }
       @else if $dir == block {
-        margin-top: get-margin($key);
-        margin-bottom: get-margin($key);
+        @if $important {
+          margin-top: get-margin($key) !important;
+          margin-bottom: get-margin($key) !important;
+        } @else {
+          margin-top: get-margin($key);
+          margin-bottom: get-margin($key);
+        }
       }
     }
   }
@@ -119,12 +150,12 @@ $margin-sizes: map.merge($finch-margins, $set-margins);
 
 /// MARGIN INLINE
 /// a shorthand for the `margin-logical` mixin, with `$dir` set to `inline`.
-@mixin margin-inline($key) {
-  @include margin-logical($key: $key, $dir: inline);
+@mixin margin-inline($key, $important: false) {
+  @include margin-logical($key: $key, $dir: inline, $important: $important);
 }
 
 /// MARGIN BLOCK
 /// a shorthand for the `margin-logical` mixin, with `$dir` set to `block`.
-@mixin margin-block($key) {
-  @include margin-logical($key: $key, $dir: block);
+@mixin margin-block($key, $important: false) {
+  @include margin-logical($key: $key, $dir: block, $important: $important);
 }
