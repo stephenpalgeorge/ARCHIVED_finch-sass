@@ -1,5 +1,6 @@
 - global:
-  - need to be able to pass an 'important' flag into most mixins.
+  - add `animations` module.
+  - add `form` module.
 
 - typography module:
   - add 'text-shadow' property.

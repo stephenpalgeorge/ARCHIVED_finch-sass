@@ -36,10 +36,11 @@ $base-id: "finch" !default;
     // style the 'default' state of `contenteditable` elements:
     @include lyt.border($style: dashed, $color: rgba(clr.use(dark), .1));
     @include lyt.padding(base);
+    transition: border-color .2s ease;
     // style the 'active' state of `contenteditable` elements:
     &:hover, &:focus {
-      border-color:rgba(clr.use(dark), .5);
-      outline-color: rgba(clr.use(green, 900));
+      border-color: rgba(clr.use(orange), .5);
+      outline-color: rgba(clr.use(orange, 700), .5);
       outline-width: .25rem;
       outline-offset: .25rem;
     }
@@ -215,7 +216,7 @@ $base-id: "finch" !default;
   /// FORMS
   /// ----------
   ///
-  form {
+  form:invalid {
 
   }
 
@@ -224,22 +225,16 @@ $base-id: "finch" !default;
   /// The text elements referred to in the title of this section are any text based content that relates to
   /// any input element. This includes `<label>` and `<legend>`.
   ///
-  /// #1 - style 'required' inputs.
+  /// #1 - style input errors.
   ///
 
   /*-- #1 --*/
-  input[required],
-  input[aria-required="true"] {
-    /// @todo the `content` variable in the below mixin should contain the unicode for an asterisk.
-    @include ps.before('') {
-      color: clr.use(required);
-      @each $name, $value in clr.$color-palette {
-        &[data-asterisk-color='#{"" + $name}'] {
-          color: clr.use($name);
-        }
-      }
-    }
+  input:invalid,
+  input.invalid,
+  input.error {
+
   }
+  
 
   /// BUTTONS
   /// ----------

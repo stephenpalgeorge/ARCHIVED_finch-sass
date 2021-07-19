@@ -1,4 +1,5 @@
 @use '../../src/config' with ( $use-scale: major-thirds );
+@use '../../src/color' as clr;
 @use '../../src/layout/' as lyt with (
   $set-utilities: (stack: true),
 );
