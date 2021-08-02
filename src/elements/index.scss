@@ -152,7 +152,7 @@ $base-id: "finch" !default;
   ///
 
   /*-- #1 --*/
-  ul + *, ol + * { margin-block-start: lyt.get-margin(large); } /* #1 */
+  :is(ul, ol) + * { margin-block-start: lyt.get-margin(large); }
 
   ul:not([role="list"]) {
     /*-- #2 --*/
@@ -184,7 +184,7 @@ $base-id: "finch" !default;
   }
 
   // provide option for all colors of marker thourgh a data-attr api.
-  ul:not([role="list"]), ol:not([role="list"]) {
+  :is(ul, ol):not([role="list"]) {
     @each $name, $value in clr.$color-palette {
       &[data-bullet-color='#{"" + $name}'] {
         li::before {
@@ -220,7 +220,7 @@ $base-id: "finch" !default;
 
   /// FORMS
   /// ----------
-  /// #1 - set up some basic form styles.
+  /// #1 - [opinion] set up some basic form styles.
   /// #2 - style invalid forms.
   /// #3 - style valid forms.
   ///
@@ -239,7 +239,7 @@ $base-id: "finch" !default;
     }
 
     /*-- #3 --*/
-    &:valid {
+    &:is(:valid, .valid, .success) {
       border-color: clr.use(valid, 700);
     }
   }
@@ -250,16 +250,26 @@ $base-id: "finch" !default;
   /// The text elements referred to in the title of this section are any text based content that relates to
   /// any input element. This includes `<label>` and `<legend>`.
   ///
-  /// #1 - setup basic input styles.
+  /// #1 - [opinion] setup basic input styles.
+  /// #2 - style invalid inputs.
   ///
 
   input {
     /*-- #1 --*/
     transition: border-color .2s ease, outline-color .2s ease;
+    /*-- #2 --*/
     &:is(:invalid, .invalid, .error) {
       border-color: clr.use(invalid);
       &:focus {
         outline-color: rgba(clr.use(invalid), .4);
+      }
+    }
+
+    /*-- #2 --*/
+    &:is(:valid, .valid, .success) {
+      border-color: clr.use(valid, 700);
+      &:focus {
+        outline-color: rgba(clr.use(valid, 700), .4);
       }
     }
   }
@@ -269,6 +279,7 @@ $base-id: "finch" !default;
   /// ----------
   /// #1 - [opinion] all buttons should have center-aligned text.
   /// #2 - [opinion] all buttons should have a 'pointer' cursor.
+  /// #3 - [opinion] all buttons should have a transition on their background and color.
   ///
 
   :is(button, [role="button"], [type="button"]) {
@@ -276,6 +287,8 @@ $base-id: "finch" !default;
     text-align: center;
     /*-- #2 --*/
     cursor: pointer;
+    /*-- #3 --*/
+    transition: background .2s ease, color .2s ease;
   }
 
   /// ** INTERACTIVE ELEMENTS **
