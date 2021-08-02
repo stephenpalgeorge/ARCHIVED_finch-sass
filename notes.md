@@ -7,6 +7,7 @@
 
 - layout module:
   - add 'box-shadow' stuff.
+  - add 'outline' stuff.
 
 ## possible text style considerations:
 ```scss

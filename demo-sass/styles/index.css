@@ -1,3 +1,8 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,900&display=swap");
 .box-reset {
   padding: 0;
   margin: 0;
@@ -48,13 +53,691 @@
   margin-top: 3.8146972656rem;
 }
 
-h1 {
-  margin-block: 3.8146972656rem;
-  color: #b1021c;
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  /* 1 */
+  margin: 0;
+  /* 2 */
+  padding: 0;
+  /* 2 */
+}
+
+pre, code, kbd, samp {
+  font-family: monospace, monospace;
+  /* 1 */
+  font-size: 1em;
+  /* 2 */
+}
+
+input, button, textarea, select, optgroup {
+  font: inherit;
+  /* 3 */
+}
+
+body {
+  text-rendering: optimizeSpeed;
+  /* 4 */
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  /* 5 */
+}
+
+img, picture {
+  max-width: 100%;
+  /* 1 */
+  display: block;
+  /* 1 */
+}
+
+html:focus-within {
+  scroll-behavior: smooth;
+  /* 1 */
+}
+
+ul[role=list], ol[role=list] {
+  list-style: none;
+  /* 2 */
+}
+
+details {
+  display: block;
+  /* 3 */
+}
+
+summary {
+  display: list-item;
+  /* 4 */
+}
+
+[hidden] {
+  display: none !important;
+  /* 5 */
+}
+
+table {
+  border-collapse: collapse;
+  /* 6 */
+}
+
+a:not([href]):not([class]) {
+  color: inherit;
+  /* 7 */
+  text-decoration: none;
+  /* 7 */
+}
+a:not([href]):not([class]):hover {
+  color: inherit;
+  /* 7 */
+  text-decoration: none;
+  /* 7 */
+}
+
+[role=button] {
+  cursor: pointer;
+  /* 8 */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+    /* 1 */
+  }
+
+  *,
+*::before,
+*::after {
+    animation-duration: 0.01ms !important;
+    /* 2 */
+    animation-iteration-count: 1 !important;
+    /* 2 */
+    transition-duration: 0.01ms !important;
+    /* 2 */
+    scroll-behavior: auto !important;
+    /* 1 */
+  }
+}
+.font-size\:small-print {
+  font-size: 0.8rem;
+}
+
+.font-size\:small-print\! {
+  font-size: 0.8rem !important;
+}
+
+.font-size\:base {
+  font-size: 1rem;
+}
+
+.font-size\:base\! {
+  font-size: 1rem !important;
+}
+
+.font-size\:lead {
+  font-size: 1.25rem;
+}
+
+.font-size\:lead\! {
+  font-size: 1.25rem !important;
+}
+
+.font-size\:sub-heading {
+  font-size: 2.44140625rem;
+}
+
+.font-size\:sub-heading\! {
+  font-size: 2.44140625rem !important;
+}
+
+.font-size\:heading {
+  font-size: 3.0517578125rem;
+}
+
+.font-size\:heading\! {
+  font-size: 3.0517578125rem !important;
+}
+
+.finch,
+#finch {
+  /*-- #1 --*/
+  padding: 3.8146972656rem;
+  /* #2 */
+  /* #3 */
+  /*-- #1 --*/
+  /* #1 */
+}
+@media screen and (max-width: 767px) {
+  .finch,
+#finch {
+    padding: 1rem;
+  }
+}
+.finch ::selection,
+#finch ::selection {
+  /*-- #1 --*/
+  background-color: rgba(253, 28, 62, 0.99);
+  color: #fbf7fc;
+}
+.finch *[contenteditable],
+#finch *[contenteditable] {
+  /*-- #2 --*/
+  border-width: 0.125rem;
+  border-style: dashed;
+  border-color: rgba(33, 33, 33, 0.1);
+  padding: 1rem;
+  transition: border-color 0.2s ease;
+}
+.finch *[contenteditable]:hover, .finch *[contenteditable]:focus,
+#finch *[contenteditable]:hover,
+#finch *[contenteditable]:focus {
+  border-color: rgba(255, 103, 15, 0.5);
+  outline-color: rgba(255, 168, 117, 0.5);
+  outline-width: 0.25rem;
+  outline-offset: 0.25rem;
+}
+.finch hr,
+#finch hr {
+  /*-- #3 --*/
+  border: none;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: #bababa;
+  margin-block: 3.8146972656rem !important;
 }
 @supports not (margin-block: 0) {
-  h1 {
-    margin-top: 3.8146972656rem;
-    margin-bottom: 3.8146972656rem;
+  .finch hr,
+#finch hr {
+    margin-top: 3.8146972656rem !important;
+    margin-bottom: 3.8146972656rem !important;
   }
+}
+.finch *,
+#finch * {
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.953125;
+  text-align: start;
+  color: #000;
+  max-width: 65ch;
+  /* #1 */
+}
+.finch h1, .finch h2, .finch h3, .finch h4, .finch h5, .finch h6,
+#finch h1,
+#finch h2,
+#finch h3,
+#finch h4,
+#finch h5,
+#finch h6 {
+  font-family: "Playfair Display", serif;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 1.5625;
+  text-align: start;
+  color: #000;
+  max-width: 65ch;
+  /* #2 */
+}
+.finch h1,
+#finch h1 {
+  font-size: 3.0517578125rem;
+  /* #2 */
+  /* #3 */
+}
+.finch h1 + *,
+#finch h1 + * {
+  margin-block-start: 3.8146972656rem;
+}
+.finch h2, .finch h3,
+#finch h2,
+#finch h3 {
+  font-size: 2.44140625rem;
+  /* #2 */
+  /* #3 */
+}
+.finch h2 + *, .finch h3 + *,
+#finch h2 + *,
+#finch h3 + * {
+  margin-block-start: 1.953125rem;
+}
+.finch h3,
+#finch h3 {
+  font-weight: 600;
+}
+.finch p + *,
+#finch p + * {
+  margin-block-start: 1rem;
+}
+.finch a,
+#finch a {
+  font-family: "Playfair Display", serif;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.953125;
+  text-align: start;
+  color: #b1021c;
+  max-width: 65ch;
+  /* #1 */
+  transition: color 0.2s ease, background-color 0.2s ease;
+  /* #2 */
+  /* #3 */
+  /* #5 */
+}
+.finch a:not([href]),
+#finch a:not([href]) {
+  text-decoration-line: line-through;
+  text-decoration-color: currentColor;
+  text-decoration-style: solid;
+}
+@supports (text-decoration-thickness: 1px) {
+  .finch a:not([href]),
+#finch a:not([href]) {
+    text-decoration-thickness: 1px;
+  }
+}
+.finch a:disabled, .finch a.disabled,
+#finch a:disabled,
+#finch a.disabled {
+  /*-- #4 --*/
+  color: #fe8194;
+  pointer-events: none;
+}
+.finch a:not(:disabled):hover, .finch a:not(.disabled):hover,
+#finch a:not(:disabled):hover,
+#finch a:not(.disabled):hover {
+  color: #7e0114;
+}
+.finch a:not(:disabled):focus, .finch a:not(.disabled):focus,
+#finch a:not(:disabled):focus,
+#finch a:not(.disabled):focus {
+  /*-- #6 --*/
+  outline: none;
+  color: #7e0114;
+  background-color: rgba(254, 129, 148, 0.1);
+}
+.finch blockquote,
+#finch blockquote {
+  /*-- #1 --*/
+  padding: 0.64rem;
+  padding-inline-start: 1.953125rem;
+  border-left-width: 0.125rem;
+  border-left-style: solid;
+  border-left-color: #b1021c;
+  /*-- #2 --*/
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.953125;
+  text-align: start;
+  color: #000;
+  max-width: 65ch;
+}
+.finch blockquote + *,
+#finch blockquote + * {
+  margin-block-start: 1rem;
+}
+.finch blockquote > *:not(cite),
+#finch blockquote > *:not(cite) {
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  font-style: italic;
+  font-weight: 300;
+  line-height: 1.953125;
+  text-align: start;
+  color: #000;
+  max-width: 65ch;
+}
+.finch cite,
+#finch cite {
+  /*-- #3 --*/
+  display: block;
+  padding-inline-start: 1rem;
+  font-family: "Playfair Display", serif;
+  position: relative;
+}
+.finch cite::before,
+#finch cite::before {
+  content: "-";
+  position: absolute;
+  left: 0;
+}
+.finch ul + *, .finch ol + *,
+#finch ul + *,
+#finch ol + * {
+  margin-block-start: 1.953125rem;
+}
+.finch ul:not([role=list]),
+#finch ul:not([role=list]) {
+  /*-- #2 --*/
+  list-style-type: none;
+}
+.finch ul:not([role=list]) li,
+#finch ul:not([role=list]) li {
+  padding-inline-start: 2rem;
+  position: relative;
+}
+.finch ul:not([role=list]) li::before,
+#finch ul:not([role=list]) li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: #b1021c;
+}
+.finch ol:not([role=list]),
+#finch ol:not([role=list]) {
+  list-style-type: none;
+  counter-reset: orderedlist;
+}
+.finch ol:not([role=list]) li,
+#finch ol:not([role=list]) li {
+  padding-inline-start: 2rem;
+  counter-increment: orderedlist;
+  position: relative;
+}
+.finch ol:not([role=list]) li::before,
+#finch ol:not([role=list]) li::before {
+  content: counter(orderedlist) ".";
+  position: absolute;
+  left: 0;
+  color: #b1021c;
+}
+.finch ul:not([role=list])[data-bullet-color=main] li::before, .finch ol:not([role=list])[data-bullet-color=main] li::before,
+#finch ul:not([role=list])[data-bullet-color=main] li::before,
+#finch ol:not([role=list])[data-bullet-color=main] li::before {
+  color: #b1021c;
+  /* #2.b */
+}
+.finch ul:not([role=list])[data-bullet-color=secondary] li::before, .finch ol:not([role=list])[data-bullet-color=secondary] li::before,
+#finch ul:not([role=list])[data-bullet-color=secondary] li::before,
+#finch ol:not([role=list])[data-bullet-color=secondary] li::before {
+  color: #3cabec;
+  /* #2.b */
+}
+.finch ul:not([role=list])[data-bullet-color=tertiary] li::before, .finch ol:not([role=list])[data-bullet-color=tertiary] li::before,
+#finch ul:not([role=list])[data-bullet-color=tertiary] li::before,
+#finch ol:not([role=list])[data-bullet-color=tertiary] li::before {
+  color: #f7c326;
+  /* #2.b */
+}
+.finch ul:not([role=list])[data-bullet-color=light] li::before, .finch ol:not([role=list])[data-bullet-color=light] li::before,
+#finch ul:not([role=list])[data-bullet-color=light] li::before,
+#finch ol:not([role=list])[data-bullet-color=light] li::before {
+  color: #fbf7fc;
+  /* #2.b */
+}
+.finch ul:not([role=list])[data-bullet-color=dark] li::before, .finch ol:not([role=list])[data-bullet-color=dark] li::before,
+#finch ul:not([role=list])[data-bullet-color=dark] li::before,
+#finch ol:not([role=list])[data-bullet-color=dark] li::before {
+  color: #212121;
+  /* #2.b */
+}
+.finch ul:not([role=list])[data-bullet-color=white] li::before, .finch ol:not([role=list])[data-bullet-color=white] li::before,
+#finch ul:not([role=list])[data-bullet-color=white] li::before,
+#finch ol:not([role=list])[data-bullet-color=white] li::before {
+  color: white;
+  /* #2.b */
+}
+.finch ul:not([role=list])[data-bullet-color=black] li::before, .finch ol:not([role=list])[data-bullet-color=black] li::before,
+#finch ul:not([role=list])[data-bullet-color=black] li::before,
+#finch ol:not([role=list])[data-bullet-color=black] li::before {
+  color: black;
+  /* #2.b */
+}
+.finch ul:not([role=list])[data-bullet-color=red] li::before, .finch ol:not([role=list])[data-bullet-color=red] li::before,
+#finch ul:not([role=list])[data-bullet-color=red] li::before,
+#finch ol:not([role=list])[data-bullet-color=red] li::before {
+  color: #b1021c;
+  /* #2.b */
+}
+.finch ul:not([role=list])[data-bullet-color=blue] li::before, .finch ol:not([role=list])[data-bullet-color=blue] li::before,
+#finch ul:not([role=list])[data-bullet-color=blue] li::before,
+#finch ol:not([role=list])[data-bullet-color=blue] li::before {
+  color: #3cabec;
+  /* #2.b */
+}
+.finch ul:not([role=list])[data-bullet-color=green] li::before, .finch ol:not([role=list])[data-bullet-color=green] li::before,
+#finch ul:not([role=list])[data-bullet-color=green] li::before,
+#finch ol:not([role=list])[data-bullet-color=green] li::before {
+  color: #425e21;
+  /* #2.b */
+}
+.finch ul:not([role=list])[data-bullet-color=yellow] li::before, .finch ol:not([role=list])[data-bullet-color=yellow] li::before,
+#finch ul:not([role=list])[data-bullet-color=yellow] li::before,
+#finch ol:not([role=list])[data-bullet-color=yellow] li::before {
+  color: #f7c326;
+  /* #2.b */
+}
+.finch ul:not([role=list])[data-bullet-color=pink] li::before, .finch ol:not([role=list])[data-bullet-color=pink] li::before,
+#finch ul:not([role=list])[data-bullet-color=pink] li::before,
+#finch ol:not([role=list])[data-bullet-color=pink] li::before {
+  color: #e071ac;
+  /* #2.b */
+}
+.finch ul:not([role=list])[data-bullet-color=purple] li::before, .finch ol:not([role=list])[data-bullet-color=purple] li::before,
+#finch ul:not([role=list])[data-bullet-color=purple] li::before,
+#finch ol:not([role=list])[data-bullet-color=purple] li::before {
+  color: #8213be;
+  /* #2.b */
+}
+.finch ul:not([role=list])[data-bullet-color=orange] li::before, .finch ol:not([role=list])[data-bullet-color=orange] li::before,
+#finch ul:not([role=list])[data-bullet-color=orange] li::before,
+#finch ol:not([role=list])[data-bullet-color=orange] li::before {
+  color: #ff670f;
+  /* #2.b */
+}
+.finch ul:not([role=list])[data-bullet-color=indigo] li::before, .finch ol:not([role=list])[data-bullet-color=indigo] li::before,
+#finch ul:not([role=list])[data-bullet-color=indigo] li::before,
+#finch ol:not([role=list])[data-bullet-color=indigo] li::before {
+  color: #8794de;
+  /* #2.b */
+}
+.finch ul:not([role=list])[data-bullet-color=violet] li::before, .finch ol:not([role=list])[data-bullet-color=violet] li::before,
+#finch ul:not([role=list])[data-bullet-color=violet] li::before,
+#finch ol:not([role=list])[data-bullet-color=violet] li::before {
+  color: #7500eb;
+  /* #2.b */
+}
+.finch ul:not([role=list])[data-bullet-color=error] li::before, .finch ol:not([role=list])[data-bullet-color=error] li::before,
+#finch ul:not([role=list])[data-bullet-color=error] li::before,
+#finch ol:not([role=list])[data-bullet-color=error] li::before {
+  color: #b1021c;
+  /* #2.b */
+}
+.finch ul:not([role=list])[data-bullet-color=info] li::before, .finch ol:not([role=list])[data-bullet-color=info] li::before,
+#finch ul:not([role=list])[data-bullet-color=info] li::before,
+#finch ol:not([role=list])[data-bullet-color=info] li::before {
+  color: #3cabec;
+  /* #2.b */
+}
+.finch ul:not([role=list])[data-bullet-color=success] li::before, .finch ol:not([role=list])[data-bullet-color=success] li::before,
+#finch ul:not([role=list])[data-bullet-color=success] li::before,
+#finch ol:not([role=list])[data-bullet-color=success] li::before {
+  color: #425e21;
+  /* #2.b */
+}
+.finch ul:not([role=list])[data-bullet-color=warning] li::before, .finch ol:not([role=list])[data-bullet-color=warning] li::before,
+#finch ul:not([role=list])[data-bullet-color=warning] li::before,
+#finch ol:not([role=list])[data-bullet-color=warning] li::before {
+  color: #f7c326;
+  /* #2.b */
+}
+.finch ul:not([role=list])[data-bullet-color=required] li::before, .finch ol:not([role=list])[data-bullet-color=required] li::before,
+#finch ul:not([role=list])[data-bullet-color=required] li::before,
+#finch ol:not([role=list])[data-bullet-color=required] li::before {
+  color: #b1021c;
+  /* #2.b */
+}
+.finch ul:not([role=list])[data-bullet-color=invalid] li::before, .finch ol:not([role=list])[data-bullet-color=invalid] li::before,
+#finch ul:not([role=list])[data-bullet-color=invalid] li::before,
+#finch ol:not([role=list])[data-bullet-color=invalid] li::before {
+  color: #b1021c;
+  /* #2.b */
+}
+.finch ul:not([role=list])[data-bullet-color=valid] li::before, .finch ol:not([role=list])[data-bullet-color=valid] li::before,
+#finch ul:not([role=list])[data-bullet-color=valid] li::before,
+#finch ol:not([role=list])[data-bullet-color=valid] li::before {
+  color: #425e21;
+  /* #2.b */
+}
+.finch mark,
+#finch mark {
+  /*-- #1 --*/
+  background-color: rgba(251, 222, 137, 0.99);
+  /*-- #2 --*/
+}
+.finch mark[data-bg-color=main],
+#finch mark[data-bg-color=main] {
+  background-color: rgba(254, 129, 148, 0.99);
+}
+.finch mark[data-bg-color=secondary],
+#finch mark[data-bg-color=secondary] {
+  background-color: rgba(153, 211, 245, 0.99);
+}
+.finch mark[data-bg-color=tertiary],
+#finch mark[data-bg-color=tertiary] {
+  background-color: rgba(251, 222, 137, 0.99);
+}
+.finch mark[data-bg-color=light],
+#finch mark[data-bg-color=light] {
+  background-color: rgba(213, 171, 227, 0.99);
+}
+.finch mark[data-bg-color=dark],
+#finch mark[data-bg-color=dark] {
+  background-color: rgba(186, 186, 186, 0.99);
+}
+.finch mark[data-bg-color=white],
+#finch mark[data-bg-color=white] {
+  background-color: rgba(179, 179, 179, 0.99);
+}
+.finch mark[data-bg-color=black],
+#finch mark[data-bg-color=black] {
+  background-color: rgba(179, 179, 179, 0.99);
+}
+.finch mark[data-bg-color=red],
+#finch mark[data-bg-color=red] {
+  background-color: rgba(254, 129, 148, 0.99);
+}
+.finch mark[data-bg-color=blue],
+#finch mark[data-bg-color=blue] {
+  background-color: rgba(153, 211, 245, 0.99);
+}
+.finch mark[data-bg-color=green],
+#finch mark[data-bg-color=green] {
+  background-color: rgba(193, 222, 161, 0.99);
+}
+.finch mark[data-bg-color=yellow],
+#finch mark[data-bg-color=yellow] {
+  background-color: rgba(251, 222, 137, 0.99);
+}
+.finch mark[data-bg-color=pink],
+#finch mark[data-bg-color=pink] {
+  background-color: rgba(233, 155, 196, 0.99);
+}
+.finch mark[data-bg-color=purple],
+#finch mark[data-bg-color=purple] {
+  background-color: rgba(199, 120, 242, 0.99);
+}
+.finch mark[data-bg-color=orange],
+#finch mark[data-bg-color=orange] {
+  background-color: rgba(255, 168, 117, 0.99);
+}
+.finch mark[data-bg-color=indigo],
+#finch mark[data-bg-color=indigo] {
+  background-color: rgba(135, 148, 222, 0.99);
+}
+.finch mark[data-bg-color=violet],
+#finch mark[data-bg-color=violet] {
+  background-color: rgba(194, 133, 255, 0.99);
+}
+.finch mark[data-bg-color=error],
+#finch mark[data-bg-color=error] {
+  background-color: rgba(254, 129, 148, 0.99);
+}
+.finch mark[data-bg-color=info],
+#finch mark[data-bg-color=info] {
+  background-color: rgba(153, 211, 245, 0.99);
+}
+.finch mark[data-bg-color=success],
+#finch mark[data-bg-color=success] {
+  background-color: rgba(193, 222, 161, 0.99);
+}
+.finch mark[data-bg-color=warning],
+#finch mark[data-bg-color=warning] {
+  background-color: rgba(251, 222, 137, 0.99);
+}
+.finch mark[data-bg-color=required],
+#finch mark[data-bg-color=required] {
+  background-color: rgba(254, 129, 148, 0.99);
+}
+.finch mark[data-bg-color=invalid],
+#finch mark[data-bg-color=invalid] {
+  background-color: rgba(254, 129, 148, 0.99);
+}
+.finch mark[data-bg-color=valid],
+#finch mark[data-bg-color=valid] {
+  background-color: rgba(193, 222, 161, 0.99);
+}
+.finch form[data-form-states],
+#finch form[data-form-states] {
+  /*-- #1 --*/
+  transition: border-color 0.2s ease;
+  /*-- #2 --*/
+  /*-- #3 --*/
+}
+.finch form[data-form-states]:is(:invalid, .invalid, .error),
+#finch form[data-form-states]:is(:invalid, .invalid, .error) {
+  border-color: #e30224;
+}
+.finch form[data-form-states]:valid,
+#finch form[data-form-states]:valid {
+  border-color: #c1dea1;
+}
+.finch input,
+#finch input {
+  /*-- #1 --*/
+  transition: border-color 0.2s ease, outline-color 0.2s ease;
+}
+.finch input:is(:invalid, .invalid, .error),
+#finch input:is(:invalid, .invalid, .error) {
+  border-color: #b1021c;
+}
+.finch input:is(:invalid, .invalid, .error):focus,
+#finch input:is(:invalid, .invalid, .error):focus {
+  outline-color: rgba(177, 2, 28, 0.4);
+}
+.finch :is(button, [role=button], [type=button]),
+#finch :is(button, [role=button], [type=button]) {
+  /*-- #1 --*/
+  text-align: center;
+  /*-- #2 --*/
+  cursor: pointer;
+}
+
+form {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  flex-flow: row wrap;
+  border-width: 0.125rem;
+  border-style: solid;
+  border-color: #3cabec;
+}
+form > * {
+  flex: 1 1;
+  min-width: 10rem;
+}
+form input {
+  border-width: 0.125rem;
+  border-style: solid;
+  border-color: #3cabec;
+}
+form input:focus:not(:disabled) {
+  outline: 0.25rem solid rgba(60, 171, 236, 0.4);
 }

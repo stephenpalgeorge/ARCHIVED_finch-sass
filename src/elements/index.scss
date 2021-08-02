@@ -1,3 +1,4 @@
+@use '../config' as *;
 @use '../color/' as clr;
 @use '../layout/' as lyt;
 @use '../pseudo/' as ps;
@@ -18,6 +19,9 @@ $base-id: "finch" !default;
   ///
   /*-- #1 --*/
   @include lyt.padding(x-large);
+  @include break(md, down) {
+    @include lyt.padding(base);
+  }
 
   /// MISC
   /// ----------
@@ -116,7 +120,7 @@ $base-id: "finch" !default;
   ///
   blockquote {
     /*-- #1 --*/
-    + * { margin-block-start: lyt.get-margin(small); }
+    + * { margin-block-start: lyt.get-margin(base); }
     @include lyt.padding(small);
     padding-inline-start: lyt.get-padding(large);
     @include lyt.border($color: clr.use(main), $sides: left);
@@ -202,6 +206,7 @@ $base-id: "finch" !default;
   /// ----------
   /// #1 - set default `<mark>` background color as yellow.
   /// #2 - provide options for all other colors.
+  ///
   mark {
     /*-- #1 --*/
     background-color: rgba(clr.use(yellow, 700), .99);
@@ -215,30 +220,63 @@ $base-id: "finch" !default;
 
   /// FORMS
   /// ----------
+  /// #1 - set up some basic form styles.
+  /// #2 - style invalid forms.
+  /// #3 - style valid forms.
   ///
-  form:invalid {
+  /// We namespace all the form validation stuff under a data-attr so they don't have to be included by default and overidden.
+  ///
+  form[data-form-states] {
+    /*-- #1 --*/
+    transition: border-color .2s ease;
 
+    /*-- #2 --*/
+    &:is(:invalid, .invalid, .error) {
+      // by only styling the border-color, we make sure we don't interfere with any other border
+      // styles that may have been set elsewhere. This does also mean, though, that if a form doesn't
+      // have a border already, then the below line won't have any visual affect.
+      border-color: clr.use(invalid, 400);
+    }
+
+    /*-- #3 --*/
+    &:valid {
+      border-color: clr.use(valid, 700);
+    }
   }
+
 
   /// INPUTS/FIELDSETS + their text elements
   /// ----------
   /// The text elements referred to in the title of this section are any text based content that relates to
   /// any input element. This includes `<label>` and `<legend>`.
   ///
-  /// #1 - style input errors.
+  /// #1 - setup basic input styles.
   ///
 
-  /*-- #1 --*/
-  input:invalid,
-  input.invalid,
-  input.error {
-
+  input {
+    /*-- #1 --*/
+    transition: border-color .2s ease, outline-color .2s ease;
+    &:is(:invalid, .invalid, .error) {
+      border-color: clr.use(invalid);
+      &:focus {
+        outline-color: rgba(clr.use(invalid), .4);
+      }
+    }
   }
   
 
   /// BUTTONS
   /// ----------
+  /// #1 - [opinion] all buttons should have center-aligned text.
+  /// #2 - [opinion] all buttons should have a 'pointer' cursor.
   ///
+
+  :is(button, [role="button"], [type="button"]) {
+    /*-- #1 --*/
+    text-align: center;
+    /*-- #2 --*/
+    cursor: pointer;
+  }
 
   /// ** INTERACTIVE ELEMENTS **
   ///

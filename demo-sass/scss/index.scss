@@ -4,3 +4,15 @@
   $set-utilities: (stack: true),
 );
 @use '../../src/elements';
+
+form {
+  @include lyt.flex-blocks($block-min: 10rem, $align: flex-end);
+  @include lyt.border($color: clr.use(secondary));
+
+  input {
+    @include lyt.border($color: clr.use(secondary));
+    &:focus:not(:disabled) { 
+      outline: .25rem solid rgba(clr.use(secondary), .4);
+    }
+  }
+}
