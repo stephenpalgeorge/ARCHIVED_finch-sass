@@ -64,24 +64,33 @@ $base-id: "finch" !default;
   /// #3 - Set the vertical flow for different elements.
   /// 
   * {
-    @include typ.format; /* #1 */
+    /*-- #1 --*/
+    @include typ.format;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @include typ.format($family: serif, $weight: heavy, $line-height: base); /* #2 */
+    /*-- #2 --*/
+    @include typ.format($family: serif, $weight: heavy, $line-height: base);
   }
 
   h1 {
-    @include typ.font-size(heading); /* #2 */
-    + * { margin-block-start: lyt.get-margin(x-large); } /* #3 */
+    /*-- #2 --*/
+    @include typ.font-size(heading);
+    @include typ.underline;
+    /*-- #3 --*/
+    + * { margin-block-start: lyt.get-margin(x-large); }
   }
   h2, h3 {
-    @include typ.font-size(sub-heading); /* #2 */
-    + * { margin-block-start: lyt.get-margin(large); } /* #3 */
+    /*-- #2 --*/
+    @include typ.font-size(sub-heading);
+    /*-- #3 --*/
+    + * { margin-block-start: lyt.get-margin(large); }
   }
-  h3 { @include typ.font-weight(thick); } /* #2 */
+  /*-- #2 --*/
+  h3 { @include typ.font-weight(thick); }
   
-  p + * { margin-block-start: lyt.get-margin(base); } /* #3 */
+  /*-- #3 --*/
+  p + * { margin-block-start: lyt.get-margin(base); }
 
   /// LINKS
   /// ----------
@@ -92,9 +101,12 @@ $base-id: "finch" !default;
   /// #5 - Style the hover state.
   /// #6 - Style the focus state.
   a {
-    @include typ.format($family: serif, $color: clr.use(main)); /* #1 */
-    transition: color .2s ease, background-color .2s ease; /* #2 */
-    &:not([href]) { @include typ.strike; } /* #3 */
+    /*-- #1 --*/
+    @include typ.format($family: serif, $color: clr.use(main));
+    /*-- #2 --*/
+    transition: color .2s ease, background-color .2s ease;
+    /*-- #3 --*/
+    &:not([href]) { @include typ.strike; }
 
     &:disabled,
     &.disabled {
@@ -103,7 +115,8 @@ $base-id: "finch" !default;
       pointer-events: none;
     }
 
-    @include ps.hover { color: clr.use(main, 200); } /* #5 */
+    /*-- #5 --*/
+    @include ps.hover { color: clr.use(main, 200); }
     @include ps.focus {
       /*-- #6 --*/
       outline: none;
@@ -149,6 +162,9 @@ $base-id: "finch" !default;
   /// ----------
   /// #1 - Set the vertical flow of list elements.
   /// #2 - Style the markers.
+  ///
+  /// @todo - Add `<dl>`
+  /// @todo - Add `datalist` attr if the dropdown is stylable?
   ///
 
   /*-- #1 --*/
@@ -220,59 +236,32 @@ $base-id: "finch" !default;
 
   /// FORMS
   /// ----------
-  /// #1 - [opinion] set up some basic form styles.
-  /// #2 - style invalid forms.
-  /// #3 - style valid forms.
+  /// Forms will have their own module, so no styles here for now.
   ///
-  /// We namespace all the form validation stuff under a data-attr so they don't have to be included by default and overidden.
-  ///
-  form[data-form-states] {
-    /*-- #1 --*/
-    transition: border-color .2s ease;
-
-    /*-- #2 --*/
-    &:is(:invalid, .invalid, .error) {
-      // by only styling the border-color, we make sure we don't interfere with any other border
-      // styles that may have been set elsewhere. This does also mean, though, that if a form doesn't
-      // have a border already, then the below line won't have any visual affect.
-      border-color: clr.use(invalid, 400);
-    }
-
-    /*-- #3 --*/
-    &:is(:valid, .valid, .success) {
-      border-color: clr.use(valid, 700);
-    }
-  }
 
 
   /// INPUTS/FIELDSETS + their text elements
   /// ----------
-  /// The text elements referred to in the title of this section are any text based content that relates to
-  /// any input element. This includes `<label>` and `<legend>`.
-  ///
-  /// #1 - [opinion] setup basic input styles.
-  /// #2 - style invalid inputs.
-  ///
+  /// Inputs and the like are included in the `form` module.
+  // input {
+  //   /*-- #1 --*/
+  //   transition: border-color .2s ease, outline-color .2s ease;
+  //   /*-- #2 --*/
+  //   &:is(:invalid, .invalid, .error) {
+  //     border-color: clr.use(invalid);
+  //     &:focus {
+  //       outline-color: rgba(clr.use(invalid), .4);
+  //     }
+  //   }
 
-  input {
-    /*-- #1 --*/
-    transition: border-color .2s ease, outline-color .2s ease;
-    /*-- #2 --*/
-    &:is(:invalid, .invalid, .error) {
-      border-color: clr.use(invalid);
-      &:focus {
-        outline-color: rgba(clr.use(invalid), .4);
-      }
-    }
-
-    /*-- #2 --*/
-    &:is(:valid, .valid, .success) {
-      border-color: clr.use(valid, 700);
-      &:focus {
-        outline-color: rgba(clr.use(valid, 700), .4);
-      }
-    }
-  }
+  //   /*-- #2 --*/
+  //   &:is(:valid, .valid, .success) {
+  //     border-color: clr.use(valid, 700);
+  //     &:focus {
+  //       outline-color: rgba(clr.use(valid, 700), .4);
+  //     }
+  //   }
+  // }
   
 
   /// BUTTONS
@@ -281,7 +270,6 @@ $base-id: "finch" !default;
   /// #2 - [opinion] all buttons should have a 'pointer' cursor.
   /// #3 - [opinion] all buttons should have a transition on their background and color.
   ///
-
   :is(button, [role="button"], [type="button"]) {
     /*-- #1 --*/
     text-align: center;

@@ -204,10 +204,9 @@ a:not([href]):not([class]):hover {
 #finch {
   /*-- #1 --*/
   padding: 3.8146972656rem;
-  /* #2 */
-  /* #3 */
+  /*-- #2 --*/
+  /*-- #3 --*/
   /*-- #1 --*/
-  /* #1 */
 }
 @media screen and (max-width: 767px) {
   .finch,
@@ -256,6 +255,7 @@ a:not([href]):not([class]):hover {
 }
 .finch *,
 #finch * {
+  /*-- #1 --*/
   font-family: "Poppins", sans-serif;
   font-size: 1rem;
   font-style: normal;
@@ -264,7 +264,6 @@ a:not([href]):not([class]):hover {
   text-align: start;
   color: #000;
   max-width: 65ch;
-  /* #1 */
 }
 .finch h1, .finch h2, .finch h3, .finch h4, .finch h5, .finch h6,
 #finch h1,
@@ -273,6 +272,7 @@ a:not([href]):not([class]):hover {
 #finch h4,
 #finch h5,
 #finch h6 {
+  /*-- #2 --*/
   font-family: "Playfair Display", serif;
   font-size: 1rem;
   font-style: normal;
@@ -281,13 +281,21 @@ a:not([href]):not([class]):hover {
   text-align: start;
   color: #000;
   max-width: 65ch;
-  /* #2 */
 }
 .finch h1,
 #finch h1 {
+  /*-- #2 --*/
   font-size: 3.0517578125rem;
-  /* #2 */
-  /* #3 */
+  text-decoration-line: underline;
+  text-decoration-color: currentColor;
+  text-decoration-style: solid;
+  /*-- #3 --*/
+}
+@supports (text-decoration-thickness: 1px) {
+  .finch h1,
+#finch h1 {
+    text-decoration-thickness: 1px;
+  }
 }
 .finch h1 + *,
 #finch h1 + * {
@@ -296,9 +304,9 @@ a:not([href]):not([class]):hover {
 .finch h2, .finch h3,
 #finch h2,
 #finch h3 {
+  /*-- #2 --*/
   font-size: 2.44140625rem;
-  /* #2 */
-  /* #3 */
+  /*-- #3 --*/
 }
 .finch h2 + *, .finch h3 + *,
 #finch h2 + *,
@@ -315,6 +323,7 @@ a:not([href]):not([class]):hover {
 }
 .finch a,
 #finch a {
+  /*-- #1 --*/
   font-family: "Playfair Display", serif;
   font-size: 1rem;
   font-style: normal;
@@ -323,11 +332,10 @@ a:not([href]):not([class]):hover {
   text-align: start;
   color: #b1021c;
   max-width: 65ch;
-  /* #1 */
+  /*-- #2 --*/
   transition: color 0.2s ease, background-color 0.2s ease;
-  /* #2 */
-  /* #3 */
-  /* #5 */
+  /*-- #3 --*/
+  /*-- #5 --*/
 }
 .finch a:not([href]),
 #finch a:not([href]) {
@@ -408,9 +416,8 @@ a:not([href]):not([class]):hover {
   position: absolute;
   left: 0;
 }
-.finch ul + *, .finch ol + *,
-#finch ul + *,
-#finch ol + * {
+.finch :is(ul, ol) + *,
+#finch :is(ul, ol) + * {
   margin-block-start: 1.953125rem;
 }
 .finch ul:not([role=list]),
@@ -448,141 +455,118 @@ a:not([href]):not([class]):hover {
   left: 0;
   color: #b1021c;
 }
-.finch ul:not([role=list])[data-bullet-color=main] li::before, .finch ol:not([role=list])[data-bullet-color=main] li::before,
-#finch ul:not([role=list])[data-bullet-color=main] li::before,
-#finch ol:not([role=list])[data-bullet-color=main] li::before {
+.finch :is(ul, ol):not([role=list])[data-bullet-color=main] li::before,
+#finch :is(ul, ol):not([role=list])[data-bullet-color=main] li::before {
   color: #b1021c;
   /* #2.b */
 }
-.finch ul:not([role=list])[data-bullet-color=secondary] li::before, .finch ol:not([role=list])[data-bullet-color=secondary] li::before,
-#finch ul:not([role=list])[data-bullet-color=secondary] li::before,
-#finch ol:not([role=list])[data-bullet-color=secondary] li::before {
+.finch :is(ul, ol):not([role=list])[data-bullet-color=secondary] li::before,
+#finch :is(ul, ol):not([role=list])[data-bullet-color=secondary] li::before {
   color: #3cabec;
   /* #2.b */
 }
-.finch ul:not([role=list])[data-bullet-color=tertiary] li::before, .finch ol:not([role=list])[data-bullet-color=tertiary] li::before,
-#finch ul:not([role=list])[data-bullet-color=tertiary] li::before,
-#finch ol:not([role=list])[data-bullet-color=tertiary] li::before {
+.finch :is(ul, ol):not([role=list])[data-bullet-color=tertiary] li::before,
+#finch :is(ul, ol):not([role=list])[data-bullet-color=tertiary] li::before {
   color: #f7c326;
   /* #2.b */
 }
-.finch ul:not([role=list])[data-bullet-color=light] li::before, .finch ol:not([role=list])[data-bullet-color=light] li::before,
-#finch ul:not([role=list])[data-bullet-color=light] li::before,
-#finch ol:not([role=list])[data-bullet-color=light] li::before {
+.finch :is(ul, ol):not([role=list])[data-bullet-color=light] li::before,
+#finch :is(ul, ol):not([role=list])[data-bullet-color=light] li::before {
   color: #fbf7fc;
   /* #2.b */
 }
-.finch ul:not([role=list])[data-bullet-color=dark] li::before, .finch ol:not([role=list])[data-bullet-color=dark] li::before,
-#finch ul:not([role=list])[data-bullet-color=dark] li::before,
-#finch ol:not([role=list])[data-bullet-color=dark] li::before {
+.finch :is(ul, ol):not([role=list])[data-bullet-color=dark] li::before,
+#finch :is(ul, ol):not([role=list])[data-bullet-color=dark] li::before {
   color: #212121;
   /* #2.b */
 }
-.finch ul:not([role=list])[data-bullet-color=white] li::before, .finch ol:not([role=list])[data-bullet-color=white] li::before,
-#finch ul:not([role=list])[data-bullet-color=white] li::before,
-#finch ol:not([role=list])[data-bullet-color=white] li::before {
+.finch :is(ul, ol):not([role=list])[data-bullet-color=white] li::before,
+#finch :is(ul, ol):not([role=list])[data-bullet-color=white] li::before {
   color: white;
   /* #2.b */
 }
-.finch ul:not([role=list])[data-bullet-color=black] li::before, .finch ol:not([role=list])[data-bullet-color=black] li::before,
-#finch ul:not([role=list])[data-bullet-color=black] li::before,
-#finch ol:not([role=list])[data-bullet-color=black] li::before {
+.finch :is(ul, ol):not([role=list])[data-bullet-color=black] li::before,
+#finch :is(ul, ol):not([role=list])[data-bullet-color=black] li::before {
   color: black;
   /* #2.b */
 }
-.finch ul:not([role=list])[data-bullet-color=red] li::before, .finch ol:not([role=list])[data-bullet-color=red] li::before,
-#finch ul:not([role=list])[data-bullet-color=red] li::before,
-#finch ol:not([role=list])[data-bullet-color=red] li::before {
+.finch :is(ul, ol):not([role=list])[data-bullet-color=red] li::before,
+#finch :is(ul, ol):not([role=list])[data-bullet-color=red] li::before {
   color: #b1021c;
   /* #2.b */
 }
-.finch ul:not([role=list])[data-bullet-color=blue] li::before, .finch ol:not([role=list])[data-bullet-color=blue] li::before,
-#finch ul:not([role=list])[data-bullet-color=blue] li::before,
-#finch ol:not([role=list])[data-bullet-color=blue] li::before {
+.finch :is(ul, ol):not([role=list])[data-bullet-color=blue] li::before,
+#finch :is(ul, ol):not([role=list])[data-bullet-color=blue] li::before {
   color: #3cabec;
   /* #2.b */
 }
-.finch ul:not([role=list])[data-bullet-color=green] li::before, .finch ol:not([role=list])[data-bullet-color=green] li::before,
-#finch ul:not([role=list])[data-bullet-color=green] li::before,
-#finch ol:not([role=list])[data-bullet-color=green] li::before {
+.finch :is(ul, ol):not([role=list])[data-bullet-color=green] li::before,
+#finch :is(ul, ol):not([role=list])[data-bullet-color=green] li::before {
   color: #425e21;
   /* #2.b */
 }
-.finch ul:not([role=list])[data-bullet-color=yellow] li::before, .finch ol:not([role=list])[data-bullet-color=yellow] li::before,
-#finch ul:not([role=list])[data-bullet-color=yellow] li::before,
-#finch ol:not([role=list])[data-bullet-color=yellow] li::before {
+.finch :is(ul, ol):not([role=list])[data-bullet-color=yellow] li::before,
+#finch :is(ul, ol):not([role=list])[data-bullet-color=yellow] li::before {
   color: #f7c326;
   /* #2.b */
 }
-.finch ul:not([role=list])[data-bullet-color=pink] li::before, .finch ol:not([role=list])[data-bullet-color=pink] li::before,
-#finch ul:not([role=list])[data-bullet-color=pink] li::before,
-#finch ol:not([role=list])[data-bullet-color=pink] li::before {
+.finch :is(ul, ol):not([role=list])[data-bullet-color=pink] li::before,
+#finch :is(ul, ol):not([role=list])[data-bullet-color=pink] li::before {
   color: #e071ac;
   /* #2.b */
 }
-.finch ul:not([role=list])[data-bullet-color=purple] li::before, .finch ol:not([role=list])[data-bullet-color=purple] li::before,
-#finch ul:not([role=list])[data-bullet-color=purple] li::before,
-#finch ol:not([role=list])[data-bullet-color=purple] li::before {
+.finch :is(ul, ol):not([role=list])[data-bullet-color=purple] li::before,
+#finch :is(ul, ol):not([role=list])[data-bullet-color=purple] li::before {
   color: #8213be;
   /* #2.b */
 }
-.finch ul:not([role=list])[data-bullet-color=orange] li::before, .finch ol:not([role=list])[data-bullet-color=orange] li::before,
-#finch ul:not([role=list])[data-bullet-color=orange] li::before,
-#finch ol:not([role=list])[data-bullet-color=orange] li::before {
+.finch :is(ul, ol):not([role=list])[data-bullet-color=orange] li::before,
+#finch :is(ul, ol):not([role=list])[data-bullet-color=orange] li::before {
   color: #ff670f;
   /* #2.b */
 }
-.finch ul:not([role=list])[data-bullet-color=indigo] li::before, .finch ol:not([role=list])[data-bullet-color=indigo] li::before,
-#finch ul:not([role=list])[data-bullet-color=indigo] li::before,
-#finch ol:not([role=list])[data-bullet-color=indigo] li::before {
+.finch :is(ul, ol):not([role=list])[data-bullet-color=indigo] li::before,
+#finch :is(ul, ol):not([role=list])[data-bullet-color=indigo] li::before {
   color: #8794de;
   /* #2.b */
 }
-.finch ul:not([role=list])[data-bullet-color=violet] li::before, .finch ol:not([role=list])[data-bullet-color=violet] li::before,
-#finch ul:not([role=list])[data-bullet-color=violet] li::before,
-#finch ol:not([role=list])[data-bullet-color=violet] li::before {
+.finch :is(ul, ol):not([role=list])[data-bullet-color=violet] li::before,
+#finch :is(ul, ol):not([role=list])[data-bullet-color=violet] li::before {
   color: #7500eb;
   /* #2.b */
 }
-.finch ul:not([role=list])[data-bullet-color=error] li::before, .finch ol:not([role=list])[data-bullet-color=error] li::before,
-#finch ul:not([role=list])[data-bullet-color=error] li::before,
-#finch ol:not([role=list])[data-bullet-color=error] li::before {
+.finch :is(ul, ol):not([role=list])[data-bullet-color=error] li::before,
+#finch :is(ul, ol):not([role=list])[data-bullet-color=error] li::before {
   color: #b1021c;
   /* #2.b */
 }
-.finch ul:not([role=list])[data-bullet-color=info] li::before, .finch ol:not([role=list])[data-bullet-color=info] li::before,
-#finch ul:not([role=list])[data-bullet-color=info] li::before,
-#finch ol:not([role=list])[data-bullet-color=info] li::before {
+.finch :is(ul, ol):not([role=list])[data-bullet-color=info] li::before,
+#finch :is(ul, ol):not([role=list])[data-bullet-color=info] li::before {
   color: #3cabec;
   /* #2.b */
 }
-.finch ul:not([role=list])[data-bullet-color=success] li::before, .finch ol:not([role=list])[data-bullet-color=success] li::before,
-#finch ul:not([role=list])[data-bullet-color=success] li::before,
-#finch ol:not([role=list])[data-bullet-color=success] li::before {
+.finch :is(ul, ol):not([role=list])[data-bullet-color=success] li::before,
+#finch :is(ul, ol):not([role=list])[data-bullet-color=success] li::before {
   color: #425e21;
   /* #2.b */
 }
-.finch ul:not([role=list])[data-bullet-color=warning] li::before, .finch ol:not([role=list])[data-bullet-color=warning] li::before,
-#finch ul:not([role=list])[data-bullet-color=warning] li::before,
-#finch ol:not([role=list])[data-bullet-color=warning] li::before {
+.finch :is(ul, ol):not([role=list])[data-bullet-color=warning] li::before,
+#finch :is(ul, ol):not([role=list])[data-bullet-color=warning] li::before {
   color: #f7c326;
   /* #2.b */
 }
-.finch ul:not([role=list])[data-bullet-color=required] li::before, .finch ol:not([role=list])[data-bullet-color=required] li::before,
-#finch ul:not([role=list])[data-bullet-color=required] li::before,
-#finch ol:not([role=list])[data-bullet-color=required] li::before {
+.finch :is(ul, ol):not([role=list])[data-bullet-color=required] li::before,
+#finch :is(ul, ol):not([role=list])[data-bullet-color=required] li::before {
   color: #b1021c;
   /* #2.b */
 }
-.finch ul:not([role=list])[data-bullet-color=invalid] li::before, .finch ol:not([role=list])[data-bullet-color=invalid] li::before,
-#finch ul:not([role=list])[data-bullet-color=invalid] li::before,
-#finch ol:not([role=list])[data-bullet-color=invalid] li::before {
+.finch :is(ul, ol):not([role=list])[data-bullet-color=invalid] li::before,
+#finch :is(ul, ol):not([role=list])[data-bullet-color=invalid] li::before {
   color: #b1021c;
   /* #2.b */
 }
-.finch ul:not([role=list])[data-bullet-color=valid] li::before, .finch ol:not([role=list])[data-bullet-color=valid] li::before,
-#finch ul:not([role=list])[data-bullet-color=valid] li::before,
-#finch ol:not([role=list])[data-bullet-color=valid] li::before {
+.finch :is(ul, ol):not([role=list])[data-bullet-color=valid] li::before,
+#finch :is(ul, ol):not([role=list])[data-bullet-color=valid] li::before {
   color: #425e21;
   /* #2.b */
 }
@@ -684,40 +668,14 @@ a:not([href]):not([class]):hover {
 #finch mark[data-bg-color=valid] {
   background-color: rgba(193, 222, 161, 0.99);
 }
-.finch form[data-form-states],
-#finch form[data-form-states] {
-  /*-- #1 --*/
-  transition: border-color 0.2s ease;
-  /*-- #2 --*/
-  /*-- #3 --*/
-}
-.finch form[data-form-states]:is(:invalid, .invalid, .error),
-#finch form[data-form-states]:is(:invalid, .invalid, .error) {
-  border-color: #e30224;
-}
-.finch form[data-form-states]:valid,
-#finch form[data-form-states]:valid {
-  border-color: #c1dea1;
-}
-.finch input,
-#finch input {
-  /*-- #1 --*/
-  transition: border-color 0.2s ease, outline-color 0.2s ease;
-}
-.finch input:is(:invalid, .invalid, .error),
-#finch input:is(:invalid, .invalid, .error) {
-  border-color: #b1021c;
-}
-.finch input:is(:invalid, .invalid, .error):focus,
-#finch input:is(:invalid, .invalid, .error):focus {
-  outline-color: rgba(177, 2, 28, 0.4);
-}
 .finch :is(button, [role=button], [type=button]),
 #finch :is(button, [role=button], [type=button]) {
   /*-- #1 --*/
   text-align: center;
   /*-- #2 --*/
   cursor: pointer;
+  /*-- #3 --*/
+  transition: background 0.2s ease, color 0.2s ease;
 }
 
 form {

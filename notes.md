@@ -8,6 +8,7 @@
 - layout module:
   - add 'box-shadow' stuff.
   - add 'outline' stuff.
+  - add 'object-fit' stuff.
 
 ## possible text style considerations:
 ```scss
