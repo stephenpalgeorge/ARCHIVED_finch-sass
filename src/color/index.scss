@@ -120,7 +120,7 @@ $shades-map: ();
 /// @param $key one of the keys from the color-palette map.
 /// @param $shade {Number} a number from 0 - 1000, in increments of 100.
 ///
-@function use($key, $shade: null) {
+@function use($key, $shade: null, $alpha: 1) {
   $spec-values: (currentColor);
   // if the given value is one of the `global-values`, or one of the `spec-values` return it immediately:
   @if list.index(config.$global-values, $key) or list.index($spec-values, $key) {
@@ -134,7 +134,7 @@ $shades-map: ();
   }
   
   @if $value {
-    @return $value;
+    @return rgba($value, $alpha);
   }
 
   @warn 'No color found for key "#{$key}"';

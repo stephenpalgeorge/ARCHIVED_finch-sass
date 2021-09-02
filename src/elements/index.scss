@@ -31,20 +31,20 @@ $base-id: "finch" !default;
   ///
   ::selection {
     /*-- #1 --*/
-    background-color: rgba(clr.use(main, 500), .99);
+    background-color: clr.use(main, 500, .99);
     color: clr.use(light);
   }
 
   *[contenteditable] {
     /*-- #2 --*/
     // style the 'default' state of `contenteditable` elements:
-    @include lyt.border($style: dashed, $color: rgba(clr.use(dark), .1));
+    @include lyt.border($style: dashed, $color: clr.use(dark, $alpha: .1));
     @include lyt.padding(base);
     transition: border-color .2s ease;
     // style the 'active' state of `contenteditable` elements:
     &:hover, &:focus {
-      border-color: rgba(clr.use(orange), .5);
-      outline-color: rgba(clr.use(orange, 700), .5);
+      border-color: clr.use(orange, $alpha: .5);
+      outline-color: clr.use(orange, 700, .5);
       outline-width: .25rem;
       outline-offset: .25rem;
     }
@@ -121,7 +121,7 @@ $base-id: "finch" !default;
       /*-- #6 --*/
       outline: none;
       color: clr.use(main, 200);
-      background-color: rgba(clr.use(main, 700), .1);
+      background-color: clr.use(main, 700, .1);
     }
   }
 
@@ -177,10 +177,14 @@ $base-id: "finch" !default;
     li {
       // the padding on the list item makes room for the markers.
       padding-inline-start: 2rem;
-      // `\2022` is the unicode "bullet" character.
-      @include ps.before('\2022') {
+      @include ps.before('') {
         left: 0;
-        color: clr.use(main);
+        top: 1rem;
+        width: .5rem;
+        height: .5rem;
+        border-radius: 50%;
+        background-color: clr.use(main);
+        transform: translateY(-50%);
       };
     }
   }
@@ -200,11 +204,20 @@ $base-id: "finch" !default;
   }
 
   // provide option for all colors of marker thourgh a data-attr api.
-  :is(ul, ol):not([role="list"]) {
+  ol:not([role="list"]) {
     @each $name, $value in clr.$color-palette {
       &[data-bullet-color='#{"" + $name}'] {
         li::before {
           color: clr.use($name); /* #2.b */
+        }
+      }
+    }
+  }
+  ul:not([role="list"]) {
+    @each $name, $value in clr.$color-palette {
+      &[data-bullet-color='#{"" + $name}'] {
+        li::before {
+          background-color: clr.use($name); /* #2.b */
         }
       }
     }
@@ -225,11 +238,11 @@ $base-id: "finch" !default;
   ///
   mark {
     /*-- #1 --*/
-    background-color: rgba(clr.use(yellow, 700), .99);
+    background-color: clr.use(yellow, 700, .99);
     /*-- #2 --*/
     @each $name, $value in clr.$color-palette {
       &[data-bg-color='#{"" + $name}'] {
-        background-color: rgba(clr.use($name, 700), .99);
+        background-color: clr.use($name, 700, .99);
       }
     }
   }
@@ -284,7 +297,56 @@ $base-id: "finch" !default;
   
   /// DETAILS
   /// ----------
+  /// #1 - [opinion] details should have a faint border.
+  /// #2 - space the elements within a `details`.
+  /// #3 - style the [open] `details`.
+  /// #4 - style the `details` content.
   ///
+  details {
+    /*-- #1 --*/
+    @include lyt.border($color: clr.use(main, 700, .5));
+    /*-- #2 --*/
+    @include lyt.padding(base);
+    
+    /*-- #3 --*/
+    &[open] {
+      summary {
+        /*-- #2 --*/
+        padding-bottom: lyt.get-padding(small);
+        @include lyt.border($color: clr.use(dark, 800, .4), $sides: bottom);
+        
+        & + * {
+          /*-- #2 --*/
+          margin-top: lyt.get-margin(small);
+        }
+      }
+    }
+
+    summary {
+      /*-- #4 --*/
+      @include typ.font-family(serif);
+      & + * {
+        @include typ.font-weight(light);
+      }
+
+      &:focus {
+        outline: none;
+        background-color: clr.use(dark, 900, .8);
+      }
+    }
+
+    // provide colour options for the border:
+    @each $name, $value in clr.$color-palette {
+      &[data-border-color='#{"" + $name}'] {
+        border-color: clr.use($name, 700, .99);
+      }
+    }
+
+    // provide shadow option:
+    &[data-shadow] {
+      box-shadow: 0 0 .25rem .25rem clr.use(dark, 400, .24);
+    }
+  }
 
   /// DIALOG
   /// ----------
