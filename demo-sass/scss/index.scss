@@ -12,7 +12,24 @@ form {
   input {
     @include lyt.border($color: clr.use(secondary));
     &:focus:not(:disabled) { 
-      outline: .25rem solid rgba(clr.use(secondary), .4);
+      outline: .25rem solid clr.use(secondary, $alpha: .4);
     }
   }
 }
+
+@mixin button-base($c) {
+  @include lyt.padding-inline(base);
+  @include lyt.padding-block(small);
+  @include lyt.border($color: clr.use($c, 400), $radius: subtle);
+  background-color: clr.use($c, 800);
+  color: clr.use(dark);
+
+  &:hover {
+    background-color: clr.use($c, 300);
+    border-color: clr.use($c, 300);
+    color: clr.use(light);
+  }
+}
+
+#success-button { @include button-base(success); }
+#error-button { @include button-base(error); }

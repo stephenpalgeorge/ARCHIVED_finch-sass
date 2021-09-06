@@ -37,16 +37,30 @@ $base-id: "finch" !default;
 
   *[contenteditable] {
     /*-- #2 --*/
+    // set the ::selection color to match:
     // style the 'default' state of `contenteditable` elements:
     @include lyt.border($style: dashed, $color: clr.use(dark, $alpha: .1));
     @include lyt.padding(base);
     transition: border-color .2s ease;
     // style the 'active' state of `contenteditable` elements:
     &:hover, &:focus {
+      &::selection { background-color: clr.use(orange, 500, .99); }
       border-color: clr.use(orange, $alpha: .5);
       outline-color: clr.use(orange, 700, .5);
       outline-width: .25rem;
       outline-offset: .25rem;
+    }
+    // provide color options for the `contenteditable` elements:
+    @each $name, $value in clr.$color-palette {
+      &[data-edit-color='#{"" + $name}'] {
+        &:hover, &:focus {
+          &::selection { background-color: clr.use($name, 500, .99); }
+          border-color: clr.use($name, $alpha: .5);
+          outline-color: clr.use($name, 700, .5);
+          outline-width: .25rem;
+          outline-offset: .25rem;          
+        }
+      }
     }
   }
 
@@ -55,6 +69,12 @@ $base-id: "finch" !default;
     border: none;
     @include lyt.border($width: thin, $color: clr.use(dark, 700), $sides: bottom);
     @include lyt.margin(x-large, y, true);
+    // provide color options for the `contenteditable` elements:
+    @each $name, $value in clr.$color-palette {
+      &[data-color='#{"" + $name}'] {
+        border-color: clr.use($name, 700);
+      }
+    }
   }
 
   /// TYPOGRAPHY
@@ -226,6 +246,26 @@ $base-id: "finch" !default;
   /// FIGURES
   /// ----------
   ///
+  figure {
+    position: relative;
+    > * {
+      max-width: 100% !important;
+    }
+
+    figcaption {
+      width: 100%;
+      @include lyt.absolute(0, $sides: [bottom]);
+      @include lyt.padding(small);
+      background-color: clr.use(dark, 300, .75);
+      color: clr.use(light) !important;
+      @include typ.format($size: small, $style: italic);
+
+      * {
+        color: clr.use(light) !important;
+        @include typ.format($size: small);
+      }
+    }
+  }
 
   /// CODE BLOCKS
   /// ----------
@@ -282,6 +322,7 @@ $base-id: "finch" !default;
   /// #1 - [opinion] all buttons should have center-aligned text.
   /// #2 - [opinion] all buttons should have a 'pointer' cursor.
   /// #3 - [opinion] all buttons should have a transition on their background and color.
+  /// #4 - [opinion] all buttons should have the default border removed.
   ///
   :is(button, [role="button"], [type="button"]) {
     /*-- #1 --*/
@@ -290,6 +331,8 @@ $base-id: "finch" !default;
     cursor: pointer;
     /*-- #3 --*/
     transition: background .2s ease, color .2s ease;
+    /*-- #4 --*/
+    border: none;
   }
 
   /// ** INTERACTIVE ELEMENTS **
@@ -313,7 +356,7 @@ $base-id: "finch" !default;
       summary {
         /*-- #2 --*/
         padding-bottom: lyt.get-padding(small);
-        @include lyt.border($color: clr.use(dark, 800, .4), $sides: bottom);
+        @include lyt.border($color: clr.use(main, 700, .5), $sides: bottom);
         
         & + * {
           /*-- #2 --*/
@@ -331,20 +374,27 @@ $base-id: "finch" !default;
 
       &:focus {
         outline: none;
-        background-color: clr.use(dark, 900, .8);
+        background-color: clr.use(main, 900, .5);
       }
     }
 
-    // provide colour options for the border:
     @each $name, $value in clr.$color-palette {
+      // provide colour options for the border:
       &[data-border-color='#{"" + $name}'] {
         border-color: clr.use($name, 700, .99);
       }
+      // provide colour options for the summary focus:
+      & summary[data-focus-bg='#{"" + $name}'] {
+        &:focus {
+          background-color: clr.use($name, 900, .5);
+        }
+      }
     }
+
 
     // provide shadow option:
     &[data-shadow] {
-      box-shadow: 0 0 .25rem .25rem clr.use(dark, 400, .24);
+      box-shadow: 0 0 .5rem .25rem clr.use(dark, 400, .24);
     }
   }
 
@@ -352,11 +402,7 @@ $base-id: "finch" !default;
   /// ----------
   ///
 
-  /// MENU
-  /// ----------
-  ///
-
-  /// SUMMARY
+  /// NAV
   /// ----------
   ///
 
