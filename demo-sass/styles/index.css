@@ -241,303 +241,303 @@ a:not([href]):not([class]):hover {
 #finch *[contenteditable]:focus::selection {
   background-color: rgba(255, 103, 15, 0.99);
 }
-.finch *[contenteditable][data-color=main]:hover, .finch *[contenteditable][data-color=main]:focus,
-#finch *[contenteditable][data-color=main]:hover,
-#finch *[contenteditable][data-color=main]:focus {
+.finch *[contenteditable][data-edit-color=main]:hover, .finch *[contenteditable][data-edit-color=main]:focus,
+#finch *[contenteditable][data-edit-color=main]:hover,
+#finch *[contenteditable][data-edit-color=main]:focus {
   border-color: rgba(177, 2, 28, 0.5);
   outline-color: rgba(254, 129, 148, 0.5);
   outline-width: 0.25rem;
   outline-offset: 0.25rem;
 }
-.finch *[contenteditable][data-color=main]:hover::selection, .finch *[contenteditable][data-color=main]:focus::selection,
-#finch *[contenteditable][data-color=main]:hover::selection,
-#finch *[contenteditable][data-color=main]:focus::selection {
+.finch *[contenteditable][data-edit-color=main]:hover::selection, .finch *[contenteditable][data-edit-color=main]:focus::selection,
+#finch *[contenteditable][data-edit-color=main]:hover::selection,
+#finch *[contenteditable][data-edit-color=main]:focus::selection {
   background-color: rgba(253, 28, 62, 0.99);
 }
-.finch *[contenteditable][data-color=secondary]:hover, .finch *[contenteditable][data-color=secondary]:focus,
-#finch *[contenteditable][data-color=secondary]:hover,
-#finch *[contenteditable][data-color=secondary]:focus {
+.finch *[contenteditable][data-edit-color=secondary]:hover, .finch *[contenteditable][data-edit-color=secondary]:focus,
+#finch *[contenteditable][data-edit-color=secondary]:hover,
+#finch *[contenteditable][data-edit-color=secondary]:focus {
   border-color: rgba(60, 171, 236, 0.5);
   outline-color: rgba(153, 211, 245, 0.5);
   outline-width: 0.25rem;
   outline-offset: 0.25rem;
 }
-.finch *[contenteditable][data-color=secondary]:hover::selection, .finch *[contenteditable][data-color=secondary]:focus::selection,
-#finch *[contenteditable][data-color=secondary]:hover::selection,
-#finch *[contenteditable][data-color=secondary]:focus::selection {
+.finch *[contenteditable][data-edit-color=secondary]:hover::selection, .finch *[contenteditable][data-edit-color=secondary]:focus::selection,
+#finch *[contenteditable][data-edit-color=secondary]:hover::selection,
+#finch *[contenteditable][data-edit-color=secondary]:focus::selection {
   background-color: rgba(60, 171, 236, 0.99);
 }
-.finch *[contenteditable][data-color=tertiary]:hover, .finch *[contenteditable][data-color=tertiary]:focus,
-#finch *[contenteditable][data-color=tertiary]:hover,
-#finch *[contenteditable][data-color=tertiary]:focus {
+.finch *[contenteditable][data-edit-color=tertiary]:hover, .finch *[contenteditable][data-edit-color=tertiary]:focus,
+#finch *[contenteditable][data-edit-color=tertiary]:hover,
+#finch *[contenteditable][data-edit-color=tertiary]:focus {
   border-color: rgba(247, 195, 38, 0.5);
   outline-color: rgba(251, 222, 137, 0.5);
   outline-width: 0.25rem;
   outline-offset: 0.25rem;
 }
-.finch *[contenteditable][data-color=tertiary]:hover::selection, .finch *[contenteditable][data-color=tertiary]:focus::selection,
-#finch *[contenteditable][data-color=tertiary]:hover::selection,
-#finch *[contenteditable][data-color=tertiary]:focus::selection {
+.finch *[contenteditable][data-edit-color=tertiary]:hover::selection, .finch *[contenteditable][data-edit-color=tertiary]:focus::selection,
+#finch *[contenteditable][data-edit-color=tertiary]:hover::selection,
+#finch *[contenteditable][data-edit-color=tertiary]:focus::selection {
   background-color: rgba(247, 195, 38, 0.99);
 }
-.finch *[contenteditable][data-color=light]:hover, .finch *[contenteditable][data-color=light]:focus,
-#finch *[contenteditable][data-color=light]:hover,
-#finch *[contenteditable][data-color=light]:focus {
+.finch *[contenteditable][data-edit-color=light]:hover, .finch *[contenteditable][data-edit-color=light]:focus,
+#finch *[contenteditable][data-edit-color=light]:hover,
+#finch *[contenteditable][data-edit-color=light]:focus {
   border-color: rgba(251, 247, 252, 0.5);
   outline-color: rgba(213, 171, 227, 0.5);
   outline-width: 0.25rem;
   outline-offset: 0.25rem;
 }
-.finch *[contenteditable][data-color=light]:hover::selection, .finch *[contenteditable][data-color=light]:focus::selection,
-#finch *[contenteditable][data-color=light]:hover::selection,
-#finch *[contenteditable][data-color=light]:focus::selection {
+.finch *[contenteditable][data-edit-color=light]:hover::selection, .finch *[contenteditable][data-edit-color=light]:focus::selection,
+#finch *[contenteditable][data-edit-color=light]:hover::selection,
+#finch *[contenteditable][data-edit-color=light]:focus::selection {
   background-color: rgba(175, 94, 201, 0.99);
 }
-.finch *[contenteditable][data-color=dark]:hover, .finch *[contenteditable][data-color=dark]:focus,
-#finch *[contenteditable][data-color=dark]:hover,
-#finch *[contenteditable][data-color=dark]:focus {
+.finch *[contenteditable][data-edit-color=dark]:hover, .finch *[contenteditable][data-edit-color=dark]:focus,
+#finch *[contenteditable][data-edit-color=dark]:hover,
+#finch *[contenteditable][data-edit-color=dark]:focus {
   border-color: rgba(33, 33, 33, 0.5);
   outline-color: rgba(186, 186, 186, 0.5);
   outline-width: 0.25rem;
   outline-offset: 0.25rem;
 }
-.finch *[contenteditable][data-color=dark]:hover::selection, .finch *[contenteditable][data-color=dark]:focus::selection,
-#finch *[contenteditable][data-color=dark]:hover::selection,
-#finch *[contenteditable][data-color=dark]:focus::selection {
+.finch *[contenteditable][data-edit-color=dark]:hover::selection, .finch *[contenteditable][data-edit-color=dark]:focus::selection,
+#finch *[contenteditable][data-edit-color=dark]:hover::selection,
+#finch *[contenteditable][data-edit-color=dark]:focus::selection {
   background-color: rgba(135, 135, 135, 0.99);
 }
-.finch *[contenteditable][data-color=white]:hover, .finch *[contenteditable][data-color=white]:focus,
-#finch *[contenteditable][data-color=white]:hover,
-#finch *[contenteditable][data-color=white]:focus {
+.finch *[contenteditable][data-edit-color=white]:hover, .finch *[contenteditable][data-edit-color=white]:focus,
+#finch *[contenteditable][data-edit-color=white]:hover,
+#finch *[contenteditable][data-edit-color=white]:focus {
   border-color: rgba(255, 255, 255, 0.5);
   outline-color: rgba(179, 179, 179, 0.5);
   outline-width: 0.25rem;
   outline-offset: 0.25rem;
 }
-.finch *[contenteditable][data-color=white]:hover::selection, .finch *[contenteditable][data-color=white]:focus::selection,
-#finch *[contenteditable][data-color=white]:hover::selection,
-#finch *[contenteditable][data-color=white]:focus::selection {
+.finch *[contenteditable][data-edit-color=white]:hover::selection, .finch *[contenteditable][data-edit-color=white]:focus::selection,
+#finch *[contenteditable][data-edit-color=white]:hover::selection,
+#finch *[contenteditable][data-edit-color=white]:focus::selection {
   background-color: rgba(128, 128, 128, 0.99);
 }
-.finch *[contenteditable][data-color=black]:hover, .finch *[contenteditable][data-color=black]:focus,
-#finch *[contenteditable][data-color=black]:hover,
-#finch *[contenteditable][data-color=black]:focus {
+.finch *[contenteditable][data-edit-color=black]:hover, .finch *[contenteditable][data-edit-color=black]:focus,
+#finch *[contenteditable][data-edit-color=black]:hover,
+#finch *[contenteditable][data-edit-color=black]:focus {
   border-color: rgba(0, 0, 0, 0.5);
   outline-color: rgba(179, 179, 179, 0.5);
   outline-width: 0.25rem;
   outline-offset: 0.25rem;
 }
-.finch *[contenteditable][data-color=black]:hover::selection, .finch *[contenteditable][data-color=black]:focus::selection,
-#finch *[contenteditable][data-color=black]:hover::selection,
-#finch *[contenteditable][data-color=black]:focus::selection {
+.finch *[contenteditable][data-edit-color=black]:hover::selection, .finch *[contenteditable][data-edit-color=black]:focus::selection,
+#finch *[contenteditable][data-edit-color=black]:hover::selection,
+#finch *[contenteditable][data-edit-color=black]:focus::selection {
   background-color: rgba(128, 128, 128, 0.99);
 }
-.finch *[contenteditable][data-color=red]:hover, .finch *[contenteditable][data-color=red]:focus,
-#finch *[contenteditable][data-color=red]:hover,
-#finch *[contenteditable][data-color=red]:focus {
+.finch *[contenteditable][data-edit-color=red]:hover, .finch *[contenteditable][data-edit-color=red]:focus,
+#finch *[contenteditable][data-edit-color=red]:hover,
+#finch *[contenteditable][data-edit-color=red]:focus {
   border-color: rgba(177, 2, 28, 0.5);
   outline-color: rgba(254, 129, 148, 0.5);
   outline-width: 0.25rem;
   outline-offset: 0.25rem;
 }
-.finch *[contenteditable][data-color=red]:hover::selection, .finch *[contenteditable][data-color=red]:focus::selection,
-#finch *[contenteditable][data-color=red]:hover::selection,
-#finch *[contenteditable][data-color=red]:focus::selection {
+.finch *[contenteditable][data-edit-color=red]:hover::selection, .finch *[contenteditable][data-edit-color=red]:focus::selection,
+#finch *[contenteditable][data-edit-color=red]:hover::selection,
+#finch *[contenteditable][data-edit-color=red]:focus::selection {
   background-color: rgba(253, 28, 62, 0.99);
 }
-.finch *[contenteditable][data-color=blue]:hover, .finch *[contenteditable][data-color=blue]:focus,
-#finch *[contenteditable][data-color=blue]:hover,
-#finch *[contenteditable][data-color=blue]:focus {
+.finch *[contenteditable][data-edit-color=blue]:hover, .finch *[contenteditable][data-edit-color=blue]:focus,
+#finch *[contenteditable][data-edit-color=blue]:hover,
+#finch *[contenteditable][data-edit-color=blue]:focus {
   border-color: rgba(60, 171, 236, 0.5);
   outline-color: rgba(153, 211, 245, 0.5);
   outline-width: 0.25rem;
   outline-offset: 0.25rem;
 }
-.finch *[contenteditable][data-color=blue]:hover::selection, .finch *[contenteditable][data-color=blue]:focus::selection,
-#finch *[contenteditable][data-color=blue]:hover::selection,
-#finch *[contenteditable][data-color=blue]:focus::selection {
+.finch *[contenteditable][data-edit-color=blue]:hover::selection, .finch *[contenteditable][data-edit-color=blue]:focus::selection,
+#finch *[contenteditable][data-edit-color=blue]:hover::selection,
+#finch *[contenteditable][data-edit-color=blue]:focus::selection {
   background-color: rgba(60, 171, 236, 0.99);
 }
-.finch *[contenteditable][data-color=green]:hover, .finch *[contenteditable][data-color=green]:focus,
-#finch *[contenteditable][data-color=green]:hover,
-#finch *[contenteditable][data-color=green]:focus {
+.finch *[contenteditable][data-edit-color=green]:hover, .finch *[contenteditable][data-edit-color=green]:focus,
+#finch *[contenteditable][data-edit-color=green]:hover,
+#finch *[contenteditable][data-edit-color=green]:focus {
   border-color: rgba(66, 94, 33, 0.5);
   outline-color: rgba(193, 222, 161, 0.5);
   outline-width: 0.25rem;
   outline-offset: 0.25rem;
 }
-.finch *[contenteditable][data-color=green]:hover::selection, .finch *[contenteditable][data-color=green]:focus::selection,
-#finch *[contenteditable][data-color=green]:hover::selection,
-#finch *[contenteditable][data-color=green]:focus::selection {
+.finch *[contenteditable][data-edit-color=green]:hover::selection, .finch *[contenteditable][data-edit-color=green]:focus::selection,
+#finch *[contenteditable][data-edit-color=green]:hover::selection,
+#finch *[contenteditable][data-edit-color=green]:focus::selection {
   background-color: rgba(144, 195, 85, 0.99);
 }
-.finch *[contenteditable][data-color=yellow]:hover, .finch *[contenteditable][data-color=yellow]:focus,
-#finch *[contenteditable][data-color=yellow]:hover,
-#finch *[contenteditable][data-color=yellow]:focus {
+.finch *[contenteditable][data-edit-color=yellow]:hover, .finch *[contenteditable][data-edit-color=yellow]:focus,
+#finch *[contenteditable][data-edit-color=yellow]:hover,
+#finch *[contenteditable][data-edit-color=yellow]:focus {
   border-color: rgba(247, 195, 38, 0.5);
   outline-color: rgba(251, 222, 137, 0.5);
   outline-width: 0.25rem;
   outline-offset: 0.25rem;
 }
-.finch *[contenteditable][data-color=yellow]:hover::selection, .finch *[contenteditable][data-color=yellow]:focus::selection,
-#finch *[contenteditable][data-color=yellow]:hover::selection,
-#finch *[contenteditable][data-color=yellow]:focus::selection {
+.finch *[contenteditable][data-edit-color=yellow]:hover::selection, .finch *[contenteditable][data-edit-color=yellow]:focus::selection,
+#finch *[contenteditable][data-edit-color=yellow]:hover::selection,
+#finch *[contenteditable][data-edit-color=yellow]:focus::selection {
   background-color: rgba(247, 195, 38, 0.99);
 }
-.finch *[contenteditable][data-color=pink]:hover, .finch *[contenteditable][data-color=pink]:focus,
-#finch *[contenteditable][data-color=pink]:hover,
-#finch *[contenteditable][data-color=pink]:focus {
+.finch *[contenteditable][data-edit-color=pink]:hover, .finch *[contenteditable][data-edit-color=pink]:focus,
+#finch *[contenteditable][data-edit-color=pink]:hover,
+#finch *[contenteditable][data-edit-color=pink]:focus {
   border-color: rgba(224, 113, 172, 0.5);
   outline-color: rgba(233, 155, 196, 0.5);
   outline-width: 0.25rem;
   outline-offset: 0.25rem;
 }
-.finch *[contenteditable][data-color=pink]:hover::selection, .finch *[contenteditable][data-color=pink]:focus::selection,
-#finch *[contenteditable][data-color=pink]:hover::selection,
-#finch *[contenteditable][data-color=pink]:focus::selection {
+.finch *[contenteditable][data-edit-color=pink]:hover::selection, .finch *[contenteditable][data-edit-color=pink]:focus::selection,
+#finch *[contenteditable][data-edit-color=pink]:hover::selection,
+#finch *[contenteditable][data-edit-color=pink]:focus::selection {
   background-color: rgba(215, 71, 148, 0.99);
 }
-.finch *[contenteditable][data-color=purple]:hover, .finch *[contenteditable][data-color=purple]:focus,
-#finch *[contenteditable][data-color=purple]:hover,
-#finch *[contenteditable][data-color=purple]:focus {
+.finch *[contenteditable][data-edit-color=purple]:hover, .finch *[contenteditable][data-edit-color=purple]:focus,
+#finch *[contenteditable][data-edit-color=purple]:hover,
+#finch *[contenteditable][data-edit-color=purple]:focus {
   border-color: rgba(130, 19, 190, 0.5);
   outline-color: rgba(199, 120, 242, 0.5);
   outline-width: 0.25rem;
   outline-offset: 0.25rem;
 }
-.finch *[contenteditable][data-color=purple]:hover::selection, .finch *[contenteditable][data-color=purple]:focus::selection,
-#finch *[contenteditable][data-color=purple]:hover::selection,
-#finch *[contenteditable][data-color=purple]:focus::selection {
+.finch *[contenteditable][data-edit-color=purple]:hover::selection, .finch *[contenteditable][data-edit-color=purple]:focus::selection,
+#finch *[contenteditable][data-edit-color=purple]:hover::selection,
+#finch *[contenteditable][data-edit-color=purple]:focus::selection {
   background-color: rgba(161, 28, 233, 0.99);
 }
-.finch *[contenteditable][data-color=orange]:hover, .finch *[contenteditable][data-color=orange]:focus,
-#finch *[contenteditable][data-color=orange]:hover,
-#finch *[contenteditable][data-color=orange]:focus {
+.finch *[contenteditable][data-edit-color=orange]:hover, .finch *[contenteditable][data-edit-color=orange]:focus,
+#finch *[contenteditable][data-edit-color=orange]:hover,
+#finch *[contenteditable][data-edit-color=orange]:focus {
   border-color: rgba(255, 103, 15, 0.5);
   outline-color: rgba(255, 168, 117, 0.5);
   outline-width: 0.25rem;
   outline-offset: 0.25rem;
 }
-.finch *[contenteditable][data-color=orange]:hover::selection, .finch *[contenteditable][data-color=orange]:focus::selection,
-#finch *[contenteditable][data-color=orange]:hover::selection,
-#finch *[contenteditable][data-color=orange]:focus::selection {
+.finch *[contenteditable][data-edit-color=orange]:hover::selection, .finch *[contenteditable][data-edit-color=orange]:focus::selection,
+#finch *[contenteditable][data-edit-color=orange]:hover::selection,
+#finch *[contenteditable][data-edit-color=orange]:focus::selection {
   background-color: rgba(255, 103, 15, 0.99);
 }
-.finch *[contenteditable][data-color=indigo]:hover, .finch *[contenteditable][data-color=indigo]:focus,
-#finch *[contenteditable][data-color=indigo]:hover,
-#finch *[contenteditable][data-color=indigo]:focus {
+.finch *[contenteditable][data-edit-color=indigo]:hover, .finch *[contenteditable][data-edit-color=indigo]:focus,
+#finch *[contenteditable][data-edit-color=indigo]:hover,
+#finch *[contenteditable][data-edit-color=indigo]:focus {
   border-color: rgba(135, 148, 222, 0.5);
   outline-color: rgba(135, 148, 222, 0.5);
   outline-width: 0.25rem;
   outline-offset: 0.25rem;
 }
-.finch *[contenteditable][data-color=indigo]:hover::selection, .finch *[contenteditable][data-color=indigo]:focus::selection,
-#finch *[contenteditable][data-color=indigo]:hover::selection,
-#finch *[contenteditable][data-color=indigo]:focus::selection {
+.finch *[contenteditable][data-edit-color=indigo]:hover::selection, .finch *[contenteditable][data-edit-color=indigo]:focus::selection,
+#finch *[contenteditable][data-edit-color=indigo]:hover::selection,
+#finch *[contenteditable][data-edit-color=indigo]:focus::selection {
   background-color: rgba(55, 77, 200, 0.99);
 }
-.finch *[contenteditable][data-color=violet]:hover, .finch *[contenteditable][data-color=violet]:focus,
-#finch *[contenteditable][data-color=violet]:hover,
-#finch *[contenteditable][data-color=violet]:focus {
+.finch *[contenteditable][data-edit-color=violet]:hover, .finch *[contenteditable][data-edit-color=violet]:focus,
+#finch *[contenteditable][data-edit-color=violet]:hover,
+#finch *[contenteditable][data-edit-color=violet]:focus {
   border-color: rgba(117, 0, 235, 0.5);
   outline-color: rgba(194, 133, 255, 0.5);
   outline-width: 0.25rem;
   outline-offset: 0.25rem;
 }
-.finch *[contenteditable][data-color=violet]:hover::selection, .finch *[contenteditable][data-color=violet]:focus::selection,
-#finch *[contenteditable][data-color=violet]:hover::selection,
-#finch *[contenteditable][data-color=violet]:focus::selection {
+.finch *[contenteditable][data-edit-color=violet]:hover::selection, .finch *[contenteditable][data-edit-color=violet]:focus::selection,
+#finch *[contenteditable][data-edit-color=violet]:hover::selection,
+#finch *[contenteditable][data-edit-color=violet]:focus::selection {
   background-color: rgba(143, 31, 255, 0.99);
 }
-.finch *[contenteditable][data-color=error]:hover, .finch *[contenteditable][data-color=error]:focus,
-#finch *[contenteditable][data-color=error]:hover,
-#finch *[contenteditable][data-color=error]:focus {
+.finch *[contenteditable][data-edit-color=error]:hover, .finch *[contenteditable][data-edit-color=error]:focus,
+#finch *[contenteditable][data-edit-color=error]:hover,
+#finch *[contenteditable][data-edit-color=error]:focus {
   border-color: rgba(177, 2, 28, 0.5);
   outline-color: rgba(254, 129, 148, 0.5);
   outline-width: 0.25rem;
   outline-offset: 0.25rem;
 }
-.finch *[contenteditable][data-color=error]:hover::selection, .finch *[contenteditable][data-color=error]:focus::selection,
-#finch *[contenteditable][data-color=error]:hover::selection,
-#finch *[contenteditable][data-color=error]:focus::selection {
+.finch *[contenteditable][data-edit-color=error]:hover::selection, .finch *[contenteditable][data-edit-color=error]:focus::selection,
+#finch *[contenteditable][data-edit-color=error]:hover::selection,
+#finch *[contenteditable][data-edit-color=error]:focus::selection {
   background-color: rgba(253, 28, 62, 0.99);
 }
-.finch *[contenteditable][data-color=info]:hover, .finch *[contenteditable][data-color=info]:focus,
-#finch *[contenteditable][data-color=info]:hover,
-#finch *[contenteditable][data-color=info]:focus {
+.finch *[contenteditable][data-edit-color=info]:hover, .finch *[contenteditable][data-edit-color=info]:focus,
+#finch *[contenteditable][data-edit-color=info]:hover,
+#finch *[contenteditable][data-edit-color=info]:focus {
   border-color: rgba(60, 171, 236, 0.5);
   outline-color: rgba(153, 211, 245, 0.5);
   outline-width: 0.25rem;
   outline-offset: 0.25rem;
 }
-.finch *[contenteditable][data-color=info]:hover::selection, .finch *[contenteditable][data-color=info]:focus::selection,
-#finch *[contenteditable][data-color=info]:hover::selection,
-#finch *[contenteditable][data-color=info]:focus::selection {
+.finch *[contenteditable][data-edit-color=info]:hover::selection, .finch *[contenteditable][data-edit-color=info]:focus::selection,
+#finch *[contenteditable][data-edit-color=info]:hover::selection,
+#finch *[contenteditable][data-edit-color=info]:focus::selection {
   background-color: rgba(60, 171, 236, 0.99);
 }
-.finch *[contenteditable][data-color=success]:hover, .finch *[contenteditable][data-color=success]:focus,
-#finch *[contenteditable][data-color=success]:hover,
-#finch *[contenteditable][data-color=success]:focus {
+.finch *[contenteditable][data-edit-color=success]:hover, .finch *[contenteditable][data-edit-color=success]:focus,
+#finch *[contenteditable][data-edit-color=success]:hover,
+#finch *[contenteditable][data-edit-color=success]:focus {
   border-color: rgba(66, 94, 33, 0.5);
   outline-color: rgba(193, 222, 161, 0.5);
   outline-width: 0.25rem;
   outline-offset: 0.25rem;
 }
-.finch *[contenteditable][data-color=success]:hover::selection, .finch *[contenteditable][data-color=success]:focus::selection,
-#finch *[contenteditable][data-color=success]:hover::selection,
-#finch *[contenteditable][data-color=success]:focus::selection {
+.finch *[contenteditable][data-edit-color=success]:hover::selection, .finch *[contenteditable][data-edit-color=success]:focus::selection,
+#finch *[contenteditable][data-edit-color=success]:hover::selection,
+#finch *[contenteditable][data-edit-color=success]:focus::selection {
   background-color: rgba(144, 195, 85, 0.99);
 }
-.finch *[contenteditable][data-color=warning]:hover, .finch *[contenteditable][data-color=warning]:focus,
-#finch *[contenteditable][data-color=warning]:hover,
-#finch *[contenteditable][data-color=warning]:focus {
+.finch *[contenteditable][data-edit-color=warning]:hover, .finch *[contenteditable][data-edit-color=warning]:focus,
+#finch *[contenteditable][data-edit-color=warning]:hover,
+#finch *[contenteditable][data-edit-color=warning]:focus {
   border-color: rgba(247, 195, 38, 0.5);
   outline-color: rgba(251, 222, 137, 0.5);
   outline-width: 0.25rem;
   outline-offset: 0.25rem;
 }
-.finch *[contenteditable][data-color=warning]:hover::selection, .finch *[contenteditable][data-color=warning]:focus::selection,
-#finch *[contenteditable][data-color=warning]:hover::selection,
-#finch *[contenteditable][data-color=warning]:focus::selection {
+.finch *[contenteditable][data-edit-color=warning]:hover::selection, .finch *[contenteditable][data-edit-color=warning]:focus::selection,
+#finch *[contenteditable][data-edit-color=warning]:hover::selection,
+#finch *[contenteditable][data-edit-color=warning]:focus::selection {
   background-color: rgba(247, 195, 38, 0.99);
 }
-.finch *[contenteditable][data-color=required]:hover, .finch *[contenteditable][data-color=required]:focus,
-#finch *[contenteditable][data-color=required]:hover,
-#finch *[contenteditable][data-color=required]:focus {
+.finch *[contenteditable][data-edit-color=required]:hover, .finch *[contenteditable][data-edit-color=required]:focus,
+#finch *[contenteditable][data-edit-color=required]:hover,
+#finch *[contenteditable][data-edit-color=required]:focus {
   border-color: rgba(177, 2, 28, 0.5);
   outline-color: rgba(254, 129, 148, 0.5);
   outline-width: 0.25rem;
   outline-offset: 0.25rem;
 }
-.finch *[contenteditable][data-color=required]:hover::selection, .finch *[contenteditable][data-color=required]:focus::selection,
-#finch *[contenteditable][data-color=required]:hover::selection,
-#finch *[contenteditable][data-color=required]:focus::selection {
+.finch *[contenteditable][data-edit-color=required]:hover::selection, .finch *[contenteditable][data-edit-color=required]:focus::selection,
+#finch *[contenteditable][data-edit-color=required]:hover::selection,
+#finch *[contenteditable][data-edit-color=required]:focus::selection {
   background-color: rgba(253, 28, 62, 0.99);
 }
-.finch *[contenteditable][data-color=invalid]:hover, .finch *[contenteditable][data-color=invalid]:focus,
-#finch *[contenteditable][data-color=invalid]:hover,
-#finch *[contenteditable][data-color=invalid]:focus {
+.finch *[contenteditable][data-edit-color=invalid]:hover, .finch *[contenteditable][data-edit-color=invalid]:focus,
+#finch *[contenteditable][data-edit-color=invalid]:hover,
+#finch *[contenteditable][data-edit-color=invalid]:focus {
   border-color: rgba(177, 2, 28, 0.5);
   outline-color: rgba(254, 129, 148, 0.5);
   outline-width: 0.25rem;
   outline-offset: 0.25rem;
 }
-.finch *[contenteditable][data-color=invalid]:hover::selection, .finch *[contenteditable][data-color=invalid]:focus::selection,
-#finch *[contenteditable][data-color=invalid]:hover::selection,
-#finch *[contenteditable][data-color=invalid]:focus::selection {
+.finch *[contenteditable][data-edit-color=invalid]:hover::selection, .finch *[contenteditable][data-edit-color=invalid]:focus::selection,
+#finch *[contenteditable][data-edit-color=invalid]:hover::selection,
+#finch *[contenteditable][data-edit-color=invalid]:focus::selection {
   background-color: rgba(253, 28, 62, 0.99);
 }
-.finch *[contenteditable][data-color=valid]:hover, .finch *[contenteditable][data-color=valid]:focus,
-#finch *[contenteditable][data-color=valid]:hover,
-#finch *[contenteditable][data-color=valid]:focus {
+.finch *[contenteditable][data-edit-color=valid]:hover, .finch *[contenteditable][data-edit-color=valid]:focus,
+#finch *[contenteditable][data-edit-color=valid]:hover,
+#finch *[contenteditable][data-edit-color=valid]:focus {
   border-color: rgba(66, 94, 33, 0.5);
   outline-color: rgba(193, 222, 161, 0.5);
   outline-width: 0.25rem;
   outline-offset: 0.25rem;
 }
-.finch *[contenteditable][data-color=valid]:hover::selection, .finch *[contenteditable][data-color=valid]:focus::selection,
-#finch *[contenteditable][data-color=valid]:hover::selection,
-#finch *[contenteditable][data-color=valid]:focus::selection {
+.finch *[contenteditable][data-edit-color=valid]:hover::selection, .finch *[contenteditable][data-edit-color=valid]:focus::selection,
+#finch *[contenteditable][data-edit-color=valid]:hover::selection,
+#finch *[contenteditable][data-edit-color=valid]:focus::selection {
   background-color: rgba(144, 195, 85, 0.99);
 }
 .finch hr,
@@ -681,16 +681,8 @@ a:not([href]):not([class]):hover {
 #finch h1 {
   /*-- #2 --*/
   font-size: 3.0517578125rem;
-  text-decoration-line: underline;
-  text-decoration-color: currentColor;
-  text-decoration-style: solid;
+  text-transform: uppercase;
   /*-- #3 --*/
-}
-@supports (text-decoration-thickness: 1px) {
-  .finch h1,
-#finch h1 {
-    text-decoration-thickness: 1px;
-  }
 }
 .finch h1 + *,
 #finch h1 + * {
@@ -814,6 +806,11 @@ a:not([href]):not([class]):hover {
 .finch :is(ul, ol) + *,
 #finch :is(ul, ol) + * {
   margin-block-start: 1.953125rem;
+}
+.finch ul[role=list], .finch ol[role=list],
+#finch ul[role=list],
+#finch ol[role=list] {
+  list-style-type: none;
 }
 .finch ul:not([role=list]),
 #finch ul:not([role=list]) {
@@ -1220,8 +1217,8 @@ a:not([href]):not([class]):hover {
 #finch mark[data-bg-color=valid] {
   background-color: rgba(193, 222, 161, 0.99);
 }
-.finch :is(button, [role=button], [type=button]),
-#finch :is(button, [role=button], [type=button]) {
+.finch :is(button, [role=button], [type=button], [type=submit]),
+#finch :is(button, [role=button], [type=button], [type=submit]) {
   /*-- #1 --*/
   text-align: center;
   /*-- #2 --*/
@@ -1257,6 +1254,7 @@ a:not([href]):not([class]):hover {
 .finch details summary,
 #finch details summary {
   /*-- #4 --*/
+  cursor: pointer;
   font-family: "Playfair Display", serif;
 }
 .finch details summary + *,

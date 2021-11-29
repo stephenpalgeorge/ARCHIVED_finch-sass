@@ -96,7 +96,7 @@ $base-id: "finch" !default;
   h1 {
     /*-- #2 --*/
     @include typ.font-size(heading);
-    @include typ.underline;
+    text-transform: uppercase;
     /*-- #3 --*/
     + * { margin-block-start: lyt.get-margin(x-large); }
   }
@@ -190,6 +190,7 @@ $base-id: "finch" !default;
   /*-- #1 --*/
   :is(ul, ol) + * { margin-block-start: lyt.get-margin(large); }
 
+  ul[role="list"], ol[role="list"] { list-style-type: none; }
   ul:not([role="list"]) {
     /*-- #2 --*/
     // style the "default" marker as yellow.
@@ -324,7 +325,7 @@ $base-id: "finch" !default;
   /// #3 - [opinion] all buttons should have a transition on their background and color.
   /// #4 - [opinion] all buttons should have the default border removed.
   ///
-  :is(button, [role="button"], [type="button"]) {
+  :is(button, [role="button"], [type="button"], [type="submit"]) {
     /*-- #1 --*/
     text-align: center;
     /*-- #2 --*/
@@ -367,6 +368,7 @@ $base-id: "finch" !default;
 
     summary {
       /*-- #4 --*/
+      cursor: pointer;
       @include typ.font-family(serif);
       & + * {
         @include typ.font-weight(light);
